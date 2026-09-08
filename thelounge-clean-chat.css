@@ -800,3 +800,24 @@ a:not(.toggle-thumbnail)[href*="giphy.com/"]:not([href*=".gif" i])::after {
 #form #input {
     line-height: 1.45;
 }
+
+/* ============================================================
+   18. BOT-ONLY CHANNELS - HIDE LINK/MEDIA PREVIEWS
+   ============================================================ */
+
+#chat-container:is(
+    [data-current-channel="#announce" i],
+    [data-current-channel="#pre" i]
+) .preview,
+
+#chat-container:is(
+    [data-current-channel="#announce" i],
+    [data-current-channel="#pre" i]
+) .toggle-preview,
+
+#chat-container:is(
+    [data-current-channel="#announce" i],
+    [data-current-channel="#pre" i]
+) .preview-size {
+    display: none !important;
+}
