@@ -16,6 +16,7 @@ Initial public version.
 - Improved inline image sizing, spacing and mobile behaviour.
 - Hiding of join, part, quit and condensed presence noise in `#darkpeers`.
 - Handling for orphaned `New messages` markers caused by hidden presence events.
+- Link/media previews are hidden in the bot-only `#announce` and `#PRE` channels.
 - Less intrusive timestamps and hidden hostmasks.
 - Touch-device formatted topic expansion.
 - Larger Custom CSS editor.
