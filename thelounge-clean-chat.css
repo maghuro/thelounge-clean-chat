@@ -108,10 +108,7 @@ textarea#user-specified-css-input {
 #chat-container[data-current-channel="#darkpeers"]
 .unread-marker:not(
     :has(
-        ~ .msg:not([data-type="join"])
-              :not([data-type="part"])
-              :not([data-type="quit"])
-              :not([data-type="condensed"])
+        ~ .msg:not([data-type="join"]):not([data-type="part"]):not([data-type="quit"]):not([data-type="condensed"])
     )
 ) {
     display: none;
@@ -391,11 +388,7 @@ a:not(.toggle-thumbnail)[href*="darkpeers.org/bon-pool"]::after {
 #chat-container[data-current-channel="#darkpeers"]
 .msg
 .content
-a:not(.toggle-thumbnail)[href*="darkpeers.org/"]
-:not([href*="/users/"])
-:not([href*="/forums/topics/"])
-:not([href*="/requests/"])
-:not([href*="/bon-pool"]) {
+a:not(.toggle-thumbnail)[href*="darkpeers.org/"]:not([href*="/users/"]):not([href*="/forums/topics/"]):not([href*="/requests/"]):not([href*="/bon-pool"]) {
     font-size: 0;
 
     display: inline-block;
@@ -417,11 +410,7 @@ a:not(.toggle-thumbnail)[href*="darkpeers.org/"]
 #chat-container[data-current-channel="#darkpeers"]
 .msg
 .content
-a:not(.toggle-thumbnail)[href*="darkpeers.org/"]
-:not([href*="/users/"])
-:not([href*="/forums/topics/"])
-:not([href*="/requests/"])
-:not([href*="/bon-pool"])::after {
+a:not(.toggle-thumbnail)[href*="darkpeers.org/"]:not([href*="/users/"]):not([href*="/forums/topics/"]):not([href*="/requests/"]):not([href*="/bon-pool"])::after {
     content: "site ↗";
 
     font-size: 10px;
@@ -537,8 +526,7 @@ a:not(.toggle-thumbnail)[href*=".gif" i]::after {
 #chat-container[data-current-channel="#darkpeers"]
 .msg
 .content
-a:not(.toggle-thumbnail)[href*="giphy.com/"]
-:not([href*=".gif" i]) {
+a:not(.toggle-thumbnail)[href*="giphy.com/"]:not([href*=".gif" i]) {
     font-size: 0;
 
     display: inline-block;
@@ -560,8 +548,7 @@ a:not(.toggle-thumbnail)[href*="giphy.com/"]
 #chat-container[data-current-channel="#darkpeers"]
 .msg
 .content
-a:not(.toggle-thumbnail)[href*="giphy.com/"]
-:not([href*=".gif" i])::after {
+a:not(.toggle-thumbnail)[href*="giphy.com/"]:not([href*=".gif" i])::after {
     content: "🎞 GIF";
 
     font-size: 11px;
