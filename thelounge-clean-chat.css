@@ -607,28 +607,18 @@ textarea#user-specified-css-input {
 
    Main/reminder:  🎁 + ✨
    Sponsor update: ✨ (without 🎁)
-   Final summary:  🥳
+   Entries:        📋
+   Time:           ⏳
    Result:         🏆
    Tie:            ⚠️
    Rigged:         😈, plus 😉 on a main reminder
+   Unrigged:       😒
+   Naughty add:    👮
    Rejection:      🚫 / 🛑 / 🚨
-   ============================================================ */
 
-/* Shared category-card behaviour. */
-#chat-container[data-current-channel="#darkpeers"]
-.msg[data-type="message"][data-from="DP"]:not(.highlight):is(
-    :has(.content .emoji[aria-label="Emoji: wrapped gift"]):has(.content .emoji[aria-label="Emoji: sparkles"]),
-    :not(:has(.content .emoji[aria-label="Emoji: wrapped gift"])):has(.content .emoji[aria-label="Emoji: sparkles"]),
-    :has(.content .emoji[aria-label*="trophy" i]),
-    :has(.content .emoji[aria-label*="partying" i]),
-    :has(.content .emoji[aria-label*="warning" i]),
-    :has(.content .emoji[aria-label*="horns" i]),
-    :has(.content .emoji[aria-label*="prohibited" i]),
-    :has(.content .emoji[aria-label*="stop sign" i]),
-    :has(.content .emoji[aria-label*="police car light" i])
-) {
-    border-radius: 5px;
-}
+   Text-only giveaway responses cannot be identified reliably
+   with CSS after the bridge has stripped their BBCode markup.
+   ============================================================ */
 
 
 /* ------------------------------------------------------------
@@ -656,6 +646,7 @@ textarea#user-specified-css-input {
         inset 4px 0 0 var(--giveaway-accent),
         inset 0 1px 0 color-mix(in srgb, var(--giveaway-accent) 30%, transparent),
         inset 0 -1px 0 color-mix(in srgb, var(--giveaway-accent) 30%, transparent);
+    border-radius: 5px;
 }
 
 #chat-container[data-current-channel="#darkpeers"]
@@ -696,6 +687,7 @@ textarea#user-specified-css-input {
         color-mix(in srgb, #f3d34a 5%, transparent);
     box-shadow:
         inset 2px 0 0 color-mix(in srgb, #f3d34a 70%, transparent);
+    border-radius: 5px;
 }
 
 #chat-container[data-current-channel="#darkpeers"]
@@ -713,22 +705,93 @@ textarea#user-specified-css-input {
 
 
 /* ------------------------------------------------------------
+   ENTRIES LIST - 📋
+   ------------------------------------------------------------ */
+
+#chat-container[data-current-channel="#darkpeers"]
+.msg[data-type="message"][data-from="DP"]:not(.highlight):has(
+    .content .emoji[aria-label*="clipboard" i]
+) {
+    background:
+        color-mix(in srgb, #6eb8d4 5%, transparent);
+    box-shadow:
+        inset 2px 0 0 color-mix(in srgb, #6eb8d4 72%, transparent);
+    border-radius: 5px;
+}
+
+#chat-container[data-current-channel="#darkpeers"]
+.msg[data-type="message"][data-from="DP"]:has(
+    .content .emoji[aria-label*="clipboard" i]
+) .from .user::after {
+    content: "ENTRIES";
+    color: #6eb8d4;
+    border-color:
+        color-mix(in srgb, #6eb8d4 50%, transparent);
+    background:
+        color-mix(in srgb, #6eb8d4 9%, transparent);
+}
+
+
+/* ------------------------------------------------------------
+   GIVEAWAY TIME - ⏳
+   ------------------------------------------------------------ */
+
+#chat-container[data-current-channel="#darkpeers"]
+.msg[data-type="message"][data-from="DP"]:not(.highlight):has(
+    .content .emoji[aria-label*="hourglass" i]
+) {
+    background:
+        color-mix(in srgb, #79d99b 5%, transparent);
+    box-shadow:
+        inset 2px 0 0 color-mix(in srgb, #79d99b 72%, transparent);
+    border-radius: 5px;
+}
+
+#chat-container[data-current-channel="#darkpeers"]
+.msg[data-type="message"][data-from="DP"]:has(
+    .content .emoji[aria-label*="hourglass" i]
+) .from .user::after {
+    content: "TIME";
+    color: #79d99b;
+    border-color:
+        color-mix(in srgb, #79d99b 50%, transparent);
+    background:
+        color-mix(in srgb, #79d99b 9%, transparent);
+}
+
+
+/* ------------------------------------------------------------
    FINAL SPONSOR THANK-YOU - 🥳
+
+   The script also uses 🥳 when someone is removed from the
+   naughty list, so only classify it as SPONSORS when the next
+   giveaway message is the tie/result announcement.
    ------------------------------------------------------------ */
 
 #chat-container[data-current-channel="#darkpeers"]
 .msg[data-type="message"][data-from="DP"]:not(.highlight):has(
     .content .emoji[aria-label*="partying" i]
+):has(
+    + .msg[data-type="message"][data-from="DP"]:is(
+        :has(.content .emoji[aria-label*="warning" i]),
+        :has(.content .emoji[aria-label*="trophy" i])
+    )
 ) {
     background:
         color-mix(in srgb, #79d99b 7%, transparent);
     box-shadow:
         inset 3px 0 0 color-mix(in srgb, #79d99b 85%, transparent);
+    border-radius: 5px;
 }
 
 #chat-container[data-current-channel="#darkpeers"]
 .msg[data-type="message"][data-from="DP"]:has(
     .content .emoji[aria-label*="partying" i]
+):has(
+    + .msg[data-type="message"][data-from="DP"]:is(
+        :has(.content .emoji[aria-label*="warning" i]),
+        :has(.content .emoji[aria-label*="trophy" i])
+    )
 ) .from .user::after {
     content: "SPONSORS";
     color: #79d99b;
@@ -752,6 +815,7 @@ textarea#user-specified-css-input {
     box-shadow:
         inset 4px 0 0 #f3d34a,
         inset 0 0 0 1px color-mix(in srgb, #f3d34a 28%, transparent);
+    border-radius: 5px;
 }
 
 #chat-container[data-current-channel="#darkpeers"]
@@ -779,6 +843,7 @@ textarea#user-specified-css-input {
         color-mix(in srgb, #f0a83a 8%, transparent);
     box-shadow:
         inset 3px 0 0 #f0a83a;
+    border-radius: 5px;
 }
 
 #chat-container[data-current-channel="#darkpeers"]
@@ -796,7 +861,10 @@ textarea#user-specified-css-input {
 
 /* ------------------------------------------------------------
    RIGGED MODE - 😈
-   Also recognise the 😉 suffix on a main giveaway reminder.
+
+   The script uses 😈 for the engaged announcement and direct
+   entry confirmations while rigged. A rigged reminder carries
+   😉 in addition to the normal 🎁 + ✨ signature.
    ------------------------------------------------------------ */
 
 #chat-container[data-current-channel="#darkpeers"]
@@ -817,6 +885,7 @@ textarea#user-specified-css-input {
         inset 4px 0 0 #ff4f9a,
         inset 0 1px 0 color-mix(in srgb, #ff4f9a 28%, transparent),
         inset 0 -1px 0 color-mix(in srgb, #ff4f9a 28%, transparent);
+    border-radius: 5px;
 }
 
 #chat-container[data-current-channel="#darkpeers"]
@@ -841,6 +910,62 @@ textarea#user-specified-css-input {
 
 
 /* ------------------------------------------------------------
+   RIGGED MODE DISABLED - 😒
+   ------------------------------------------------------------ */
+
+#chat-container[data-current-channel="#darkpeers"]
+.msg[data-type="message"][data-from="DP"]:not(.highlight):has(
+    .content .emoji[aria-label*="unamused" i]
+) {
+    background:
+        color-mix(in srgb, #79d99b 6%, transparent);
+    box-shadow:
+        inset 3px 0 0 color-mix(in srgb, #79d99b 82%, transparent);
+    border-radius: 5px;
+}
+
+#chat-container[data-current-channel="#darkpeers"]
+.msg[data-type="message"][data-from="DP"]:has(
+    .content .emoji[aria-label*="unamused" i]
+) .from .user::after {
+    content: "UNRIGGED";
+    color: #79d99b;
+    border-color:
+        color-mix(in srgb, #79d99b 55%, transparent);
+    background:
+        color-mix(in srgb, #79d99b 10%, transparent);
+}
+
+
+/* ------------------------------------------------------------
+   NAUGHTY-LIST ADD / REMOVAL - 👮
+   ------------------------------------------------------------ */
+
+#chat-container[data-current-channel="#darkpeers"]
+.msg[data-type="message"][data-from="DP"]:not(.highlight):has(
+    .content .emoji[aria-label*="police officer" i]
+) {
+    background:
+        color-mix(in srgb, #ffde59 6%, transparent);
+    box-shadow:
+        inset 3px 0 0 color-mix(in srgb, #ffde59 82%, transparent);
+    border-radius: 5px;
+}
+
+#chat-container[data-current-channel="#darkpeers"]
+.msg[data-type="message"][data-from="DP"]:has(
+    .content .emoji[aria-label*="police officer" i]
+) .from .user::after {
+    content: "NAUGHTY";
+    color: #ffde59;
+    border-color:
+        color-mix(in srgb, #ffde59 55%, transparent);
+    background:
+        color-mix(in srgb, #ffde59 10%, transparent);
+}
+
+
+/* ------------------------------------------------------------
    REJECTED / UNAUTHORISED - 🚫 / 🛑 / 🚨
    ------------------------------------------------------------ */
 
@@ -854,6 +979,7 @@ textarea#user-specified-css-input {
         color-mix(in srgb, #e85d55 7%, transparent);
     box-shadow:
         inset 3px 0 0 color-mix(in srgb, #e85d55 88%, transparent);
+    border-radius: 5px;
 }
 
 #chat-container[data-current-channel="#darkpeers"]
