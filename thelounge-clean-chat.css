@@ -26,4 +26,790 @@
    retain their native colors and interactivity.
    ============================================================ */
 
-/* Full stylesheet omitted here would be incorrect; this call intentionally preserves existing content via update only if changed. */
+
+/* ============================================================
+   0. LARGER CUSTOM CSS EDITOR
+   ============================================================ */
+
+textarea#user-specified-css-input {
+    height: 400px;
+}
+
+
+/* ============================================================
+   1. GENERAL READABILITY
+   ============================================================ */
+
+#chat .messages {
+    line-height: 1.47;
+}
+
+#chat .time {
+    opacity: 0.48;
+    font-size: 0.78em;
+}
+
+#chat .from {
+    font-weight: 600;
+}
+
+@media (min-width: 480px) {
+    #chat .time,
+    #chat .from,
+    #chat .content {
+        padding-top: 4px;
+        padding-bottom: 4px;
+    }
+}
+
+
+/* ============================================================
+   2. IRC NOISE REDUCTION
+   ============================================================ */
+
+#chat .hostmask {
+    display: none;
+}
+
+#chat .msg[data-type="mode"],
+#chat .msg[data-type="kick"],
+#chat .msg[data-type="nick"],
+#chat .msg[data-type="chghost"] {
+    opacity: 0.52;
+    font-size: 0.86em;
+}
+
+
+/* ============================================================
+   3. #darkpeers - HIDE PRESENCE NOISE
+   ============================================================ */
+
+#chat-container[data-current-channel="#darkpeers"]
+.msg[data-type="join"],
+
+#chat-container[data-current-channel="#darkpeers"]
+.msg[data-type="part"],
+
+#chat-container[data-current-channel="#darkpeers"]
+.msg[data-type="quit"] {
+    display: none;
+}
+
+#chat-container[data-current-channel="#darkpeers"]
+.msg[data-type="condensed"] {
+    display: none;
+}
+
+
+/* ============================================================
+   4. FIX ORPHANED "NEW MESSAGES" MARKERS
+   ============================================================ */
+
+#chat-container[data-current-channel="#darkpeers"]
+.unread-marker:not(
+    :has(
+        ~ .msg:not([data-type="join"])
+              :not([data-type="part"])
+              :not([data-type="quit"])
+              :not([data-type="condensed"])
+    )
+) {
+    display: none;
+}
+
+
+/* ============================================================
+   5. DARKPEERS WEB BRIDGE MESSAGES
+   ============================================================ */
+
+#chat-container[data-current-channel="#darkpeers"]
+.msg[data-type="message"][data-from="DP"] {
+    box-shadow:
+        inset 2px 0 0
+        color-mix(
+            in srgb,
+            var(--link-color) 68%,
+            transparent
+        );
+
+    border-radius: 4px;
+}
+
+#chat-container[data-current-channel="#darkpeers"]
+.msg[data-type="message"][data-from="DP"]:not(.highlight) {
+    background:
+        color-mix(
+            in srgb,
+            var(--link-color) 4.5%,
+            transparent
+        );
+}
+
+#chat-container[data-current-channel="#darkpeers"]
+.msg[data-type="message"][data-from="DP"].highlight {
+    box-shadow:
+        inset 3px 0 0
+        var(--highlight-border-color);
+}
+
+#chat-container[data-current-channel="#darkpeers"]
+.msg[data-type="message"][data-from="DP"]
+.content {
+    padding-right: 9px;
+}
+
+
+/* ============================================================
+   6. REPLACE THE DP NICKNAME WITH A "WEB" BADGE
+   ============================================================ */
+
+#chat-container[data-current-channel="#darkpeers"]
+.msg[data-type="message"][data-from="DP"]
+.from .user {
+    font-size: 0;
+    opacity: 1;
+}
+
+#chat-container[data-current-channel="#darkpeers"]
+.msg[data-type="message"][data-from="DP"]
+.from .user::after {
+    content: "WEB";
+
+    display: inline-block;
+
+    font-size: 10px;
+    line-height: 1.55;
+
+    font-weight: 700;
+    letter-spacing: 0.04em;
+
+    padding: 1px 5px;
+
+    border: 1px solid
+        color-mix(
+            in srgb,
+            var(--link-color) 42%,
+            transparent
+        );
+
+    border-radius: 5px;
+
+    color: var(--link-color);
+
+    background:
+        color-mix(
+            in srgb,
+            var(--link-color) 7%,
+            transparent
+        );
+}
+
+
+/* ============================================================
+   7. HEURISTIC DETECTION OF WEB REPLIES
+   ============================================================ */
+
+#chat-container[data-current-channel="#darkpeers"]
+.msg[data-type="message"][data-from="DP"]:has(
+    .content a[href*="darkpeers.org/users/"]
+):not(.highlight) {
+    background:
+        color-mix(
+            in srgb,
+            var(--link-color) 7%,
+            transparent
+        );
+}
+
+#chat-container[data-current-channel="#darkpeers"]
+.msg[data-type="message"][data-from="DP"]:has(
+    .content a[href*="darkpeers.org/users/"]
+) {
+    box-shadow:
+        inset 3px 0 0
+        color-mix(
+            in srgb,
+            var(--link-color) 92%,
+            transparent
+        );
+}
+
+#chat-container[data-current-channel="#darkpeers"]
+.msg[data-type="message"][data-from="DP"].highlight:has(
+    .content a[href*="darkpeers.org/users/"]
+) {
+    box-shadow:
+        inset 3px 0 0
+        var(--highlight-border-color);
+}
+
+#chat-container[data-current-channel="#darkpeers"]
+.msg[data-type="message"][data-from="DP"]:has(
+    .content a[href*="darkpeers.org/users/"]
+)
+.content::before {
+    content: "↪";
+
+    display: inline-block;
+
+    margin-right: 6px;
+
+    color: var(--link-color);
+
+    font-size: 0.9em;
+    font-weight: 700;
+
+    opacity: 0.85;
+}
+
+
+/* ============================================================
+   8. CLEAN DARKPEERS LINKS
+   ============================================================ */
+
+#chat-container[data-current-channel="#darkpeers"]
+.msg
+.preview:has(
+    .toggle-type-link a[href*="darkpeers.org/"]
+),
+
+#chat-container[data-current-channel="#darkpeers"]
+.msg
+.preview:has(
+    .toggle-type-error a[href*="darkpeers.org/"]
+) {
+    display: none !important;
+}
+
+#chat-container[data-current-channel="#darkpeers"]
+.msg
+.content
+span[dir="auto"]:has(
+    > a[href*="darkpeers.org/"]
+)
+> .toggle-preview,
+
+#chat-container[data-current-channel="#darkpeers"]
+.msg
+.content
+span[dir="auto"]:has(
+    > a[href*="darkpeers.org/"]
+)
+> .preview-size {
+    display: none !important;
+}
+
+#chat-container[data-current-channel="#darkpeers"]
+.msg
+.content
+a:not(.toggle-thumbnail)[href*="darkpeers.org/users/"],
+
+#chat-container[data-current-channel="#darkpeers"]
+.msg
+.content
+a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/"],
+
+#chat-container[data-current-channel="#darkpeers"]
+.msg
+.content
+a:not(.toggle-thumbnail)[href*="darkpeers.org/requests/"],
+
+#chat-container[data-current-channel="#darkpeers"]
+.msg
+.content
+a:not(.toggle-thumbnail)[href*="darkpeers.org/bon-pool"] {
+    font-size: 0;
+
+    display: inline-block;
+
+    padding: 0 5px;
+
+    border-radius: 999px;
+
+    background:
+        color-mix(
+            in srgb,
+            var(--link-color) 8%,
+            transparent
+        );
+
+    vertical-align: 0.08em;
+}
+
+#chat-container[data-current-channel="#darkpeers"]
+.msg
+.content
+a:not(.toggle-thumbnail)[href*="darkpeers.org/users/"]::after {
+    content: "profile ↗";
+
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+
+    color: var(--link-color);
+}
+
+#chat-container[data-current-channel="#darkpeers"]
+.msg
+.content
+a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/"]::after {
+    content: "thread ↗";
+
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+
+    color: var(--link-color);
+}
+
+#chat-container[data-current-channel="#darkpeers"]
+.msg
+.content
+a:not(.toggle-thumbnail)[href*="darkpeers.org/requests/"]::after {
+    content: "request ↗";
+
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+
+    color: var(--link-color);
+}
+
+#chat-container[data-current-channel="#darkpeers"]
+.msg
+.content
+a:not(.toggle-thumbnail)[href*="darkpeers.org/bon-pool"]::after {
+    content: "BON pool ↗";
+
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+
+    color: var(--link-color);
+}
+
+#chat-container[data-current-channel="#darkpeers"]
+.msg
+.content
+a:not(.toggle-thumbnail)[href*="darkpeers.org/"]
+:not([href*="/users/"])
+:not([href*="/forums/topics/"])
+:not([href*="/requests/"])
+:not([href*="/bon-pool"]) {
+    font-size: 0;
+
+    display: inline-block;
+
+    padding: 0 5px;
+
+    border-radius: 999px;
+
+    background:
+        color-mix(
+            in srgb,
+            var(--link-color) 8%,
+            transparent
+        );
+
+    vertical-align: 0.08em;
+}
+
+#chat-container[data-current-channel="#darkpeers"]
+.msg
+.content
+a:not(.toggle-thumbnail)[href*="darkpeers.org/"]
+:not([href*="/users/"])
+:not([href*="/forums/topics/"])
+:not([href*="/requests/"])
+:not([href*="/bon-pool"])::after {
+    content: "site ↗";
+
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+
+    color: var(--link-color);
+}
+
+
+/* ============================================================
+   9. COMPACT DIRECT MEDIA LINKS
+   ============================================================ */
+
+#chat-container[data-current-channel="#darkpeers"]
+.msg
+.content
+a:not(.toggle-thumbnail)[href*=".jpg" i],
+
+#chat-container[data-current-channel="#darkpeers"]
+.msg
+.content
+a:not(.toggle-thumbnail)[href*=".jpeg" i],
+
+#chat-container[data-current-channel="#darkpeers"]
+.msg
+.content
+a:not(.toggle-thumbnail)[href*=".png" i],
+
+#chat-container[data-current-channel="#darkpeers"]
+.msg
+.content
+a:not(.toggle-thumbnail)[href*=".webp" i] {
+    font-size: 0;
+
+    display: inline-block;
+
+    padding: 1px 6px;
+
+    border-radius: 5px;
+
+    background:
+        color-mix(
+            in srgb,
+            var(--link-color) 8%,
+            transparent
+        );
+
+    vertical-align: 0.05em;
+}
+
+#chat-container[data-current-channel="#darkpeers"]
+.msg
+.content
+a:not(.toggle-thumbnail)[href*=".jpg" i]::after,
+
+#chat-container[data-current-channel="#darkpeers"]
+.msg
+.content
+a:not(.toggle-thumbnail)[href*=".jpeg" i]::after,
+
+#chat-container[data-current-channel="#darkpeers"]
+.msg
+.content
+a:not(.toggle-thumbnail)[href*=".png" i]::after,
+
+#chat-container[data-current-channel="#darkpeers"]
+.msg
+.content
+a:not(.toggle-thumbnail)[href*=".webp" i]::after {
+    content: "🖼 image";
+
+    font-size: 11px;
+    font-weight: 600;
+
+    color: var(--link-color);
+}
+
+#chat-container[data-current-channel="#darkpeers"]
+.msg
+.content
+a:not(.toggle-thumbnail)[href*=".gif" i] {
+    font-size: 0;
+
+    display: inline-block;
+
+    padding: 1px 6px;
+
+    border-radius: 5px;
+
+    background:
+        color-mix(
+            in srgb,
+            var(--link-color) 8%,
+            transparent
+        );
+
+    vertical-align: 0.05em;
+}
+
+#chat-container[data-current-channel="#darkpeers"]
+.msg
+.content
+a:not(.toggle-thumbnail)[href*=".gif" i]::after {
+    content: "🎞 GIF";
+
+    font-size: 11px;
+    font-weight: 600;
+
+    color: var(--link-color);
+}
+
+#chat-container[data-current-channel="#darkpeers"]
+.msg
+.content
+a:not(.toggle-thumbnail)[href*="giphy.com/"]
+:not([href*=".gif" i]) {
+    font-size: 0;
+
+    display: inline-block;
+
+    padding: 1px 6px;
+
+    border-radius: 5px;
+
+    background:
+        color-mix(
+            in srgb,
+            var(--link-color) 8%,
+            transparent
+        );
+
+    vertical-align: 0.05em;
+}
+
+#chat-container[data-current-channel="#darkpeers"]
+.msg
+.content
+a:not(.toggle-thumbnail)[href*="giphy.com/"]
+:not([href*=".gif" i])::after {
+    content: "🎞 GIF";
+
+    font-size: 11px;
+    font-weight: 600;
+
+    color: var(--link-color);
+}
+
+
+/* ============================================================
+   10. PREVIEW PRESENTATION
+   ============================================================ */
+
+#chat .preview-size {
+    font-size: 0.72em;
+    opacity: 0.52;
+    margin-left: 4px;
+}
+
+#chat .toggle-content {
+    margin-top: 6px;
+    max-width: 100%;
+    border-radius: 9px;
+    overflow: hidden;
+}
+
+#chat .toggle-text {
+    white-space: initial;
+}
+
+#chat .preview + .preview {
+    margin-top: 5px;
+}
+
+
+/* ============================================================
+   11. DIRECT IMAGE PREVIEWS
+   ============================================================ */
+
+#chat .toggle-type-image {
+    background: transparent;
+    box-shadow: none;
+    border-radius: 9px;
+}
+
+#chat .toggle-type-image .toggle-thumbnail {
+    display: block;
+    width: fit-content;
+    max-width: min(520px, 100%);
+}
+
+#chat .toggle-type-image img {
+    display: block;
+
+    width: auto;
+    height: auto;
+
+    max-width: 100%;
+    max-height: min(520px, 62vh);
+
+    object-fit: contain;
+
+    border-radius: 9px;
+
+    cursor: zoom-in;
+}
+
+
+/* ============================================================
+   12. NORMAL WEBSITE THUMBNAILS
+   ============================================================ */
+
+#chat .toggle-type-link .thumb {
+    width: auto;
+    height: auto;
+
+    max-width: 150px;
+    max-height: 105px;
+
+    object-fit: cover;
+}
+
+
+/* ============================================================
+   13. OWN MESSAGES
+   ============================================================ */
+
+#chat .msg.self:not(.highlight) {
+    background:
+        color-mix(
+            in srgb,
+            var(--link-color) 2.5%,
+            transparent
+        );
+}
+
+
+/* ============================================================
+   14. GENERAL LINKS
+   ============================================================ */
+
+#chat .content a {
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+}
+
+
+/* ============================================================
+   15. FULL FORMATTED CHANNEL TOPIC ON TOUCH DEVICES
+   ============================================================ */
+
+#chat .header {
+    position: relative;
+    overflow: visible;
+}
+
+#chat .header .topic {
+    position: relative;
+}
+
+@media (hover: none) and (pointer: coarse) {
+    #chat .header .topic {
+        cursor: pointer;
+    }
+
+    #chat .header .topic:hover,
+    #chat .header .topic:active {
+        position: fixed;
+
+        top: 48px;
+        left: 6px;
+        right: 6px;
+
+        z-index: 9999;
+
+        display: block;
+
+        margin: 0;
+        min-width: 0;
+
+        padding: 10px 11px;
+
+        max-height: 45vh;
+
+        overflow-x: hidden;
+        overflow-y: auto;
+
+        white-space: normal;
+
+        word-break: normal;
+        overflow-wrap: anywhere;
+
+        line-height: 1.4;
+
+        font-size: 13px;
+        font-weight: 400;
+
+        color: var(--body-color);
+        background: var(--window-bg-color);
+
+        border: 1px solid
+            color-mix(
+                in srgb,
+                var(--body-color) 18%,
+                transparent
+            );
+
+        border-radius: 8px;
+
+        box-shadow:
+            0 6px 22px
+            rgb(0 0 0 / 28%);
+
+        mask-image: none;
+        -webkit-mask-image: none;
+
+        user-select: text;
+
+        cursor: text;
+    }
+
+    #chat .header .topic:hover::before,
+    #chat .header .topic:active::before {
+        content: "";
+
+        position: fixed;
+
+        top: 0;
+        left: 0;
+        right: 0;
+
+        height: 48px;
+
+        background: transparent;
+
+        pointer-events: auto;
+    }
+}
+
+@media (hover: hover) and (pointer: fine) {
+    #chat .header .topic {
+        cursor: default;
+    }
+}
+
+
+/* ============================================================
+   16. MOBILE
+   ============================================================ */
+
+@media (max-width: 479px) {
+    #chat .messages {
+        line-height: 1.48;
+    }
+
+    #chat .msg {
+        padding-top: 3px;
+        padding-bottom: 3px;
+    }
+
+    #chat .time {
+        opacity: 0.42;
+        font-size: 0.72em;
+    }
+
+    #chat-container[data-current-channel="#darkpeers"]
+    .msg[data-type="message"][data-from="DP"] {
+        margin-top: 2px;
+        margin-bottom: 2px;
+        border-radius: 4px;
+    }
+
+    #chat .toggle-type-image img {
+        max-width: 100%;
+        max-height: 58vh;
+    }
+
+    #chat .toggle-type-link .thumb {
+        max-width: 120px;
+        max-height: 84px;
+    }
+}
+
+
+/* ============================================================
+   17. MESSAGE INPUT
+   ============================================================ */
+
+#form #input {
+    line-height: 1.45;
+}
