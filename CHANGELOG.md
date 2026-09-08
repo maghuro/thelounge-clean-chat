@@ -20,3 +20,8 @@ Initial public version.
 - Touch-device formatted topic expansion.
 - Larger Custom CSS editor.
 - Chrome Android and desktop testing with The Lounge 4.5.2.
+
+### Fixed
+
+- Corrected selector chaining for orphaned `New messages` detection.
+- Corrected selector chaining for generic DarkPeers URL and Giphy fallback rules.
