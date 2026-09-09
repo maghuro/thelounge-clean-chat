@@ -2,6 +2,21 @@
 
 All notable changes to **The Lounge Clean Chat** will be documented here.
 
+## v0.3.1 - 2026-09-09
+
+### Fixed
+
+- Corrected the DarkPeers active-network scope introduced in v0.3: the original selector used nested `:has()` pseudo-classes, which browsers reject and therefore caused most TLCC rules to stop matching.
+- Reworked the network scope to use a single valid `:has()` with alternatives for the active DarkPeers lobby or an active channel/query inside the DarkPeers network.
+- Removed the remaining nested `:has()` pattern from the final sponsor thank-you heuristic.
+- Restored the intended v0.3 behaviour: `WEB` badges, presence-noise hiding, compact DarkPeers links, UNIT3D preview suppression, media handling and giveaway styling now apply again while DarkPeers is active.
+- Preserved network isolation: similarly named channels such as `#announce` on other IRC networks are not affected.
+
+### Notes
+
+- This is a corrective patch release for v0.3; no intentional visual redesign was introduced.
+- The project remains CSS-only.
+
 ## v0.3 - 2026-09-09
 
 ### Added
