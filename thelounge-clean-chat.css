@@ -1,5 +1,5 @@
 /* ============================================================
-   Maghuro - THE LOUNGE CLEAN CHAT v0.3
+   Maghuro - THE LOUNGE CLEAN CHAT v0.3.1
    Tested with The Lounge 4.5.2
    Chrome: Android + Desktop
    ============================================================
@@ -7,9 +7,9 @@
    DarkPeers-specific stylesheet for The Lounge.
 
    Expected setup:
-     Network:     DarkPeers
-     Main channel:#darkpeers
-     Bridge bot:  DP
+     Network:      DarkPeers
+     Main channel: #darkpeers
+     Bridge bot:   DP
 
    Everything except the Custom CSS editor rule is scoped to
    the currently active DarkPeers network. This prevents the
@@ -41,18 +41,17 @@ textarea#user-specified-css-input {
 /* ============================================================
    DARKPEERS ACTIVE-NETWORK SCOPE
 
-   The Lounge sidebar exposes each network as .network, its
-   lobby as data-name="<network>", and the current target with
-   .active. The active channel remains rendered even when its
-   network is collapsed, so this scope also works in that state.
+   IMPORTANT:
+   :has() must not be nested inside another :has(). The scope
+   below uses one relational :has() with two alternatives:
+     - the DarkPeers lobby itself is active; or
+     - an active channel/query exists inside DarkPeers.
    ============================================================ */
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(
-        .channel-list-item.active
-    )
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
 ) {
     --tlcc-gold: #f3d34a;
     --tlcc-cyan: #6eb8d4;
@@ -69,36 +68,36 @@ body:has(
    ============================================================ */
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
 ) #chat .messages {
     line-height: 1.47;
 }
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
 ) #chat .time {
     opacity: 0.48;
     font-size: 0.78em;
 }
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
 ) #chat .from {
     font-weight: 600;
 }
 
 @media (min-width: 480px) {
     body:has(
-        .network:has(
-            > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-        ):has(.channel-list-item.active)
-    ) #chat :is(.time, .from, .content) {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat :is(.time, .from, .content) {
         padding-top: 4px;
         padding-bottom: 4px;
     }
@@ -110,23 +109,18 @@ body:has(
    ============================================================ */
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
 ) #chat .hostmask {
     display: none;
 }
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
-) #chat .msg:is(
-    [data-type="mode"],
-    [data-type="kick"],
-    [data-type="nick"],
-    [data-type="chghost"]
-) {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat .msg:is([data-type="mode"], [data-type="kick"], [data-type="nick"], [data-type="chghost"]) {
     opacity: 0.52;
     font-size: 0.86em;
 }
@@ -137,17 +131,10 @@ body:has(
    ============================================================ */
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
-)
-#chat-container[data-current-channel="#darkpeers" i]
-.msg:is(
-    [data-type="join"],
-    [data-type="part"],
-    [data-type="quit"],
-    [data-type="condensed"]
-) {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .msg:is([data-type="join"], [data-type="part"], [data-type="quit"], [data-type="condensed"]) {
     display: none;
 }
 
@@ -157,16 +144,10 @@ body:has(
    ============================================================ */
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
-)
-#chat-container[data-current-channel="#darkpeers" i]
-.unread-marker:not(
-    :has(
-        ~ .msg:not([data-type="join"]):not([data-type="part"]):not([data-type="quit"]):not([data-type="condensed"])
-    )
-) {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .unread-marker:not(:has(~ .msg:not([data-type="join"]):not([data-type="part"]):not([data-type="quit"]):not([data-type="condensed"]))) {
     display: none;
 }
 
@@ -176,12 +157,10 @@ body:has(
    ============================================================ */
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
-)
-#chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i] {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i] {
     box-shadow:
         inset 2px 0 0
         color-mix(in srgb, var(--link-color) 68%, transparent);
@@ -189,34 +168,28 @@ body:has(
 }
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
-)
-#chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(.highlight) {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:not(.highlight) {
     background:
         color-mix(in srgb, var(--link-color) 4.5%, transparent);
 }
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
-)
-#chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i].highlight {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i].highlight {
     box-shadow:
         inset 3px 0 0 var(--highlight-border-color);
 }
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
-)
-#chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i] .content {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i] .content {
     padding-right: 9px;
 }
 
@@ -226,23 +199,19 @@ body:has(
    ============================================================ */
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
-)
-#chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i] .from .user {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i] .from .user {
     font-size: 0;
     opacity: 1;
 }
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
-)
-#chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i] .from .user::after {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i] .from .user::after {
     content: "WEB";
     display: inline-block;
     font-size: 10px;
@@ -264,54 +233,38 @@ body:has(
    ============================================================ */
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
-)
-#chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:has(
-    .content a[href*="darkpeers.org/users/" i]
-):not(.highlight) {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:has(.content a[href*="darkpeers.org/users/" i]):not(.highlight) {
     background:
         color-mix(in srgb, var(--link-color) 7%, transparent);
 }
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
-)
-#chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:has(
-    .content a[href*="darkpeers.org/users/" i]
-) {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:has(.content a[href*="darkpeers.org/users/" i]) {
     box-shadow:
         inset 3px 0 0
         color-mix(in srgb, var(--link-color) 92%, transparent);
 }
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
-)
-#chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i].highlight:has(
-    .content a[href*="darkpeers.org/users/" i]
-) {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i].highlight:has(.content a[href*="darkpeers.org/users/" i]) {
     box-shadow:
         inset 3px 0 0 var(--highlight-border-color);
 }
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
-)
-#chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:has(
-    .content a[href*="darkpeers.org/users/" i]
-) .content::before {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:has(.content a[href*="darkpeers.org/users/" i]) .content::before {
     content: "↪";
     display: inline-block;
     margin-right: 6px;
@@ -326,55 +279,30 @@ body:has(
    8. CLEAN DARKPEERS LINKS
    ============================================================ */
 
-/* Hide unauthenticated UNIT3D page/error previews only.
-   Direct media previews use a different preview type and remain. */
+/* Hide unauthenticated UNIT3D page/error previews. */
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
-)
-#chat-container[data-current-channel="#darkpeers" i]
-.msg .preview:is(
-    :has(.toggle-type-link a[href*="darkpeers.org/" i]),
-    :has(.toggle-type-error a[href*="darkpeers.org/" i])
-) {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .msg .preview:is(:has(.toggle-type-link a[href*="darkpeers.org/" i]), :has(.toggle-type-error a[href*="darkpeers.org/" i])) {
     display: none !important;
 }
 
-/* Hide dead page-preview controls, but do not touch direct media
-   URLs hosted on darkpeers.org. */
+/* Hide dead page-preview controls, but keep direct media controls. */
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
-)
-#chat-container[data-current-channel="#darkpeers" i]
-.msg .content span[dir="auto"]:has(
-    > a[href*="darkpeers.org/" i]:not(.toggle-thumbnail):not(:is(
-        [href$=".jpg" i],  [href*=".jpg?" i],  [href*=".jpg#" i],
-        [href$=".jpeg" i], [href*=".jpeg?" i], [href*=".jpeg#" i],
-        [href$=".png" i],  [href*=".png?" i],  [href*=".png#" i],
-        [href$=".webp" i], [href*=".webp?" i], [href*=".webp#" i],
-        [href$=".gif" i],  [href*=".gif?" i],  [href*=".gif#" i]
-    ))
-) > :is(.toggle-preview, .preview-size) {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .msg .content span[dir="auto"]:has(> a[href*="darkpeers.org/" i]:not(.toggle-thumbnail):not(:is([href$=".jpg" i], [href*=".jpg?" i], [href*=".jpg#" i], [href$=".jpeg" i], [href*=".jpeg?" i], [href*=".jpeg#" i], [href$=".png" i], [href*=".png?" i], [href*=".png#" i], [href$=".webp" i], [href*=".webp?" i], [href*=".webp#" i], [href$=".gif" i], [href*=".gif?" i], [href*=".gif#" i]))) > :is(.toggle-preview, .preview-size) {
     display: none !important;
 }
 
-
-/* Known DarkPeers page types */
+/* Known DarkPeers page types. */
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
-)
-#chat-container[data-current-channel="#darkpeers" i]
-.msg .content a:not(.toggle-thumbnail):is(
-    [href*="darkpeers.org/users/" i],
-    [href*="darkpeers.org/forums/topics/" i],
-    [href*="darkpeers.org/requests/" i],
-    [href*="darkpeers.org/bon-pool" i]
-) {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .msg .content a:not(.toggle-thumbnail):is([href*="darkpeers.org/users/" i], [href*="darkpeers.org/forums/topics/" i], [href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]) {
     font-size: 0;
     display: inline-block;
     padding: 0 5px;
@@ -385,12 +313,10 @@ body:has(
 }
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
-)
-#chat-container[data-current-channel="#darkpeers" i]
-.msg .content a:not(.toggle-thumbnail)[href*="darkpeers.org/users/" i]::after {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .msg .content a:not(.toggle-thumbnail)[href*="darkpeers.org/users/" i]::after {
     content: "profile ↗";
     font-size: 10px;
     font-weight: 600;
@@ -399,12 +325,10 @@ body:has(
 }
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
-)
-#chat-container[data-current-channel="#darkpeers" i]
-.msg .content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/" i]::after {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .msg .content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/" i]::after {
     content: "thread ↗";
     font-size: 10px;
     font-weight: 600;
@@ -413,12 +337,10 @@ body:has(
 }
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
-)
-#chat-container[data-current-channel="#darkpeers" i]
-.msg .content a:not(.toggle-thumbnail)[href*="darkpeers.org/requests/" i]::after {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .msg .content a:not(.toggle-thumbnail)[href*="darkpeers.org/requests/" i]::after {
     content: "request ↗";
     font-size: 10px;
     font-weight: 600;
@@ -427,12 +349,10 @@ body:has(
 }
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
-)
-#chat-container[data-current-channel="#darkpeers" i]
-.msg .content a:not(.toggle-thumbnail)[href*="darkpeers.org/bon-pool" i]::after {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .msg .content a:not(.toggle-thumbnail)[href*="darkpeers.org/bon-pool" i]::after {
     content: "BON pool ↗";
     font-size: 10px;
     font-weight: 600;
@@ -440,23 +360,12 @@ body:has(
     color: var(--link-color);
 }
 
-
-/* Generic DarkPeers page link fallback.
-   Direct media is explicitly excluded so it can be handled by
-   the media rules below instead of becoming a "site" pill. */
+/* Generic DarkPeers page fallback; direct media is excluded. */
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
-)
-#chat-container[data-current-channel="#darkpeers" i]
-.msg .content a:not(.toggle-thumbnail)[href*="darkpeers.org/" i]:not([href*="/users/" i]):not([href*="/forums/topics/" i]):not([href*="/requests/" i]):not([href*="/bon-pool" i]):not(:is(
-    [href$=".jpg" i],  [href*=".jpg?" i],  [href*=".jpg#" i],
-    [href$=".jpeg" i], [href*=".jpeg?" i], [href*=".jpeg#" i],
-    [href$=".png" i],  [href*=".png?" i],  [href*=".png#" i],
-    [href$=".webp" i], [href*=".webp?" i], [href*=".webp#" i],
-    [href$=".gif" i],  [href*=".gif?" i],  [href*=".gif#" i]
-)) {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .msg .content a:not(.toggle-thumbnail)[href*="darkpeers.org/" i]:not([href*="/users/" i]):not([href*="/forums/topics/" i]):not([href*="/requests/" i]):not([href*="/bon-pool" i]):not(:is([href$=".jpg" i], [href*=".jpg?" i], [href*=".jpg#" i], [href$=".jpeg" i], [href*=".jpeg?" i], [href*=".jpeg#" i], [href$=".png" i], [href*=".png?" i], [href*=".png#" i], [href$=".webp" i], [href*=".webp?" i], [href*=".webp#" i], [href$=".gif" i], [href*=".gif?" i], [href*=".gif#" i])) {
     font-size: 0;
     display: inline-block;
     padding: 0 5px;
@@ -467,18 +376,10 @@ body:has(
 }
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
-)
-#chat-container[data-current-channel="#darkpeers" i]
-.msg .content a:not(.toggle-thumbnail)[href*="darkpeers.org/" i]:not([href*="/users/" i]):not([href*="/forums/topics/" i]):not([href*="/requests/" i]):not([href*="/bon-pool" i]):not(:is(
-    [href$=".jpg" i],  [href*=".jpg?" i],  [href*=".jpg#" i],
-    [href$=".jpeg" i], [href*=".jpeg?" i], [href*=".jpeg#" i],
-    [href$=".png" i],  [href*=".png?" i],  [href*=".png#" i],
-    [href$=".webp" i], [href*=".webp?" i], [href*=".webp#" i],
-    [href$=".gif" i],  [href*=".gif?" i],  [href*=".gif#" i]
-))::after {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .msg .content a:not(.toggle-thumbnail)[href*="darkpeers.org/" i]:not([href*="/users/" i]):not([href*="/forums/topics/" i]):not([href*="/requests/" i]):not([href*="/bon-pool" i]):not(:is([href$=".jpg" i], [href*=".jpg?" i], [href*=".jpg#" i], [href$=".jpeg" i], [href*=".jpeg?" i], [href*=".jpeg#" i], [href$=".png" i], [href*=".png?" i], [href*=".png#" i], [href$=".webp" i], [href*=".webp?" i], [href*=".webp#" i], [href$=".gif" i], [href*=".gif?" i], [href*=".gif#" i]))::after {
     content: "site ↗";
     font-size: 10px;
     font-weight: 600;
@@ -491,20 +392,11 @@ body:has(
    9. COMPACT DIRECT MEDIA LINKS
    ============================================================ */
 
-/* Still images: extension must end the URL path or be followed
-   by ? / #. This avoids false positives from arbitrary params. */
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
-)
-#chat-container[data-current-channel="#darkpeers" i]
-.msg .content a:not(.toggle-thumbnail):is(
-    [href$=".jpg" i],  [href*=".jpg?" i],  [href*=".jpg#" i],
-    [href$=".jpeg" i], [href*=".jpeg?" i], [href*=".jpeg#" i],
-    [href$=".png" i],  [href*=".png?" i],  [href*=".png#" i],
-    [href$=".webp" i], [href*=".webp?" i], [href*=".webp#" i]
-) {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .msg .content a:not(.toggle-thumbnail):is([href$=".jpg" i], [href*=".jpg?" i], [href*=".jpg#" i], [href$=".jpeg" i], [href*=".jpeg?" i], [href*=".jpeg#" i], [href$=".png" i], [href*=".png?" i], [href*=".png#" i], [href$=".webp" i], [href*=".webp?" i], [href*=".webp#" i]) {
     font-size: 0;
     display: inline-block;
     padding: 1px 6px;
@@ -515,36 +407,21 @@ body:has(
 }
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
-)
-#chat-container[data-current-channel="#darkpeers" i]
-.msg .content a:not(.toggle-thumbnail):is(
-    [href$=".jpg" i],  [href*=".jpg?" i],  [href*=".jpg#" i],
-    [href$=".jpeg" i], [href*=".jpeg?" i], [href*=".jpeg#" i],
-    [href$=".png" i],  [href*=".png?" i],  [href*=".png#" i],
-    [href$=".webp" i], [href*=".webp?" i], [href*=".webp#" i]
-)::after {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .msg .content a:not(.toggle-thumbnail):is([href$=".jpg" i], [href*=".jpg?" i], [href*=".jpg#" i], [href$=".jpeg" i], [href*=".jpeg?" i], [href*=".jpeg#" i], [href$=".png" i], [href*=".png?" i], [href*=".png#" i], [href$=".webp" i], [href*=".webp?" i], [href*=".webp#" i])::after {
     content: "🖼 image";
     font-size: 11px;
     font-weight: 600;
     color: var(--link-color);
 }
 
-
-/* GIF */
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
-)
-#chat-container[data-current-channel="#darkpeers" i]
-.msg .content a:not(.toggle-thumbnail):is(
-    [href$=".gif" i],
-    [href*=".gif?" i],
-    [href*=".gif#" i]
-) {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .msg .content a:not(.toggle-thumbnail):is([href$=".gif" i], [href*=".gif?" i], [href*=".gif#" i]) {
     font-size: 0;
     display: inline-block;
     padding: 1px 6px;
@@ -555,35 +432,21 @@ body:has(
 }
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
-)
-#chat-container[data-current-channel="#darkpeers" i]
-.msg .content a:not(.toggle-thumbnail):is(
-    [href$=".gif" i],
-    [href*=".gif?" i],
-    [href*=".gif#" i]
-)::after {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .msg .content a:not(.toggle-thumbnail):is([href$=".gif" i], [href*=".gif?" i], [href*=".gif#" i])::after {
     content: "🎞 GIF";
     font-size: 11px;
     font-weight: 600;
     color: var(--link-color);
 }
 
-
-/* Giphy page fallback */
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
-)
-#chat-container[data-current-channel="#darkpeers" i]
-.msg .content a:not(.toggle-thumbnail)[href*="giphy.com/" i]:not(:is(
-    [href$=".gif" i],
-    [href*=".gif?" i],
-    [href*=".gif#" i]
-)) {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .msg .content a:not(.toggle-thumbnail)[href*="giphy.com/" i]:not(:is([href$=".gif" i], [href*=".gif?" i], [href*=".gif#" i])) {
     font-size: 0;
     display: inline-block;
     padding: 1px 6px;
@@ -594,16 +457,10 @@ body:has(
 }
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
-)
-#chat-container[data-current-channel="#darkpeers" i]
-.msg .content a:not(.toggle-thumbnail)[href*="giphy.com/" i]:not(:is(
-    [href$=".gif" i],
-    [href*=".gif?" i],
-    [href*=".gif#" i]
-))::after {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .msg .content a:not(.toggle-thumbnail)[href*="giphy.com/" i]:not(:is([href$=".gif" i], [href*=".gif?" i], [href*=".gif#" i]))::after {
     content: "🎞 GIF";
     font-size: 11px;
     font-weight: 600;
@@ -616,9 +473,9 @@ body:has(
    ============================================================ */
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
 ) #chat .preview-size {
     font-size: 0.72em;
     opacity: 0.52;
@@ -626,9 +483,9 @@ body:has(
 }
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
 ) #chat .toggle-content {
     margin-top: 6px;
     max-width: 100%;
@@ -637,17 +494,17 @@ body:has(
 }
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
 ) #chat .toggle-text {
     white-space: initial;
 }
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
 ) #chat .preview + .preview {
     margin-top: 5px;
 }
@@ -658,9 +515,9 @@ body:has(
    ============================================================ */
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
 ) #chat .toggle-type-image {
     background: transparent;
     box-shadow: none;
@@ -668,9 +525,9 @@ body:has(
 }
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
 ) #chat .toggle-type-image .toggle-thumbnail {
     display: block;
     width: fit-content;
@@ -678,9 +535,9 @@ body:has(
 }
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
 ) #chat .toggle-type-image img {
     display: block;
     width: auto;
@@ -698,9 +555,9 @@ body:has(
    ============================================================ */
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
 ) #chat .toggle-type-link .thumb {
     width: auto;
     height: auto;
@@ -715,9 +572,9 @@ body:has(
    ============================================================ */
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
 ) #chat .msg.self:not(.highlight) {
     background:
         color-mix(in srgb, var(--link-color) 2.5%, transparent);
@@ -729,9 +586,9 @@ body:has(
    ============================================================ */
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
 ) #chat .content a {
     text-decoration-thickness: 1px;
     text-underline-offset: 2px;
@@ -743,36 +600,41 @@ body:has(
    ============================================================ */
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
 ) #chat .header {
     position: relative;
     overflow: visible;
 }
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
 ) #chat .header .topic {
     position: relative;
 }
 
 @media (hover: none) and (pointer: coarse) {
     body:has(
-        .network:has(
-            > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-        ):has(.channel-list-item.active)
-    ) #chat .header .topic {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat .header .topic {
         cursor: pointer;
     }
 
     body:has(
-        .network:has(
-            > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-        ):has(.channel-list-item.active)
-    ) #chat .header .topic:is(:hover, :active) {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat .header .topic:hover,
+    body:has(
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat .header .topic:active {
         position: fixed;
         top: 48px;
         left: 6px;
@@ -805,10 +667,15 @@ body:has(
     }
 
     body:has(
-        .network:has(
-            > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-        ):has(.channel-list-item.active)
-    ) #chat .header .topic:is(:hover, :active)::before {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat .header .topic:hover::before,
+    body:has(
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat .header .topic:active::before {
         content: "";
         position: fixed;
         top: 0;
@@ -822,10 +689,10 @@ body:has(
 
 @media (hover: hover) and (pointer: fine) {
     body:has(
-        .network:has(
-            > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-        ):has(.channel-list-item.active)
-    ) #chat .header .topic {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat .header .topic {
         cursor: default;
     }
 }
@@ -837,57 +704,55 @@ body:has(
 
 @media (max-width: 479px) {
     body:has(
-        .network:has(
-            > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-        ):has(.channel-list-item.active)
-    ) #chat .messages {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat .messages {
         line-height: 1.48;
     }
 
     body:has(
-        .network:has(
-            > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-        ):has(.channel-list-item.active)
-    ) #chat .msg {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat .msg {
         padding-top: 3px;
         padding-bottom: 3px;
     }
 
     body:has(
-        .network:has(
-            > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-        ):has(.channel-list-item.active)
-    ) #chat .time {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat .time {
         opacity: 0.42;
         font-size: 0.72em;
     }
 
     body:has(
-        .network:has(
-            > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-        ):has(.channel-list-item.active)
-    )
-    #chat-container[data-current-channel="#darkpeers" i]
-    .msg[data-type="message"][data-from="DP" i] {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i] {
         margin-top: 2px;
         margin-bottom: 2px;
         border-radius: 4px;
     }
 
     body:has(
-        .network:has(
-            > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-        ):has(.channel-list-item.active)
-    ) #chat .toggle-type-image img {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat .toggle-type-image img {
         max-width: 100%;
         max-height: 58vh;
     }
 
     body:has(
-        .network:has(
-            > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-        ):has(.channel-list-item.active)
-    ) #chat .toggle-type-link .thumb {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat .toggle-type-link .thumb {
         max-width: 120px;
         max-height: 84px;
     }
@@ -899,30 +764,23 @@ body:has(
    ============================================================ */
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
 ) #form #input {
     line-height: 1.45;
 }
 
 
 /* ============================================================
-   18. DARKPEERS BOT-ONLY CHANNELS - HIDE PREVIEWS
-
-   Network-scoped deliberately: another IRC network may also
-   contain #announce without being affected by this stylesheet.
+   18. DARKPEERS BOT-ONLY CHANNELS - HIDE LINK/MEDIA PREVIEWS
    ============================================================ */
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
-)
-#chat-container:is(
-    [data-current-channel="#announce" i],
-    [data-current-channel="#pre" i]
-) :is(.preview, .toggle-preview, .preview-size) {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container:is([data-current-channel="#announce" i], [data-current-channel="#pre" i]) :is(.preview, .toggle-preview, .preview-size) {
     display: none !important;
 }
 
@@ -951,21 +809,13 @@ body:has(
    ============================================================ */
 
 
-/* ------------------------------------------------------------
-   MAIN GIVEAWAY ANNOUNCEMENT / REMINDER - 🎁 + ✨
-   ------------------------------------------------------------ */
+/* MAIN GIVEAWAY ANNOUNCEMENT / REMINDER - 🎁 + ✨ */
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
-)
-#chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(.highlight):has(
-    .content .emoji[aria-label="Emoji: wrapped gift"]
-):has(
-    .content .emoji[aria-label="Emoji: sparkles"]
-) {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content .emoji[aria-label="Emoji: wrapped gift"]):has(.content .emoji[aria-label="Emoji: sparkles"]) {
     background:
         color-mix(in srgb, var(--tlcc-gold) 10%, transparent);
     box-shadow:
@@ -976,16 +826,10 @@ body:has(
 }
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
-)
-#chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:has(
-    .content .emoji[aria-label="Emoji: wrapped gift"]
-):has(
-    .content .emoji[aria-label="Emoji: sparkles"]
-) .from .user::after {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label="Emoji: wrapped gift"]):has(.content .emoji[aria-label="Emoji: sparkles"]) .from .user::after {
     content: "GIVEAWAY";
     color: var(--tlcc-gold);
     border-color:
@@ -995,35 +839,21 @@ body:has(
 }
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
-)
-#chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:has(
-    .content .emoji[aria-label="Emoji: wrapped gift"]
-):has(
-    .content .emoji[aria-label="Emoji: sparkles"]
-) .content .emoji[aria-label="Emoji: wrapped gift"] {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label="Emoji: wrapped gift"]):has(.content .emoji[aria-label="Emoji: sparkles"]) .content .emoji[aria-label="Emoji: wrapped gift"] {
     font-size: 1.12em;
 }
 
 
-/* ------------------------------------------------------------
-   SPONSOR UPDATE - ✨ without 🎁
-   ------------------------------------------------------------ */
+/* SPONSOR UPDATE - ✨ without 🎁 */
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
-)
-#chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(.highlight):not(
-    :has(.content .emoji[aria-label="Emoji: wrapped gift"])
-):has(
-    .content .emoji[aria-label="Emoji: sparkles"]
-) {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:not(.highlight):not(:has(.content .emoji[aria-label="Emoji: wrapped gift"])):has(.content .emoji[aria-label="Emoji: sparkles"]) {
     background:
         color-mix(in srgb, var(--tlcc-gold) 5%, transparent);
     box-shadow:
@@ -1032,16 +862,10 @@ body:has(
 }
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
-)
-#chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(
-    :has(.content .emoji[aria-label="Emoji: wrapped gift"])
-):has(
-    .content .emoji[aria-label="Emoji: sparkles"]
-) .from .user::after {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:not(:has(.content .emoji[aria-label="Emoji: wrapped gift"])):has(.content .emoji[aria-label="Emoji: sparkles"]) .from .user::after {
     color: var(--tlcc-gold);
     border-color:
         color-mix(in srgb, var(--tlcc-gold) 45%, transparent);
@@ -1050,19 +874,13 @@ body:has(
 }
 
 
-/* ------------------------------------------------------------
-   ENTRIES LIST - 📋
-   ------------------------------------------------------------ */
+/* ENTRIES LIST - 📋 */
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
-)
-#chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(.highlight):has(
-    .content .emoji[aria-label*="clipboard" i]
-) {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content .emoji[aria-label*="clipboard" i]) {
     background:
         color-mix(in srgb, var(--tlcc-cyan) 5%, transparent);
     box-shadow:
@@ -1071,14 +889,10 @@ body:has(
 }
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
-)
-#chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:has(
-    .content .emoji[aria-label*="clipboard" i]
-) .from .user::after {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="clipboard" i]) .from .user::after {
     content: "ENTRIES";
     color: var(--tlcc-cyan);
     border-color:
@@ -1088,19 +902,13 @@ body:has(
 }
 
 
-/* ------------------------------------------------------------
-   GIVEAWAY TIME - ⏳
-   ------------------------------------------------------------ */
+/* GIVEAWAY TIME - ⏳ */
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
-)
-#chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(.highlight):has(
-    .content .emoji[aria-label*="hourglass" i]
-) {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content .emoji[aria-label*="hourglass" i]) {
     background:
         color-mix(in srgb, var(--tlcc-green) 5%, transparent);
     box-shadow:
@@ -1109,14 +917,10 @@ body:has(
 }
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
-)
-#chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:has(
-    .content .emoji[aria-label*="hourglass" i]
-) .from .user::after {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="hourglass" i]) .from .user::after {
     content: "TIME";
     color: var(--tlcc-green);
     border-color:
@@ -1126,28 +930,15 @@ body:has(
 }
 
 
-/* ------------------------------------------------------------
-   FINAL SPONSOR THANK-YOU - 🥳
-
-   The script also uses 🥳 when someone is removed from the
-   naughty list, so only classify it as SPONSORS when the next
-   giveaway message is the tie/result announcement.
-   ------------------------------------------------------------ */
+/* FINAL SPONSOR THANK-YOU - 🥳
+   Only classify as SPONSORS when the next DP message is a
+   tie/result announcement, avoiding unrelated party emoji. */
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
-)
-#chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(.highlight):has(
-    .content .emoji[aria-label*="partying" i]
-):has(
-    + .msg[data-type="message"][data-from="DP" i]:is(
-        :has(.content .emoji[aria-label*="warning" i]),
-        :has(.content .emoji[aria-label*="trophy" i])
-    )
-) {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content .emoji[aria-label*="partying" i]):is(:has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="warning" i]), :has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="trophy" i])) {
     background:
         color-mix(in srgb, var(--tlcc-green) 7%, transparent);
     box-shadow:
@@ -1156,19 +947,10 @@ body:has(
 }
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
-)
-#chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:has(
-    .content .emoji[aria-label*="partying" i]
-):has(
-    + .msg[data-type="message"][data-from="DP" i]:is(
-        :has(.content .emoji[aria-label*="warning" i]),
-        :has(.content .emoji[aria-label*="trophy" i])
-    )
-) .from .user::after {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="partying" i]):is(:has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="warning" i]), :has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="trophy" i])) .from .user::after {
     content: "SPONSORS";
     color: var(--tlcc-green);
     border-color:
@@ -1178,19 +960,13 @@ body:has(
 }
 
 
-/* ------------------------------------------------------------
-   FINAL RESULT - 🏆
-   ------------------------------------------------------------ */
+/* FINAL RESULT - 🏆 */
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
-)
-#chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(.highlight):has(
-    .content .emoji[aria-label*="trophy" i]
-) {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content .emoji[aria-label*="trophy" i]) {
     background:
         color-mix(in srgb, var(--tlcc-gold) 12%, transparent);
     box-shadow:
@@ -1200,14 +976,10 @@ body:has(
 }
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
-)
-#chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:has(
-    .content .emoji[aria-label*="trophy" i]
-) .from .user::after {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="trophy" i]) .from .user::after {
     content: "RESULT";
     color: var(--tlcc-gold);
     border-color:
@@ -1217,19 +989,13 @@ body:has(
 }
 
 
-/* ------------------------------------------------------------
-   TIE / WARNING - ⚠️
-   ------------------------------------------------------------ */
+/* TIE / WARNING - ⚠️ */
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
-)
-#chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(.highlight):has(
-    .content .emoji[aria-label*="warning" i]
-) {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content .emoji[aria-label*="warning" i]) {
     background:
         color-mix(in srgb, var(--tlcc-warning) 8%, transparent);
     box-shadow:
@@ -1238,14 +1004,10 @@ body:has(
 }
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
-)
-#chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:has(
-    .content .emoji[aria-label*="warning" i]
-) .from .user::after {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="warning" i]) .from .user::after {
     content: "TIE";
     color: var(--tlcc-warning);
     border-color:
@@ -1255,28 +1017,18 @@ body:has(
 }
 
 
-/* ------------------------------------------------------------
-   RIGGED MODE - 😈
-
-   The script uses 😈 for the engaged announcement and direct
-   entry confirmations while rigged. A rigged reminder carries
-   😉 in addition to the normal 🎁 + ✨ signature.
-   ------------------------------------------------------------ */
+/* RIGGED MODE - 😈 / 😉 on main reminder */
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
-)
-#chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(.highlight):is(
-    :has(.content .emoji[aria-label*="horns" i]),
-    :has(.content .emoji[aria-label="Emoji: wrapped gift"]):has(
-        .content .emoji[aria-label="Emoji: sparkles"]
-    ):has(
-        .content .emoji[aria-label*="winking face" i]
-    )
-) {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content .emoji[aria-label*="horns" i]),
+body:has(
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content .emoji[aria-label="Emoji: wrapped gift"]):has(.content .emoji[aria-label="Emoji: sparkles"]):has(.content .emoji[aria-label*="winking face" i]) {
     background:
         color-mix(in srgb, var(--tlcc-rigged) 9%, transparent);
     box-shadow:
@@ -1287,19 +1039,15 @@ body:has(
 }
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
-)
-#chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:is(
-    :has(.content .emoji[aria-label*="horns" i]),
-    :has(.content .emoji[aria-label="Emoji: wrapped gift"]):has(
-        .content .emoji[aria-label="Emoji: sparkles"]
-    ):has(
-        .content .emoji[aria-label*="winking face" i]
-    )
-) .from .user::after {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="horns" i]) .from .user::after,
+body:has(
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label="Emoji: wrapped gift"]):has(.content .emoji[aria-label="Emoji: sparkles"]):has(.content .emoji[aria-label*="winking face" i]) .from .user::after {
     content: "RIGGED";
     color: var(--tlcc-rigged);
     border-color:
@@ -1309,19 +1057,13 @@ body:has(
 }
 
 
-/* ------------------------------------------------------------
-   RIGGED MODE DISABLED - 😒
-   ------------------------------------------------------------ */
+/* RIGGED MODE DISABLED - 😒 */
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
-)
-#chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(.highlight):has(
-    .content .emoji[aria-label*="unamused" i]
-) {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content .emoji[aria-label*="unamused" i]) {
     background:
         color-mix(in srgb, var(--tlcc-green) 6%, transparent);
     box-shadow:
@@ -1330,14 +1072,10 @@ body:has(
 }
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
-)
-#chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:has(
-    .content .emoji[aria-label*="unamused" i]
-) .from .user::after {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="unamused" i]) .from .user::after {
     content: "UNRIGGED";
     color: var(--tlcc-green);
     border-color:
@@ -1347,19 +1085,13 @@ body:has(
 }
 
 
-/* ------------------------------------------------------------
-   NAUGHTY-LIST ADD / REMOVAL - 👮
-   ------------------------------------------------------------ */
+/* NAUGHTY-LIST ADD / REMOVAL - 👮 */
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
-)
-#chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(.highlight):has(
-    .content .emoji[aria-label*="police officer" i]
-) {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content .emoji[aria-label*="police officer" i]) {
     background:
         color-mix(in srgb, var(--tlcc-naughty) 6%, transparent);
     box-shadow:
@@ -1368,14 +1100,10 @@ body:has(
 }
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
-)
-#chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:has(
-    .content .emoji[aria-label*="police officer" i]
-) .from .user::after {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="police officer" i]) .from .user::after {
     content: "NAUGHTY";
     color: var(--tlcc-naughty);
     border-color:
@@ -1385,21 +1113,13 @@ body:has(
 }
 
 
-/* ------------------------------------------------------------
-   REJECTED / UNAUTHORISED - 🚫 / 🛑 / 🚨
-   ------------------------------------------------------------ */
+/* REJECTED / UNAUTHORISED - 🚫 / 🛑 / 🚨 */
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
-)
-#chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(.highlight):is(
-    :has(.content .emoji[aria-label*="prohibited" i]),
-    :has(.content .emoji[aria-label*="stop sign" i]),
-    :has(.content .emoji[aria-label*="police car light" i])
-) {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:not(.highlight):is(:has(.content .emoji[aria-label*="prohibited" i]), :has(.content .emoji[aria-label*="stop sign" i]), :has(.content .emoji[aria-label*="police car light" i])) {
     background:
         color-mix(in srgb, var(--tlcc-alert) 7%, transparent);
     box-shadow:
@@ -1408,16 +1128,10 @@ body:has(
 }
 
 body:has(
-    .network:has(
-        > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-    ):has(.channel-list-item.active)
-)
-#chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:is(
-    :has(.content .emoji[aria-label*="prohibited" i]),
-    :has(.content .emoji[aria-label*="stop sign" i]),
-    :has(.content .emoji[aria-label*="police car light" i])
-) .from .user::after {
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:is(:has(.content .emoji[aria-label*="prohibited" i]), :has(.content .emoji[aria-label*="stop sign" i]), :has(.content .emoji[aria-label*="police car light" i])) .from .user::after {
     content: "ALERT";
     color: var(--tlcc-alert);
     border-color:
