@@ -1,5 +1,5 @@
 /* ============================================================
-   Maghuro - THE LOUNGE CLEAN CHAT v0.3.1
+   Maghuro - THE LOUNGE CLEAN CHAT v0.3.2
    Tested with The Lounge 4.5.2
    Chrome: Android + Desktop
    ============================================================
@@ -799,7 +799,7 @@ body:has(
    Time:           ⏳
    Result:         🏆
    Tie:            ⚠️
-   Rigged:         😈, plus 😉 on a main reminder
+   Rigged:         😈, plus trailing 😉 on a main reminder
    Unrigged:       😒
    Naughty add:    👮
    Rejection:      🚫 / 🛑 / 🚨
@@ -1017,7 +1017,14 @@ body:has(
 }
 
 
-/* RIGGED MODE - 😈 / 😉 on main reminder */
+/* RIGGED MODE - 😈 / trailing 😉 on main reminder
+
+   The userscript appends the rigged-reminder 😉 after the normal
+   🎁 ... ✨ Gift ... ✨ giveaway body. A wink inside the host's
+   custom giveaway text appears before those final sparkles, so
+   requiring the wink to be the last element avoids that collision.
+   Normal entry confirmations remain text-only after the bridge and
+   therefore cannot be targeted reliably with CSS alone. */
 
 body:has(
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
@@ -1028,7 +1035,7 @@ body:has(
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
         ~ .channels .channel-list-item.active
-) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content .emoji[aria-label="Emoji: wrapped gift"]):has(.content .emoji[aria-label="Emoji: sparkles"]):has(.content .emoji[aria-label*="winking face" i]) {
+) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content .emoji[aria-label="Emoji: wrapped gift"]):has(.content .emoji[aria-label="Emoji: sparkles"]):has(.content .emoji[aria-label*="winking face" i]:last-child) {
     background:
         color-mix(in srgb, var(--tlcc-rigged) 9%, transparent);
     box-shadow:
@@ -1047,7 +1054,7 @@ body:has(
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
         ~ .channels .channel-list-item.active
-) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label="Emoji: wrapped gift"]):has(.content .emoji[aria-label="Emoji: sparkles"]):has(.content .emoji[aria-label*="winking face" i]) .from .user::after {
+) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label="Emoji: wrapped gift"]):has(.content .emoji[aria-label="Emoji: sparkles"]):has(.content .emoji[aria-label*="winking face" i]:last-child) .from .user::after {
     content: "RIGGED";
     color: var(--tlcc-rigged);
     border-color:
