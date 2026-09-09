@@ -2,6 +2,35 @@
 
 All notable changes to **The Lounge Clean Chat** will be documented here.
 
+## v0.3 - 2026-09-09
+
+### Added
+
+- Proper active-network scoping for the **DarkPeers** IRC network using The Lounge's sidebar DOM.
+- Centralised giveaway colour palette through `--tlcc-*` custom properties.
+- `overscroll-behavior: contain` for the expanded touch-device channel topic.
+
+### Changed
+
+- TLCC is now explicitly DarkPeers-specific instead of behaving like a partly generic stylesheet.
+- Runtime styling is applied only while a target belonging to the `DarkPeers` network is active.
+- `#darkpeers` and `DP` bridge selectors are now case-insensitive where appropriate.
+- Direct media URL detection now requires the file extension to end the URL path or be followed by `?` / `#`, reducing false positives.
+- Generic DarkPeers page-link handling now explicitly excludes direct image/GIF URLs.
+- DarkPeers page-preview control suppression now avoids direct media hosted on `darkpeers.org`.
+- Several repeated selectors were consolidated with `:is()` without changing the intended visual result.
+
+### Fixed
+
+- DarkPeers bot-only `#announce` / `#pre` preview suppression no longer leaks into similarly named channels on other connected IRC networks.
+- Global readability, preview, topic, mobile, own-message and link tweaks no longer affect non-DarkPeers networks in the same The Lounge instance.
+
+### Notes
+
+- The larger Custom CSS editor remains intentionally global because it belongs to The Lounge itself, not to a specific IRC network.
+- The network scope expects the local The Lounge network/lobby label to be `DarkPeers`.
+- The project remains CSS-only; bridged usernames and text-only giveaway messages still cannot be semantically parsed.
+
 ## v0.2 - 2026-09-08
 
 ### Added
