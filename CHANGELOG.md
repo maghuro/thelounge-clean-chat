@@ -2,6 +2,23 @@
 
 All notable changes to **The Lounge Clean Chat** will be documented here.
 
+## v0.3.2 - 2026-09-09
+
+### Fixed
+
+- Fixed false `RIGGED` classification when a normal giveaway's custom message contained a `😉` emoji.
+- Tightened the rigged-reminder heuristic: the userscript-added `😉` must now survive as the trailing/last emoji element after the normal `🎁` + `✨` giveaway structure, instead of merely appearing anywhere in the message.
+- Preserved genuine rigged detection through `😈`, including rigged-mode announcements and rigged entry responses.
+
+### Investigated
+
+- Re-checked Blutopia BON Giveaway v6.2.2 entry handling. Normal `has entered with the number ...` confirmations are emitted as text plus BBCode colours, with no distinctive emoji or other structure that survives the DarkPeers → IRC bridge.
+- No broad CSS adjacency heuristic was added for normal entry confirmations because it would also misclassify ordinary consecutive web messages. TLCC remains CSS-only and prefers no styling over unreliable styling.
+
+### Notes
+
+- This is a CSS-only bugfix/hardening release; no bridge, userscript or The Lounge source changes are required.
+
 ## v0.3.1 - 2026-09-09
 
 ### Fixed
