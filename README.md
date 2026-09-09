@@ -4,13 +4,13 @@ Custom CSS for [The Lounge](https://thelounge.chat/) focused on making the DarkP
 
 This project is deliberately **CSS-only**. It does not patch The Lounge, the DarkPeers bridge, Docker images, JavaScript or the giveaway userscript.
 
-**Current version:** v0.3  
+**Current version:** v0.3.1  
 **Tested with:** The Lounge 4.5.2  
 **Browsers tested:** Chrome on Android and desktop
 
 ## Scope
 
-v0.3 is explicitly scoped to the **DarkPeers** IRC network.
+v0.3.1 is explicitly scoped to the **DarkPeers** IRC network.
 
 Expected setup:
 
