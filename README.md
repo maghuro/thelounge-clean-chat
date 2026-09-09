@@ -4,13 +4,13 @@ Custom CSS for [The Lounge](https://thelounge.chat/) focused on making the DarkP
 
 This project is deliberately **CSS-only**. It does not patch The Lounge, the DarkPeers bridge, Docker images, JavaScript or the giveaway userscript.
 
-**Current version:** v0.3.1  
+**Current version:** v0.3.2  
 **Tested with:** The Lounge 4.5.2  
 **Browsers tested:** Chrome on Android and desktop
 
 ## Scope
 
-v0.3.1 is explicitly scoped to the **DarkPeers** IRC network.
+v0.3.2 is explicitly scoped to the **DarkPeers** IRC network.
 
 Expected setup:
 
@@ -60,7 +60,7 @@ Current treatments include:
 - `SPONSORS` — final sponsor thank-you when it is immediately followed by the tie/result sequence (`🥳`).
 - `RESULT` — final winner summary (`🏆`).
 - `TIE` — tie-break announcements (`⚠️`).
-- `RIGGED` — rigged-mode announcements / marked rigged entries (`😈`) and rigged main reminders (`😉` combined with the normal giveaway signature).
+- `RIGGED` — rigged-mode announcements / marked rigged entries (`😈`) and rigged main reminders whose userscript-added `😉` is the trailing emoji after the normal giveaway signature. v0.3.2 deliberately avoids treating a wink inside the host's custom giveaway text as rigged mode.
 - `UNRIGGED` — successful rigged-mode disable message (`😒`).
 - `NAUGHTY` — naughty-list add/removal marker (`👮`).
 - `ALERT` — rejected or unauthorised actions marked with `🚫`, `🛑` or `🚨`.
@@ -100,7 +100,7 @@ Website usernames such as `[Furyan]` or `[Chungus]` are plain text sent by the b
 
 The same limitation applies to other bridge text that merely looks like markup. The project deliberately stays **CSS-only**.
 
-Giveaway detection has the same constraint: only structure that survives the bridge can be selected reliably. CSS cannot safely identify text-only giveaway replies such as `Giveaway Amount`, normal entry confirmations, `your number is`, winner-scaling messages or time adjustments unless they also contain a distinctive structured marker.
+Giveaway detection has the same constraint: only structure that survives the bridge can be selected reliably. CSS cannot safely identify text-only giveaway replies such as `Giveaway Amount`, normal entry confirmations (`has entered with the number ...`), `your number is`, winner-scaling messages or time adjustments unless they also contain a distinctive structured marker. The v0.3.2 review of the userscript confirmed that normal entry confirmations contain no distinctive emoji/DOM marker after the bridge strips their BBCode, so TLCC intentionally does not apply a broad adjacency heuristic that would also catch ordinary web chat.
 
 Emoji-based giveaway detection is intentionally heuristic. A normal bridged message containing one of the same distinctive emoji may theoretically receive the corresponding visual treatment.
 
