@@ -1,5 +1,5 @@
 /* ============================================================
-   Maghuro - THE LOUNGE CLEAN CHAT v0.3.3
+   Maghuro - THE LOUNGE CLEAN CHAT v0.4.0
    Tested with The Lounge 4.5.2
    Chrome: Android + Desktop
    ============================================================
@@ -25,6 +25,12 @@
 
    Regular IRC nicknames that The Lounge itself recognises
    retain their native colours and interactivity.
+
+   RECOMMENDED INSTALLATION
+   ------------------------
+   Use the jsDelivr @import loader documented in README.md for
+   automatic updates from the main branch. This file remains
+   fully standalone for manual installation.
    ============================================================ */
 
 
