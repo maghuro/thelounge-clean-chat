@@ -2,6 +2,23 @@
 
 All notable changes to **The Lounge Clean Chat** will be documented here.
 
+## v0.3.3 - 2026-09-10
+
+### Added
+
+- Added a cyan `REQUEST` card/badge for DarkPeers bridge messages containing a `darkpeers.org/requests/` link, including the `[New-Request]` torrent-request announcements seen in `#darkpeers`.
+- Added a gold accent to the existing compact `request ↗` link when it appears inside a detected request message.
+
+### Detection
+
+- Request detection is deliberately based on the surviving `/requests/` anchor rather than the literal `[New-Request]` text, because CSS cannot inspect arbitrary text-node contents after the bridge.
+- Any `DP`-bridged message containing a DarkPeers request URL receives the same `REQUEST` treatment. This avoids fragile text or adjacency heuristics while keeping TLCC entirely CSS-only.
+- Native The Lounge highlighted-message backgrounds remain preserved; the request card background/border treatment is only applied to non-highlighted messages.
+
+### Notes
+
+- No DarkPeers bridge, userscript, JavaScript or The Lounge source changes are required.
+
 ## v0.3.2 - 2026-09-09
 
 ### Fixed
