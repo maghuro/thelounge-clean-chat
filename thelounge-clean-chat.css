@@ -1,5 +1,5 @@
 /* ============================================================
-   Maghuro - THE LOUNGE CLEAN CHAT v0.3.2
+   Maghuro - THE LOUNGE CLEAN CHAT v0.3.3
    Tested with The Lounge 4.5.2
    Chrome: Android + Desktop
    ============================================================
@@ -385,6 +385,60 @@ body:has(
     font-weight: 600;
     letter-spacing: 0.02em;
     color: var(--link-color);
+}
+
+
+/* ============================================================
+   8A. DARKPEERS REQUEST-LINK NOTIFICATIONS
+
+   The bridge's "[New-Request]" label is plain text, which CSS
+   cannot inspect. The surviving DarkPeers /requests/ anchor is
+   therefore the stable hook. Any DP bridge message containing
+   such a link receives the REQUEST treatment.
+   ============================================================ */
+
+body:has(
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/requests/" i]) {
+    background:
+        color-mix(in srgb, var(--tlcc-cyan) 9%, transparent);
+    box-shadow:
+        inset 4px 0 0 var(--tlcc-cyan),
+        inset 0 1px 0 color-mix(in srgb, var(--tlcc-cyan) 28%, transparent),
+        inset 0 -1px 0 color-mix(in srgb, var(--tlcc-cyan) 28%, transparent);
+    border-radius: 5px;
+}
+
+body:has(
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/requests/" i]) .from .user::after {
+    content: "REQUEST";
+    color: var(--tlcc-cyan);
+    border-color:
+        color-mix(in srgb, var(--tlcc-cyan) 62%, transparent);
+    background:
+        color-mix(in srgb, var(--tlcc-cyan) 12%, transparent);
+}
+
+body:has(
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/requests/" i]) .content a:not(.toggle-thumbnail)[href*="darkpeers.org/requests/" i] {
+    background:
+        color-mix(in srgb, var(--tlcc-gold) 10%, transparent);
+}
+
+body:has(
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/requests/" i]) .content a:not(.toggle-thumbnail)[href*="darkpeers.org/requests/" i]::after {
+    color: var(--tlcc-gold);
 }
 
 
