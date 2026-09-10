@@ -4,13 +4,13 @@ Custom CSS for [The Lounge](https://thelounge.chat/) focused on making the DarkP
 
 This project is deliberately **CSS-only**. It does not patch The Lounge, the DarkPeers bridge, Docker images, JavaScript or the giveaway userscript.
 
-**Current version:** v0.3.3  
+**Current version:** v0.4.0  
 **Tested with:** The Lounge 4.5.2  
 **Browsers tested:** Chrome on Android and desktop
 
 ## Scope
 
-v0.3.3 is explicitly scoped to the **DarkPeers** IRC network.
+v0.4.0 is explicitly scoped to the **DarkPeers** IRC network.
 
 Expected setup:
 
@@ -78,10 +78,36 @@ The giveaway palette is centralised in `--tlcc-*` custom properties so it is eas
 
 ## Installation
 
+### Recommended: automatic updates
+
+Since v0.4.0, the recommended installation is a tiny `@import` loader served through jsDelivr. Paste the following block into **Settings → Appearance → Custom CSS**:
+
+```css
+/* ============================================================
+   The Lounge Clean Chat (TLCC)
+   Auto-updating from GitHub via jsDelivr
+   https://github.com/maghuro/thelounge-clean-chat
+   ============================================================ */
+@import url("https://cdn.jsdelivr.net/gh/maghuro/thelounge-clean-chat@main/thelounge-clean-chat.css");
+/* ========================== /TLCC =========================== */
+```
+
+The `@import` tracks the repository's `main` branch, so future TLCC updates are picked up automatically without replacing the full stylesheet in The Lounge. CDN/browser caching means a newly published change may not appear instantly; a later refresh will pick it up once the cached copy expires.
+
+The comments are intentionally part of the recommended snippet so it is obvious what the import belongs to when revisiting the Custom CSS field later. If you add your own CSS overrides, place them **after** the closing TLCC comment. `@import` must remain before normal CSS rules.
+
+A direct `raw.githubusercontent.com` import was tested but did not load in the tested The Lounge setup; the jsDelivr URL above did and is therefore the supported automatic-update method.
+
+### Manual installation
+
+If you prefer a fully local/static copy:
+
 1. Open **The Lounge**.
 2. Go to **Settings → Appearance → Custom CSS**.
 3. Copy the contents of [`thelounge-clean-chat.css`](thelounge-clean-chat.css).
 4. Paste it into the Custom CSS field and save.
+
+Manual installs do **not** update automatically.
 
 For inline URL/image previews, The Lounge's normal link prefetch/media preview functionality must be enabled.
 
