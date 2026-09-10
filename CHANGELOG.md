@@ -2,6 +2,31 @@
 
 All notable changes to **The Lounge Clean Chat** will be documented here.
 
+## v0.4.0 - 2026-09-10
+
+### Added
+
+- Added a recommended auto-updating installation method using a jsDelivr `@import` that tracks `main`.
+- Added a clearly labelled TLCC loader block with comments before and after the import, making it easy to identify inside The Lounge's Custom CSS field.
+- Documented where users should place their own CSS overrides: after the TLCC loader block, while keeping `@import` before all normal CSS rules.
+
+### Changed
+
+- The README now recommends the lightweight jsDelivr loader instead of copying the full stylesheet for every update.
+- Manual full-CSS installation remains supported for users who prefer a static local copy.
+- The stylesheet header now points users to the recommended loader while remaining fully standalone.
+
+### Tested
+
+- Confirmed the jsDelivr `@main` import loads TLCC successfully in the tested The Lounge 4.5.2 setup.
+- A direct `raw.githubusercontent.com` import was tested first but did not load in that setup, so it is not used as the supported loader.
+
+### Notes
+
+- v0.4.0 does not intentionally change TLCC's visual styling; it changes how the stylesheet can be installed and kept up to date.
+- Updates delivered through jsDelivr may be briefly delayed by CDN/browser caching.
+- The project remains entirely CSS-only.
+
 ## v0.3.3 - 2026-09-10
 
 ### Added
