@@ -313,6 +313,7 @@ body:has(
     display: inline-block;
     padding: 0 5px;
     border-radius: 999px;
+    text-decoration: none;
     background:
         color-mix(in srgb, var(--link-color) 8%, transparent);
     vertical-align: 0.08em;
@@ -376,6 +377,7 @@ body:has(
     display: inline-block;
     padding: 0 5px;
     border-radius: 999px;
+    text-decoration: none;
     background:
         color-mix(in srgb, var(--link-color) 8%, transparent);
     vertical-align: 0.08em;
