@@ -1,0 +1,64 @@
+name: Promote TLCC v0.4.5
+
+on:
+  push:
+    branches: [dev]
+    paths:
+      - '.github/workflows/promote-v045.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout dev
+        uses: actions/checkout@v4
+        with:
+          ref: dev
+          fetch-depth: 0
+
+      - name: Finalize v0.4.5
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          # Final release version in CSS + README.
+          for name in ('thelounge-clean-chat.css', 'README.md'):
+              p = Path(name)
+              s = p.read_text()
+              s = s.replace('v0.4.5-dev.1', 'v0.4.5')
+              p.write_text(s)
+
+          # Convert the development changelog entry into the released patch.
+          p = Path('CHANGELOG.md')
+          s = p.read_text()
+          s = s.replace('## v0.4.5-dev.1 - 2026-09-11', '## v0.4.5 - 2026-09-11', 1)
+          s = s.replace(
+              '- Development preview only. Verify the footer layout on a normal desktop, a narrow/small desktop window and Android before promoting to `main`.\n'
+              '- Check that the footer icons keep their normal alignment and that the extra marker row does not overlap or clip the sidebar.\n',
+              '- Promoted after visual validation of the footer marker in the `dev` preview.\n'
+              '- The marker provides a persistent version check even when the channel topic is too long to expose the topic suffix.\n',
+              1,
+          )
+          p.write_text(s)
+          PY
+
+      - name: Validate release
+        run: |
+          grep -q 'THE LOUNGE CLEAN CHAT v0.4.5' thelounge-clean-chat.css
+          grep -q -- '--tlcc-version: "v0.4.5";' thelounge-clean-chat.css
+          grep -q '^\*\*Current version:\*\* v0.4.5' README.md
+          grep -q '^## v0.4.5 - 2026-09-11' CHANGELOG.md
+          ! grep -R 'v0.4.5-dev.1' thelounge-clean-chat.css README.md CHANGELOG.md
+          test "$(grep -c '& #footer::after' thelounge-clean-chat.css)" -eq 1
+
+      - name: Commit release and remove helper workflow
+        run: |
+          rm -f .github/workflows/promote-v045.yml
+          git config user.name 'Maghuro'
+          git config user.email '1546139+maghuro@users.noreply.github.com'
+          git add thelounge-clean-chat.css README.md CHANGELOG.md .github/workflows/promote-v045.yml
+          git commit -m 'Release TLCC v0.4.5'
+          git push origin dev
