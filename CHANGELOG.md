@@ -2,6 +2,35 @@
 
 All notable changes to **The Lounge Clean Chat** will be documented here.
 
+## v0.4.1 - 2026-09-11
+
+### Added
+
+- Added a subtle `Enhanced by TLCC vX.X.X` marker to the local `#darkpeers` topic so users can see which stylesheet version their browser has actually received.
+- Added dedicated green **BON POOL** styling for `DP` bridge messages containing a real `darkpeers.org/bon-pool` link.
+- Added a **BON POOL** badge and matching card treatment while preserving native The Lounge highlighted-message backgrounds.
+- Added automatic jsDelivr cache purging through GitHub Actions whenever `thelounge-clean-chat.css` changes on `main`.
+
+### Changed
+
+- Compact DarkPeers page-link pills now explicitly remove inherited text underlining for cleaner presentation across themes/browsers.
+- The topic version marker is generated entirely in CSS and does not modify the real IRC topic.
+- The jsDelivr installation documentation now reflects the automatic purge workflow and uses the visible topic version marker as an easy cache/version check.
+
+### Detection
+
+- BON Pool detection uses the surviving `darkpeers.org/bon-pool` anchor instead of trying to parse the plain-text `[BON-POOL]` label.
+- The version marker reads from the central `--tlcc-version` custom property, keeping the displayed version tied to the delivered stylesheet.
+
+### Tested
+
+- Confirmed the topic version marker and BON Pool treatment in The Lounge 4.5.2 on Chrome Android.
+- Confirmed the GitHub Actions jsDelivr purge workflow with a real CSS commit and verified that the purged stylesheet was subsequently served by the CDN.
+
+### Notes
+
+- This remains a CSS-only release; no DarkPeers bridge, userscript, JavaScript or The Lounge source changes are required.
+
 ## v0.4.0 - 2026-09-10
 
 ### Added
