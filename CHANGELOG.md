@@ -2,19 +2,6 @@
 
 All notable changes to **The Lounge Clean Chat** will be documented here.
 
-## v0.4.5-dev.1 - 2026-09-11
-
-### Changed
-
-- Extended the full formatted channel-topic popup to desktop pointer devices: hovering the topic now reveals the same readable full-topic box already available on touch devices.
-- Kept the normal compact one-line header unchanged until hover, so the desktop UI does not permanently consume extra vertical space.
-- The popup includes the local `Enhanced by TLCC vX.X.X` marker, making the loaded TLCC version discoverable even on small monitors where the normal topic line truncates before the suffix.
-
-### Notes
-
-- Development preview only. Production `main` remains on v0.4.4 until this desktop interaction is verified.
-- Thanks to **Captain Chungus**, whose small-monitor/very-long-topic discovery proved that “the marker exists” and “the human can actually see the marker” are, irritatingly, two different requirements. 🙃
-
 ## v0.4.4 - 2026-09-11
 
 ### Fixed
@@ -26,6 +13,9 @@ All notable changes to **The Lounge Clean Chat** will be documented here.
 
 ### Changed
 
+- Extended the full formatted channel-topic popup to desktop pointer devices: hovering the topic now reveals the same readable full-topic box already available on touch devices.
+- Kept the normal compact one-line header unchanged until hover, so the desktop UI does not permanently consume extra vertical space.
+- The expanded desktop topic includes the local `Enhanced by TLCC vX.X.X` marker, making the loaded TLCC version discoverable on small monitors where the normal topic line truncates before the suffix.
 - Giveaway heuristics now form their own visible family: desktop badges use `GIVEAWAY · <CATEGORY>` and narrow mobile screens use the shorter `GW · <CATEGORY>` prefix.
 - Main `🎁 ... ✨ ... ✨` announcements remain the compact `GIVEAWAY` badge.
 - Sponsor digests are now labelled `GIVEAWAY · SPONSORS` instead of a generic gold `WEB` badge.
@@ -43,6 +33,7 @@ All notable changes to **The Lounge Clean Chat** will be documented here.
 
 ### Notes
 
+- Thanks to **Captain Chungus** for proving that “the marker exists” and “the human can actually see the marker” are two different requirements on a small monitor with a very long topic. 🙃
 - TLCC remains completely CSS-only; no changes to The Lounge, the DarkPeers bridge or Blutopia BON Giveaway are required.
 - The fixed production URL and browser revalidation behaviour introduced in v0.4.2 are unchanged.
 - Special thanks to **Furyan**, who found the connection-name bug by apparently doing the outrageous thing of naming his own connection whatever he wanted, and to **Captain Chungus** plus his beautiful **T.R.A.V.I.S.** for helping turn giveaway classification into a small research programme. 😂
