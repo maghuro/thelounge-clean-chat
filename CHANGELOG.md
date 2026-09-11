@@ -13,7 +13,7 @@ All notable changes to **The Lounge Clean Chat** will be documented here.
 ### Changed
 
 - The recommended automatic loader is now `https://thelounge-clean-chat.pages.dev/thelounge-clean-chat.css`.
-- Corrected The Lounge UI terminology in the project documentation from **Custom Stylesheet** to **Custom Stylesheet**.
+- Corrected the project documentation to use The Lounge's actual UI terminology: **Custom Stylesheet**.
 - The Cloudflare Pages project is connected directly to GitHub and deploys the selected production branch automatically.
 - Cloudflare Pages is now the sole recommended automatic delivery path.
 
