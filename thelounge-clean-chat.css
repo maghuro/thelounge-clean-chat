@@ -1,5 +1,5 @@
 /* ============================================================
-   Maghuro - THE LOUNGE CLEAN CHAT v0.4.4-dev.1
+   Maghuro - THE LOUNGE CLEAN CHAT v0.4.4-dev.2
    Tested with The Lounge 4.5.2
    Chrome: Android + Desktop
    ============================================================
@@ -74,7 +74,8 @@ body:has(
     .network > .channels .channel-list-item.active
         ~ .channel-list-item[data-name="#darkpeers" i]
 ) {
-    --tlcc-version: "v0.4.4-dev.1";
+    --tlcc-version: "v0.4.4-dev.2";
+    --tlcc-giveaway-prefix: "GIVEAWAY · ";
     --tlcc-gold: #f3d34a;
     --tlcc-cyan: #6eb8d4;
     --tlcc-green: #79d99b;
@@ -606,6 +607,10 @@ body:has(
    ============================================================ */
 
 @media (max-width: 479px) {
+    & {
+        --tlcc-giveaway-prefix: "GW · ";
+    }
+
     & #chat .messages {
         line-height: 1.48;
     }
@@ -668,11 +673,14 @@ body:has(
    Confidence model:
      - REQUEST / BON POOL are structural link-based classifications
        handled earlier in this file. They take precedence.
-     - Emoji-derived classifications remain heuristics. Their badges
-       deliberately retain "WEB ·" and use a dashed border so the UI
-       does not pretend CSS has proved more than it actually has.
+     - Giveaway-specific emoji signatures use a dashed GIVEAWAY ·
+       badge. They are still CSS heuristics, not hidden script state.
+     - Ambiguous generic script output stays WEB. In particular, 🏆
+       is also used by !top, so trophy-only messages remain WEB ·
+       WINNERS instead of being falsely promoted to giveaway RESULT.
 
-   Signatures verified against Blutopia BON Giveaway v6.2.2:
+   Signatures verified against Blutopia BON Giveaway v6.2.2 and
+   observed live after the DarkPeers -> DP -> IRC -> The Lounge bridge:
      Giveaway:       🎁 ... ✨ ... ✨
      Sponsor digest: one ✨, without 🎁
      Entries:        📋
@@ -685,6 +693,10 @@ body:has(
      Unrigged:       😒
      Naughty add:    👮
      Rejection:      🚫 / 🛑 / 🚨
+
+   Generic command/response emoji such as ✅, 📊, 💰 and 💸 are
+   intentionally left as WEB because they are not unique enough for
+   honest CSS-only classification after bridge flattening.
 
    Text-only responses remain impossible to classify reliably after
    the website -> IRC bridge has flattened their markup.
@@ -707,7 +719,7 @@ body:has(
 & #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label="Emoji: wrapped gift"] ~ .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"])
 .from .user::after {
-    content: "WEB · GIVEAWAY";
+    content: "GIVEAWAY";
     color: var(--tlcc-gold);
     border-color:
         color-mix(in srgb, var(--tlcc-gold) 60%, transparent);
@@ -724,7 +736,8 @@ body:has(
 
 
 /* SPONSOR UPDATE - one ✨, without 🎁
-   This remains a coloured WEB message rather than a semantic badge. */
+   Live bridge testing confirms the userscript's sponsor digest keeps
+   this signature. It remains dashed because one ✨ is heuristic. */
 
 & #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):not(:has(.content .emoji[aria-label="Emoji: wrapped gift"])):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"])) {
@@ -738,9 +751,11 @@ body:has(
 & #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(:has(.content .emoji[aria-label="Emoji: wrapped gift"])):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]))
 .from .user::after {
+    content: var(--tlcc-giveaway-prefix) "SPONSORS";
     color: var(--tlcc-gold);
     border-color:
         color-mix(in srgb, var(--tlcc-gold) 45%, transparent);
+    border-style: dashed;
     background:
         color-mix(in srgb, var(--tlcc-gold) 8%, transparent);
 }
@@ -760,7 +775,7 @@ body:has(
 & #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="clipboard" i])
 .from .user::after {
-    content: "WEB · ENTRIES";
+    content: var(--tlcc-giveaway-prefix) "ENTRIES";
     color: var(--tlcc-cyan);
     border-color:
         color-mix(in srgb, var(--tlcc-cyan) 50%, transparent);
@@ -784,7 +799,7 @@ body:has(
 & #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="hourglass" i])
 .from .user::after {
-    content: "WEB · TIME";
+    content: var(--tlcc-giveaway-prefix) "TIME";
     color: var(--tlcc-green);
     border-color:
         color-mix(in srgb, var(--tlcc-green) 50%, transparent);
@@ -813,7 +828,7 @@ body:has(
 .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="partying" i]):is(:has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="warning" i]),:has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="trophy" i])
 )
 .from .user::after {
-    content: "WEB · SPONSORS";
+    content: var(--tlcc-giveaway-prefix) "SPONSORS";
     color: var(--tlcc-green);
     border-color:
         color-mix(in srgb, var(--tlcc-green) 55%, transparent);
@@ -825,7 +840,8 @@ body:has(
 
 /* TROPHY OUTPUT - 🏆
    v6.2.2 uses the same trophy for both !top and the final winner
-   summary. A trophy alone therefore cannot honestly prove RESULT. */
+   summary. Live testing reproduced !top as a trophy message, so a
+   trophy alone still cannot honestly prove giveaway RESULT. */
 
 & #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="trophy" i]) {
@@ -855,7 +871,7 @@ body:has(
 & #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="trophy" i]):has(.content .emoji[aria-label*="medal" i])
 .from .user::after {
-    content: "WEB · RESULT";
+    content: var(--tlcc-giveaway-prefix) "RESULT";
 }
 
 
@@ -875,7 +891,7 @@ body:has(
 & #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="warning" i]):has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="trophy" i])
 .from .user::after {
-    content: "WEB · TIE";
+    content: var(--tlcc-giveaway-prefix) "TIE";
     color: var(--tlcc-warning);
     border-color:
         color-mix(in srgb, var(--tlcc-warning) 58%, transparent);
@@ -908,7 +924,7 @@ body:has(
 & #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label="Emoji: wrapped gift"] ~ .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]):has(.content .emoji[aria-label*="winking face" i]:last-child)
 .from .user::after {
-    content: "WEB · RIGGED";
+    content: var(--tlcc-giveaway-prefix) "RIGGED";
     color: var(--tlcc-rigged);
     border-color:
         color-mix(in srgb, var(--tlcc-rigged) 65%, transparent);
@@ -932,7 +948,7 @@ body:has(
 & #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="unamused" i])
 .from .user::after {
-    content: "WEB · UNRIGGED";
+    content: var(--tlcc-giveaway-prefix) "UNRIGGED";
     color: var(--tlcc-green);
     border-color:
         color-mix(in srgb, var(--tlcc-green) 55%, transparent);
@@ -956,7 +972,7 @@ body:has(
 & #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="police officer" i])
 .from .user::after {
-    content: "WEB · NAUGHTY";
+    content: var(--tlcc-giveaway-prefix) "NAUGHTY";
     color: var(--tlcc-naughty);
     border-color:
         color-mix(in srgb, var(--tlcc-naughty) 55%, transparent);
@@ -982,7 +998,7 @@ body:has(
 .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):is(:has(.content .emoji[aria-label*="prohibited" i]),:has(.content .emoji[aria-label*="stop sign" i]),:has(.content .emoji[aria-label*="police car light" i])
 )
 .from .user::after {
-    content: "WEB · ALERT";
+    content: var(--tlcc-giveaway-prefix) "REJECTED";
     color: var(--tlcc-alert);
     border-color:
         color-mix(in srgb, var(--tlcc-alert) 58%, transparent);
