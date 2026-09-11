@@ -1,5 +1,5 @@
 /* ============================================================
-   Maghuro - THE LOUNGE CLEAN CHAT v0.4.2
+   Maghuro - THE LOUNGE CLEAN CHAT v0.4.3
    Tested with The Lounge 4.5.2
    Chrome: Android + Desktop
    ============================================================
@@ -59,7 +59,7 @@ body:has(
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
         ~ .channels .channel-list-item.active
 ) {
-    --tlcc-version: "v0.4.2";
+    --tlcc-version: "v0.4.3";
     --tlcc-gold: #f3d34a;
     --tlcc-cyan: #6eb8d4;
     --tlcc-green: #79d99b;
@@ -914,33 +914,48 @@ body:has(
    19. BLUTOPIA BON GIVEAWAY MESSAGES
    ============================================================
 
-   The DarkPeers -> IRC bridge strips the userscript's BBCode
-   colours, but The Lounge preserves emoji as structured .emoji
-   spans. These rules use those surviving emoji signatures.
+   The giveaway userscript runs on the DarkPeers website. The DP
+   bridge then relays the resulting website chat text into IRC.
+   Original BBCode colours do not survive, but The Lounge renders
+   emoji as structured .emoji spans that CSS can still inspect.
 
-   Main/reminder:  🎁 + ✨
-   Sponsor update: ✨ (without 🎁)
-   Entries:        📋
-   Time:           ⏳
-   Result:         🏆
-   Tie:            ⚠️
-   Rigged:         😈, plus trailing 😉 on a main reminder
-   Unrigged:       😒
-   Naughty add:    👮
-   Rejection:      🚫 / 🛑 / 🚨
+   Confidence model:
+     - REQUEST / BON POOL are structural link-based classifications
+       handled earlier in this file. They take precedence.
+     - Emoji-derived classifications remain heuristics. Their badges
+       deliberately retain "WEB ·" and use a dashed border so the UI
+       does not pretend CSS has proved more than it actually has.
 
-   Text-only giveaway responses cannot be identified reliably
-   with CSS after the bridge has stripped their BBCode markup.
+   Signatures verified against Blutopia BON Giveaway v6.2.2:
+     Giveaway:       🎁 ... ✨ ... ✨
+     Sponsor digest: one ✨, without 🎁
+     Entries:        📋
+     Time:           ⏳
+     Final sponsors: 🥳 immediately before tie/result sequence
+     Winners:        🏆 (ambiguous: final single result or !top)
+     Result:         🏆 + podium/medal emoji (multi-winner result)
+     Tie:            ⚠️ immediately before a 🏆 message
+     Rigged:         😈, plus trailing 😉 on a full giveaway reminder
+     Unrigged:       😒
+     Naughty add:    👮
+     Rejection:      🚫 / 🛑 / 🚨
+
+   Text-only responses remain impossible to classify reliably after
+   the website -> IRC bridge has flattened their markup.
    ============================================================ */
 
 
-/* MAIN GIVEAWAY ANNOUNCEMENT / REMINDER - 🎁 + ✨ */
+/* MAIN GIVEAWAY ANNOUNCEMENT / REMINDER - 🎁 ... ✨ ... ✨ */
 
 body:has(
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
         ~ .channels .channel-list-item.active
-) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content .emoji[aria-label="Emoji: wrapped gift"]):has(.content .emoji[aria-label="Emoji: sparkles"]) {
+) #chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]
+:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i])))
+:not(.highlight)
+:has(.content .emoji[aria-label="Emoji: wrapped gift"] ~ .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]) {
     background:
         color-mix(in srgb, var(--tlcc-gold) 10%, transparent);
     box-shadow:
@@ -954,11 +969,16 @@ body:has(
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
         ~ .channels .channel-list-item.active
-) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label="Emoji: wrapped gift"]):has(.content .emoji[aria-label="Emoji: sparkles"]) .from .user::after {
-    content: "GIVEAWAY";
+) #chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]
+:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i])))
+:has(.content .emoji[aria-label="Emoji: wrapped gift"] ~ .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"])
+.from .user::after {
+    content: "WEB · GIVEAWAY";
     color: var(--tlcc-gold);
     border-color:
         color-mix(in srgb, var(--tlcc-gold) 60%, transparent);
+    border-style: dashed;
     background:
         color-mix(in srgb, var(--tlcc-gold) 12%, transparent);
 }
@@ -967,18 +987,29 @@ body:has(
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
         ~ .channels .channel-list-item.active
-) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label="Emoji: wrapped gift"]):has(.content .emoji[aria-label="Emoji: sparkles"]) .content .emoji[aria-label="Emoji: wrapped gift"] {
+) #chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]
+:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i])))
+:has(.content .emoji[aria-label="Emoji: wrapped gift"] ~ .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"])
+.content .emoji[aria-label="Emoji: wrapped gift"] {
     font-size: 1.12em;
 }
 
 
-/* SPONSOR UPDATE - ✨ without 🎁 */
+/* SPONSOR UPDATE - one ✨, without 🎁
+   This remains a coloured WEB message rather than a semantic badge. */
 
 body:has(
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
         ~ .channels .channel-list-item.active
-) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:not(.highlight):not(:has(.content .emoji[aria-label="Emoji: wrapped gift"])):has(.content .emoji[aria-label="Emoji: sparkles"]) {
+) #chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]
+:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i])))
+:not(.highlight)
+:not(:has(.content .emoji[aria-label="Emoji: wrapped gift"]))
+:has(.content .emoji[aria-label="Emoji: sparkles"])
+:not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"])) {
     background:
         color-mix(in srgb, var(--tlcc-gold) 5%, transparent);
     box-shadow:
@@ -990,7 +1021,13 @@ body:has(
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
         ~ .channels .channel-list-item.active
-) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:not(:has(.content .emoji[aria-label="Emoji: wrapped gift"])):has(.content .emoji[aria-label="Emoji: sparkles"]) .from .user::after {
+) #chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]
+:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i])))
+:not(:has(.content .emoji[aria-label="Emoji: wrapped gift"]))
+:has(.content .emoji[aria-label="Emoji: sparkles"])
+:not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]))
+.from .user::after {
     color: var(--tlcc-gold);
     border-color:
         color-mix(in srgb, var(--tlcc-gold) 45%, transparent);
@@ -1005,7 +1042,11 @@ body:has(
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
         ~ .channels .channel-list-item.active
-) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content .emoji[aria-label*="clipboard" i]) {
+) #chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]
+:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i])))
+:not(.highlight)
+:has(.content .emoji[aria-label*="clipboard" i]) {
     background:
         color-mix(in srgb, var(--tlcc-cyan) 5%, transparent);
     box-shadow:
@@ -1017,11 +1058,16 @@ body:has(
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
         ~ .channels .channel-list-item.active
-) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="clipboard" i]) .from .user::after {
-    content: "ENTRIES";
+) #chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]
+:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i])))
+:has(.content .emoji[aria-label*="clipboard" i])
+.from .user::after {
+    content: "WEB · ENTRIES";
     color: var(--tlcc-cyan);
     border-color:
         color-mix(in srgb, var(--tlcc-cyan) 50%, transparent);
+    border-style: dashed;
     background:
         color-mix(in srgb, var(--tlcc-cyan) 9%, transparent);
 }
@@ -1033,7 +1079,11 @@ body:has(
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
         ~ .channels .channel-list-item.active
-) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content .emoji[aria-label*="hourglass" i]) {
+) #chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]
+:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i])))
+:not(.highlight)
+:has(.content .emoji[aria-label*="hourglass" i]) {
     background:
         color-mix(in srgb, var(--tlcc-green) 5%, transparent);
     box-shadow:
@@ -1045,25 +1095,39 @@ body:has(
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
         ~ .channels .channel-list-item.active
-) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="hourglass" i]) .from .user::after {
-    content: "TIME";
+) #chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]
+:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i])))
+:has(.content .emoji[aria-label*="hourglass" i])
+.from .user::after {
+    content: "WEB · TIME";
     color: var(--tlcc-green);
     border-color:
         color-mix(in srgb, var(--tlcc-green) 50%, transparent);
+    border-style: dashed;
     background:
         color-mix(in srgb, var(--tlcc-green) 9%, transparent);
 }
 
 
 /* FINAL SPONSOR THANK-YOU - 🥳
-   Only classify as SPONSORS when the next DP message is a
-   tie/result announcement, avoiding unrelated party emoji. */
+   The userscript emits this immediately before either a tie line or
+   the final trophy-bearing winner output. Keep the existing forward
+   adjacency requirement to avoid ordinary party emoji. */
 
 body:has(
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
         ~ .channels .channel-list-item.active
-) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content .emoji[aria-label*="partying" i]):is(:has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="warning" i]), :has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="trophy" i])) {
+) #chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]
+:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i])))
+:not(.highlight)
+:has(.content .emoji[aria-label*="partying" i])
+:is(
+    :has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="warning" i]),
+    :has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="trophy" i])
+) {
     background:
         color-mix(in srgb, var(--tlcc-green) 7%, transparent);
     box-shadow:
@@ -1075,23 +1139,38 @@ body:has(
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
         ~ .channels .channel-list-item.active
-) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="partying" i]):is(:has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="warning" i]), :has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="trophy" i])) .from .user::after {
-    content: "SPONSORS";
+) #chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]
+:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i])))
+:has(.content .emoji[aria-label*="partying" i])
+:is(
+    :has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="warning" i]),
+    :has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="trophy" i])
+)
+.from .user::after {
+    content: "WEB · SPONSORS";
     color: var(--tlcc-green);
     border-color:
         color-mix(in srgb, var(--tlcc-green) 55%, transparent);
+    border-style: dashed;
     background:
         color-mix(in srgb, var(--tlcc-green) 10%, transparent);
 }
 
 
-/* FINAL RESULT - 🏆 */
+/* TROPHY OUTPUT - 🏆
+   v6.2.2 uses the same trophy for both !top and the final winner
+   summary. A trophy alone therefore cannot honestly prove RESULT. */
 
 body:has(
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
         ~ .channels .channel-list-item.active
-) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content .emoji[aria-label*="trophy" i]) {
+) #chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]
+:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i])))
+:not(.highlight)
+:has(.content .emoji[aria-label*="trophy" i]) {
     background:
         color-mix(in srgb, var(--tlcc-gold) 12%, transparent);
     box-shadow:
@@ -1104,23 +1183,51 @@ body:has(
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
         ~ .channels .channel-list-item.active
-) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="trophy" i]) .from .user::after {
-    content: "RESULT";
+) #chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]
+:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i])))
+:has(.content .emoji[aria-label*="trophy" i])
+.from .user::after {
+    content: "WEB · WINNERS";
     color: var(--tlcc-gold);
     border-color:
         color-mix(in srgb, var(--tlcc-gold) 65%, transparent);
+    border-style: dashed;
     background:
         color-mix(in srgb, var(--tlcc-gold) 14%, transparent);
 }
 
 
-/* TIE / WARNING - ⚠️ */
+/* HIGH-CONFIDENCE MULTI-WINNER RESULT - 🏆 + medal/podium emoji */
 
 body:has(
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
         ~ .channels .channel-list-item.active
-) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content .emoji[aria-label*="warning" i]) {
+) #chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]
+:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i])))
+:has(.content .emoji[aria-label*="trophy" i])
+:has(.content .emoji[aria-label*="medal" i])
+.from .user::after {
+    content: "WEB · RESULT";
+}
+
+
+/* TIE / WARNING - ⚠️
+   v6.2.2 emits a tie line immediately before the trophy result.
+   Prefer a missed decoration over classifying arbitrary warnings. */
+
+body:has(
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]
+:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i])))
+:not(.highlight)
+:has(.content .emoji[aria-label*="warning" i])
+:has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="trophy" i]) {
     background:
         color-mix(in srgb, var(--tlcc-warning) 8%, transparent);
     box-shadow:
@@ -1132,35 +1239,45 @@ body:has(
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
         ~ .channels .channel-list-item.active
-) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="warning" i]) .from .user::after {
-    content: "TIE";
+) #chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]
+:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i])))
+:has(.content .emoji[aria-label*="warning" i])
+:has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="trophy" i])
+.from .user::after {
+    content: "WEB · TIE";
     color: var(--tlcc-warning);
     border-color:
         color-mix(in srgb, var(--tlcc-warning) 58%, transparent);
+    border-style: dashed;
     background:
         color-mix(in srgb, var(--tlcc-warning) 11%, transparent);
 }
 
 
-/* RIGGED MODE - 😈 / trailing 😉 on main reminder
-
-   The userscript appends the rigged-reminder 😉 after the normal
-   🎁 ... ✨ Gift ... ✨ giveaway body. A wink inside the host's
-   custom giveaway text appears before those final sparkles, so
-   requiring the wink to be the last element avoids that collision.
-   Normal entry confirmations remain text-only after the bridge and
-   therefore cannot be targeted reliably with CSS alone. */
+/* RIGGED MODE - 😈 / trailing 😉 on full giveaway reminder
+   Standalone 😈 is intentionally still heuristic because v6.2.2
+   also appends it to rigged entry confirmations. */
 
 body:has(
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
         ~ .channels .channel-list-item.active
-) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content .emoji[aria-label*="horns" i]),
+) #chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]
+:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i])))
+:not(.highlight)
+:has(.content .emoji[aria-label*="horns" i]),
 body:has(
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
         ~ .channels .channel-list-item.active
-) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content .emoji[aria-label="Emoji: wrapped gift"]):has(.content .emoji[aria-label="Emoji: sparkles"]):has(.content .emoji[aria-label*="winking face" i]:last-child) {
+) #chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]
+:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i])))
+:not(.highlight)
+:has(.content .emoji[aria-label="Emoji: wrapped gift"] ~ .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"])
+:has(.content .emoji[aria-label*="winking face" i]:last-child) {
     background:
         color-mix(in srgb, var(--tlcc-rigged) 9%, transparent);
     box-shadow:
@@ -1174,16 +1291,26 @@ body:has(
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
         ~ .channels .channel-list-item.active
-) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="horns" i]) .from .user::after,
+) #chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]
+:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i])))
+:has(.content .emoji[aria-label*="horns" i])
+.from .user::after,
 body:has(
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
         ~ .channels .channel-list-item.active
-) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label="Emoji: wrapped gift"]):has(.content .emoji[aria-label="Emoji: sparkles"]):has(.content .emoji[aria-label*="winking face" i]:last-child) .from .user::after {
-    content: "RIGGED";
+) #chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]
+:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i])))
+:has(.content .emoji[aria-label="Emoji: wrapped gift"] ~ .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"])
+:has(.content .emoji[aria-label*="winking face" i]:last-child)
+.from .user::after {
+    content: "WEB · RIGGED";
     color: var(--tlcc-rigged);
     border-color:
         color-mix(in srgb, var(--tlcc-rigged) 65%, transparent);
+    border-style: dashed;
     background:
         color-mix(in srgb, var(--tlcc-rigged) 12%, transparent);
 }
@@ -1195,7 +1322,11 @@ body:has(
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
         ~ .channels .channel-list-item.active
-) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content .emoji[aria-label*="unamused" i]) {
+) #chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]
+:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i])))
+:not(.highlight)
+:has(.content .emoji[aria-label*="unamused" i]) {
     background:
         color-mix(in srgb, var(--tlcc-green) 6%, transparent);
     box-shadow:
@@ -1207,23 +1338,32 @@ body:has(
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
         ~ .channels .channel-list-item.active
-) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="unamused" i]) .from .user::after {
-    content: "UNRIGGED";
+) #chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]
+:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i])))
+:has(.content .emoji[aria-label*="unamused" i])
+.from .user::after {
+    content: "WEB · UNRIGGED";
     color: var(--tlcc-green);
     border-color:
         color-mix(in srgb, var(--tlcc-green) 55%, transparent);
+    border-style: dashed;
     background:
         color-mix(in srgb, var(--tlcc-green) 10%, transparent);
 }
 
 
-/* NAUGHTY-LIST ADD / REMOVAL - 👮 */
+/* NAUGHTY-LIST ADD - 👮 */
 
 body:has(
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
         ~ .channels .channel-list-item.active
-) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content .emoji[aria-label*="police officer" i]) {
+) #chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]
+:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i])))
+:not(.highlight)
+:has(.content .emoji[aria-label*="police officer" i]) {
     background:
         color-mix(in srgb, var(--tlcc-naughty) 6%, transparent);
     box-shadow:
@@ -1235,11 +1375,16 @@ body:has(
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
         ~ .channels .channel-list-item.active
-) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="police officer" i]) .from .user::after {
-    content: "NAUGHTY";
+) #chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]
+:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i])))
+:has(.content .emoji[aria-label*="police officer" i])
+.from .user::after {
+    content: "WEB · NAUGHTY";
     color: var(--tlcc-naughty);
     border-color:
         color-mix(in srgb, var(--tlcc-naughty) 55%, transparent);
+    border-style: dashed;
     background:
         color-mix(in srgb, var(--tlcc-naughty) 10%, transparent);
 }
@@ -1251,7 +1396,15 @@ body:has(
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
         ~ .channels .channel-list-item.active
-) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:not(.highlight):is(:has(.content .emoji[aria-label*="prohibited" i]), :has(.content .emoji[aria-label*="stop sign" i]), :has(.content .emoji[aria-label*="police car light" i])) {
+) #chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]
+:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i])))
+:not(.highlight)
+:is(
+    :has(.content .emoji[aria-label*="prohibited" i]),
+    :has(.content .emoji[aria-label*="stop sign" i]),
+    :has(.content .emoji[aria-label*="police car light" i])
+) {
     background:
         color-mix(in srgb, var(--tlcc-alert) 7%, transparent);
     box-shadow:
@@ -1263,11 +1416,20 @@ body:has(
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
         ~ .channels .channel-list-item.active
-) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:is(:has(.content .emoji[aria-label*="prohibited" i]), :has(.content .emoji[aria-label*="stop sign" i]), :has(.content .emoji[aria-label*="police car light" i])) .from .user::after {
-    content: "ALERT";
+) #chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]
+:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i])))
+:is(
+    :has(.content .emoji[aria-label*="prohibited" i]),
+    :has(.content .emoji[aria-label*="stop sign" i]),
+    :has(.content .emoji[aria-label*="police car light" i])
+)
+.from .user::after {
+    content: "WEB · ALERT";
     color: var(--tlcc-alert);
     border-color:
         color-mix(in srgb, var(--tlcc-alert) 58%, transparent);
+    border-style: dashed;
     background:
         color-mix(in srgb, var(--tlcc-alert) 10%, transparent);
 }

@@ -2,6 +2,36 @@
 
 All notable changes to **The Lounge Clean Chat** will be documented here.
 
+## v0.4.3 - 2026-09-11
+
+### Fixed
+
+- Audited giveaway detection directly against **Blutopia BON Giveaway v6.2.2**, taking into account that the userscript runs on the DarkPeers website and TLCC only sees the flattened message after the `DP` website → IRC bridge.
+- Tightened the main giveaway/reminder signature from simple `🎁` + `✨` presence to the userscript's actual ordered `🎁 ... ✨ ... ✨` structure.
+- Tightened rigged-reminder detection to require the full giveaway signature plus the userscript-added trailing `😉`.
+- Tightened `TIE` detection: `⚠️` is only classified when the immediately following `DP` message contains the trophy output expected by the userscript's end sequence.
+- Prevented emoji-derived giveaway rules from overriding the stronger link-derived `REQUEST` and `BON POOL` classifications.
+- Removed the misleading assumption that every `🏆` message is necessarily a final result. Blutopia BON Giveaway v6.2.2 also uses `🏆` for its `!top` leaderboard.
+
+### Changed
+
+- Emoji-derived badges now retain their web origin as `WEB · <CATEGORY>` and use a dashed border. Link-derived `REQUEST` and `BON POOL` badges remain solid.
+- Trophy-only messages are now labelled `WEB · WINNERS`, which is true for both the `!top` leaderboard and a final single-winner summary.
+- `WEB · RESULT` is reserved for higher-confidence multi-winner result messages where both `🏆` and a podium/medal emoji survive the bridge.
+- Sponsor digests remain a gold-accented generic `WEB` message rather than receiving a semantic badge.
+- Corrected the `NAUGHTY` documentation: `👮` is emitted by the naughty-list **add** response; removal uses `🥳`.
+
+### Reviewed
+
+- Considered using `:first-child` / positional emoji selectors as an authenticity check, but deliberately rejected that as proof: the bridge prepends `[username]` as a plain text node, and CSS element-child pseudo-classes do not account for text nodes.
+- Reviewed native CSS nesting as a maintainability refactor. It is useful for deduplicating the repeated DarkPeers scope, but it is intentionally deferred to a separate visual-regression-tested refactor because nesting does not reduce selector-matching work by itself.
+- Reviewed the performance concern around repeated `:has()` and forward sibling lookahead. No performance regression is claimed without measurement; the existing unread-marker trade-off remains unchanged pending profiling.
+
+### Notes
+
+- This remains entirely CSS-only. No userscript, bridge, JavaScript or The Lounge source modification is required.
+- The stricter classifier policy intentionally prefers an occasional missed decoration over presenting an uncertain emoji match as authoritative.
+
 ## v0.4.2 - 2026-09-11
 
 ### Fixed
