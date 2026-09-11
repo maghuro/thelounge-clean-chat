@@ -952,10 +952,7 @@ body:has(
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
         ~ .channels .channel-list-item.active
 ) #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]
-:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i])))
-:not(.highlight)
-:has(.content .emoji[aria-label="Emoji: wrapped gift"] ~ .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]) {
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label="Emoji: wrapped gift"] ~ .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]) {
     background:
         color-mix(in srgb, var(--tlcc-gold) 10%, transparent);
     box-shadow:
@@ -970,9 +967,7 @@ body:has(
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
         ~ .channels .channel-list-item.active
 ) #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]
-:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i])))
-:has(.content .emoji[aria-label="Emoji: wrapped gift"] ~ .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"])
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label="Emoji: wrapped gift"] ~ .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"])
 .from .user::after {
     content: "WEB · GIVEAWAY";
     color: var(--tlcc-gold);
@@ -988,9 +983,7 @@ body:has(
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
         ~ .channels .channel-list-item.active
 ) #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]
-:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i])))
-:has(.content .emoji[aria-label="Emoji: wrapped gift"] ~ .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"])
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label="Emoji: wrapped gift"] ~ .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"])
 .content .emoji[aria-label="Emoji: wrapped gift"] {
     font-size: 1.12em;
 }
@@ -1004,12 +997,7 @@ body:has(
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
         ~ .channels .channel-list-item.active
 ) #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]
-:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i])))
-:not(.highlight)
-:not(:has(.content .emoji[aria-label="Emoji: wrapped gift"]))
-:has(.content .emoji[aria-label="Emoji: sparkles"])
-:not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"])) {
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):not(:has(.content .emoji[aria-label="Emoji: wrapped gift"])):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"])) {
     background:
         color-mix(in srgb, var(--tlcc-gold) 5%, transparent);
     box-shadow:
@@ -1022,11 +1010,7 @@ body:has(
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
         ~ .channels .channel-list-item.active
 ) #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]
-:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i])))
-:not(:has(.content .emoji[aria-label="Emoji: wrapped gift"]))
-:has(.content .emoji[aria-label="Emoji: sparkles"])
-:not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]))
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(:has(.content .emoji[aria-label="Emoji: wrapped gift"])):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]))
 .from .user::after {
     color: var(--tlcc-gold);
     border-color:
@@ -1043,10 +1027,7 @@ body:has(
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
         ~ .channels .channel-list-item.active
 ) #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]
-:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i])))
-:not(.highlight)
-:has(.content .emoji[aria-label*="clipboard" i]) {
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="clipboard" i]) {
     background:
         color-mix(in srgb, var(--tlcc-cyan) 5%, transparent);
     box-shadow:
@@ -1059,9 +1040,7 @@ body:has(
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
         ~ .channels .channel-list-item.active
 ) #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]
-:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i])))
-:has(.content .emoji[aria-label*="clipboard" i])
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="clipboard" i])
 .from .user::after {
     content: "WEB · ENTRIES";
     color: var(--tlcc-cyan);
@@ -1080,10 +1059,7 @@ body:has(
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
         ~ .channels .channel-list-item.active
 ) #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]
-:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i])))
-:not(.highlight)
-:has(.content .emoji[aria-label*="hourglass" i]) {
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="hourglass" i]) {
     background:
         color-mix(in srgb, var(--tlcc-green) 5%, transparent);
     box-shadow:
@@ -1096,9 +1072,7 @@ body:has(
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
         ~ .channels .channel-list-item.active
 ) #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]
-:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i])))
-:has(.content .emoji[aria-label*="hourglass" i])
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="hourglass" i])
 .from .user::after {
     content: "WEB · TIME";
     color: var(--tlcc-green);
@@ -1120,13 +1094,7 @@ body:has(
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
         ~ .channels .channel-list-item.active
 ) #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]
-:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i])))
-:not(.highlight)
-:has(.content .emoji[aria-label*="partying" i])
-:is(
-    :has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="warning" i]),
-    :has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="trophy" i])
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="partying" i]):is(:has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="warning" i]),:has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="trophy" i])
 ) {
     background:
         color-mix(in srgb, var(--tlcc-green) 7%, transparent);
@@ -1140,12 +1108,7 @@ body:has(
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
         ~ .channels .channel-list-item.active
 ) #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]
-:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i])))
-:has(.content .emoji[aria-label*="partying" i])
-:is(
-    :has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="warning" i]),
-    :has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="trophy" i])
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="partying" i]):is(:has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="warning" i]),:has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="trophy" i])
 )
 .from .user::after {
     content: "WEB · SPONSORS";
@@ -1167,10 +1130,7 @@ body:has(
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
         ~ .channels .channel-list-item.active
 ) #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]
-:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i])))
-:not(.highlight)
-:has(.content .emoji[aria-label*="trophy" i]) {
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="trophy" i]) {
     background:
         color-mix(in srgb, var(--tlcc-gold) 12%, transparent);
     box-shadow:
@@ -1184,9 +1144,7 @@ body:has(
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
         ~ .channels .channel-list-item.active
 ) #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]
-:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i])))
-:has(.content .emoji[aria-label*="trophy" i])
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="trophy" i])
 .from .user::after {
     content: "WEB · WINNERS";
     color: var(--tlcc-gold);
@@ -1205,10 +1163,7 @@ body:has(
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
         ~ .channels .channel-list-item.active
 ) #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]
-:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i])))
-:has(.content .emoji[aria-label*="trophy" i])
-:has(.content .emoji[aria-label*="medal" i])
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="trophy" i]):has(.content .emoji[aria-label*="medal" i])
 .from .user::after {
     content: "WEB · RESULT";
 }
@@ -1223,11 +1178,7 @@ body:has(
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
         ~ .channels .channel-list-item.active
 ) #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]
-:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i])))
-:not(.highlight)
-:has(.content .emoji[aria-label*="warning" i])
-:has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="trophy" i]) {
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="warning" i]):has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="trophy" i]) {
     background:
         color-mix(in srgb, var(--tlcc-warning) 8%, transparent);
     box-shadow:
@@ -1240,10 +1191,7 @@ body:has(
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
         ~ .channels .channel-list-item.active
 ) #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]
-:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i])))
-:has(.content .emoji[aria-label*="warning" i])
-:has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="trophy" i])
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="warning" i]):has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="trophy" i])
 .from .user::after {
     content: "WEB · TIE";
     color: var(--tlcc-warning);
@@ -1264,20 +1212,13 @@ body:has(
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
         ~ .channels .channel-list-item.active
 ) #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]
-:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i])))
-:not(.highlight)
-:has(.content .emoji[aria-label*="horns" i]),
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="horns" i]),
 body:has(
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
         ~ .channels .channel-list-item.active
 ) #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]
-:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i])))
-:not(.highlight)
-:has(.content .emoji[aria-label="Emoji: wrapped gift"] ~ .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"])
-:has(.content .emoji[aria-label*="winking face" i]:last-child) {
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label="Emoji: wrapped gift"] ~ .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]):has(.content .emoji[aria-label*="winking face" i]:last-child) {
     background:
         color-mix(in srgb, var(--tlcc-rigged) 9%, transparent);
     box-shadow:
@@ -1292,19 +1233,14 @@ body:has(
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
         ~ .channels .channel-list-item.active
 ) #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]
-:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i])))
-:has(.content .emoji[aria-label*="horns" i])
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="horns" i])
 .from .user::after,
 body:has(
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
         ~ .channels .channel-list-item.active
 ) #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]
-:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i])))
-:has(.content .emoji[aria-label="Emoji: wrapped gift"] ~ .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"])
-:has(.content .emoji[aria-label*="winking face" i]:last-child)
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label="Emoji: wrapped gift"] ~ .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]):has(.content .emoji[aria-label*="winking face" i]:last-child)
 .from .user::after {
     content: "WEB · RIGGED";
     color: var(--tlcc-rigged);
@@ -1323,10 +1259,7 @@ body:has(
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
         ~ .channels .channel-list-item.active
 ) #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]
-:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i])))
-:not(.highlight)
-:has(.content .emoji[aria-label*="unamused" i]) {
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="unamused" i]) {
     background:
         color-mix(in srgb, var(--tlcc-green) 6%, transparent);
     box-shadow:
@@ -1339,9 +1272,7 @@ body:has(
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
         ~ .channels .channel-list-item.active
 ) #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]
-:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i])))
-:has(.content .emoji[aria-label*="unamused" i])
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="unamused" i])
 .from .user::after {
     content: "WEB · UNRIGGED";
     color: var(--tlcc-green);
@@ -1360,10 +1291,7 @@ body:has(
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
         ~ .channels .channel-list-item.active
 ) #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]
-:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i])))
-:not(.highlight)
-:has(.content .emoji[aria-label*="police officer" i]) {
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="police officer" i]) {
     background:
         color-mix(in srgb, var(--tlcc-naughty) 6%, transparent);
     box-shadow:
@@ -1376,9 +1304,7 @@ body:has(
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
         ~ .channels .channel-list-item.active
 ) #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]
-:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i])))
-:has(.content .emoji[aria-label*="police officer" i])
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="police officer" i])
 .from .user::after {
     content: "WEB · NAUGHTY";
     color: var(--tlcc-naughty);
@@ -1397,13 +1323,7 @@ body:has(
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
         ~ .channels .channel-list-item.active
 ) #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]
-:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i])))
-:not(.highlight)
-:is(
-    :has(.content .emoji[aria-label*="prohibited" i]),
-    :has(.content .emoji[aria-label*="stop sign" i]),
-    :has(.content .emoji[aria-label*="police car light" i])
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):is(:has(.content .emoji[aria-label*="prohibited" i]),:has(.content .emoji[aria-label*="stop sign" i]),:has(.content .emoji[aria-label*="police car light" i])
 ) {
     background:
         color-mix(in srgb, var(--tlcc-alert) 7%, transparent);
@@ -1417,12 +1337,7 @@ body:has(
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
         ~ .channels .channel-list-item.active
 ) #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]
-:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i])))
-:is(
-    :has(.content .emoji[aria-label*="prohibited" i]),
-    :has(.content .emoji[aria-label*="stop sign" i]),
-    :has(.content .emoji[aria-label*="police car light" i])
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):is(:has(.content .emoji[aria-label*="prohibited" i]),:has(.content .emoji[aria-label*="stop sign" i]),:has(.content .emoji[aria-label*="police car light" i])
 )
 .from .user::after {
     content: "WEB · ALERT";
