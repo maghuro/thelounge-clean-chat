@@ -1,0 +1,163 @@
+name: Refactor TLCC v0.4.3 network scope
+
+on:
+  push:
+    branches:
+      - dev
+    paths:
+      - .github/workflows/tlcc-v0.4.3-nesting.yml
+
+permissions:
+  contents: write
+
+jobs:
+  nesting-refactor:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout dev
+        uses: actions/checkout@v4
+        with:
+          ref: dev
+          fetch-depth: 0
+
+      - name: Collapse repeated DarkPeers guard with native CSS nesting
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          p = Path('thelounge-clean-chat.css')
+          s = p.read_text()
+
+          scope = re.compile(
+              r'body:has\(\n'
+              r'\s*\.network > \.channel-list-item\[data-type="lobby"\]\[data-name="DarkPeers" i\]\.active,\n'
+              r'\s*\.network > \.channel-list-item\[data-type="lobby"\]\[data-name="DarkPeers" i\]\n'
+              r'\s*~ \.channels \.channel-list-item\.active\n'
+              r'\s*\)'
+          )
+
+          matches = list(scope.finditer(s))
+          if len(matches) < 20:
+              raise SystemExit(f'Expected many repeated DarkPeers guards, found only {len(matches)}')
+
+          first = matches[0]
+          before = s[:first.end()]
+          after = s[first.end():]
+
+          # The first guard already owns the custom properties. Keep that opening
+          # rule, remove only its early closing brace, and let it become the one
+          # outer scope for the remainder of the stylesheet.
+          close_marker = '    --tlcc-naughty: #ffde59;\n}\n\n\n/* ============================================================\n   1. GENERAL READABILITY'
+          open_marker = '    --tlcc-naughty: #ffde59;\n\n\n/* ============================================================\n   1. GENERAL READABILITY'
+          if after.count(close_marker) != 1:
+              raise SystemExit(f'Expected exactly one scope-close marker, found {after.count(close_marker)}')
+          after = after.replace(close_marker, open_marker, 1)
+
+          # Every later copy of the same active-network guard is now represented
+          # by the parent selector. Explicit & preserves the original semantics.
+          after, replaced = scope.subn('&', after)
+          expected = len(matches) - 1
+          if replaced != expected:
+              raise SystemExit(f'Expected to replace {expected} repeated guards, replaced {replaced}')
+
+          s = before + after.rstrip() + '\n}\n'
+
+          if len(scope.findall(s)) != 1:
+              raise SystemExit(f'Expected one DarkPeers guard after refactor, found {len(scope.findall(s))}')
+          if s.count('{') != s.count('}'):
+              raise SystemExit(f'CSS brace mismatch: {s.count("{")} opening vs {s.count("}")} closing')
+
+          p.write_text(s)
+          print(f'OK: collapsed {expected} repeated guards into one outer scope')
+          PY
+
+      - name: Update documentation
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          # README
+          p = Path('README.md')
+          s = p.read_text()
+          needle = (
+              'The scope expects the local The Lounge network/lobby name to be `DarkPeers`. '
+              'Channel and bridge-nick matching is case-insensitive where appropriate.\n'
+          )
+          addition = (
+              '\nInternally, v0.4.3 keeps that active-network test in one outer rule and uses '
+              '**native CSS nesting** for the scoped TLCC rules. This removes the old repeated '
+              '`body:has(...)` guard from every selector while preserving the same DarkPeers-only '
+              'behaviour. The Custom Stylesheet editor rule remains intentionally outside that scope.\n'
+          )
+          if addition.strip() not in s:
+              if needle not in s:
+                  raise SystemExit('README scope insertion point not found')
+              s = s.replace(needle, needle + addition, 1)
+
+          compat_old = 'TLCC uses modern CSS features including `:has()`, `:is()` and `color-mix()`, so a reasonably modern browser is required.'
+          compat_new = 'TLCC uses modern CSS features including `:has()`, `:is()`, `color-mix()` and native CSS nesting, so a reasonably modern browser is required.'
+          if compat_old in s:
+              s = s.replace(compat_old, compat_new, 1)
+          elif compat_new not in s:
+              raise SystemExit('README compatibility sentence not found')
+
+          p.write_text(s)
+
+          # CHANGELOG
+          p = Path('CHANGELOG.md')
+          s = p.read_text()
+          old = '- Reviewed native CSS nesting as a maintainability refactor. It is useful for deduplicating the repeated DarkPeers scope, but it is intentionally deferred to a separate visual-regression-tested refactor because nesting does not reduce selector-matching work by itself.\n'
+          if old not in s:
+              raise SystemExit('CHANGELOG deferred-nesting line not found')
+          s = s.replace(old, '', 1)
+
+          changed_anchor = '- Corrected the `NAUGHTY` documentation: `👮` is emitted by the naughty-list **add** response; removal uses `🥳`.\n'
+          changed_bullet = '- Refactored the repeated DarkPeers active-network guard into one outer scope using **native CSS nesting** and explicit `&` selectors. This removes dozens of copied `body:has(...)` guards, improving readability and maintainability without claiming a selector-performance improvement.\n'
+          if changed_bullet not in s:
+              if changed_anchor not in s:
+                  raise SystemExit('CHANGELOG Changed insertion point not found')
+              s = s.replace(changed_anchor, changed_anchor + changed_bullet, 1)
+
+          p.write_text(s)
+          PY
+
+      - name: Validate refactor
+        shell: bash
+        run: |
+          git diff --check
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          s = Path('thelounge-clean-chat.css').read_text()
+          scope = re.compile(
+              r'body:has\(\n'
+              r'\s*\.network > \.channel-list-item\[data-type="lobby"\]\[data-name="DarkPeers" i\]\.active,\n'
+              r'\s*\.network > \.channel-list-item\[data-type="lobby"\]\[data-name="DarkPeers" i\]\n'
+              r'\s*~ \.channels \.channel-list-item\.active\n'
+              r'\s*\)'
+          )
+          guards = len(scope.findall(s))
+          if guards != 1:
+              raise SystemExit(f'Expected one active-network guard, found {guards}')
+          if '--tlcc-version: "v0.4.3";' not in s:
+              raise SystemExit('Version marker missing')
+          if s.count('{') != s.count('}'):
+              raise SystemExit('Brace mismatch')
+          print('OK: one DarkPeers guard remains')
+          print('CSS bytes:', len(s.encode()))
+          PY
+          grep -nE 'THE LOUNGE CLEAN CHAT v|--tlcc-version' thelounge-clean-chat.css
+          git diff --stat
+
+      - name: Commit refactor and remove helper workflow
+        run: |
+          git config user.name "Maghuro"
+          git config user.email "1546139+maghuro@users.noreply.github.com"
+          git rm .github/workflows/tlcc-v0.4.3-nesting.yml
+          git add thelounge-clean-chat.css README.md CHANGELOG.md
+          git commit -m "Refactor TLCC network scope with CSS nesting"
+          git push origin dev
