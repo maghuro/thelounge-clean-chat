@@ -1,5 +1,5 @@
 /* ============================================================
-   Maghuro - THE LOUNGE CLEAN CHAT v0.4.3
+   Maghuro - THE LOUNGE CLEAN CHAT v0.4.4-dev.1
    Tested with The Lounge 4.5.2
    Chrome: Android + Desktop
    ============================================================
@@ -7,9 +7,14 @@
    DarkPeers-specific stylesheet for The Lounge.
 
    Expected setup:
-     Network:      DarkPeers
-     Main channel: #darkpeers
-     Bridge bot:   DP
+     DarkPeers fingerprint: #darkpeers channel
+     Main channel:          #darkpeers
+     Bridge bot:            DP
+
+   The local The Lounge connection name may be anything. TLCC
+   identifies the DarkPeers network by the presence of its
+   #darkpeers channel in the same network as the active lobby/
+   channel, rather than trusting the user-defined connection name.
 
    Everything except the Custom Stylesheet editor rule is scoped to
    the currently active DarkPeers network. This prevents the
@@ -49,17 +54,27 @@ textarea#user-specified-css-input {
 
    IMPORTANT:
    :has() must not be nested inside another :has(). The scope
-   below uses one relational :has() with two alternatives:
-     - the DarkPeers lobby itself is active; or
-     - an active channel/query exists inside DarkPeers.
+   identifies DarkPeers by the presence of #darkpeers inside the
+   SAME .network as the active lobby/channel. The connection label
+   itself is user-defined and is therefore deliberately ignored.
+
+   The four alternatives cover:
+     - the network lobby is active;
+     - #darkpeers itself is active;
+     - another active channel appears after #darkpeers; or
+     - another active channel appears before #darkpeers.
    ============================================================ */
 
 body:has(
-    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
-    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
-        ~ .channels .channel-list-item.active
+    .network > .channel-list-item[data-type="lobby"].active
+        ~ .channels .channel-list-item[data-name="#darkpeers" i],
+    .network > .channels .channel-list-item[data-name="#darkpeers" i].active,
+    .network > .channels .channel-list-item[data-name="#darkpeers" i]
+        ~ .channel-list-item.active,
+    .network > .channels .channel-list-item.active
+        ~ .channel-list-item[data-name="#darkpeers" i]
 ) {
-    --tlcc-version: "v0.4.3";
+    --tlcc-version: "v0.4.4-dev.1";
     --tlcc-gold: #f3d34a;
     --tlcc-cyan: #6eb8d4;
     --tlcc-green: #79d99b;
