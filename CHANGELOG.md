@@ -2,6 +2,38 @@
 
 All notable changes to **The Lounge Clean Chat** will be documented here.
 
+## v0.4.4 - 2026-09-11
+
+### Fixed
+
+- Removed the requirement for the local The Lounge connection/lobby to be named `DarkPeers`. TLCC now fingerprints the active DarkPeers network from the presence of its real `#darkpeers` channel, so locally named connections such as `DP`, `Batatas` or anything else work without editing the stylesheet.
+- Extended the active-network fingerprint to cover the network lobby, `#darkpeers` itself, and other active channels on the same network regardless of whether `#darkpeers` appears before or after them in the sidebar.
+- Corrected end-of-giveaway ordering assumptions after live bridge testing proved asynchronous userscript messages may reach IRC in reverse order. `TIE` and final `SPONSORS` adjacency now accept both sides of the result sequence.
+- Fixed tie messages that remained generic `WEB` when the final result reached IRC first.
+
+### Changed
+
+- Giveaway heuristics now form their own visible family: desktop badges use `GIVEAWAY · <CATEGORY>` and narrow mobile screens use the shorter `GW · <CATEGORY>` prefix.
+- Main `🎁 ... ✨ ... ✨` announcements remain the compact `GIVEAWAY` badge.
+- Sponsor digests are now labelled `GIVEAWAY · SPONSORS` instead of a generic gold `WEB` badge.
+- Trophy-only output now falls back to `GIVEAWAY · WINNERS` rather than `WEB · WINNERS`; the trophy is known to belong to the giveaway userscript even when CSS cannot distinguish `!top` from a final single-winner summary.
+- `GIVEAWAY · RESULT` now recognises stronger live-verified evidence: trophy + podium/medal output, trophy + the rigged final-result `👀` marker, or trophy adjacency to a tie warning.
+- Renamed the old `ALERT` giveaway category to the more accurate `REJECTED` for `🚫`, `🛑` and `🚨` denial/invalid-entry responses.
+
+### Tested
+
+- Ran real giveaways specifically to exercise the DarkPeers website → `DP` → IRC → The Lounge path rather than relying only on synthetic DOM examples.
+- Verified main giveaway, sponsor digest, entries, rigged-mode, rejected-entry and trophy/result treatments in live bridged output.
+- Verified a real two-winner result and a real tie where IRC arrival order was `RESULT → TIE`, despite the userscript calling the tie send first.
+- Verified a real single-winner rigged result carrying `🏆` + `👀`.
+- Verified the new network fingerprint with a deliberately non-`DarkPeers` local connection name.
+
+### Notes
+
+- TLCC remains completely CSS-only; no changes to The Lounge, the DarkPeers bridge or Blutopia BON Giveaway are required.
+- The fixed production URL and browser revalidation behaviour introduced in v0.4.2 are unchanged.
+- Special thanks to **Furyan**, who found the connection-name bug by apparently doing the outrageous thing of naming his own connection whatever he wanted, and to **Captain Chungus** plus his beautiful **T.R.A.V.I.S.** for helping turn giveaway classification into a small research programme. 😂
+
 ## v0.4.3 - 2026-09-11
 
 ### Fixed

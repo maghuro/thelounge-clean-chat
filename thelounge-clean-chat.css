@@ -1,5 +1,5 @@
 /* ============================================================
-   Maghuro - THE LOUNGE CLEAN CHAT v0.4.4-dev.2
+   Maghuro - THE LOUNGE CLEAN CHAT v0.4.4
    Tested with The Lounge 4.5.2
    Chrome: Android + Desktop
    ============================================================
@@ -74,7 +74,7 @@ body:has(
     .network > .channels .channel-list-item.active
         ~ .channel-list-item[data-name="#darkpeers" i]
 ) {
-    --tlcc-version: "v0.4.4-dev.2";
+    --tlcc-version: "v0.4.4";
     --tlcc-giveaway-prefix: "GIVEAWAY · ";
     --tlcc-gold: #f3d34a;
     --tlcc-cyan: #6eb8d4;
@@ -675,9 +675,10 @@ body:has(
        handled earlier in this file. They take precedence.
      - Giveaway-specific emoji signatures use a dashed GIVEAWAY ·
        badge. They are still CSS heuristics, not hidden script state.
-     - Ambiguous generic script output stays WEB. In particular, 🏆
-       is also used by !top, so trophy-only messages remain WEB ·
-       WINNERS instead of being falsely promoted to giveaway RESULT.
+     - Trophy output belongs to the giveaway family, but 🏆 alone is
+       ambiguous because !top uses it too. It therefore falls back to
+       GIVEAWAY · WINNERS; stronger surviving context promotes it to
+       GIVEAWAY · RESULT.
 
    Signatures verified against Blutopia BON Giveaway v6.2.2 and
    observed live after the DarkPeers -> DP -> IRC -> The Lounge bridge:
@@ -685,10 +686,10 @@ body:has(
      Sponsor digest: one ✨, without 🎁
      Entries:        📋
      Time:           ⏳
-     Final sponsors: 🥳 immediately before tie/result sequence
-     Winners:        🏆 (ambiguous: final single result or !top)
-     Result:         🏆 + podium/medal emoji (multi-winner result)
-     Tie:            ⚠️ immediately before a 🏆 message
+     Final sponsors: 🥳 adjacent to tie/result sequence (either side)
+     Winners:        🏆 (giveaway-family fallback; !top is ambiguous)
+     Result:         🏆 + medal/podium, 👀, or adjacent tie context
+     Tie:            ⚠️ adjacent to 🏆; bridge order may reverse
      Rigged:         😈, plus trailing 😉 on a full giveaway reminder
      Unrigged:       😒
      Naughty add:    👮
@@ -810,13 +811,21 @@ body:has(
 
 
 /* FINAL SPONSOR THANK-YOU - 🥳
-   The userscript emits this immediately before either a tie line or
-   the final trophy-bearing winner output. Keep the existing forward
-   adjacency requirement to avoid ordinary party emoji. */
+   The userscript emits this at giveaway end next to the tie/result
+   sequence. Live bridge testing showed asynchronous sends can arrive
+   in reversed order, so accept the party line immediately before OR
+   after a warning/trophy message. */
 
 & #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="partying" i]):is(:has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="warning" i]),:has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="trophy" i])
-) {
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="partying" i]):is(
+    :has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="warning" i]),
+    :has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="trophy" i])
+),
+& #chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:is(
+    :has(.content .emoji[aria-label*="warning" i]),
+    :has(.content .emoji[aria-label*="trophy" i])
+) + .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="partying" i]) {
     background:
         color-mix(in srgb, var(--tlcc-green) 7%, transparent);
     box-shadow:
@@ -825,8 +834,16 @@ body:has(
 }
 
 & #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="partying" i]):is(:has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="warning" i]),:has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="trophy" i])
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="partying" i]):is(
+    :has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="warning" i]),
+    :has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="trophy" i])
 )
+.from .user::after,
+& #chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:is(
+    :has(.content .emoji[aria-label*="warning" i]),
+    :has(.content .emoji[aria-label*="trophy" i])
+) + .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="partying" i])
 .from .user::after {
     content: var(--tlcc-giveaway-prefix) "SPONSORS";
     color: var(--tlcc-green);
@@ -840,8 +857,9 @@ body:has(
 
 /* TROPHY OUTPUT - 🏆
    v6.2.2 uses the same trophy for both !top and the final winner
-   summary. Live testing reproduced !top as a trophy message, so a
-   trophy alone still cannot honestly prove giveaway RESULT. */
+   summary. A trophy therefore belongs to the giveaway family, but
+   trophy alone cannot prove RESULT. Use WINNERS as the honest
+   fallback and promote only when stronger context survives. */
 
 & #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="trophy" i]) {
@@ -856,7 +874,7 @@ body:has(
 & #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="trophy" i])
 .from .user::after {
-    content: "WEB · WINNERS";
+    content: var(--tlcc-giveaway-prefix) "WINNERS";
     color: var(--tlcc-gold);
     border-color:
         color-mix(in srgb, var(--tlcc-gold) 65%, transparent);
@@ -866,21 +884,38 @@ body:has(
 }
 
 
-/* HIGH-CONFIDENCE MULTI-WINNER RESULT - 🏆 + medal/podium emoji */
+/* HIGH-CONFIDENCE RESULT
+   - 🏆 + medal/podium: verified multi-winner result
+   - 🏆 + 👀: rigged-mode final result; !top never appends this marker
+   - 🏆 adjacent to ⚠️: end-of-giveaway tie/result sequence, accepting
+     either bridge arrival order because sendMessage() is asynchronous. */
 
 & #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="trophy" i]):has(.content .emoji[aria-label*="medal" i])
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="trophy" i]):is(
+    :has(.content .emoji[aria-label*="medal" i]),
+    :has(.content .emoji[aria-label*="eyes" i]),
+    :has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="warning" i])
+)
+.from .user::after,
+& #chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="warning" i])
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="trophy" i])
 .from .user::after {
     content: var(--tlcc-giveaway-prefix) "RESULT";
 }
 
 
 /* TIE / WARNING - ⚠️
-   v6.2.2 emits a tie line immediately before the trophy result.
-   Prefer a missed decoration over classifying arbitrary warnings. */
+   The source emits the tie before the result, but live bridge testing
+   proved the two asynchronous sends may reach IRC in the opposite
+   order. Classify the warning when a trophy message is immediately
+   before OR after it. */
 
 & #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="warning" i]):has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="trophy" i]) {
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="warning" i]):has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="trophy" i]),
+& #chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="trophy" i])
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="warning" i]) {
     background:
         color-mix(in srgb, var(--tlcc-warning) 8%, transparent);
     box-shadow:
@@ -890,6 +925,10 @@ body:has(
 
 & #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="warning" i]):has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="trophy" i])
+.from .user::after,
+& #chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="trophy" i])
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="warning" i])
 .from .user::after {
     content: var(--tlcc-giveaway-prefix) "TIE";
     color: var(--tlcc-warning);
