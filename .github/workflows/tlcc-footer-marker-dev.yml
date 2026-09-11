@@ -1,0 +1,65 @@
+name: TLCC footer marker dev test
+
+on:
+  push:
+    branches: [dev]
+    paths:
+      - .github/workflows/tlcc-footer-marker-dev.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout dev
+        uses: actions/checkout@v4
+        with:
+          ref: dev
+          fetch-depth: 0
+
+      - name: Add footer version marker
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          p = Path('thelounge-clean-chat.css')
+          s = p.read_text()
+
+          s = s.replace('THE LOUNGE CLEAN CHAT v0.4.4', 'THE LOUNGE CLEAN CHAT v0.4.5-dev.1', 1)
+          s = s.replace('--tlcc-version: "v0.4.4";', '--tlcc-version: "v0.4.5-dev.1";', 1)
+
+          anchor = '''    --tlcc-naughty: #ffde59;\n\n\n/* ============================================================\n   1. GENERAL READABILITY'''
+          block = '''    --tlcc-naughty: #ffde59;\n\n\n/* ============================================================\n   0A. VISIBLE TLCC VERSION MARKER IN SIDEBAR FOOTER\n\n   The topic marker can be truncated on small desktop monitors.\n   The footer marker gives desktop and mobile/sidebar users a\n   stable place to confirm the stylesheet version.\n   ============================================================ */\n\n& #footer {\n    flex-wrap: wrap;\n    height: auto;\n    min-height: 45px;\n    padding-bottom: 5px;\n}\n\n& #footer::after {\n    content: "Enhanced by TLCC " var(--tlcc-version);\n    flex: 0 0 100%;\n    order: 99;\n    text-align: center;\n    font-size: 0.68em;\n    letter-spacing: 0.04em;\n    line-height: 1.2;\n    padding-top: 2px;\n    color: var(--body-color-muted, var(--body-color));\n    opacity: 0.62;\n    pointer-events: none;\n    white-space: nowrap;\n}\n\n\n/* ============================================================\n   1. GENERAL READABILITY'''
+
+          if anchor not in s:
+              raise SystemExit('Footer marker insertion anchor not found')
+          s = s.replace(anchor, block, 1)
+
+          if s.count('#footer::after') != 1:
+              raise SystemExit('Expected exactly one footer marker rule')
+          if s.count('{') != s.count('}'):
+              raise SystemExit('CSS brace mismatch')
+
+          p.write_text(s)
+          PY
+
+      - name: Validate version and marker
+        shell: bash
+        run: |
+          grep -F 'THE LOUNGE CLEAN CHAT v0.4.5-dev.1' thelounge-clean-chat.css
+          grep -F -- '--tlcc-version: "v0.4.5-dev.1";' thelounge-clean-chat.css
+          grep -F '#footer::after' thelounge-clean-chat.css
+          grep -F 'Enhanced by TLCC' thelounge-clean-chat.css
+
+      - name: Commit patch and remove helper workflow
+        shell: bash
+        run: |
+          rm -f .github/workflows/tlcc-footer-marker-dev.yml
+          git config user.name 'Maghuro'
+          git config user.email '1546139+maghuro@users.noreply.github.com'
+          git add thelounge-clean-chat.css .github/workflows/tlcc-footer-marker-dev.yml
+          git commit -m 'Test persistent TLCC footer marker on dev'
+          git push origin dev
