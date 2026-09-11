@@ -1,0 +1,73 @@
+name: TLCC v0.4.5 footer marker cleanup
+
+on:
+  push:
+    branches: [dev]
+    paths:
+      - '.github/workflows/tlcc-v0.4.5-footer-cleanup.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout dev
+        uses: actions/checkout@v4
+        with:
+          ref: dev
+          fetch-depth: 0
+
+      - name: Keep one robust footer marker
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          p = Path('thelounge-clean-chat.css')
+          s = p.read_text()
+
+          # Remove the accidentally duplicated late footer-marker block, keeping 0A.
+          pattern = re.compile(
+              r'\n/\* ============================================================\n'
+              r'   21\. SIDEBAR FOOTER VERSION MARKER\n.*?'
+              r'& #footer::after \{.*?\n\}\n',
+              re.S,
+          )
+          s, n = pattern.subn('\n', s)
+          if n != 1:
+              raise SystemExit(f'Expected exactly one duplicate section 21, removed {n}')
+
+          # Harden the retained 0A marker for narrow/mobile sidebars.
+          old = '''& #footer::after {\n    content: "Enhanced by TLCC " var(--tlcc-version);\n    flex: 0 0 100%;\n    order: 99;\n    text-align: center;\n    font-size: 0.68em;\n    letter-spacing: 0.04em;\n    line-height: 1.2;\n    padding-top: 2px;\n    color: var(--body-color-muted, var(--body-color));\n    opacity: 0.62;\n    pointer-events: none;\n    white-space: nowrap;\n}\n'''
+          new = '''& #footer::after {\n    content: "Enhanced by TLCC " var(--tlcc-version);\n    flex: 0 0 100%;\n    width: 100%;\n    min-width: 0;\n    box-sizing: border-box;\n    order: 99;\n    text-align: center;\n    font-size: 0.68em;\n    letter-spacing: 0.04em;\n    line-height: 1.2;\n    padding-top: 2px;\n    color: var(--body-color-muted, var(--body-color));\n    opacity: 0.62;\n    pointer-events: none;\n    white-space: nowrap;\n}\n'''
+          if old not in s:
+              raise SystemExit('Retained footer marker block not found')
+          s = s.replace(old, new, 1)
+
+          if s.count('VISIBLE TLCC VERSION MARKER IN SIDEBAR FOOTER') != 1:
+              raise SystemExit('Expected exactly one retained footer marker section')
+          if s.count('& #footer::after') != 1:
+              raise SystemExit('Expected exactly one #footer::after rule')
+          if s.count('{') != s.count('}'):
+              raise SystemExit(f'CSS brace mismatch: {s.count("{")} opening vs {s.count("}")} closing')
+
+          p.write_text(s)
+          PY
+
+      - name: Validate
+        run: |
+          grep -q 'THE LOUNGE CLEAN CHAT v0.4.5-dev.1' thelounge-clean-chat.css
+          grep -q -- '--tlcc-version: "v0.4.5-dev.1";' thelounge-clean-chat.css
+          test "$(grep -c '& #footer::after' thelounge-clean-chat.css)" -eq 1
+          ! grep -q '21. SIDEBAR FOOTER VERSION MARKER' thelounge-clean-chat.css
+
+      - name: Commit cleanup and remove helper workflow
+        run: |
+          rm -f .github/workflows/tlcc-v0.4.5-footer-cleanup.yml
+          git config user.name 'Maghuro'
+          git config user.email '1546139+maghuro@users.noreply.github.com'
+          git add thelounge-clean-chat.css .github/workflows/tlcc-v0.4.5-footer-cleanup.yml
+          git commit -m 'Clean up footer version marker preview'
+          git push origin dev
