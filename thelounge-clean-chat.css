@@ -1,5 +1,5 @@
 /* ============================================================
-   Maghuro - THE LOUNGE CLEAN CHAT v0.4.5-dev.1
+   Maghuro - THE LOUNGE CLEAN CHAT v0.4.5
    Tested with The Lounge 4.5.2
    Chrome: Android + Desktop
    ============================================================
@@ -74,7 +74,7 @@ body:has(
     .network > .channels .channel-list-item.active
         ~ .channel-list-item[data-name="#darkpeers" i]
 ) {
-    --tlcc-version: "v0.4.5-dev.1";
+    --tlcc-version: "v0.4.5";
     --tlcc-giveaway-prefix: "GIVEAWAY · ";
     --tlcc-gold: #f3d34a;
     --tlcc-cyan: #6eb8d4;

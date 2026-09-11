@@ -2,7 +2,7 @@
 
 All notable changes to **The Lounge Clean Chat** will be documented here.
 
-## v0.4.5-dev.1 - 2026-09-11
+## v0.4.5 - 2026-09-11
 
 ### Changed
 
@@ -12,8 +12,8 @@ All notable changes to **The Lounge Clean Chat** will be documented here.
 
 ### Testing
 
-- Development preview only. Verify the footer layout on a normal desktop, a narrow/small desktop window and Android before promoting to `main`.
-- Check that the footer icons keep their normal alignment and that the extra marker row does not overlap or clip the sidebar.
+- Promoted after visual validation of the footer marker in the `dev` preview.
+- The marker provides a persistent version check even when the channel topic is too long to expose the topic suffix.
 
 ### Notes
 
