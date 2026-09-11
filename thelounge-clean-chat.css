@@ -103,6 +103,9 @@ body:has(
 & #footer::after {
     content: "Enhanced by TLCC " var(--tlcc-version);
     flex: 0 0 100%;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
     order: 99;
     text-align: center;
     font-size: 0.68em;
@@ -1125,36 +1128,5 @@ body:has(
         color-mix(in srgb, var(--tlcc-alert) 10%, transparent);
 }
 
-/* ============================================================
-   21. SIDEBAR FOOTER VERSION MARKER
-
-   The topic marker can be truncated on smaller desktop monitors.
-   Mirror the loaded TLCC version in The Lounge's shared sidebar
-   footer so it remains discoverable on desktop and mobile.
-   ============================================================ */
-
-& #footer {
-    flex-wrap: wrap;
-    height: auto;
-    min-height: 45px;
-    padding-bottom: 6px;
-}
-
-& #footer::after {
-    content: "Enhanced by TLCC " var(--tlcc-version);
-    flex: 0 0 100%;
-    width: 100%;
-    min-width: 0;
-    box-sizing: border-box;
-    text-align: center;
-    font-size: 10px;
-    letter-spacing: 0.04em;
-    line-height: 1.2;
-    padding-top: 3px;
-    opacity: 0.45;
-    color: var(--body-color);
-    pointer-events: none;
-    white-space: nowrap;
-}
 
 }
