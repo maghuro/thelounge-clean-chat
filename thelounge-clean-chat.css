@@ -1,5 +1,5 @@
 /* ============================================================
-   Maghuro - THE LOUNGE CLEAN CHAT v0.4.1
+   Maghuro - THE LOUNGE CLEAN CHAT v0.4.2
    Tested with The Lounge 4.5.2
    Chrome: Android + Desktop
    ============================================================
@@ -11,7 +11,7 @@
      Main channel: #darkpeers
      Bridge bot:   DP
 
-   Everything except the Custom CSS editor rule is scoped to
+   Everything except the Custom Stylesheet editor rule is scoped to
    the currently active DarkPeers network. This prevents the
    stylesheet from affecting similarly named channels on other
    IRC networks loaded in the same The Lounge instance.
@@ -28,8 +28,8 @@
 
    RECOMMENDED INSTALLATION
    ------------------------
-   Use the jsDelivr @import loader documented in README.md for
-   automatic updates from the main branch. This file remains
+   Use the Cloudflare Pages @import loader documented in README.md
+   for automatic updates from the main branch. This file remains
    fully standalone for manual installation.
    ============================================================ */
 
@@ -59,7 +59,7 @@ body:has(
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
         ~ .channels .channel-list-item.active
 ) {
-    --tlcc-version: "v0.4.1";
+    --tlcc-version: "v0.4.2";
     --tlcc-gold: #f3d34a;
     --tlcc-cyan: #6eb8d4;
     --tlcc-green: #79d99b;

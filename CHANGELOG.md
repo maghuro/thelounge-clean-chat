@@ -2,6 +2,34 @@
 
 All notable changes to **The Lounge Clean Chat** will be documented here.
 
+## v0.4.2 - 2026-09-11
+
+### Fixed
+
+- Moved the recommended automatic delivery path to a stable **Cloudflare Pages** endpoint so TLCC can control the stylesheet's browser-cache policy.
+- Added a Pages `_headers` rule for `thelounge-clean-chat.css` using `Cache-Control: no-cache, max-age=0, must-revalidate`, preventing browsers from treating an old release as fresh for hours.
+- Added `X-Content-Type-Options: nosniff` to the published stylesheet response.
+
+### Changed
+
+- The recommended automatic loader is now `https://thelounge-clean-chat.pages.dev/thelounge-clean-chat.css`.
+- Corrected The Lounge UI terminology in the project documentation from **Custom Stylesheet** to **Custom Stylesheet**.
+- The Cloudflare Pages project is connected directly to GitHub and deploys the selected production branch automatically.
+- Cloudflare Pages is now the sole recommended automatic delivery path.
+
+### Tested
+
+- Confirmed consecutive development revisions loaded from the exact same Cloudflare Pages URL on The Lounge 4.5.2 / Chrome Android after a normal reload.
+- Confirmed the update appeared without clearing browser cache, changing the `@import` URL or adding a version/query-string cachebuster.
+- Confirmed the visible `Enhanced by TLCC vX.X.X` topic marker changed with the newly delivered stylesheet, providing an immediate version check.
+
+
+### Notes
+
+- This is a delivery/cache-control bugfix release; it does not intentionally redesign TLCC's chat styling.
+- An already-open The Lounge page still needs a normal reload/reopen before the browser requests/revalidates the stylesheet.
+- TLCC remains entirely CSS-only; no DarkPeers bridge, JavaScript, userscript or The Lounge source changes are required.
+
 ## v0.4.1 - 2026-09-11
 
 ### Added
@@ -9,13 +37,12 @@ All notable changes to **The Lounge Clean Chat** will be documented here.
 - Added a subtle `Enhanced by TLCC vX.X.X` marker to the local `#darkpeers` topic so users can see which stylesheet version their browser has actually received.
 - Added dedicated green **BON POOL** styling for `DP` bridge messages containing a real `darkpeers.org/bon-pool` link.
 - Added a **BON POOL** badge and matching card treatment while preserving native The Lounge highlighted-message backgrounds.
-- Added automatic jsDelivr cache purging through GitHub Actions whenever `thelounge-clean-chat.css` changes on `main`.
 
 ### Changed
 
 - Compact DarkPeers page-link pills now explicitly remove inherited text underlining for cleaner presentation across themes/browsers.
 - The topic version marker is generated entirely in CSS and does not modify the real IRC topic.
-- The jsDelivr installation documentation now reflects the automatic purge workflow and uses the visible topic version marker as an easy cache/version check.
+- The installation documentation uses the visible topic version marker as an easy cache/version check.
 
 ### Detection
 
@@ -25,7 +52,6 @@ All notable changes to **The Lounge Clean Chat** will be documented here.
 ### Tested
 
 - Confirmed the topic version marker and BON Pool treatment in The Lounge 4.5.2 on Chrome Android.
-- Confirmed the GitHub Actions jsDelivr purge workflow with a real CSS commit and verified that the purged stylesheet was subsequently served by the CDN.
 
 ### Notes
 
@@ -35,25 +61,25 @@ All notable changes to **The Lounge Clean Chat** will be documented here.
 
 ### Added
 
-- Added a recommended auto-updating installation method using a jsDelivr `@import` that tracks `main`.
-- Added a clearly labelled TLCC loader block with comments before and after the import, making it easy to identify inside The Lounge's Custom CSS field.
+- Added the first recommended auto-updating installation method using a lightweight `@import` loader.
+- Added a clearly labelled TLCC loader block with comments before and after the import, making it easy to identify inside The Lounge's Custom Stylesheet field.
 - Documented where users should place their own CSS overrides: after the TLCC loader block, while keeping `@import` before all normal CSS rules.
 
 ### Changed
 
-- The README now recommends the lightweight jsDelivr loader instead of copying the full stylesheet for every update.
+- The README now recommends a lightweight `@import` loader instead of copying the full stylesheet for every update.
 - Manual full-CSS installation remains supported for users who prefer a static local copy.
 - The stylesheet header now points users to the recommended loader while remaining fully standalone.
 
 ### Tested
 
-- Confirmed the jsDelivr `@main` import loads TLCC successfully in the tested The Lounge 4.5.2 setup.
-- A direct `raw.githubusercontent.com` import was tested first but did not load in that setup, so it is not used as the supported loader.
+- Confirmed the automatic `@import` loader loads TLCC successfully in the tested The Lounge 4.5.2 setup.
+- A direct `raw.githubusercontent.com` import was tested separately but did not load in that setup.
 
 ### Notes
 
 - v0.4.0 does not intentionally change TLCC's visual styling; it changes how the stylesheet can be installed and kept up to date.
-- Updates delivered through jsDelivr may be briefly delayed by CDN/browser caching.
+- This first automatic-delivery implementation could still be briefly delayed by browser/CDN caching.
 - The project remains entirely CSS-only.
 
 ## v0.3.3 - 2026-09-10
@@ -130,7 +156,7 @@ All notable changes to **The Lounge Clean Chat** will be documented here.
 
 ### Notes
 
-- The larger Custom CSS editor remains intentionally global because it belongs to The Lounge itself, not to a specific IRC network.
+- The larger Custom Stylesheet editor remains intentionally global because it belongs to The Lounge itself, not to a specific IRC network.
 - The network scope expects the local The Lounge network/lobby label to be `DarkPeers`.
 - The project remains CSS-only; bridged usernames and text-only giveaway messages still cannot be semantically parsed.
 
@@ -182,7 +208,7 @@ Initial public version.
 - Link/media previews are hidden in the bot-only `#announce` and `#PRE` channels.
 - Less intrusive timestamps and hidden hostmasks.
 - Touch-device formatted topic expansion.
-- Larger Custom CSS editor.
+- Larger Custom Stylesheet editor.
 - Chrome Android and desktop testing with The Lounge 4.5.2.
 
 ### Fixed
