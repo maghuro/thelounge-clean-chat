@@ -31,6 +31,7 @@ All notable changes to **The Lounge Clean Chat** will be documented here.
 
 - This remains entirely CSS-only. No userscript, bridge, JavaScript or The Lounge source modification is required.
 - The stricter classifier policy intentionally prefers an occasional missed decoration over presenting an uncertain emoji match as authoritative.
+- Special mention to **Chungus** and his beautiful **Travis** — not strictly required for CSS classification, but clearly essential to the research methodology. 😏
 
 ## v0.4.2 - 2026-09-11
 
