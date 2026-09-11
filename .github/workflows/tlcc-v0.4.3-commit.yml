@@ -1,0 +1,55 @@
+name: Commit TLCC v0.4.3 refinement
+
+on:
+  push:
+    branches:
+      - dev
+    paths:
+      - .github/workflows/tlcc-v0.4.3-commit.yml
+
+permissions:
+  contents: write
+
+jobs:
+  commit-refinement:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout dev
+        uses: actions/checkout@v4
+        with:
+          ref: dev
+          fetch-depth: 0
+
+      - name: Re-run validated refinement script
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          src = Path('.github/workflows/tlcc-v0.4.3-refine.yml').read_text().splitlines()
+          start = src.index("          python3 - <<'PY'") + 1
+          end = src.index("          PY", start)
+          code = []
+          for line in src[start:end]:
+              if line.startswith('          '):
+                  line = line[10:]
+              code.append(line)
+          Path('/tmp/tlcc-refine.py').write_text('\n'.join(code) + '\n')
+          PY
+          python3 /tmp/tlcc-refine.py
+
+      - name: Validate diff
+        run: |
+          git diff --check -- thelounge-clean-chat.css CHANGELOG.md
+          git diff --stat
+          grep -nE 'THE LOUNGE CLEAN CHAT v|--tlcc-version' thelounge-clean-chat.css
+          grep -n 'WEB ·' thelounge-clean-chat.css | sed -n '1,20p'
+
+      - name: Commit and clean up one-shot workflows
+        run: |
+          git config user.name "Maghuro"
+          git config user.email "1546139+maghuro@users.noreply.github.com"
+          git rm .github/workflows/tlcc-v0.4.3-refine.yml .github/workflows/tlcc-v0.4.3-commit.yml
+          git add thelounge-clean-chat.css README.md CHANGELOG.md
+          git commit -m "Prepare TLCC v0.4.3 classifier hardening"
+          git push origin dev
