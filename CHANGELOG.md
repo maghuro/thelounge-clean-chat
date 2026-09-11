@@ -2,6 +2,19 @@
 
 All notable changes to **The Lounge Clean Chat** will be documented here.
 
+## v0.4.5-dev.1 - 2026-09-11
+
+### Changed
+
+- Extended the full formatted channel-topic popup to desktop pointer devices: hovering the topic now reveals the same readable full-topic box already available on touch devices.
+- Kept the normal compact one-line header unchanged until hover, so the desktop UI does not permanently consume extra vertical space.
+- The popup includes the local `Enhanced by TLCC vX.X.X` marker, making the loaded TLCC version discoverable even on small monitors where the normal topic line truncates before the suffix.
+
+### Notes
+
+- Development preview only. Production `main` remains on v0.4.4 until this desktop interaction is verified.
+- Thanks to **Captain Chungus**, whose small-monitor/very-long-topic discovery proved that “the marker exists” and “the human can actually see the marker” are, irritatingly, two different requirements. 🙃
+
 ## v0.4.4 - 2026-09-11
 
 ### Fixed

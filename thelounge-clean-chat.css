@@ -1,5 +1,5 @@
 /* ============================================================
-   Maghuro - THE LOUNGE CLEAN CHAT v0.4.4
+   Maghuro - THE LOUNGE CLEAN CHAT v0.4.5-dev.1
    Tested with The Lounge 4.5.2
    Chrome: Android + Desktop
    ============================================================
@@ -74,7 +74,7 @@ body:has(
     .network > .channels .channel-list-item.active
         ~ .channel-list-item[data-name="#darkpeers" i]
 ) {
-    --tlcc-version: "v0.4.4";
+    --tlcc-version: "v0.4.5-dev.1";
     --tlcc-giveaway-prefix: "GIVEAWAY · ";
     --tlcc-gold: #f3d34a;
     --tlcc-cyan: #6eb8d4;
@@ -520,7 +520,7 @@ body:has(
 
 
 /* ============================================================
-   15. FULL FORMATTED CHANNEL TOPIC ON TOUCH DEVICES
+   15. FULL FORMATTED CHANNEL TOPIC
    ============================================================ */
 
 & #chat .header {
@@ -597,7 +597,55 @@ body:has(
 
 @media (hover: hover) and (pointer: fine) {
     & #chat .header .topic {
-        cursor: default;
+        cursor: help;
+    }
+
+    /* Desktop: reveal the complete formatted topic on hover. The
+       transparent ::before bridge keeps the header under the pointer
+       after the topic itself becomes a fixed popup. */
+    & #chat .header .topic:hover {
+        position: fixed;
+        top: 48px;
+        left: 12px;
+        right: 12px;
+        z-index: 9999;
+        display: block;
+        width: auto;
+        max-width: 900px;
+        margin: 0 auto;
+        min-width: 0;
+        padding: 10px 12px;
+        max-height: 45vh;
+        overflow-x: hidden;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        white-space: normal;
+        word-break: normal;
+        overflow-wrap: anywhere;
+        line-height: 1.4;
+        font-size: 13px;
+        font-weight: 400;
+        color: var(--body-color);
+        background: var(--window-bg-color);
+        border: 1px solid
+            color-mix(in srgb, var(--body-color) 18%, transparent);
+        border-radius: 8px;
+        box-shadow: 0 6px 22px rgb(0 0 0 / 28%);
+        mask-image: none;
+        -webkit-mask-image: none;
+        user-select: text;
+        cursor: text;
+    }
+
+    & #chat .header .topic:hover::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 48px;
+        background: transparent;
+        pointer-events: auto;
     }
 }
 
