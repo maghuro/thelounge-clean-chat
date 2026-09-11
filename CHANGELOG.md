@@ -20,11 +20,11 @@ All notable changes to **The Lounge Clean Chat** will be documented here.
 - `WEB · RESULT` is reserved for higher-confidence multi-winner result messages where both `🏆` and a podium/medal emoji survive the bridge.
 - Sponsor digests remain a gold-accented generic `WEB` message rather than receiving a semantic badge.
 - Corrected the `NAUGHTY` documentation: `👮` is emitted by the naughty-list **add** response; removal uses `🥳`.
+- Refactored the repeated DarkPeers active-network guard into one outer scope using **native CSS nesting** and explicit `&` selectors. This removes 93 copied `body:has(...)` guards, improving readability and maintainability without claiming a selector-performance improvement.
 
 ### Reviewed
 
 - Considered using `:first-child` / positional emoji selectors as an authenticity check, but deliberately rejected that as proof: the bridge prepends `[username]` as a plain text node, and CSS element-child pseudo-classes do not account for text nodes.
-- Reviewed native CSS nesting as a maintainability refactor. It is useful for deduplicating the repeated DarkPeers scope, but it is intentionally deferred to a separate visual-regression-tested refactor because nesting does not reduce selector-matching work by itself.
 - Reviewed the performance concern around repeated `:has()` and forward sibling lookahead. No performance regression is claimed without measurement; the existing unread-marker trade-off remains unchanged pending profiling.
 
 ### Notes

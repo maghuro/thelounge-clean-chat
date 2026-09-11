@@ -191,6 +191,10 @@ to your local network name.
 
 The DarkPeers main-channel and bridge selectors are case-insensitive where appropriate.
 
+Internally, v0.4.3 keeps the active-network test in one outer rule and uses **native CSS nesting** with explicit `&` selectors for the scoped TLCC rules. This removes the old repeated `body:has(...)` guard from every selector while preserving the same DarkPeers-only behaviour. The Custom Stylesheet editor rule remains intentionally outside that scope.
+
+Because TLCC already depends on modern CSS such as `:has()` and `color-mix()`, the nested form intentionally targets reasonably modern browsers as well.
+
 ## Limitations
 
 Website usernames such as `[Furyan]` or `[Chungus]` are plain text sent by the bridge. CSS cannot turn those substrings into native The Lounge nickname elements, assign them native nick colours, or make them open The Lounge's user context menu.
