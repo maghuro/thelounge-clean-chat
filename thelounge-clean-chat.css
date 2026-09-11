@@ -1,5 +1,5 @@
 /* ============================================================
-   Maghuro - THE LOUNGE CLEAN CHAT v0.4.0
+   Maghuro - THE LOUNGE CLEAN CHAT v0.4.1
    Tested with The Lounge 4.5.2
    Chrome: Android + Desktop
    ============================================================
@@ -59,6 +59,7 @@ body:has(
     .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
         ~ .channels .channel-list-item.active
 ) {
+    --tlcc-version: "v0.4.1";
     --tlcc-gold: #f3d34a;
     --tlcc-cyan: #6eb8d4;
     --tlcc-green: #79d99b;
@@ -451,6 +452,52 @@ body:has(
 
 
 /* ============================================================
+   8B. DARKPEERS BON POOL NOTIFICATIONS
+
+   BON pool bridge messages retain a real /bon-pool link, which
+   provides a reliable CSS-only hook without parsing plain text.
+   ============================================================ */
+
+body:has(
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/bon-pool" i]) {
+    background:
+        color-mix(in srgb, var(--tlcc-green) 6%, transparent);
+    box-shadow:
+        inset 3px 0 0
+        color-mix(in srgb, var(--tlcc-green) 82%, transparent);
+    border-radius: 5px;
+}
+
+body:has(
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/bon-pool" i]) .from .user::after {
+    content: "BON POOL";
+    color: var(--tlcc-green);
+    border-color:
+        color-mix(in srgb, var(--tlcc-green) 55%, transparent);
+    background:
+        color-mix(in srgb, var(--tlcc-green) 10%, transparent);
+}
+
+body:has(
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/bon-pool" i]) .content a:not(.toggle-thumbnail)[href*="darkpeers.org/bon-pool" i] {
+    color: var(--tlcc-green);
+    border-color:
+        color-mix(in srgb, var(--tlcc-green) 38%, transparent);
+    background:
+        color-mix(in srgb, var(--tlcc-green) 9%, transparent);
+}
+
+
+/* ============================================================
    9. COMPACT DIRECT MEDIA LINKS
    ============================================================ */
 
@@ -676,6 +723,22 @@ body:has(
         ~ .channels .channel-list-item.active
 ) #chat .header .topic {
     position: relative;
+}
+
+body:has(
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i].active,
+    .network > .channel-list-item[data-type="lobby"][data-name="DarkPeers" i]
+        ~ .channels .channel-list-item.active
+) #chat-container[data-current-channel="#darkpeers" i] .header .topic::after {
+    content: " · Enhanced by TLCC " var(--tlcc-version);
+    display: inline-block;
+    margin-left: 5px;
+    font-size: 0.72em;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    color: var(--tlcc-cyan);
+    opacity: 0.58;
+    white-space: nowrap;
 }
 
 @media (hover: none) and (pointer: coarse) {
