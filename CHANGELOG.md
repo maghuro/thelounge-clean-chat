@@ -2,6 +2,23 @@
 
 All notable changes to **The Lounge Clean Chat** will be documented here.
 
+## v0.4.5-dev.1 - 2026-09-11
+
+### Changed
+
+- Added a persistent `Enhanced by TLCC vX.X.X` marker to a second row of The Lounge's sidebar footer, so the loaded version is visible even when a long channel topic truncates the existing topic suffix on smaller desktop monitors.
+- Kept the topic marker as a secondary confirmation instead of replacing it.
+- Used the shared `#footer` layout rather than separate desktop/mobile markup; on mobile the marker appears when the sidebar is open.
+
+### Testing
+
+- Development preview only. Verify the footer layout on a normal desktop, a narrow/small desktop window and Android before promoting to `main`.
+- Check that the footer icons keep their normal alignment and that the extra marker row does not overlap or clip the sidebar.
+
+### Notes
+
+- Suggested by **Captain Chungus** after his very long topic required 60% browser zoom to expose the old marker, with an assist from the increasingly employable **T.R.A.V.I.S.** 🙃
+
 ## v0.4.4 - 2026-09-11
 
 ### Fixed
