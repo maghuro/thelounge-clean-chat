@@ -19,11 +19,6 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Normalize shared core metadata
-        shell: bash
-        run: |
-          python -c 'from pathlib import Path; p=Path("thelounge-clean-chat-core.css"); s=p.read_text(); marker="\n\n/* ============================================================\n   0. LARGER CUSTOM STYLESHEET EDITOR"; end=s.index(marker); new="/* ============================================================\n   Maghuro - THE LOUNGE CLEAN CHAT - SHARED CORE\n   Official The Lounge + fork-independent DarkPeers rules\n\n   Tested with The Lounge 4.5.2\n   Chrome: Android + Desktop\n\n   Expected setup:\n     DarkPeers fingerprint: #darkpeers channel\n     Main channel:          #darkpeers\n     Bridge bot:            DP\n\n   The local The Lounge connection name may be anything. TLCC\n   identifies the DarkPeers network by the presence of its\n   #darkpeers channel in the same network as the active lobby/\n   channel, rather than trusting the user-defined connection name.\n\n   Everything except the Custom Stylesheet editor rule is scoped to\n   the currently active DarkPeers network. This prevents the\n   stylesheet from affecting similarly named channels on other\n   IRC networks loaded in the same The Lounge instance.\n\n   OFFICIAL THE LOUNGE BRIDGED USERNAMES\n   --------------------------------------\n   On official The Lounge, names such as \"[Furyan]\" or \"[Chungus]\"\n   remain plain bridge text. CSS alone cannot turn that substring\n   into a native The Lounge user or make it open the normal user\n   context menu.\n\n   Compatible forks may expose additional structured bridge-user\n   data. Those cases are handled by dedicated compatibility modules\n   outside this shared core.\n\n   Regular IRC nicknames that The Lounge itself recognises retain\n   their native colours and interactivity.\n\n   RELEASE VERSIONING\n   ------------------\n   The visible TLCC release number is defined by the dedicated\n   release-version module, not by this shared core.\n   ============================================================ */"; s=new+s[end:]; s=s.replace("    --tlcc-version: \"v0.4.5\";\n", "", 1); p.write_text(s)'
-
       - name: Build standalone stylesheet
         shell: bash
         run: |
@@ -35,16 +30,16 @@ jobs:
             cat thelounge-clean-chat-version.css
           } > thelounge-clean-chat.css
 
-      - name: Commit normalized source and generated stylesheet
+      - name: Commit generated stylesheet
         shell: bash
         run: |
-          if git diff --quiet -- thelounge-clean-chat-core.css thelounge-clean-chat.css; then
-            echo "TLCC source and generated stylesheet are already up to date"
+          if git diff --quiet -- thelounge-clean-chat.css; then
+            echo "thelounge-clean-chat.css is already up to date"
             exit 0
           fi
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add thelounge-clean-chat-core.css thelounge-clean-chat.css
-          git commit -m "Normalize shared core metadata"
+          git add thelounge-clean-chat.css
+          git commit -m "Build standalone TLCC stylesheet"
           git push
