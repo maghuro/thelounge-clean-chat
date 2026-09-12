@@ -2,6 +2,38 @@
 
 All notable changes to **The Lounge Clean Chat** will be documented here.
 
+## v0.5.0 - 2026-09-12
+
+### Added
+
+- Added first-class compatibility with the tracker-first TNB fork of The Lounge while keeping official The Lounge behaviour unchanged.
+- Added a fork-specific compatibility module keyed to the TNB fork's structured `data-bridged="true"` marker.
+- Preserved the real website username rendered by the fork alongside TLCC's `WEB`, `REQUEST`, `BON POOL` and giveaway badges.
+- Added handling for the fork-only `mass_event` presence-summary type, including orphaned `New messages` marker cleanup.
+
+### Changed
+
+- Split the public stylesheet into a stable v0.5.0 loader, shared core stylesheet and narrowly scoped TNB compatibility module.
+- Kept the existing public Cloudflare Pages URL unchanged, so existing installations update without editing their Custom Stylesheet.
+- Expanded the Pages no-cache policy from only the entry stylesheet to all CSS modules.
+- Updated documentation to distinguish what TLCC can do on official The Lounge from what becomes possible when the TNB fork has already converted bridge text into structured user DOM.
+
+### Fixed
+
+- Fixed bridged website usernames disappearing on the TNB fork. The fork replaces `.from .user` with the parsed website username while retaining `data-from="DP"`; pre-v0.5.0 TLCC therefore zero-sized the real username when replacing the bridge sender with `WEB`.
+- The compatibility override now restores that username only on messages explicitly marked by the fork as bridged, avoiding broad selectors or changes to the official client path.
+
+### Tested
+
+- Audited the supplied TNB fork source, including its shoutbox parser, message rendering and fork-only event types.
+- Installed the fork separately and confirmed on Chrome Android that a live bridged message renders the TLCC `WEB` badge together with the real website username (`WEB (maghuro)`).
+- Confirmed normal IRC messages remain visually separate from the bridged treatment.
+
+### Notes
+
+- TLCC remains CSS-only. It does not parse bridge text itself; on the TNB fork it consumes structured DOM that the fork has already produced.
+- Thanks to **Furyan** for exposing the incompatibility and to **NeoByte** for the fork whose source made the actual cause wonderfully unambiguous. 😄
+
 ## v0.4.5 - 2026-09-11
 
 ### Changed
@@ -106,7 +138,6 @@ All notable changes to **The Lounge Clean Chat** will be documented here.
 - Confirmed consecutive development revisions loaded from the exact same Cloudflare Pages URL on The Lounge 4.5.2 / Chrome Android after a normal reload.
 - Confirmed the update appeared without clearing browser cache, changing the `@import` URL or adding a version/query-string cachebuster.
 - Confirmed the visible `Enhanced by TLCC vX.X.X` topic marker changed with the newly delivered stylesheet, providing an immediate version check.
-
 
 ### Notes
 
@@ -235,7 +266,7 @@ All notable changes to **The Lounge Clean Chat** will be documented here.
 
 ### Fixed
 
-- DarkPeers bot-only `#announce` / `#pre` preview suppression no longer leaks into similarly named channels on other connected IRC networks.
+- DarkPeers bot-only `#announce` / `#pre` preview suppression no longer leaks into similarly named channels on other IRC networks.
 - Global readability, preview, topic, mobile, own-message and link tweaks no longer affect non-DarkPeers networks in the same The Lounge instance.
 
 ### Notes
