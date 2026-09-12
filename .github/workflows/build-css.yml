@@ -23,7 +23,7 @@ jobs:
         shell: bash
         run: |
           {
-            cat thelounge-clean-chat-core.css
+            sed 's/THE LOUNGE CLEAN CHAT v0\.4\.5/THE LOUNGE CLEAN CHAT v0.5.0/' thelounge-clean-chat-core.css
             printf '\n\n'
             cat thelounge-clean-chat-tnb.css
             printf '\n\n'
