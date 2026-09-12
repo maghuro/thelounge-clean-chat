@@ -1,25 +1,18 @@
 /* ============================================================
-   TLCC - TNB The Lounge fork compatibility test
+   TLCC v0.5.0 - TNB The Lounge fork compatibility
 
-   DEV-ONLY TEST OVERRIDE
-   Load AFTER the normal TLCC stylesheet.
-
-   Audited against the TNB fork source supplied by a DarkPeers user.
+   Audited against the TNB fork source supplied by a DarkPeers user
+   and live-tested against its bridged-message rendering.
 
    The fork rewrites supported shoutbox bridge messages client-side:
      - data-from keeps the original IRC bridge nick (DP);
      - data-bridged="true" marks a successfully parsed bridge message;
-     - .from .user becomes the REAL website username (Furyan, etc.);
+     - .from .user becomes the real website username;
      - the original [username] prefix is removed from .content.
 
-   Production TLCC normally zero-sizes .from .user because official
-   The Lounge keeps DP there. On the TNB fork that would therefore
-   hide the website username. This override restores that username
-   while retaining TLCC's WEB / REQUEST / BON POOL / GIVEAWAY badge
-   on the existing ::after pseudo-element.
-
-   All fork-specific rules require data-bridged="true", an attribute
-   not emitted by official The Lounge, so they are inert upstream.
+   Every fork-specific rule below requires data-bridged="true" or the
+   fork-only mass_event message type, so the official The Lounge path
+   remains untouched.
    ============================================================ */
 
 body:has(
@@ -33,18 +26,17 @@ body:has(
 ) {
 
 /* ============================================================
-   1. TNB BRIDGED USERNAME
+   TNB BRIDGED USERNAME
 
-   In the TNB fork the bridge parser changes:
+   Official The Lounge keeps DP in .from .user, so the core TLCC
+   zero-sizes that text and replaces it with a WEB/category badge.
 
-       [Furyan] hello
+   The TNB fork instead replaces that same user component with the
+   parsed website username while retaining data-from="DP" and adding
+   data-bridged="true". Restore the username and keep the core badge.
 
-   from IRC sender DP into a rendered sender Furyan, while preserving
-   data-from="dp" and adding data-bridged="true" to the message.
-
-   Restore the real website username and keep the TLCC badge generated
-   by .from .user::after. inline-flex + row-reverse places that badge
-   before the username without duplicating any classifier rules.
+   row-reverse places the generated ::after badge before the username,
+   producing e.g. WEB (Furyan) without duplicating classifier logic.
    ============================================================ */
 
 & #chat-container[data-current-channel="#darkpeers" i]
@@ -60,11 +52,10 @@ body:has(
 
 
 /* ============================================================
-   2. TNB MASS-EVENT PRESENCE NOISE
+   TNB MASS-EVENT PRESENCE NOISE
 
-   The fork adds a mass_event message type for join/part/quit storms.
-   A single mass_event may render outside the normal condensed wrapper,
-   so include it in TLCC's #darkpeers presence-noise policy.
+   The fork adds mass_event for aggregated join/part/quit traffic.
+   Treat it like the presence noise hidden by the core stylesheet.
    ============================================================ */
 
 & #chat-container[data-current-channel="#darkpeers" i]
@@ -72,8 +63,8 @@ body:has(
     display: none;
 }
 
-/* Match the production orphan-marker rule, adding mass_event because
-   this fork-specific type is hidden immediately above. */
+/* Prevent an orphaned New messages marker when only hidden
+   mass_event/presence entries remain below it. */
 & #chat-container[data-current-channel="#darkpeers" i]
 .unread-marker:not(:has(~ .msg:not([data-type="join"]):not([data-type="part"]):not([data-type="quit"]):not([data-type="condensed"]):not([data-type="mass_event"]))) {
     display: none;

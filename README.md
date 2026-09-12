@@ -1,120 +1,104 @@
 # The Lounge Clean Chat
 
-Custom stylesheet for [The Lounge](https://thelounge.chat/) focused on making the DarkPeers IRC experience cleaner and easier to read, especially where the website chat is bridged into IRC.
+Custom CSS for [The Lounge](https://thelounge.chat/) focused on making the DarkPeers IRC experience cleaner and easier to read, especially where the website chat is bridged into IRC.
 
-This project is deliberately **CSS-only**. It does not patch The Lounge, the DarkPeers bridge, Docker images, JavaScript or the giveaway userscript.
+TLCC remains deliberately **CSS-only**. It does not patch The Lounge, the DarkPeers bridge, Docker images, JavaScript or the giveaway userscript.
 
-**Current version:** v0.4.5  
-**Tested with:** The Lounge 4.5.2  
+**Current version:** v0.5.0  
+**Tested with:** The Lounge 4.5.2 and the TNB tracker-first fork based on The Lounge 4.4.3  
 **Browsers tested:** Chrome on Android and desktop
+
+## v0.5.0: official + TNB fork compatibility
+
+v0.5.0 adds compatibility with the TNB fork without changing the normal upstream The Lounge path.
+
+The official client keeps the IRC bridge sender (`DP`) in `.from .user`. The TNB fork parses supported shoutbox messages client-side, keeps `data-from="DP"`, adds `data-bridged="true"`, and replaces that rendered sender with the real website username. Older TLCC releases therefore hid the real bridged username when they zero-sized `.from .user` to build the `WEB` badge.
+
+TLCC now detects the fork-specific structured hook and keeps both pieces of information visible, for example:
+
+```text
+WEB (Furyan) message...
+```
+
+The same behaviour carries through semantic badges such as `REQUEST`, `BON POOL` and the giveaway family. The fork-only `mass_event` presence summary is also treated as join/part/quit noise so it does not leave orphaned **New messages** markers.
+
+The compatibility rules are isolated in their own stylesheet and depend on fork-only DOM markers, so they are inert on official The Lounge.
 
 ## Scope
 
-v0.4.5 is explicitly scoped to the **DarkPeers** IRC network, but it no longer depends on whatever local name you gave that connection in The Lounge.
+TLCC is explicitly scoped to the **DarkPeers** IRC network and does not depend on the local name you gave that connection in The Lounge.
 
 Expected setup:
 
 ```text
-DarkPeers fingerprint:#darkpeers
-Main channel:         #darkpeers
-Bridge bot:           DP
+DarkPeers fingerprint: #darkpeers
+Main channel:          #darkpeers
+Bridge bot:            DP
 ```
 
-The stylesheet identifies the currently active DarkPeers network by finding the real `#darkpeers` channel inside the same sidebar network as the active lobby/channel. Your local connection can therefore be named `DarkPeers`, `DP`, `Batatas`, `IRC do Furyan` or anything else without breaking TLCC.
+The active network is identified by the presence of the real `#darkpeers` channel inside the same sidebar network as the active lobby/channel. Your local connection can therefore be named `DarkPeers`, `DP`, `Batatas`, `IRC do Furyan` or anything else without breaking TLCC.
 
-This keeps DarkPeers-specific styling isolated from other connected IRC networks while avoiding reliance on a user-defined lobby label. The theoretical edge case is another unrelated IRC network that also contains a channel literally named `#darkpeers`; TLCC would treat that network as DarkPeers too.
-
-The only intentionally global rule is the larger **Custom Stylesheet editor**, because that editor belongs to The Lounge itself rather than to any IRC network.
+The theoretical edge case is another unrelated IRC network that also contains a channel literally named `#darkpeers`; TLCC would treat that network as DarkPeers too.
 
 ## What it does
 
 - Replaces the `DP` bridge nickname with a compact **WEB** badge in `#darkpeers`.
+- Preserves TNB-fork website usernames next to the TLCC badge instead of hiding them.
 - Gives bridged website messages a subtle visual treatment.
 - Detects likely bridged replies and adds a reply indicator.
 - Replaces long DarkPeers URLs with compact labels such as `profile ↗`, `thread ↗`, `request ↗` and `BON pool ↗`.
-- Highlights bridged DarkPeers request-link messages — including new torrent request announcements — with a cyan **REQUEST** card/badge and a gold `request ↗` link accent.
-- Highlights bridged BON Pool notifications with a green **BON POOL** card/badge using the surviving `darkpeers.org/bon-pool` link as a reliable CSS-only hook.
-- Adds a subtle `Enhanced by TLCC vX.X.X` marker to the `#darkpeers` topic so the currently loaded stylesheet version is visible at a glance.
-- Hides useless unauthenticated UNIT3D `Login / Powered by UNIT3D` link previews.
+- Highlights bridged request-link messages with a cyan **REQUEST** card/badge and gold `request ↗` accent.
+- Highlights BON Pool notifications with a green **BON POOL** card/badge.
+- Adds `Enhanced by TLCC vX.X.X` markers to the `#darkpeers` topic and sidebar footer.
+- Hides useless unauthenticated UNIT3D `Login / Powered by UNIT3D` previews.
 - Keeps useful image/GIF previews while shortening direct media URLs.
-- Uses stricter media URL matching to avoid false positives.
-- Preserves direct media hosted on `darkpeers.org` instead of treating it as a generic site link.
-- Improves inline image sizing and spacing.
-- Hides join/part/quit noise in `#darkpeers` while keeping topic changes visible.
-- Avoids orphaned **New messages** markers when only hidden presence events follow them.
+- Hides join/part/quit/condensed presence noise in `#darkpeers`.
+- On the TNB fork, also hides its fork-specific `mass_event` presence summaries.
+- Avoids orphaned **New messages** markers after hidden presence traffic.
 - Reduces timestamp and hostmask visual noise.
 - Adds mobile-specific readability improvements.
-- Expands the real formatted channel topic on touch devices and on desktop when hovering the topic.
-- Contains expanded-topic overscroll so the background chat is less likely to move while reading a long topic.
+- Expands the formatted channel topic on touch devices and on desktop hover.
 - Makes The Lounge's Custom Stylesheet editor larger.
-- Hides link/media previews in the DarkPeers bot-only `#announce` and `#pre` channels.
-- Adds giveaway-aware styling for messages generated by the **Blutopia BON Giveaway** userscript when their emoji markers survive the DarkPeers → IRC bridge.
+- Hides link/media previews in bot-only `#announce` and `#pre` channels.
+- Adds giveaway-aware styling for messages generated by **Blutopia BON Giveaway** when distinctive emoji structure survives the website → IRC bridge.
 
 ## Request-aware styling
 
-New torrent request announcements survive the DarkPeers → IRC bridge with a real link to `darkpeers.org/requests/...`, even though the surrounding `[New-Request]` label is only plain text. v0.3.3 introduced that surviving anchor as the CSS hook.
+New torrent request announcements retain a real `darkpeers.org/requests/...` anchor after the bridge, even though the surrounding `[New-Request]` label is plain text. TLCC therefore uses the surviving link as the reliable CSS hook.
 
-A bridged `DP` message containing a DarkPeers request URL receives a **REQUEST** badge, a stronger cyan card accent and a gold-accented compact `request ↗` link. This keeps the detection CSS-only and does not depend on parsing the announcement text.
-
-Because the selector is intentionally URL-based, an ordinary bridged website message that happens to contain a DarkPeers request link will receive the same **REQUEST** treatment. CSS cannot distinguish the literal `[New-Request]` text from other plain text, so TLCC labels the message by what it can reliably prove: it contains a DarkPeers request link.
+A bridged `DP` message containing a request URL receives a **REQUEST** badge, stronger cyan card accent and gold-accented compact `request ↗` link. An ordinary website message that happens to contain a DarkPeers request URL receives the same treatment because CSS can prove the link exists but cannot safely inspect arbitrary text nodes.
 
 ## BON Pool styling
 
-v0.4.1 introduced dedicated styling for `DP`-bridged messages containing a real `darkpeers.org/bon-pool` link: a green **BON POOL** badge, card accent and compact link treatment. The URL provides a reliable structured hook, so the rule does not need to inspect the surrounding `[BON-POOL]` plain text.
-
-Native The Lounge highlighted-message backgrounds are preserved; the stronger BON Pool card background is only applied to non-highlighted messages.
-
-## Topic version marker
-
-The `#darkpeers` topic receives a subtle local-only suffix such as:
-
-```text
-· Enhanced by TLCC v0.4.5
-```
-
-This does **not** modify the real IRC topic. It is generated by CSS in the local The Lounge UI and is useful for confirming which TLCC version the browser has actually received. The full formatted topic can be expanded on touch devices and, from v0.4.4, on desktop by hovering the topic — useful on smaller monitors where the normal one-line header can truncate the TLCC marker.
-
-In **v0.4.5**, the same version marker is also mirrored onto a second row of The Lounge's sidebar footer. The footer is shared by desktop and mobile layouts, so this gives the version a stable home even when the channel topic is too long to show its suffix. On mobile, open the sidebar to see it. The topic marker remains as a secondary confirmation.
+Bridged messages containing a real `darkpeers.org/bon-pool` link receive a green **BON POOL** badge and card treatment. Native The Lounge highlighted-message backgrounds remain preserved.
 
 ## Giveaway-aware styling
 
-The **Blutopia BON Giveaway** userscript runs on the DarkPeers website. Its output is then relayed into IRC by the `DP` bridge, so TLCC never sees the userscript state itself — it only sees whatever structure survives that website → IRC → The Lounge path.
+The **Blutopia BON Giveaway** userscript runs on the DarkPeers website. TLCC only sees the structure that survives the website → IRC → The Lounge path.
 
-The classifier was audited against Blutopia BON Giveaway v6.2.2 and then checked against real bridged giveaways in The Lounge. Those live tests exposed details that source review alone could not prove, including asynchronous end-of-giveaway messages arriving in the opposite order from the JavaScript calls that produced them.
+Current treatments include:
 
-TLCC uses two confidence levels:
+- `GIVEAWAY` — main `🎁 ... ✨ ... ✨` announcement/reminder.
+- `GIVEAWAY · SPONSORS` — sponsor digest/final sponsor thank-you.
+- `GIVEAWAY · ENTRIES` — `📋` entries list.
+- `GIVEAWAY · TIME` — `⏳` remaining time.
+- `GIVEAWAY · WINNERS` — trophy-bearing output when the exact context is ambiguous.
+- `GIVEAWAY · RESULT` — higher-confidence final result.
+- `GIVEAWAY · TIE` — tie warning adjacent to trophy output.
+- `GIVEAWAY · RIGGED` — rigged-mode / rigged-entry signatures.
+- `GIVEAWAY · UNRIGGED` — successful rigged-mode disable response.
+- `GIVEAWAY · NAUGHTY` — naughty-list add response.
+- `GIVEAWAY · REJECTED` — rejected/unauthorised responses.
 
-- **Structural classifications** such as `REQUEST` and `BON POOL` are based on real surviving DarkPeers links. They use solid badges and take precedence over giveaway heuristics.
-- **Giveaway classifications** are based on surviving `.emoji` structure from the userscript. They use a dashed border. On desktop they use the `GIVEAWAY ·` family; on narrow mobile screens the prefix contracts to `GW ·` to avoid wasting the nickname column.
+On narrow mobile screens the `GIVEAWAY ·` prefix contracts to `GW ·`.
 
-Current giveaway treatments include:
-
-- `GIVEAWAY` — main announcement/reminder when the full `🎁 ... ✨ ... ✨` sequence survives.
-- `GIVEAWAY · SPONSORS` — sponsor digest (`✨`) and the final sponsor thank-you (`🥳`) when it is adjacent to the tie/result end sequence.
-- `GIVEAWAY · ENTRIES` — current entries list (`📋`).
-- `GIVEAWAY · TIME` — remaining-time response (`⏳`).
-- `GIVEAWAY · WINNERS` — trophy-bearing output (`🏆`) used as the honest fallback because the same trophy is used by both `!top` and final winner summaries.
-- `GIVEAWAY · RESULT` — higher-confidence final result when stronger context survives: `🏆` plus podium/medal output, the rigged-result `👀` marker, or adjacency to a tie warning.
-- `GIVEAWAY · TIE` — `⚠️` when adjacent to trophy output. Both orders are accepted because live bridge testing showed the asynchronous messages may reach IRC as either `TIE → RESULT` or `RESULT → TIE`.
-- `GIVEAWAY · RIGGED` — `😈` rigged-mode/rigged-entry output, plus a full giveaway reminder whose userscript-added `😉` is the trailing emoji after the normal signature.
-- `GIVEAWAY · UNRIGGED` — successful rigged-mode disable response (`😒`).
-- `GIVEAWAY · NAUGHTY` — naughty-list **add** response (`👮`).
-- `GIVEAWAY · REJECTED` — rejected/unauthorised responses marked with `🚫`, `🛑` or `🚨`.
-
-On mobile, the same categories are rendered as `GW · SPONSORS`, `GW · RESULT`, and so on.
-
-Emoji rules explicitly exclude messages already carrying the structural `/requests/` or `/bon-pool` hooks, so the stronger link-derived classification wins if signals collide.
-
-Generic command/response emoji such as `✅`, `📊`, `💰` and `💸` remain plain `WEB` when CSS cannot identify their meaning safely. Text-only replies remain deliberately unclassified rather than guessing from nearby traffic.
-
-The giveaway palette and prefix are centralised in `--tlcc-*` custom properties so the presentation can change without duplicating selector logic.
-
+Structural classifications such as `REQUEST` and `BON POOL` take precedence over emoji heuristics. Generic command/response emoji such as `✅`, `📊`, `💰` and `💸` remain plain `WEB` when their meaning cannot be identified safely.
 
 ## Installation
 
 ### Recommended: automatic updates
 
-Paste this block into **Settings → Appearance → Custom Stylesheet**:
+Paste this into **Settings → Appearance → Custom Stylesheet**:
 
 ```css
 /* ============================================================
@@ -126,48 +110,21 @@ Paste this block into **Settings → Appearance → Custom Stylesheet**:
 /* ========================== /TLCC =========================== */
 ```
 
-The public URL is stable: it does not contain a version number, query string or cache-busting token. Cloudflare Pages automatically deploys the current production branch from GitHub.
+The public URL remains stable. From v0.5.0 the entry stylesheet is a small loader that imports the shared TLCC core and narrowly scoped compatibility modules. Existing installations do **not** need to change their URL.
 
-TLCC also ships a Pages `_headers` policy for the stylesheet:
+Cloudflare Pages applies the same no-cache/revalidation policy to every TLCC CSS module:
 
 ```text
 Cache-Control: no-cache, max-age=0, must-revalidate
 ```
 
-This means the browser may keep a local copy, but it must revalidate it before reuse instead of treating an old release as fresh for hours. In testing, consecutive development releases loaded through the same fixed URL on Chrome Android after a normal reload, without clearing browser cache or changing the import URL.
+Reload/reopen The Lounge after a release so the browser revalidates the stylesheets.
 
-An already-open The Lounge document does not magically replace a stylesheet in place; reload/reopen The Lounge after a new release to trigger normal revalidation.
+### Custom rules of your own
 
-The comments are intentionally part of the recommended snippet so it is obvious what the import belongs to when revisiting the Custom Stylesheet field later. If you add your own CSS overrides, place them **after** the closing TLCC comment. `@import` must remain before normal CSS rules.
-
-
-### Manual installation
-
-If you prefer a fully local/static copy:
-
-1. Open **The Lounge**.
-2. Go to **Settings → Appearance → Custom Stylesheet**.
-3. Copy the contents of [`thelounge-clean-chat.css`](thelounge-clean-chat.css).
-4. Paste it into the Custom Stylesheet field and save.
-
-Manual installs do **not** update automatically.
-
-For inline URL/image previews, The Lounge's normal link prefetch/media preview functionality must be enabled.
-
-## Why Cloudflare Pages?
-
-The first automatic-delivery approach worked, but it did not give TLCC control over a copy that Chrome had already cached locally. Updating the upstream stylesheet could therefore leave a browser reusing an older local copy longer than intended.
-
-Cloudflare Pages gives TLCC a stable public `pages.dev` URL while allowing the repository to define the stylesheet's response headers through `_headers`. This provides the behaviour the project needs: one URL installed once, automatic GitHub deployments and browser revalidation on later loads.
-
-A direct `raw.githubusercontent.com` import was also tested earlier and did not load in the tested The Lounge setup, so it is not used as the supported loader.
-
-## Custom Stylesheet rules of your own
-
-You can still add your own rules. Put them **after** the TLCC import:
+Put personal overrides after the TLCC import:
 
 ```css
-/* TLCC */
 @import url("https://thelounge-clean-chat.pages.dev/thelounge-clean-chat.css");
 
 /* My own CSS below */
@@ -176,42 +133,44 @@ You can still add your own rules. Put them **after** the TLCC import:
 }
 ```
 
-Rules placed afterwards can also override TLCC where normal CSS specificity/cascade rules allow it.
+`@import` must remain before normal CSS rules.
+
+## Architecture
+
+v0.5.0 splits the public entry point into modules:
+
+- `thelounge-clean-chat.css` — stable release loader and version marker.
+- `thelounge-clean-chat-core.css` — shared DarkPeers styling used by official The Lounge and forks.
+- `thelounge-clean-chat-tnb.css` — TNB-fork compatibility rules guarded by fork-specific DOM markers.
+
+This keeps compatibility fixes narrow: upstream The Lounge does not need to imitate fork behaviour and fork support does not require weakening selectors used by the official client.
 
 ## DarkPeers network detection
 
-Earlier releases identified DarkPeers from the user-defined The Lounge connection label `DarkPeers`. That was a bad assumption: the same IRC connection may perfectly validly be named `Batatas`, `DP`, `DarkPeers IRC` or anything else.
+Since v0.4.4, TLCC fingerprints the active network from the real `#darkpeers` channel rather than the user-defined connection label. The scope covers the network lobby, `#darkpeers` itself, and other active channels in that same network regardless of sidebar ordering.
 
-v0.4.4 instead fingerprints the active network by the presence of its `#darkpeers` channel. The scope covers the network lobby, `#darkpeers` itself, and other active channels in that same network regardless of their ordering in the sidebar.
-
-Internally, the active-network test remains one outer rule using **native CSS nesting** with explicit `&` selectors. The Custom Stylesheet editor rule remains intentionally outside that scope.
-
-Because TLCC already depends on modern CSS such as `:has()` and `color-mix()`, the nested form intentionally targets reasonably modern browsers as well.
+TLCC uses modern CSS including `:has()`, `color-mix()` and native CSS nesting, so a reasonably modern browser is required.
 
 ## Limitations
 
-Website usernames such as `[Furyan]` or `[Chungus]` are plain text sent by the bridge. CSS cannot turn those substrings into native The Lounge nickname elements, assign them native nick colours, or make them open The Lounge's user context menu.
+On **official The Lounge**, website usernames such as `[Furyan]` arrive as plain bridge text. CSS cannot turn arbitrary text substrings into native nickname components, assign native nick colours or create The Lounge's user context menu.
 
-The same limitation applies to other bridge text that merely looks like markup. The project deliberately stays **CSS-only**.
+The **TNB fork** is different: its own JavaScript parser converts supported bridge messages into structured user DOM before TLCC runs. v0.5.0 can therefore preserve and style that already-structured username, but TLCC itself still performs no message parsing.
 
-Giveaway detection has the same constraint: TLCC does not run on the DarkPeers website and cannot inspect the userscript's JavaScript state. It only sees the IRC message produced after the bridge has flattened the website output. Text-only responses such as normal entry confirmations, `Giveaway Amount`, `your number is`, winner-scaling messages and time adjustments therefore cannot be identified safely unless they also carry distinctive surviving structure.
+Giveaway detection has the same fundamental constraint: TLCC cannot inspect userscript state and intentionally prefers a missed decoration over an unreliable semantic guess.
 
-`🏆` remains inherently ambiguous because Blutopia BON Giveaway uses it for both `!top` and final winner output. v0.4.4 therefore labels trophy-only output `GIVEAWAY · WINNERS` and promotes it to `GIVEAWAY · RESULT` only when extra evidence survives, such as a podium/medal emoji, the rigged-result `👀` marker or an adjacent tie warning.
+`🏆` remains ambiguous because the giveaway userscript uses it for both leaderboard and final-winner output; TLCC promotes it to `RESULT` only when stronger context survives.
 
-Live testing also proved that source-code call order is not guaranteed to be IRC arrival order: the userscript's asynchronous `sendMessage()` calls can make the final result arrive before the tie line. TLCC therefore accepts both adjacent orders for tie/result and final-sponsor context instead of assuming JavaScript call order equals bridge order.
-
-Emoji-based classifications remain intentionally heuristic. The bridge prepends the website username as plain text, so selectors such as `:first-child` on an emoji element do **not** prove that the emoji begins the logical message — text nodes do not participate in element-child pseudo-classes. Dashed giveaway badges make that distinction visible while solid link-derived classifications remain reserved for structure TLCC can actually prove.
-
-The bot-only `#announce` / `#pre` rules only hide preview UI. CSS cannot prevent The Lounge from performing server-side prefetch/network requests.
+The `#announce` / `#pre` rules hide preview UI only. CSS cannot prevent The Lounge from performing server-side prefetch/network requests.
 
 ## Development
 
-This was not a one-shot "vibe coding" exercise. The stylesheet was developed through repeated DOM inspection, selector testing, browser comparisons and edge-case debugging.
+TLCC has been developed through repeated DOM inspection, selector testing, browser comparisons, source audits and live edge-case debugging rather than one-shot styling.
 
-GPT-5.6 Sol provided substantial assistance during development, particularly with CSS selector reasoning, DOM analysis, debugging and cleanup.
+v0.5.0 included a source audit of the TNB fork plus a live local installation test confirming that a parsed bridged website username can coexist with the TLCC `WEB` badge.
+
+GPT-5.6 Sol provided substantial assistance during development, particularly with CSS selector reasoning, DOM/source analysis, debugging and cleanup.
 
 ## Contributions
 
-Issues, suggestions and pull requests are very welcome.
-
-If something behaves differently in another browser, theme, screen size or The Lounge version, please report it.
+Issues, suggestions and pull requests are welcome. If something behaves differently in another browser, theme, screen size, The Lounge version or fork, please report it.
