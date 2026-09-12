@@ -1,0 +1,45 @@
+name: Build flat production CSS
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "thelounge-clean-chat-core.css"
+      - "thelounge-clean-chat-tnb.css"
+      - "thelounge-clean-chat-version.css"
+      - ".github/workflows/build-css.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Build standalone stylesheet
+        shell: bash
+        run: |
+          {
+            cat thelounge-clean-chat-core.css
+            printf '\n\n'
+            cat thelounge-clean-chat-tnb.css
+            printf '\n\n'
+            cat thelounge-clean-chat-version.css
+          } > thelounge-clean-chat.css
+
+      - name: Commit generated stylesheet
+        shell: bash
+        run: |
+          if git diff --quiet -- thelounge-clean-chat.css; then
+            echo "thelounge-clean-chat.css is already up to date"
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add thelounge-clean-chat.css
+          git commit -m "Build standalone TLCC stylesheet"
+          git push
