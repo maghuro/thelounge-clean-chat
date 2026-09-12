@@ -13,15 +13,17 @@ All notable changes to **The Lounge Clean Chat** will be documented here.
 
 ### Changed
 
-- Split the public stylesheet into a stable v0.5.0 loader, shared core stylesheet and narrowly scoped TNB compatibility module.
+- Kept core and TNB compatibility code in separate source modules for maintainability.
+- The public `thelounge-clean-chat.css` is now generated as one flat standalone stylesheet instead of using nested CSS imports. This preserves the existing one-line Custom Stylesheet installation while avoiding runtime nested-`@import` compatibility problems.
 - Kept the existing public Cloudflare Pages URL unchanged, so existing installations update without editing their Custom Stylesheet.
-- Expanded the Pages no-cache policy from only the entry stylesheet to all CSS modules.
+- Expanded the Pages no-cache policy to CSS delivery.
 - Updated documentation to distinguish what TLCC can do on official The Lounge from what becomes possible when the TNB fork has already converted bridge text into structured user DOM.
 
 ### Fixed
 
 - Fixed bridged website usernames disappearing on the TNB fork. The fork replaces `.from .user` with the parsed website username while retaining `data-from="DP"`; pre-v0.5.0 TLCC therefore zero-sized the real username when replacing the bridge sender with `WEB`.
-- The compatibility override now restores that username only on messages explicitly marked by the fork as bridged, avoiding broad selectors or changes to the official client path.
+- The compatibility override restores that username only on messages explicitly marked by the fork as bridged, avoiding broad selectors or changes to the official client path.
+- Fixed the first v0.5.0 packaging attempt, where the public stylesheet itself imported `./thelounge-clean-chat-core.css` and `./thelounge-clean-chat-tnb.css`. Although valid CSS in browsers generally, this did not load reliably through The Lounge's Custom Stylesheet path. Production is now flattened at build time.
 
 ### Tested
 
@@ -207,7 +209,7 @@ All notable changes to **The Lounge Clean Chat** will be documented here.
 ### Detection
 
 - Request detection is deliberately based on the surviving `/requests/` anchor rather than the literal `[New-Request]` text, because CSS cannot inspect arbitrary text-node contents after the bridge.
-- Any `DP`-bridged message containing a DarkPeers request URL receives the same `REQUEST` treatment. This avoids fragile text or adjacency heuristics while keeping TLCC entirely CSS-only.
+- Any `DP`-bridged message containing a DarkPeers request URL receives the same **REQUEST** treatment. This avoids fragile text or adjacency heuristics while keeping TLCC entirely CSS-only.
 - Native The Lounge highlighted-message backgrounds remain preserved; the request card background/border treatment is only applied to non-highlighted messages.
 
 ### Notes
@@ -266,7 +268,7 @@ All notable changes to **The Lounge Clean Chat** will be documented here.
 
 ### Fixed
 
-- DarkPeers bot-only `#announce` / `#pre` preview suppression no longer leaks into similarly named channels on other IRC networks.
+- DarkPeers bot-only `#announce` / `#pre` preview suppression no longer leaks into similarly named channels on other connected IRC networks.
 - Global readability, preview, topic, mobile, own-message and link tweaks no longer affect non-DarkPeers networks in the same The Lounge instance.
 
 ### Notes
