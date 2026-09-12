@@ -1,0 +1,12 @@
+/* TLCC release version override. Keep this tiny file easy to update per release. */
+body:has(
+    .network > .channel-list-item[data-type="lobby"].active
+        ~ .channels .channel-list-item[data-name="#darkpeers" i],
+    .network > .channels .channel-list-item[data-name="#darkpeers" i].active,
+    .network > .channels .channel-list-item[data-name="#darkpeers" i]
+        ~ .channel-list-item.active,
+    .network > .channels .channel-list-item.active
+        ~ .channel-list-item[data-name="#darkpeers" i]
+) {
+    --tlcc-version: "v0.5.0";
+}
