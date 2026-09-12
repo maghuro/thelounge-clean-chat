@@ -1,10 +1,9 @@
 /* ============================================================
-   Maghuro - THE LOUNGE CLEAN CHAT v0.5.0
+   Maghuro - THE LOUNGE CLEAN CHAT - SHARED CORE
+   Official The Lounge + fork-independent DarkPeers rules
+
    Tested with The Lounge 4.5.2
    Chrome: Android + Desktop
-   ============================================================
-
-   DarkPeers-specific stylesheet for The Lounge.
 
    Expected setup:
      DarkPeers fingerprint: #darkpeers channel
@@ -21,23 +20,25 @@
    stylesheet from affecting similarly named channels on other
    IRC networks loaded in the same The Lounge instance.
 
-   NOTE ABOUT BRIDGED USERNAMES
-   ----------------------------
-   Names such as "[Furyan]" or "[Chungus]" are plain text sent
-   by the bridge bot. CSS cannot isolate only that substring,
-   turn it into a native The Lounge nickname, or make it open
-   the IRC user context menu.
+   OFFICIAL THE LOUNGE BRIDGED USERNAMES
+   --------------------------------------
+   On official The Lounge, names such as "[Furyan]" or "[Chungus]"
+   remain plain bridge text. CSS alone cannot turn that substring
+   into a native The Lounge user or make it open the normal user
+   context menu.
 
-   Regular IRC nicknames that The Lounge itself recognises
-   retain their native colours and interactivity.
+   Compatible forks may expose additional structured bridge-user
+   data. Those cases are handled by dedicated compatibility modules
+   outside this shared core.
 
-   RECOMMENDED INSTALLATION
-   ------------------------
-   Use the Cloudflare Pages @import loader documented in README.md
-   for automatic updates from the main branch. This file remains
-   fully standalone for manual installation.
+   Regular IRC nicknames that The Lounge itself recognises retain
+   their native colours and interactivity.
+
+   RELEASE VERSIONING
+   ------------------
+   The visible TLCC release number is defined by the dedicated
+   release-version module, not by this shared core.
    ============================================================ */
-
 
 /* ============================================================
    0. LARGER CUSTOM STYLESHEET EDITOR
@@ -74,7 +75,6 @@ body:has(
     .network > .channels .channel-list-item.active
         ~ .channel-list-item[data-name="#darkpeers" i]
 ) {
-    --tlcc-version: "v0.4.5";
     --tlcc-giveaway-prefix: "GIVEAWAY · ";
     --tlcc-gold: #f3d34a;
     --tlcc-cyan: #6eb8d4;
