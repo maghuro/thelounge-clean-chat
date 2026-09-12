@@ -1,5 +1,5 @@
 /* ============================================================
-   TLCC v0.5.0 - TNB The Lounge fork compatibility
+   TLCC - TNB The Lounge fork compatibility
 
    Audited against the TNB fork source supplied by a DarkPeers user
    and live-tested against its bridged-message rendering.
@@ -10,9 +10,18 @@
      - .from .user becomes the real website username;
      - the original [username] prefix is removed from .content.
 
+   The fork can display bridged usernames in parentheses or in its
+   normal-user style. TLCC deliberately does not depend on that visual
+   preference: data-bridged="true" is the compatibility hook and the
+   already-rendered website username is preserved as-is.
+
    Every fork-specific rule below requires data-bridged="true" or the
    fork-only mass_event message type, so the official The Lounge path
    remains untouched.
+
+   This compatibility module intentionally carries no release number;
+   the authoritative public TLCC version is applied by the dedicated
+   release-version module during the flat production build.
    ============================================================ */
 
 body:has(
