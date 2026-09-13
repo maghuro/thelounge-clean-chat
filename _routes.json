@@ -1,0 +1,5 @@
+{
+  "version": 1,
+  "include": ["/thelounge-clean-chat.css"],
+  "exclude": []
+}
