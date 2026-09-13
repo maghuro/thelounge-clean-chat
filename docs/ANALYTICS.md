@@ -6,7 +6,7 @@ TLCC can count requests for the public `thelounge-clean-chat.css` asset with a n
 
 `_routes.json` invokes Pages Functions only for `/thelounge-clean-chat.css`. All other project assets remain normal static Pages assets.
 
-The root middleware calls `context.next()` first, so the existing static CSS response remains authoritative. Analytics is written afterwards with `waitUntil()`. Missing bindings, missing secrets, or analytics failures never block stylesheet delivery.
+The root middleware calls `context.next()` for the static CSS response and writes analytics asynchronously with `waitUntil()`. Missing bindings, missing secrets, or analytics failures never block stylesheet delivery.
 
 ## Cloudflare bindings
 
@@ -33,6 +33,20 @@ The middleware deliberately does not store the raw IP address, raw User-Agent, R
 
 Workers Analytics Engine currently retains data for three months.
 
+## Opting out of analytics
+
+A request whose stylesheet URL contains the `nostats` query parameter is served normally but does not write an analytics datapoint. Both forms below are accepted:
+
+```css
+@import url("https://thelounge-clean-chat.pages.dev/thelounge-clean-chat.css?nostats");
+```
+
+```css
+@import url("https://thelounge-clean-chat.pages.dev/thelounge-clean-chat.css?nostats=1");
+```
+
+This is intended primarily for the maintainer's own The Lounge instance so personal reloads do not contaminate public-usage statistics. The opt-out is deliberately simple and is available to anyone who chooses to use it.
+
 ## Reversibility
 
-To remove TLCC analytics completely, delete `functions/_middleware.js` and `_routes.json`, then redeploy. The stable public CSS URL and the user-facing `@import` do not change.
+To remove TLCC analytics completely, delete `functions/_middleware.js` and `_routes.json`, then redeploy. The stable public CSS URL and the normal user-facing `@import` do not change.
