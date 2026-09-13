@@ -185,6 +185,14 @@ Emoji-based classifications remain intentionally heuristic. The bridge prepends 
 
 The bot-only `#announce` / `#pre` rules only hide preview UI. CSS cannot prevent The Lounge from performing server-side prefetch/network requests.
 
+## Anonymous usage analytics
+
+The hosted Cloudflare Pages CSS can optionally record privacy-preserving load statistics through a narrowly scoped Pages Function. The Function only runs for `/thelounge-clean-chat.css`; all other assets remain static.
+
+The analytics dataset stores an HMAC-derived pseudonymous IP identifier, country code, a coarse client class, hostname and response status. It deliberately does **not** store raw IP addresses, raw User-Agent strings, Referer values or The Lounge URLs. This allows approximate unique-IP counts without putting directly readable client IPs into the analytics dataset.
+
+See [`docs/ANALYTICS.md`](docs/ANALYTICS.md) for deployment, privacy and rollback details.
+
 ## Development
 
 The repository keeps the normal TLCC core and narrow TNB compatibility code separate for maintainability. A GitHub Actions build step concatenates those source modules into the single public `thelounge-clean-chat.css` served through Cloudflare Pages. This preserves one-import installation and avoids runtime nested-import assumptions.
