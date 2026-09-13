@@ -83,10 +83,10 @@ async function recordAnalytics(context, response) {
 export async function onRequest(context) {
     const url = new URL(context.request.url);
 
-    // Explicit opt-out for the maintainer's own TLCC instance (or anyone else
-    // who deliberately wants the hosted CSS without contributing statistics).
-    // Both ?nostats and ?nostats=1 are accepted.
-    if (url.searchParams.has("nostats")) {
+    // Analytics are strictly opt-in. The normal stylesheet URL serves CSS
+    // without recording anything. Only an explicit ?stats query parameter
+    // contributes a datapoint (both ?stats and ?stats=1 are accepted).
+    if (!url.searchParams.has("stats")) {
         return context.next();
     }
 
