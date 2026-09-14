@@ -44,8 +44,9 @@ body:has(
    parsed website username while retaining data-from="DP" and adding
    data-bridged="true". Restore the username and keep the core badge.
 
-   row-reverse places the generated ::after badge before the username,
-   producing e.g. WEB (Furyan) without duplicating classifier logic.
+   Keep the fork's natural left-to-right user-component order. The
+   generated TLCC badge is ::after, so it follows the avatar, username
+   and any fork-provided icon instead of reversing those elements.
    ============================================================ */
 
 & #chat-container[data-current-channel="#darkpeers" i]
@@ -54,7 +55,7 @@ body:has(
     font-size: inherit !important;
     opacity: 1 !important;
     display: inline-flex;
-    flex-direction: row-reverse;
+    flex-direction: row;
     align-items: center;
     gap: 4px;
 }
