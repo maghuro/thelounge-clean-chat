@@ -9,6 +9,11 @@
    the active #darkpeers view contains a structured TNB bridged
    message (data-bridged="true"). Stock The Lounge does not match.
 
+   The same TNB-only desktop scope also left-aligns the sender column
+   so IRC and bridged senders use the same visual direction. Bridged
+   messages keep the fork's natural order: avatar, username, optional
+   icon, then the TLCC WEB/category badge.
+
    DarkPeers is identified by the real #darkpeers channel in the
    active network. The user's local connection/network name is never
    used as a selector.
@@ -35,6 +40,7 @@
                 min-width: 12rem !important;
                 max-width: 12rem !important;
                 flex-basis: 12rem !important;
+                text-align: left !important;
             }
         }
 
