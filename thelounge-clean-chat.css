@@ -1178,8 +1178,9 @@ body:has(
    parsed website username while retaining data-from="DP" and adding
    data-bridged="true". Restore the username and keep the core badge.
 
-   row-reverse places the generated ::after badge before the username,
-   producing e.g. WEB (Furyan) without duplicating classifier logic.
+   Keep the fork's natural left-to-right user-component order. The
+   generated TLCC badge is ::after, so it follows the avatar, username
+   and any fork-provided icon instead of reversing those elements.
    ============================================================ */
 
 & #chat-container[data-current-channel="#darkpeers" i]
@@ -1188,7 +1189,7 @@ body:has(
     font-size: inherit !important;
     opacity: 1 !important;
     display: inline-flex;
-    flex-direction: row-reverse;
+    flex-direction: row;
     align-items: center;
     gap: 4px;
 }
@@ -1227,6 +1228,11 @@ body:has(
    the active #darkpeers view contains a structured TNB bridged
    message (data-bridged="true"). Stock The Lounge does not match.
 
+   The same TNB-only desktop scope also left-aligns the sender column
+   so IRC and bridged senders use the same visual direction. Bridged
+   messages keep the fork's natural order: avatar, username, optional
+   icon, then the TLCC WEB/category badge.
+
    DarkPeers is identified by the real #darkpeers channel in the
    active network. The user's local connection/network name is never
    used as a selector.
@@ -1253,6 +1259,7 @@ body:has(
                 min-width: 12rem !important;
                 max-width: 12rem !important;
                 flex-basis: 12rem !important;
+                text-align: left !important;
             }
         }
 
@@ -1283,5 +1290,5 @@ body:has(
     .network > .channels .channel-list-item.active
         ~ .channel-list-item[data-name="#darkpeers" i]
 ) {
-    --tlcc-version: "v0.5.2";
+    --tlcc-version: "v0.5.3";
 }
