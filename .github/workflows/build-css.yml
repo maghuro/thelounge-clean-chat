@@ -6,6 +6,7 @@ on:
     paths:
       - "thelounge-clean-chat-core.css"
       - "thelounge-clean-chat-tnb.css"
+      - "thelounge-clean-chat-tnb-layout.css"
       - "thelounge-clean-chat-stats.css"
       - "thelounge-clean-chat-version.css"
       - ".github/workflows/build-css.yml"
@@ -27,6 +28,8 @@ jobs:
             cat thelounge-clean-chat-core.css
             printf '\n\n'
             cat thelounge-clean-chat-tnb.css
+            printf '\n\n'
+            cat thelounge-clean-chat-tnb-layout.css
             printf '\n\n'
             cat thelounge-clean-chat-stats.css
             printf '\n\n'
