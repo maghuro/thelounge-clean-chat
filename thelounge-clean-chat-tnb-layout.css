@@ -14,6 +14,10 @@
    messages keep the fork's natural order: avatar, username, optional
    icon, then the TLCC WEB/category badge.
 
+   Extremely long website usernames are allowed to shrink inside the
+   fixed 12rem sender column. This keeps the column compact while
+   reserving the trailing TLCC badge instead of clipping the badge.
+
    DarkPeers is identified by the real #darkpeers channel in the
    active network. The user's local connection/network name is never
    used as a selector.
@@ -46,12 +50,28 @@
 
         & #chat-container[data-current-channel="#darkpeers" i]
         .msg[data-type="message"][data-from="DP" i][data-bridged="true"]
-        .from .user,
+        .from .user {
+            width: 100% !important;
+            max-width: 100% !important;
+            min-width: 0;
+        }
+
         & #chat-container[data-current-channel="#darkpeers" i]
         .msg[data-type="message"][data-from="DP" i][data-bridged="true"]
         .from .user .username {
+            flex: 0 1 auto;
+            min-width: 0;
             max-width: none !important;
             width: auto !important;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        & #chat-container[data-current-channel="#darkpeers" i]
+        .msg[data-type="message"][data-from="DP" i][data-bridged="true"]
+        .from .user::after {
+            flex: 0 0 auto;
         }
     }
 }
