@@ -1,0 +1,51 @@
+/* ============================================================
+   TLCC - TNB fork desktop sender-column compatibility
+
+   The TNB fork places the parsed website username inside .from,
+   alongside TLCC's WEB/category badge. The normal sender column can
+   therefore clip longer website usernames.
+
+   This rule widens the sender column only on desktop and only when
+   the active #darkpeers view contains a structured TNB bridged
+   message (data-bridged="true"). Stock The Lounge does not match.
+
+   DarkPeers is identified by the real #darkpeers channel in the
+   active network. The user's local connection/network name is never
+   used as a selector.
+   ============================================================ */
+
+@media (min-width: 480px) {
+    body:has(
+        .network > .channel-list-item[data-type="lobby"].active
+            ~ .channels .channel-list-item[data-name="#darkpeers" i],
+        .network > .channels .channel-list-item[data-name="#darkpeers" i].active,
+        .network > .channels .channel-list-item[data-name="#darkpeers" i]
+            ~ .channel-list-item.active,
+        .network > .channels .channel-list-item.active
+            ~ .channel-list-item[data-name="#darkpeers" i]
+    ) {
+        &:has(
+            #chat-container[data-current-channel="#darkpeers" i]
+            .msg[data-type="message"][data-from="DP" i][data-bridged="true"]
+        ) {
+            --window-left-padding: 12.5rem !important;
+
+            & #chat-container[data-current-channel="#darkpeers" i] .msg .from {
+                width: 12rem !important;
+                min-width: 12rem !important;
+                max-width: 12rem !important;
+                flex-basis: 12rem !important;
+            }
+        }
+
+        & #chat-container[data-current-channel="#darkpeers" i]
+        .msg[data-type="message"][data-from="DP" i][data-bridged="true"]
+        .from .user,
+        & #chat-container[data-current-channel="#darkpeers" i]
+        .msg[data-type="message"][data-from="DP" i][data-bridged="true"]
+        .from .user .username {
+            max-width: none !important;
+            width: auto !important;
+        }
+    }
+}
