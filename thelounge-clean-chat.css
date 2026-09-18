@@ -847,12 +847,15 @@ body:has(
 
 
 /* SPLIT MAIN GIVEAWAY - 🎁 ... ✨ | ✨
-   IRC can split a long BONanza announcement into [1/2] and [2/2].
-   The first fragment then contains the wrapped gift plus only one
-   sparkle, while the second fragment contains the closing sparkle.
-   Without this rule the first half falls back to WEB and the second
-   half is mistaken for a sponsor update. Adjacency makes the pair
-   high-confidence without inspecting the plain [1/2]/[2/2] text. */
+   Long BONanza announcements can be split by the bridge/IRC path.
+   The first fragment retains 🎁 + one ✨; that combination is already
+   specific enough to identify the giveaway without relying on text.
+
+   The continuation contains only the closing ✨ and is structurally
+   indistinguishable from a sponsor digest by itself. Tie it to the
+   preceding split-start message. Hidden presence-noise entries may sit
+   between both visible lines in The Lounge, so accept up to three of
+   the same hidden nodes TLCC already removes from #darkpeers. */
 
 & #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]
@@ -860,9 +863,7 @@ body:has(
 :not(.highlight)
 :has(.content .emoji[aria-label="Emoji: wrapped gift"])
 :has(.content .emoji[aria-label="Emoji: sparkles"])
-:not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]))
-:has(+ .msg[data-type="message"][data-from="DP" i]
-    .content .emoji[aria-label="Emoji: sparkles"]) {
+:not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"])) {
     background:
         color-mix(in srgb, var(--tlcc-gold) 10%, transparent);
     box-shadow:
@@ -878,8 +879,6 @@ body:has(
 :has(.content .emoji[aria-label="Emoji: wrapped gift"])
 :has(.content .emoji[aria-label="Emoji: sparkles"])
 :not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]))
-:has(+ .msg[data-type="message"][data-from="DP" i]
-    .content .emoji[aria-label="Emoji: sparkles"])
 .from .user::after {
     content: "GIVEAWAY";
     color: var(--tlcc-gold);
@@ -890,16 +889,60 @@ body:has(
         color-mix(in srgb, var(--tlcc-gold) 12%, transparent);
 }
 
-& #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]
-:has(.content .emoji[aria-label="Emoji: wrapped gift"])
-:has(.content .emoji[aria-label="Emoji: sparkles"])
-:not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]))
-+ .msg[data-type="message"][data-from="DP" i]
+& #chat-container[data-current-channel="#darkpeers" i] :is(
+    .msg[data-type="message"][data-from="DP" i]
+        :has(.content .emoji[aria-label="Emoji: wrapped gift"])
+        :has(.content .emoji[aria-label="Emoji: sparkles"])
+        :not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]))
+        + .msg[data-type="message"][data-from="DP" i],
+
+    .msg[data-type="message"][data-from="DP" i]
+        :has(.content .emoji[aria-label="Emoji: wrapped gift"])
+        :has(.content .emoji[aria-label="Emoji: sparkles"])
+        :not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]))
+        + :is(
+            .unread-marker,
+            .msg:is([data-type="join"], [data-type="part"], [data-type="quit"], [data-type="condensed"], [data-type="mass_event"])
+        )
+        + .msg[data-type="message"][data-from="DP" i],
+
+    .msg[data-type="message"][data-from="DP" i]
+        :has(.content .emoji[aria-label="Emoji: wrapped gift"])
+        :has(.content .emoji[aria-label="Emoji: sparkles"])
+        :not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]))
+        + :is(
+            .unread-marker,
+            .msg:is([data-type="join"], [data-type="part"], [data-type="quit"], [data-type="condensed"], [data-type="mass_event"])
+        )
+        + :is(
+            .unread-marker,
+            .msg:is([data-type="join"], [data-type="part"], [data-type="quit"], [data-type="condensed"], [data-type="mass_event"])
+        )
+        + .msg[data-type="message"][data-from="DP" i],
+
+    .msg[data-type="message"][data-from="DP" i]
+        :has(.content .emoji[aria-label="Emoji: wrapped gift"])
+        :has(.content .emoji[aria-label="Emoji: sparkles"])
+        :not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]))
+        + :is(
+            .unread-marker,
+            .msg:is([data-type="join"], [data-type="part"], [data-type="quit"], [data-type="condensed"], [data-type="mass_event"])
+        )
+        + :is(
+            .unread-marker,
+            .msg:is([data-type="join"], [data-type="part"], [data-type="quit"], [data-type="condensed"], [data-type="mass_event"])
+        )
+        + :is(
+            .unread-marker,
+            .msg:is([data-type="join"], [data-type="part"], [data-type="quit"], [data-type="condensed"], [data-type="mass_event"])
+        )
+        + .msg[data-type="message"][data-from="DP" i]
+)
 :not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i])))
 :not(.highlight)
 :not(:has(.content .emoji[aria-label="Emoji: wrapped gift"]))
-:has(.content .emoji[aria-label="Emoji: sparkles"]) {
+:has(.content .emoji[aria-label="Emoji: sparkles"])
+:not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"])) {
     background:
         color-mix(in srgb, var(--tlcc-gold) 10%, transparent);
     box-shadow:
@@ -909,15 +952,59 @@ body:has(
     border-radius: 5px;
 }
 
-& #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]
-:has(.content .emoji[aria-label="Emoji: wrapped gift"])
-:has(.content .emoji[aria-label="Emoji: sparkles"])
-:not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]))
-+ .msg[data-type="message"][data-from="DP" i]
+& #chat-container[data-current-channel="#darkpeers" i] :is(
+    .msg[data-type="message"][data-from="DP" i]
+        :has(.content .emoji[aria-label="Emoji: wrapped gift"])
+        :has(.content .emoji[aria-label="Emoji: sparkles"])
+        :not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]))
+        + .msg[data-type="message"][data-from="DP" i],
+
+    .msg[data-type="message"][data-from="DP" i]
+        :has(.content .emoji[aria-label="Emoji: wrapped gift"])
+        :has(.content .emoji[aria-label="Emoji: sparkles"])
+        :not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]))
+        + :is(
+            .unread-marker,
+            .msg:is([data-type="join"], [data-type="part"], [data-type="quit"], [data-type="condensed"], [data-type="mass_event"])
+        )
+        + .msg[data-type="message"][data-from="DP" i],
+
+    .msg[data-type="message"][data-from="DP" i]
+        :has(.content .emoji[aria-label="Emoji: wrapped gift"])
+        :has(.content .emoji[aria-label="Emoji: sparkles"])
+        :not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]))
+        + :is(
+            .unread-marker,
+            .msg:is([data-type="join"], [data-type="part"], [data-type="quit"], [data-type="condensed"], [data-type="mass_event"])
+        )
+        + :is(
+            .unread-marker,
+            .msg:is([data-type="join"], [data-type="part"], [data-type="quit"], [data-type="condensed"], [data-type="mass_event"])
+        )
+        + .msg[data-type="message"][data-from="DP" i],
+
+    .msg[data-type="message"][data-from="DP" i]
+        :has(.content .emoji[aria-label="Emoji: wrapped gift"])
+        :has(.content .emoji[aria-label="Emoji: sparkles"])
+        :not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]))
+        + :is(
+            .unread-marker,
+            .msg:is([data-type="join"], [data-type="part"], [data-type="quit"], [data-type="condensed"], [data-type="mass_event"])
+        )
+        + :is(
+            .unread-marker,
+            .msg:is([data-type="join"], [data-type="part"], [data-type="quit"], [data-type="condensed"], [data-type="mass_event"])
+        )
+        + :is(
+            .unread-marker,
+            .msg:is([data-type="join"], [data-type="part"], [data-type="quit"], [data-type="condensed"], [data-type="mass_event"])
+        )
+        + .msg[data-type="message"][data-from="DP" i]
+)
 :not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i])))
 :not(:has(.content .emoji[aria-label="Emoji: wrapped gift"]))
 :has(.content .emoji[aria-label="Emoji: sparkles"])
+:not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]))
 .from .user::after {
     content: "GIVEAWAY";
     color: var(--tlcc-gold);
