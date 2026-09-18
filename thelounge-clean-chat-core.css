@@ -796,6 +796,36 @@ body:has(
 }
 
 
+/* BONANZA · NEW MEMBERS - dedicated topic 1119 survives as a
+   stable structural hook in all three forum links. No text parsing
+   or image filename dependency is needed. */
+& #chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/1119" i]) {
+    --tlcc-bridge-badge: var(--tlcc-bonanza-prefix) "NEW MEMBERS";
+}
+
+& #chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/1119" i]) {
+    background:
+        color-mix(in srgb, var(--tlcc-gold) 7%, transparent);
+    box-shadow:
+        inset 3px 0 0 color-mix(in srgb, var(--tlcc-gold) 86%, transparent);
+    border-radius: 5px;
+}
+
+& #chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/1119" i])
+.from .user::after {
+    content: var(--tlcc-bonanza-prefix) "NEW MEMBERS";
+    color: var(--tlcc-gold);
+    border-color:
+        color-mix(in srgb, var(--tlcc-gold) 58%, transparent);
+    border-style: solid;
+    background:
+        color-mix(in srgb, var(--tlcc-gold) 10%, transparent);
+}
+
+
 /* BONANZA · DONATIONS - topic 414 + 👉 ... 👈, excluding topic 12. */
 & #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/414" i]):not(:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/12" i])):has(.content .emoji[aria-label="Emoji: backhand index pointing right"] ~ .emoji[aria-label="Emoji: backhand index pointing left"]) {
