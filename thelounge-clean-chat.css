@@ -882,7 +882,7 @@ body:has(
 :has(.content .emoji[aria-label="Emoji: sparkles"])
 :not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]))
 .from .user::after {
-    content: "GIVEAWAY";
+    content: "GIVEAWAY" !important;
     color: var(--tlcc-gold);
     border-color:
         color-mix(in srgb, var(--tlcc-gold) 60%, transparent);
@@ -1393,5 +1393,5 @@ body:has(
     .network > .channels .channel-list-item.active
         ~ .channel-list-item[data-name="#darkpeers" i]
 ) {
-    --tlcc-version: "v0.5.4-dev";
+    --tlcc-version: "v0.5.4-dev5";
 }
