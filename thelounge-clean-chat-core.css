@@ -688,21 +688,26 @@ body:has(
 /* ============================================================
    15A. RESPONSIVE BONANZA BADGES
 
-   Shorten the BONanza family prefix based on the ACTUAL chat width,
-   not the browser/window width. This matters on desktop when sidebars,
-   narrow windows, zoom or split-screen leave the chat itself cramped.
+   The limiting width is the sender column (.from), not the overall
+   chat viewport. On desktop the chat may be very wide while the
+   sender column remains ~12rem and clips long BONANZA labels.
 
-   Wide chat:    BONANZA · CATEGORY
-   Narrow chat:  BON · CATEGORY
+   Make each sender column a size container and shorten only the
+   BONanza family prefix when that actual column is narrow.
+
+   Wide sender:    BONANZA · CATEGORY
+   Narrow sender:  BON · CATEGORY
    ============================================================ */
 
-& #chat {
+& #chat-container[data-current-channel="#darkpeers" i] .msg .from {
     container-type: inline-size;
-    container-name: tlcc-chat;
+    container-name: tlcc-sender;
 }
 
-@container tlcc-chat (max-width: 1050px) {
-    & #chat-container[data-current-channel="#darkpeers" i] {
+@container tlcc-sender (max-width: 13rem) {
+    & #chat-container[data-current-channel="#darkpeers" i]
+    .msg[data-type="message"][data-from="DP" i]
+    .from .user {
         --tlcc-bonanza-prefix: "BON · ";
     }
 }
