@@ -688,15 +688,21 @@ body:has(
 /* ============================================================
    15A. RESPONSIVE BONANZA BADGES
 
-   The normal desktop sender column leaves less room for long badges
-   on narrower browser windows. Keep the semantic category intact but
-   contract only the family prefix before the full mobile layout kicks
-   in. Wide desktop: BONANZA · CATEGORY
-   Narrow desktop/tablet: BON · CATEGORY
+   Shorten the BONanza family prefix based on the ACTUAL chat width,
+   not the browser/window width. This matters on desktop when sidebars,
+   narrow windows, zoom or split-screen leave the chat itself cramped.
+
+   Wide chat:    BONANZA · CATEGORY
+   Narrow chat:  BON · CATEGORY
    ============================================================ */
 
-@media (max-width: 1100px) {
-    & {
+& #chat {
+    container-type: inline-size;
+    container-name: tlcc-chat;
+}
+
+@container tlcc-chat (max-width: 1050px) {
+    & #chat-container[data-current-channel="#darkpeers" i] {
         --tlcc-bonanza-prefix: "BON · ";
     }
 }
