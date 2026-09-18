@@ -1601,5 +1601,5 @@ body:has(
     .network > .channels .channel-list-item.active
         ~ .channel-list-item[data-name="#darkpeers" i]
 ) {
-    --tlcc-version: "v0.5.4-dev16";
+    --tlcc-version: "v0.5.4";
 }
