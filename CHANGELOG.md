@@ -10,6 +10,11 @@ All notable changes to **The Lounge Clean Chat** will be documented here.
 - Added a dedicated sponsor-summary classifier for the fork's surviving orange-heart + dizzy emoji structure, without relying on flattened plain text.
 - Added final-result promotion when trophy output is adjacent to the fork's final sponsor thank-you, allowing the final winner message to display as `GIVEAWAY · RESULT` instead of the trophy-only `GIVEAWAY · WINNERS` fallback.
 - Added handling for bridge-split main giveaway announcements. A first fragment retaining `🎁` + one `✨` is classified as `GIVEAWAY`; an immediately adjacent one-sparkle continuation from the same bridge is treated as the continuation of that giveaway rather than as a sponsor digest.
+- Added a separate structural **BONanza** family for recurring forum announcements:
+  - `BONANZA · NUMBERS` uses the surviving topic 12 + topic 414 link pair, so both split fragments classify independently.
+  - `BONANZA · DONATIONS` uses topic 414 plus the surviving `👉 ... 👈` structure; its marker-free total continuation is inherited only when immediately adjacent to that strong first-fragment signature.
+  - `BONANZA · NEW MEMBERS` uses the dedicated topic 1119 link as a stable hook.
+- Added responsive BONanza labels. The full `BONANZA ·` prefix is preserved when the sender column has room and contracts to `BON ·` when the actual `.from` column is narrow.
 
 ### Fixed
 
@@ -17,6 +22,7 @@ All notable changes to **The Lounge Clean Chat** will be documented here.
 - Fixed the split-message selector after live DOM inspection showed that whitespace between the message selector and its pseudo-classes had accidentally turned the intended compound selector into a descendant selector.
 - Kept the split giveaway badge visually consistent with the normal gold dashed `GIVEAWAY` badge.
 - Preserved The Lounge's native highlighted-message treatment while separating semantic giveaway classification from decorative card styling.
+- Fixed long BONanza badges being clipped on narrow sender columns. The responsive decision now uses the sender column itself rather than the overall browser or chat width.
 
 ### Tested
 
@@ -24,12 +30,15 @@ All notable changes to **The Lounge Clean Chat** will be documented here.
 - Confirmed the fork sponsor summary, normal sponsor update, time response, final sponsor thank-you and final result remain separately classified.
 - Confirmed bridge-split `[1/2]` / `[2/2]` giveaway output is presented as one visual giveaway sequence when the surviving emoji structure and adjacency provide enough evidence.
 - Confirmed ordinary entry confirmations remain plain `WEB` because the bridge leaves no reliable CSS-only semantic marker.
+- Validated `BONANZA · NUMBERS`, `BONANZA · DONATIONS` and `BONANZA · NEW MEMBERS` against real bridged forum announcements, including split messages and a plain donations total continuation.
+- Validated responsive prefix contraction on a desktop layout where the overall chat remained 1436 px wide but the actual sender column was only 134 px.
 
 ### Notes
 
 - The BONanza giveaway fork itself is still being tested and modified. Its emitted messages may change, so the v0.5.4 selectors may need further adjustment as the fork stabilises.
 - TLCC still cannot read arbitrary plain text such as literal `[1/2]` / `[2/2]` markers. Split-message handling is based only on surviving DOM structure, emoji signatures and immediate adjacency.
 - TLCC remains CSS-only; no DarkPeers bridge, JavaScript or The Lounge source modification is required.
+- The recurring BONanza forum-announcement rules are link/structure based and are intentionally separate from giveaway-script heuristics.
 
 ## v0.5.0 - 2026-09-12
 
