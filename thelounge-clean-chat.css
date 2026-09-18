@@ -1440,6 +1440,71 @@ body:has(
 }
 
 
+/* SPLIT RESULT CONTINUATION
+   A long final result can be split after the rich trophy/medal line.
+   The continuation may contain only plain text (for example the final
+   BONanza-fund sentence), so it has no independent structural marker.
+
+   Inherit RESULT only when the immediately preceding DP message is a
+   high-confidence result:
+     - trophy + medal/podium
+     - trophy + eyes
+     - sponsor/tie marker immediately before the trophy result
+   This avoids promoting arbitrary plain DP messages after generic
+   trophy-only output such as !top. */
+
+/* Rich result signature -> marker-free continuation. */
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="trophy" i]):is(
+    :has(.content .emoji[aria-label*="medal" i]),
+    :has(.content .emoji[aria-label*="eyes" i])
+)
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href])):not(:has(.content .emoji)),
+
+/* Sponsor/tie marker -> trophy result -> marker-free continuation. */
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:is(
+    :has(.content .emoji[aria-label*="warning" i]),
+    :has(.content .emoji[aria-label*="partying" i])
+)
++ .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="trophy" i])
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href])):not(:has(.content .emoji)) {
+    background:
+        color-mix(in srgb, var(--tlcc-gold) 12%, transparent);
+    box-shadow:
+        inset 4px 0 0 var(--tlcc-gold),
+        inset 0 0 0 1px color-mix(in srgb, var(--tlcc-gold) 28%, transparent);
+    border-radius: 5px;
+}
+
+
+/* Apply RESULT badge to the inherited continuation. */
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="trophy" i]):is(
+    :has(.content .emoji[aria-label*="medal" i]),
+    :has(.content .emoji[aria-label*="eyes" i])
+)
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href])):not(:has(.content .emoji))
+.from .user::after,
+
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:is(
+    :has(.content .emoji[aria-label*="warning" i]),
+    :has(.content .emoji[aria-label*="partying" i])
+)
++ .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="trophy" i])
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href])):not(:has(.content .emoji))
+.from .user::after {
+    content: var(--tlcc-giveaway-prefix) "RESULT";
+    color: var(--tlcc-gold);
+    border-color:
+        color-mix(in srgb, var(--tlcc-gold) 65%, transparent);
+    border-style: dashed;
+    background:
+        color-mix(in srgb, var(--tlcc-gold) 14%, transparent);
+}
+
+
 /* TIE / WARNING - ⚠️
    The source emits the tie before the result, but live bridge testing
    proved the two asynchronous sends may reach IRC in the opposite
