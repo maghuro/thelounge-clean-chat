@@ -872,6 +872,19 @@ body:has(
     --tlcc-bridge-badge: "GIVEAWAY";
 }
 
+/* Match the normal GIVEAWAY badge exactly, even when the message is highlighted. */
+& #chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label="Emoji: wrapped gift"]):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]))
+.from .user::after {
+    content: "GIVEAWAY";
+    color: var(--tlcc-gold);
+    border-color:
+        color-mix(in srgb, var(--tlcc-gold) 60%, transparent);
+    border-style: dashed;
+    background:
+        color-mix(in srgb, var(--tlcc-gold) 12%, transparent);
+}
+
 /* Decoration only: preserve native highlight treatment. */
 & #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label="Emoji: wrapped gift"]):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"])) {
@@ -1421,5 +1434,5 @@ body:has(
     .network > .channels .channel-list-item.active
         ~ .channel-list-item[data-name="#darkpeers" i]
 ) {
-    --tlcc-version: "v0.5.4-dev10";
+    --tlcc-version: "v0.5.4-dev11";
 }
