@@ -686,6 +686,23 @@ body:has(
 
 
 /* ============================================================
+   15A. RESPONSIVE BONANZA BADGES
+
+   The normal desktop sender column leaves less room for long badges
+   on narrower browser windows. Keep the semantic category intact but
+   contract only the family prefix before the full mobile layout kicks
+   in. Wide desktop: BONANZA · CATEGORY
+   Narrow desktop/tablet: BON · CATEGORY
+   ============================================================ */
+
+@media (max-width: 1100px) {
+    & {
+        --tlcc-bonanza-prefix: "BON · ";
+    }
+}
+
+
+/* ============================================================
    16. MOBILE
    ============================================================ */
 
@@ -1573,5 +1590,5 @@ body:has(
     .network > .channels .channel-list-item.active
         ~ .channel-list-item[data-name="#darkpeers" i]
 ) {
-    --tlcc-version: "v0.5.4-dev13";
+    --tlcc-version: "v0.5.4-dev14";
 }
