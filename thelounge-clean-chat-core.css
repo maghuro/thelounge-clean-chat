@@ -212,7 +212,7 @@ body:has(
 }
 
 & #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i] .from .user::after {
-    content: "WEB";
+    content: var(--tlcc-bridge-badge, "WEB");
     display: inline-block;
     font-size: 10px;
     line-height: 1.55;
@@ -866,6 +866,7 @@ body:has(
 :has(.content .emoji[aria-label="Emoji: wrapped gift"])
 :has(.content .emoji[aria-label="Emoji: sparkles"])
 :not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"])) {
+    --tlcc-bridge-badge: "GIVEAWAY";
     background:
         color-mix(in srgb, var(--tlcc-gold) 10%, transparent);
     box-shadow:
@@ -875,21 +876,6 @@ body:has(
     border-radius: 5px;
 }
 
-& #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]
-:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i])))
-:has(.content .emoji[aria-label="Emoji: wrapped gift"])
-:has(.content .emoji[aria-label="Emoji: sparkles"])
-:not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]))
-.from .user::after {
-    content: "GIVEAWAY" !important;
-    color: var(--tlcc-gold);
-    border-color:
-        color-mix(in srgb, var(--tlcc-gold) 60%, transparent);
-    border-style: dashed;
-    background:
-        color-mix(in srgb, var(--tlcc-gold) 12%, transparent);
-}
 
 
 /* FORK SPONSOR SUMMARY - 🧡 ... 🧡 + 💫 ... 💫, without 🎁
