@@ -968,8 +968,7 @@ body:has(
 }
 
 #chat-container[data-current-channel="DP" i]
-.msg[data-type="message"][data-from="DP" i]:has(.content a[href*="darkpeers.org/users/" i][href*="/conversations/" i])
-:is(.preview, .toggle-preview, .preview-size) {
+.msg[data-type="message"][data-from="DP" i]:has(.content a[href*="darkpeers.org/users/" i][href*="/conversations/" i]) :is(.preview, .toggle-preview, .preview-size) {
     display: none !important;
 }
 
