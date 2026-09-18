@@ -885,6 +885,41 @@ body:has(
 }
 
 
+/* SPLIT GIVEAWAY CONTINUATION
+   If a proven split-start giveaway (🎁 + exactly one ✨) is followed
+   immediately by a DP bridge message containing exactly one ✨ and no
+   🎁, treat that second fragment as the continuation of the same
+   giveaway. This is deliberately adjacency-scoped: an ordinary
+   one-sparkle sponsor update is unchanged unless it directly follows
+   the split-start signature. */
+
+& #chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label="Emoji: wrapped gift"]):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]))
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(:has(.content .emoji[aria-label="Emoji: wrapped gift"])):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"])) {
+    --tlcc-bridge-badge: "GIVEAWAY";
+    background:
+        color-mix(in srgb, var(--tlcc-gold) 10%, transparent);
+    box-shadow:
+        inset 4px 0 0 var(--tlcc-gold),
+        inset 0 1px 0 color-mix(in srgb, var(--tlcc-gold) 30%, transparent),
+        inset 0 -1px 0 color-mix(in srgb, var(--tlcc-gold) 30%, transparent);
+    border-radius: 5px;
+}
+
+& #chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label="Emoji: wrapped gift"]):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]))
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(:has(.content .emoji[aria-label="Emoji: wrapped gift"])):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]))
+.from .user::after {
+    content: "GIVEAWAY";
+    color: var(--tlcc-gold);
+    border-color:
+        color-mix(in srgb, var(--tlcc-gold) 60%, transparent);
+    border-style: dashed;
+    background:
+        color-mix(in srgb, var(--tlcc-gold) 12%, transparent);
+}
+
+
 /* FORK SPONSOR SUMMARY - 🧡 ... 🧡 + 💫 ... 💫, without 🎁
    The DarkPeers BONanza fork uses a distinct sponsor-list message:
    orange-heart and dizzy markers around the giveaway title and
@@ -1386,5 +1421,5 @@ body:has(
     .network > .channels .channel-list-item.active
         ~ .channel-list-item[data-name="#darkpeers" i]
 ) {
-    --tlcc-version: "v0.5.4-dev9";
+    --tlcc-version: "v0.5.4-dev10";
 }
