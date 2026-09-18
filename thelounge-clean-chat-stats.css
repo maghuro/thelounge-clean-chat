@@ -1,2 +1,2 @@
 :root{--tlcc-stats-state:"OFF"}
-body:has(.network>.channel-list-item[data-type="lobby"].active~.channels .channel-list-item[data-name="#darkpeers" i],.network>.channels .channel-list-item[data-name="#darkpeers" i].active,.network>.channels .channel-list-item[data-name="#darkpeers" i]~.channel-list-item.active,.network>.channels .channel-list-item.active~.channel-list-item[data-name="#darkpeers" i]) #footer::after{content:"Enhanced by TLCC " var(--tlcc-version) " · Stats: " var(--tlcc-stats-state)}
+@container style(--tlcc-active: on){#footer::after{content:"Enhanced by TLCC " var(--tlcc-version) " · Stats: " var(--tlcc-stats-state)}}
