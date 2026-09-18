@@ -2,6 +2,34 @@
 
 All notable changes to **The Lounge Clean Chat** will be documented here.
 
+## v0.5.5 - 2026-09-18
+
+### Performance
+
+- Reworked active-network scoping so the DarkPeers fingerprint is evaluated once on `body` to expose `--tlcc-active: on`, while the normal stylesheet is gated with `@container style(--tlcc-active: on)`.
+- Removed repeated `body:has(...)` prefixes from the core, TNB compatibility, version and stats modules. This narrows relational-selector invalidation when The Lounge updates unread/highlight state in the channel list.
+- Removed the per-message `container-type: inline-size` BONanza sender containers. The supported sender-column layouts were already below the old threshold, so the compact `BON ·` prefix is now selected directly without one layout-containment context per message.
+- Anchored the remaining TNB bridged-message layout `:has()` on the active `#chat-container` instead of `body`.
+- Kept the source modular; the supplied performance proposal was reviewed and ported into the existing core/TNB/stats/version build rather than replacing the project with a flat patch.
+
+### Added
+
+- Added `GIVEAWAY · STATS` (mobile: `GW · STATS`) for the giveaway's 📊 bar-chart response.
+- Added structural handling for DarkPeers private-message notifications sent by the `DP` bot in its IRC query:
+  - detects the surviving `/users/.../conversations/...` link;
+  - applies a green `NEW PM` badge/card;
+  - shortens the conversation URL to `PM ↗`;
+  - hides the unauthenticated UNIT3D link preview.
+
+### Compatibility
+
+- v0.5.5 relies on custom-property container style queries (`@container style(...)`) for scoped TLCC rules. Unsupported browsers leave those scoped rules inactive rather than partially applying the layout.
+- The active-network fingerprint itself remains unchanged: TLCC still identifies DarkPeers from the real `#darkpeers` channel, not from the user-defined connection name.
+
+### Credits
+
+- Performance investigation and the original architecture proposal: **T.R.A.V.I.S.**, Captain Chungus' AI friend. The report identified repeated `body:has()` invalidation and the unnecessary per-message sender size containers; both findings were useful and were incorporated after review.
+
 ## v0.5.4 - 2026-09-18
 
 ### Added
