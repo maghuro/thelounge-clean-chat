@@ -75,8 +75,9 @@ body:has(
     .network > .channels .channel-list-item.active
         ~ .channel-list-item[data-name="#darkpeers" i]
 ) {
+    --tlcc-active: on;
     --tlcc-giveaway-prefix: "GIVEAWAY · ";
-    --tlcc-bonanza-prefix: "BONANZA · ";
+    --tlcc-bonanza-prefix: "BON · ";
     --tlcc-gold: #f3d34a;
     --tlcc-cyan: #6eb8d4;
     --tlcc-green: #79d99b;
@@ -85,6 +86,22 @@ body:has(
     --tlcc-alert: #e85d55;
     --tlcc-naughty: #ffde59;
 
+    @media (max-width: 479px) {
+        --tlcc-giveaway-prefix: "GW · ";
+    }
+}
+
+
+/* ============================================================
+   ACTIVE DARKPEERS RULES
+
+   The expensive active-network :has() above is evaluated once to
+   expose --tlcc-active. All message/UI rules are then gated by a
+   custom-property style query instead of repeating body:has() as a
+   selector prefix across the entire scrollback.
+   ============================================================ */
+
+@container style(--tlcc-active: on) {
 
 /* ============================================================
    0A. VISIBLE TLCC VERSION MARKER IN SIDEBAR FOOTER
@@ -94,14 +111,14 @@ body:has(
    stable place to confirm the stylesheet version.
    ============================================================ */
 
-& #footer {
+#footer {
     flex-wrap: wrap;
     height: auto;
     min-height: 45px;
     padding-bottom: 5px;
 }
 
-& #footer::after {
+#footer::after {
     content: "Enhanced by TLCC " var(--tlcc-version);
     flex: 0 0 100%;
     width: 100%;
@@ -124,21 +141,21 @@ body:has(
    1. GENERAL READABILITY
    ============================================================ */
 
-& #chat .messages {
+#chat .messages {
     line-height: 1.47;
 }
 
-& #chat .time {
+#chat .time {
     opacity: 0.48;
     font-size: 0.78em;
 }
 
-& #chat .from {
+#chat .from {
     font-weight: 600;
 }
 
 @media (min-width: 480px) {
-    & #chat :is(.time, .from, .content) {
+    #chat :is(.time, .from, .content) {
         padding-top: 4px;
         padding-bottom: 4px;
     }
@@ -149,11 +166,11 @@ body:has(
    2. IRC NOISE REDUCTION
    ============================================================ */
 
-& #chat .hostmask {
+#chat .hostmask {
     display: none;
 }
 
-& #chat .msg:is([data-type="mode"], [data-type="kick"], [data-type="nick"], [data-type="chghost"]) {
+#chat .msg:is([data-type="mode"], [data-type="kick"], [data-type="nick"], [data-type="chghost"]) {
     opacity: 0.52;
     font-size: 0.86em;
 }
@@ -163,7 +180,7 @@ body:has(
    3. #darkpeers - HIDE PRESENCE NOISE
    ============================================================ */
 
-& #chat-container[data-current-channel="#darkpeers" i] .msg:is([data-type="join"], [data-type="part"], [data-type="quit"], [data-type="condensed"]) {
+#chat-container[data-current-channel="#darkpeers" i] .msg:is([data-type="join"], [data-type="part"], [data-type="quit"], [data-type="condensed"]) {
     display: none;
 }
 
@@ -172,7 +189,7 @@ body:has(
    4. FIX ORPHANED "NEW MESSAGES" MARKERS
    ============================================================ */
 
-& #chat-container[data-current-channel="#darkpeers" i] .unread-marker:not(:has(~ .msg:not([data-type="join"]):not([data-type="part"]):not([data-type="quit"]):not([data-type="condensed"]))) {
+#chat-container[data-current-channel="#darkpeers" i] .unread-marker:not(:has(~ .msg:not([data-type="join"]):not([data-type="part"]):not([data-type="quit"]):not([data-type="condensed"]))) {
     display: none;
 }
 
@@ -181,24 +198,24 @@ body:has(
    5. DARKPEERS WEB BRIDGE MESSAGES
    ============================================================ */
 
-& #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i] {
+#chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i] {
     box-shadow:
         inset 2px 0 0
         color-mix(in srgb, var(--link-color) 68%, transparent);
     border-radius: 4px;
 }
 
-& #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:not(.highlight) {
+#chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:not(.highlight) {
     background:
         color-mix(in srgb, var(--link-color) 4.5%, transparent);
 }
 
-& #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i].highlight {
+#chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i].highlight {
     box-shadow:
         inset 3px 0 0 var(--highlight-border-color);
 }
 
-& #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i] .content {
+#chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i] .content {
     padding-right: 9px;
 }
 
@@ -207,12 +224,12 @@ body:has(
    6. REPLACE THE DP NICKNAME WITH A "WEB" BADGE
    ============================================================ */
 
-& #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i] .from .user {
+#chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i] .from .user {
     font-size: 0;
     opacity: 1;
 }
 
-& #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i] .from .user::after {
+#chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i] .from .user::after {
     content: var(--tlcc-bridge-badge, "WEB");
     display: inline-block;
     font-size: 10px;
@@ -233,23 +250,23 @@ body:has(
    7. HEURISTIC DETECTION OF WEB REPLIES
    ============================================================ */
 
-& #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:has(.content a[href*="darkpeers.org/users/" i]):not(.highlight) {
+#chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:has(.content a[href*="darkpeers.org/users/" i]):not(.highlight) {
     background:
         color-mix(in srgb, var(--link-color) 7%, transparent);
 }
 
-& #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:has(.content a[href*="darkpeers.org/users/" i]) {
+#chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:has(.content a[href*="darkpeers.org/users/" i]) {
     box-shadow:
         inset 3px 0 0
         color-mix(in srgb, var(--link-color) 92%, transparent);
 }
 
-& #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i].highlight:has(.content a[href*="darkpeers.org/users/" i]) {
+#chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i].highlight:has(.content a[href*="darkpeers.org/users/" i]) {
     box-shadow:
         inset 3px 0 0 var(--highlight-border-color);
 }
 
-& #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:has(.content a[href*="darkpeers.org/users/" i]) .content::before {
+#chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:has(.content a[href*="darkpeers.org/users/" i]) .content::before {
     content: "↪";
     display: inline-block;
     margin-right: 6px;
@@ -265,17 +282,17 @@ body:has(
    ============================================================ */
 
 /* Hide unauthenticated UNIT3D page/error previews. */
-& #chat-container[data-current-channel="#darkpeers" i] .msg .preview:is(:has(.toggle-type-link a[href*="darkpeers.org/" i]), :has(.toggle-type-error a[href*="darkpeers.org/" i])) {
+#chat-container[data-current-channel="#darkpeers" i] .msg .preview:is(:has(.toggle-type-link a[href*="darkpeers.org/" i]), :has(.toggle-type-error a[href*="darkpeers.org/" i])) {
     display: none !important;
 }
 
 /* Hide dead page-preview controls, but keep direct media controls. */
-& #chat-container[data-current-channel="#darkpeers" i] .msg .content span[dir="auto"]:has(> a[href*="darkpeers.org/" i]:not(.toggle-thumbnail):not(:is([href$=".jpg" i], [href*=".jpg?" i], [href*=".jpg#" i], [href$=".jpeg" i], [href*=".jpeg?" i], [href*=".jpeg#" i], [href$=".png" i], [href*=".png?" i], [href*=".png#" i], [href$=".webp" i], [href*=".webp?" i], [href*=".webp#" i], [href$=".gif" i], [href*=".gif?" i], [href*=".gif#" i]))) > :is(.toggle-preview, .preview-size) {
+#chat-container[data-current-channel="#darkpeers" i] .msg .content span[dir="auto"]:has(> a[href*="darkpeers.org/" i]:not(.toggle-thumbnail):not(:is([href$=".jpg" i], [href*=".jpg?" i], [href*=".jpg#" i], [href$=".jpeg" i], [href*=".jpeg?" i], [href*=".jpeg#" i], [href$=".png" i], [href*=".png?" i], [href*=".png#" i], [href$=".webp" i], [href*=".webp?" i], [href*=".webp#" i], [href$=".gif" i], [href*=".gif?" i], [href*=".gif#" i]))) > :is(.toggle-preview, .preview-size) {
     display: none !important;
 }
 
 /* Known DarkPeers page types. */
-& #chat-container[data-current-channel="#darkpeers" i] .msg .content a:not(.toggle-thumbnail):is([href*="darkpeers.org/users/" i], [href*="darkpeers.org/forums/topics/" i], [href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]) {
+#chat-container[data-current-channel="#darkpeers" i] .msg .content a:not(.toggle-thumbnail):is([href*="darkpeers.org/users/" i], [href*="darkpeers.org/forums/topics/" i], [href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]) {
     font-size: 0;
     display: inline-block;
     padding: 0 5px;
@@ -286,7 +303,7 @@ body:has(
     vertical-align: 0.08em;
 }
 
-& #chat-container[data-current-channel="#darkpeers" i] .msg .content a:not(.toggle-thumbnail)[href*="darkpeers.org/users/" i]::after {
+#chat-container[data-current-channel="#darkpeers" i] .msg .content a:not(.toggle-thumbnail)[href*="darkpeers.org/users/" i]::after {
     content: "profile ↗";
     font-size: 10px;
     font-weight: 600;
@@ -294,7 +311,7 @@ body:has(
     color: var(--link-color);
 }
 
-& #chat-container[data-current-channel="#darkpeers" i] .msg .content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/" i]::after {
+#chat-container[data-current-channel="#darkpeers" i] .msg .content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/" i]::after {
     content: "thread ↗";
     font-size: 10px;
     font-weight: 600;
@@ -302,7 +319,7 @@ body:has(
     color: var(--link-color);
 }
 
-& #chat-container[data-current-channel="#darkpeers" i] .msg .content a:not(.toggle-thumbnail)[href*="darkpeers.org/requests/" i]::after {
+#chat-container[data-current-channel="#darkpeers" i] .msg .content a:not(.toggle-thumbnail)[href*="darkpeers.org/requests/" i]::after {
     content: "request ↗";
     font-size: 10px;
     font-weight: 600;
@@ -310,7 +327,7 @@ body:has(
     color: var(--link-color);
 }
 
-& #chat-container[data-current-channel="#darkpeers" i] .msg .content a:not(.toggle-thumbnail)[href*="darkpeers.org/bon-pool" i]::after {
+#chat-container[data-current-channel="#darkpeers" i] .msg .content a:not(.toggle-thumbnail)[href*="darkpeers.org/bon-pool" i]::after {
     content: "BON pool ↗";
     font-size: 10px;
     font-weight: 600;
@@ -319,7 +336,7 @@ body:has(
 }
 
 /* Generic DarkPeers page fallback; direct media is excluded. */
-& #chat-container[data-current-channel="#darkpeers" i] .msg .content a:not(.toggle-thumbnail)[href*="darkpeers.org/" i]:not([href*="/users/" i]):not([href*="/forums/topics/" i]):not([href*="/requests/" i]):not([href*="/bon-pool" i]):not(:is([href$=".jpg" i], [href*=".jpg?" i], [href*=".jpg#" i], [href$=".jpeg" i], [href*=".jpeg?" i], [href*=".jpeg#" i], [href$=".png" i], [href*=".png?" i], [href*=".png#" i], [href$=".webp" i], [href*=".webp?" i], [href*=".webp#" i], [href$=".gif" i], [href*=".gif?" i], [href*=".gif#" i])) {
+#chat-container[data-current-channel="#darkpeers" i] .msg .content a:not(.toggle-thumbnail)[href*="darkpeers.org/" i]:not([href*="/users/" i]):not([href*="/forums/topics/" i]):not([href*="/requests/" i]):not([href*="/bon-pool" i]):not(:is([href$=".jpg" i], [href*=".jpg?" i], [href*=".jpg#" i], [href$=".jpeg" i], [href*=".jpeg?" i], [href*=".jpeg#" i], [href$=".png" i], [href*=".png?" i], [href*=".png#" i], [href$=".webp" i], [href*=".webp?" i], [href*=".webp#" i], [href$=".gif" i], [href*=".gif?" i], [href*=".gif#" i])) {
     font-size: 0;
     display: inline-block;
     padding: 0 5px;
@@ -330,7 +347,7 @@ body:has(
     vertical-align: 0.08em;
 }
 
-& #chat-container[data-current-channel="#darkpeers" i] .msg .content a:not(.toggle-thumbnail)[href*="darkpeers.org/" i]:not([href*="/users/" i]):not([href*="/forums/topics/" i]):not([href*="/requests/" i]):not([href*="/bon-pool" i]):not(:is([href$=".jpg" i], [href*=".jpg?" i], [href*=".jpg#" i], [href$=".jpeg" i], [href*=".jpeg?" i], [href*=".jpeg#" i], [href$=".png" i], [href*=".png?" i], [href*=".png#" i], [href$=".webp" i], [href*=".webp?" i], [href*=".webp#" i], [href$=".gif" i], [href*=".gif?" i], [href*=".gif#" i]))::after {
+#chat-container[data-current-channel="#darkpeers" i] .msg .content a:not(.toggle-thumbnail)[href*="darkpeers.org/" i]:not([href*="/users/" i]):not([href*="/forums/topics/" i]):not([href*="/requests/" i]):not([href*="/bon-pool" i]):not(:is([href$=".jpg" i], [href*=".jpg?" i], [href*=".jpg#" i], [href$=".jpeg" i], [href*=".jpeg?" i], [href*=".jpeg#" i], [href$=".png" i], [href*=".png?" i], [href*=".png#" i], [href$=".webp" i], [href*=".webp?" i], [href*=".webp#" i], [href$=".gif" i], [href*=".gif?" i], [href*=".gif#" i]))::after {
     content: "site ↗";
     font-size: 10px;
     font-weight: 600;
@@ -348,7 +365,7 @@ body:has(
    such a link receives the REQUEST treatment.
    ============================================================ */
 
-& #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/requests/" i]) {
+#chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/requests/" i]) {
     background:
         color-mix(in srgb, var(--tlcc-cyan) 9%, transparent);
     box-shadow:
@@ -358,7 +375,7 @@ body:has(
     border-radius: 5px;
 }
 
-& #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/requests/" i]) .from .user::after {
+#chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/requests/" i]) .from .user::after {
     content: "REQUEST";
     color: var(--tlcc-cyan);
     border-color:
@@ -367,12 +384,12 @@ body:has(
         color-mix(in srgb, var(--tlcc-cyan) 12%, transparent);
 }
 
-& #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/requests/" i]) .content a:not(.toggle-thumbnail)[href*="darkpeers.org/requests/" i] {
+#chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/requests/" i]) .content a:not(.toggle-thumbnail)[href*="darkpeers.org/requests/" i] {
     background:
         color-mix(in srgb, var(--tlcc-gold) 10%, transparent);
 }
 
-& #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/requests/" i]) .content a:not(.toggle-thumbnail)[href*="darkpeers.org/requests/" i]::after {
+#chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/requests/" i]) .content a:not(.toggle-thumbnail)[href*="darkpeers.org/requests/" i]::after {
     color: var(--tlcc-gold);
 }
 
@@ -384,7 +401,7 @@ body:has(
    provides a reliable CSS-only hook without parsing plain text.
    ============================================================ */
 
-& #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/bon-pool" i]) {
+#chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/bon-pool" i]) {
     background:
         color-mix(in srgb, var(--tlcc-green) 6%, transparent);
     box-shadow:
@@ -393,7 +410,7 @@ body:has(
     border-radius: 5px;
 }
 
-& #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/bon-pool" i]) .from .user::after {
+#chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/bon-pool" i]) .from .user::after {
     content: "BON POOL";
     color: var(--tlcc-green);
     border-color:
@@ -402,7 +419,7 @@ body:has(
         color-mix(in srgb, var(--tlcc-green) 10%, transparent);
 }
 
-& #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/bon-pool" i]) .content a:not(.toggle-thumbnail)[href*="darkpeers.org/bon-pool" i] {
+#chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/bon-pool" i]) .content a:not(.toggle-thumbnail)[href*="darkpeers.org/bon-pool" i] {
     color: var(--tlcc-green);
     border-color:
         color-mix(in srgb, var(--tlcc-green) 38%, transparent);
@@ -415,7 +432,7 @@ body:has(
    9. COMPACT DIRECT MEDIA LINKS
    ============================================================ */
 
-& #chat-container[data-current-channel="#darkpeers" i] .msg .content a:not(.toggle-thumbnail):is([href$=".jpg" i], [href*=".jpg?" i], [href*=".jpg#" i], [href$=".jpeg" i], [href*=".jpeg?" i], [href*=".jpeg#" i], [href$=".png" i], [href*=".png?" i], [href*=".png#" i], [href$=".webp" i], [href*=".webp?" i], [href*=".webp#" i]) {
+#chat-container[data-current-channel="#darkpeers" i] .msg .content a:not(.toggle-thumbnail):is([href$=".jpg" i], [href*=".jpg?" i], [href*=".jpg#" i], [href$=".jpeg" i], [href*=".jpeg?" i], [href*=".jpeg#" i], [href$=".png" i], [href*=".png?" i], [href*=".png#" i], [href$=".webp" i], [href*=".webp?" i], [href*=".webp#" i]) {
     font-size: 0;
     display: inline-block;
     padding: 1px 6px;
@@ -425,14 +442,14 @@ body:has(
     vertical-align: 0.05em;
 }
 
-& #chat-container[data-current-channel="#darkpeers" i] .msg .content a:not(.toggle-thumbnail):is([href$=".jpg" i], [href*=".jpg?" i], [href*=".jpg#" i], [href$=".jpeg" i], [href*=".jpeg?" i], [href*=".jpeg#" i], [href$=".png" i], [href*=".png?" i], [href*=".png#" i], [href$=".webp" i], [href*=".webp?" i], [href*=".webp#" i])::after {
+#chat-container[data-current-channel="#darkpeers" i] .msg .content a:not(.toggle-thumbnail):is([href$=".jpg" i], [href*=".jpg?" i], [href*=".jpg#" i], [href$=".jpeg" i], [href*=".jpeg?" i], [href*=".jpeg#" i], [href$=".png" i], [href*=".png?" i], [href*=".png#" i], [href$=".webp" i], [href*=".webp?" i], [href*=".webp#" i])::after {
     content: "🖼 image";
     font-size: 11px;
     font-weight: 600;
     color: var(--link-color);
 }
 
-& #chat-container[data-current-channel="#darkpeers" i] .msg .content a:not(.toggle-thumbnail):is([href$=".gif" i], [href*=".gif?" i], [href*=".gif#" i]) {
+#chat-container[data-current-channel="#darkpeers" i] .msg .content a:not(.toggle-thumbnail):is([href$=".gif" i], [href*=".gif?" i], [href*=".gif#" i]) {
     font-size: 0;
     display: inline-block;
     padding: 1px 6px;
@@ -442,14 +459,14 @@ body:has(
     vertical-align: 0.05em;
 }
 
-& #chat-container[data-current-channel="#darkpeers" i] .msg .content a:not(.toggle-thumbnail):is([href$=".gif" i], [href*=".gif?" i], [href*=".gif#" i])::after {
+#chat-container[data-current-channel="#darkpeers" i] .msg .content a:not(.toggle-thumbnail):is([href$=".gif" i], [href*=".gif?" i], [href*=".gif#" i])::after {
     content: "🎞 GIF";
     font-size: 11px;
     font-weight: 600;
     color: var(--link-color);
 }
 
-& #chat-container[data-current-channel="#darkpeers" i] .msg .content a:not(.toggle-thumbnail)[href*="giphy.com/" i]:not(:is([href$=".gif" i], [href*=".gif?" i], [href*=".gif#" i])) {
+#chat-container[data-current-channel="#darkpeers" i] .msg .content a:not(.toggle-thumbnail)[href*="giphy.com/" i]:not(:is([href$=".gif" i], [href*=".gif?" i], [href*=".gif#" i])) {
     font-size: 0;
     display: inline-block;
     padding: 1px 6px;
@@ -459,7 +476,7 @@ body:has(
     vertical-align: 0.05em;
 }
 
-& #chat-container[data-current-channel="#darkpeers" i] .msg .content a:not(.toggle-thumbnail)[href*="giphy.com/" i]:not(:is([href$=".gif" i], [href*=".gif?" i], [href*=".gif#" i]))::after {
+#chat-container[data-current-channel="#darkpeers" i] .msg .content a:not(.toggle-thumbnail)[href*="giphy.com/" i]:not(:is([href$=".gif" i], [href*=".gif?" i], [href*=".gif#" i]))::after {
     content: "🎞 GIF";
     font-size: 11px;
     font-weight: 600;
@@ -471,24 +488,24 @@ body:has(
    10. PREVIEW PRESENTATION
    ============================================================ */
 
-& #chat .preview-size {
+#chat .preview-size {
     font-size: 0.72em;
     opacity: 0.52;
     margin-left: 4px;
 }
 
-& #chat .toggle-content {
+#chat .toggle-content {
     margin-top: 6px;
     max-width: 100%;
     border-radius: 9px;
     overflow: hidden;
 }
 
-& #chat .toggle-text {
+#chat .toggle-text {
     white-space: initial;
 }
 
-& #chat .preview + .preview {
+#chat .preview + .preview {
     margin-top: 5px;
 }
 
@@ -497,19 +514,19 @@ body:has(
    11. DIRECT IMAGE PREVIEWS
    ============================================================ */
 
-& #chat .toggle-type-image {
+#chat .toggle-type-image {
     background: transparent;
     box-shadow: none;
     border-radius: 9px;
 }
 
-& #chat .toggle-type-image .toggle-thumbnail {
+#chat .toggle-type-image .toggle-thumbnail {
     display: block;
     width: fit-content;
     max-width: min(520px, 100%);
 }
 
-& #chat .toggle-type-image img {
+#chat .toggle-type-image img {
     display: block;
     width: auto;
     height: auto;
@@ -525,7 +542,7 @@ body:has(
    12. NORMAL WEBSITE THUMBNAILS
    ============================================================ */
 
-& #chat .toggle-type-link .thumb {
+#chat .toggle-type-link .thumb {
     width: auto;
     height: auto;
     max-width: 150px;
@@ -538,7 +555,7 @@ body:has(
    13. OWN MESSAGES
    ============================================================ */
 
-& #chat .msg.self:not(.highlight) {
+#chat .msg.self:not(.highlight) {
     background:
         color-mix(in srgb, var(--link-color) 2.5%, transparent);
 }
@@ -548,7 +565,7 @@ body:has(
    14. GENERAL LINKS
    ============================================================ */
 
-& #chat .content a {
+#chat .content a {
     text-decoration-thickness: 1px;
     text-underline-offset: 2px;
 }
@@ -558,16 +575,16 @@ body:has(
    15. FULL FORMATTED CHANNEL TOPIC
    ============================================================ */
 
-& #chat .header {
+#chat .header {
     position: relative;
     overflow: visible;
 }
 
-& #chat .header .topic {
+#chat .header .topic {
     position: relative;
 }
 
-& #chat-container[data-current-channel="#darkpeers" i] .header .topic::after {
+#chat-container[data-current-channel="#darkpeers" i] .header .topic::after {
     content: " · Enhanced by TLCC " var(--tlcc-version);
     display: inline-block;
     margin-left: 5px;
@@ -580,12 +597,12 @@ body:has(
 }
 
 @media (hover: none) and (pointer: coarse) {
-    & #chat .header .topic {
+    #chat .header .topic {
         cursor: pointer;
     }
 
-    & #chat .header .topic:hover,
-    & #chat .header .topic:active {
+    #chat .header .topic:hover,
+    #chat .header .topic:active {
         position: fixed;
         top: 48px;
         left: 6px;
@@ -617,8 +634,8 @@ body:has(
         cursor: text;
     }
 
-    & #chat .header .topic:hover::before,
-    & #chat .header .topic:active::before {
+    #chat .header .topic:hover::before,
+    #chat .header .topic:active::before {
         content: "";
         position: fixed;
         top: 0;
@@ -631,14 +648,14 @@ body:has(
 }
 
 @media (hover: hover) and (pointer: fine) {
-    & #chat .header .topic {
+    #chat .header .topic {
         cursor: help;
     }
 
     /* Desktop: reveal the complete formatted topic on hover. The
        transparent ::before bridge keeps the header under the pointer
        after the topic itself becomes a fixed popup. */
-    & #chat .header .topic:hover {
+    #chat .header .topic:hover {
         position: fixed;
         top: 48px;
         left: 12px;
@@ -672,7 +689,7 @@ body:has(
         cursor: text;
     }
 
-    & #chat .header .topic:hover::before {
+    #chat .header .topic:hover::before {
         content: "";
         position: fixed;
         top: 0;
@@ -686,31 +703,17 @@ body:has(
 
 
 /* ============================================================
-   15A. RESPONSIVE BONANZA BADGES
+   15A. BONANZA BADGE WIDTH
 
-   The limiting width is the sender column (.from), not the overall
-   chat viewport. On desktop the chat may be very wide while the
-   sender column remains ~12rem and clips long BONANZA labels.
+   The Lounge's normal desktop sender column is narrower than the
+   former 13rem container-query threshold, and the TNB compatibility
+   layout also fixes it below that threshold. The old implementation
+   therefore created one inline-size containment context per message
+   only to select the short prefix every time.
 
-   Make each sender column a size container and shorten only the
-   BONanza family prefix when that actual column is narrow.
-
-   Wide sender:    BONANZA · CATEGORY
-   Narrow sender:  BON · CATEGORY
+   Keep the compact BON · prefix directly in the active-network scope
+   instead. This removes per-message layout containment.
    ============================================================ */
-
-& #chat-container[data-current-channel="#darkpeers" i] .msg .from {
-    container-type: inline-size;
-    container-name: tlcc-sender;
-}
-
-@container tlcc-sender (max-width: 13rem) {
-    & #chat-container[data-current-channel="#darkpeers" i]
-    .msg[data-type="message"][data-from="DP" i]
-    .from .user {
-        --tlcc-bonanza-prefix: "BON · ";
-    }
-}
 
 
 /* ============================================================
@@ -718,37 +721,32 @@ body:has(
    ============================================================ */
 
 @media (max-width: 479px) {
-    & {
-        --tlcc-giveaway-prefix: "GW · ";
-        --tlcc-bonanza-prefix: "BON · ";
-    }
-
-    & #chat .messages {
+    #chat .messages {
         line-height: 1.48;
     }
 
-    & #chat .msg {
+    #chat .msg {
         padding-top: 3px;
         padding-bottom: 3px;
     }
 
-    & #chat .time {
+    #chat .time {
         opacity: 0.42;
         font-size: 0.72em;
     }
 
-    & #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i] {
+    #chat-container[data-current-channel="#darkpeers" i] .msg[data-type="message"][data-from="DP" i] {
         margin-top: 2px;
         margin-bottom: 2px;
         border-radius: 4px;
     }
 
-    & #chat .toggle-type-image img {
+    #chat .toggle-type-image img {
         max-width: 100%;
         max-height: 58vh;
     }
 
-    & #chat .toggle-type-link .thumb {
+    #chat .toggle-type-link .thumb {
         max-width: 120px;
         max-height: 84px;
     }
@@ -759,7 +757,7 @@ body:has(
    17. MESSAGE INPUT
    ============================================================ */
 
-& #form #input {
+#form #input {
     line-height: 1.45;
 }
 
@@ -768,7 +766,7 @@ body:has(
    18. DARKPEERS BOT-ONLY CHANNELS - HIDE LINK/MEDIA PREVIEWS
    ============================================================ */
 
-& #chat-container:is([data-current-channel="#announce" i], [data-current-channel="#pre" i]) :is(.preview, .toggle-preview, .preview-size) {
+#chat-container:is([data-current-channel="#announce" i], [data-current-channel="#pre" i]) :is(.preview, .toggle-preview, .preview-size) {
     display: none !important;
 }
 
@@ -797,12 +795,12 @@ body:has(
    ============================================================ */
 
 /* BONANZA · NUMBERS - both topic 12 and topic 414 survive. */
-& #chat-container[data-current-channel="#darkpeers" i]
+#chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/12" i]):has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/414" i]) {
     --tlcc-bridge-badge: var(--tlcc-bonanza-prefix) "NUMBERS";
 }
 
-& #chat-container[data-current-channel="#darkpeers" i]
+#chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/12" i]):has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/414" i]) {
     background:
         color-mix(in srgb, var(--tlcc-gold) 7%, transparent);
@@ -811,7 +809,7 @@ body:has(
     border-radius: 5px;
 }
 
-& #chat-container[data-current-channel="#darkpeers" i]
+#chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/12" i]):has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/414" i])
 .from .user::after {
     content: var(--tlcc-bonanza-prefix) "NUMBERS";
@@ -827,12 +825,12 @@ body:has(
 /* BONANZA · NEW MEMBERS - dedicated topic 1119 survives as a
    stable structural hook in all three forum links. No text parsing
    or image filename dependency is needed. */
-& #chat-container[data-current-channel="#darkpeers" i]
+#chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/1119" i]) {
     --tlcc-bridge-badge: var(--tlcc-bonanza-prefix) "NEW MEMBERS";
 }
 
-& #chat-container[data-current-channel="#darkpeers" i]
+#chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/1119" i]) {
     background:
         color-mix(in srgb, var(--tlcc-gold) 7%, transparent);
@@ -841,7 +839,7 @@ body:has(
     border-radius: 5px;
 }
 
-& #chat-container[data-current-channel="#darkpeers" i]
+#chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/1119" i])
 .from .user::after {
     content: var(--tlcc-bonanza-prefix) "NEW MEMBERS";
@@ -856,12 +854,12 @@ body:has(
 
 /* BONANZA · DONATIONS - topic 414 + either 👉 ... 👈 or the
    stable Game-Sign-Donations image, excluding topic 12. */
-& #chat-container[data-current-channel="#darkpeers" i]
+#chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/414" i]):not(:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/12" i])):is(:has(.content .emoji[aria-label="Emoji: backhand index pointing right"] ~ .emoji[aria-label="Emoji: backhand index pointing left"]), :has(.content a[href*="Game-Sign-Donations.png" i])) {
     --tlcc-bridge-badge: var(--tlcc-bonanza-prefix) "DONATIONS";
 }
 
-& #chat-container[data-current-channel="#darkpeers" i]
+#chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/414" i]):not(:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/12" i])):is(:has(.content .emoji[aria-label="Emoji: backhand index pointing right"] ~ .emoji[aria-label="Emoji: backhand index pointing left"]), :has(.content a[href*="Game-Sign-Donations.png" i])) {
     background:
         color-mix(in srgb, var(--tlcc-gold) 7%, transparent);
@@ -870,7 +868,7 @@ body:has(
     border-radius: 5px;
 }
 
-& #chat-container[data-current-channel="#darkpeers" i]
+#chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/414" i]):not(:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/12" i])):is(:has(.content .emoji[aria-label="Emoji: backhand index pointing right"] ~ .emoji[aria-label="Emoji: backhand index pointing left"]), :has(.content a[href*="Game-Sign-Donations.png" i]))
 .from .user::after {
     content: var(--tlcc-bonanza-prefix) "DONATIONS";
@@ -886,7 +884,7 @@ body:has(
 /* Plain second DONATIONS fragment: inherit only from the immediately
    preceding strong donations signature and only when the continuation
    itself carries no link or emoji structure. */
-& #chat-container[data-current-channel="#darkpeers" i]
+#chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/414" i]):not(:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/12" i])):is(:has(.content .emoji[aria-label="Emoji: backhand index pointing right"] ~ .emoji[aria-label="Emoji: backhand index pointing left"]), :has(.content a[href*="Game-Sign-Donations.png" i]))
 + .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href])):not(:has(.content .emoji)) {
     --tlcc-bridge-badge: var(--tlcc-bonanza-prefix) "DONATIONS";
@@ -897,7 +895,7 @@ body:has(
     border-radius: 5px;
 }
 
-& #chat-container[data-current-channel="#darkpeers" i]
+#chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/414" i]):not(:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/12" i])):is(:has(.content .emoji[aria-label="Emoji: backhand index pointing right"] ~ .emoji[aria-label="Emoji: backhand index pointing left"]), :has(.content a[href*="Game-Sign-Donations.png" i]))
 + .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href])):not(:has(.content .emoji))
 .from .user::after {
@@ -908,6 +906,71 @@ body:has(
     border-style: solid;
     background:
         color-mix(in srgb, var(--tlcc-gold) 10%, transparent);
+}
+
+
+/* ============================================================
+   18B. DARKPEERS PRIVATE-MESSAGE ALERTS
+
+   The DP bot can send a direct IRC PM when the user receives a new
+   private message on DarkPeers. The surviving conversation URL is a
+   strong structural hook, so this does not depend on parsing the
+   notification text or subject.
+   ============================================================ */
+
+#chat-container[data-current-channel="DP" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content a[href*="darkpeers.org/users/" i][href*="/conversations/" i]) {
+    background:
+        color-mix(in srgb, var(--tlcc-green) 7%, transparent);
+    box-shadow:
+        inset 3px 0 0 color-mix(in srgb, var(--tlcc-green) 86%, transparent);
+    border-radius: 5px;
+}
+
+#chat-container[data-current-channel="DP" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content a[href*="darkpeers.org/users/" i][href*="/conversations/" i])
+.from .user {
+    font-size: 0;
+    opacity: 1;
+}
+
+#chat-container[data-current-channel="DP" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content a[href*="darkpeers.org/users/" i][href*="/conversations/" i])
+.from .user::after {
+    content: "NEW PM";
+    display: inline-block;
+    font-size: 10px;
+    line-height: 1.55;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 1px 5px;
+    border: 1px solid
+        color-mix(in srgb, var(--tlcc-green) 58%, transparent);
+    border-radius: 5px;
+    color: var(--tlcc-green);
+    background:
+        color-mix(in srgb, var(--tlcc-green) 10%, transparent);
+    vertical-align: middle;
+}
+
+#chat-container[data-current-channel="DP" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content a[href*="darkpeers.org/users/" i][href*="/conversations/" i])
+.content a[href*="darkpeers.org/users/" i][href*="/conversations/" i]:not(.toggle-thumbnail) {
+    font-size: 0;
+}
+
+#chat-container[data-current-channel="DP" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content a[href*="darkpeers.org/users/" i][href*="/conversations/" i])
+.content a[href*="darkpeers.org/users/" i][href*="/conversations/" i]:not(.toggle-thumbnail)::after {
+    content: "PM ↗";
+    font-size: 14px;
+    font-weight: 700;
+}
+
+#chat-container[data-current-channel="DP" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content a[href*="darkpeers.org/users/" i][href*="/conversations/" i])
+:is(.preview, .toggle-preview, .preview-size) {
+    display: none !important;
 }
 
 
@@ -936,6 +999,7 @@ body:has(
      Sponsor digest: one ✨, without 🎁
      Fork sponsors:  🧡 + 💫, without 🎁
      Entries:        📋
+     Stats:          📊
      Time:           ⏳
      Final sponsors: 🥳 adjacent to tie/result sequence (either side)
      Winners:        🏆 (giveaway-family fallback; !top is ambiguous)
@@ -947,7 +1011,7 @@ body:has(
      Naughty add:    👮
      Rejection:      🚫 / 🛑 / 🚨
 
-   Generic command/response emoji such as ✅, 📊, 💰 and 💸 are
+   Generic command/response emoji such as ✅, 💰 and 💸 are
    intentionally left as WEB because they are not unique enough for
    honest CSS-only classification after bridge flattening.
 
@@ -958,7 +1022,7 @@ body:has(
 
 /* MAIN GIVEAWAY ANNOUNCEMENT / REMINDER - 🎁 ... ✨ ... ✨ */
 
-& #chat-container[data-current-channel="#darkpeers" i]
+#chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label="Emoji: wrapped gift"] ~ .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]) {
     background:
         color-mix(in srgb, var(--tlcc-gold) 10%, transparent);
@@ -969,7 +1033,7 @@ body:has(
     border-radius: 5px;
 }
 
-& #chat-container[data-current-channel="#darkpeers" i]
+#chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label="Emoji: wrapped gift"] ~ .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"])
 .from .user::after {
     content: "GIVEAWAY";
@@ -981,7 +1045,7 @@ body:has(
         color-mix(in srgb, var(--tlcc-gold) 12%, transparent);
 }
 
-& #chat-container[data-current-channel="#darkpeers" i]
+#chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label="Emoji: wrapped gift"] ~ .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"])
 .content .emoji[aria-label="Emoji: wrapped gift"] {
     font-size: 1.12em;
@@ -992,7 +1056,7 @@ body:has(
    Live bridge testing confirms the userscript's sponsor digest keeps
    this signature. It remains dashed because one ✨ is heuristic. */
 
-& #chat-container[data-current-channel="#darkpeers" i]
+#chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):not(:has(.content .emoji[aria-label="Emoji: wrapped gift"])):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"])) {
     background:
         color-mix(in srgb, var(--tlcc-gold) 5%, transparent);
@@ -1001,7 +1065,7 @@ body:has(
     border-radius: 5px;
 }
 
-& #chat-container[data-current-channel="#darkpeers" i]
+#chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(:has(.content .emoji[aria-label="Emoji: wrapped gift"])):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]))
 .from .user::after {
     content: var(--tlcc-giveaway-prefix) "SPONSORS";
@@ -1035,13 +1099,13 @@ body:has(
    the existing one-sparkle sponsor digest. */
 
 /* Semantic classification: highlighted or not. */
-& #chat-container[data-current-channel="#darkpeers" i]
+#chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label="Emoji: wrapped gift"]):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"])) {
     --tlcc-bridge-badge: "GIVEAWAY";
 }
 
 /* Match the normal GIVEAWAY badge exactly, even when the message is highlighted. */
-& #chat-container[data-current-channel="#darkpeers" i]
+#chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label="Emoji: wrapped gift"]):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]))
 .from .user::after {
     content: "GIVEAWAY";
@@ -1054,7 +1118,7 @@ body:has(
 }
 
 /* Decoration only: preserve native highlight treatment. */
-& #chat-container[data-current-channel="#darkpeers" i]
+#chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label="Emoji: wrapped gift"]):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"])) {
     background:
         color-mix(in srgb, var(--tlcc-gold) 10%, transparent);
@@ -1074,7 +1138,7 @@ body:has(
    one-sparkle sponsor update is unchanged unless it directly follows
    the split-start signature. */
 
-& #chat-container[data-current-channel="#darkpeers" i]
+#chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label="Emoji: wrapped gift"]):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]))
 + .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(:has(.content .emoji[aria-label="Emoji: wrapped gift"])):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"])) {
     --tlcc-bridge-badge: "GIVEAWAY";
@@ -1087,7 +1151,7 @@ body:has(
     border-radius: 5px;
 }
 
-& #chat-container[data-current-channel="#darkpeers" i]
+#chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label="Emoji: wrapped gift"]):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]))
 + .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(:has(.content .emoji[aria-label="Emoji: wrapped gift"])):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]))
 .from .user::after {
@@ -1108,7 +1172,7 @@ body:has(
    giveaway announcement it contains no wrapped gift. The combined
    signature is specific enough to classify without reading text. */
 
-& #chat-container[data-current-channel="#darkpeers" i]
+#chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):not(:has(.content .emoji[aria-label="Emoji: wrapped gift"])):has(.content .emoji[aria-label="Emoji: orange heart"]):has(.content .emoji[aria-label="Emoji: dizzy"]) {
     background:
         color-mix(in srgb, var(--tlcc-gold) 5%, transparent);
@@ -1117,7 +1181,7 @@ body:has(
     border-radius: 5px;
 }
 
-& #chat-container[data-current-channel="#darkpeers" i]
+#chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(:has(.content .emoji[aria-label="Emoji: wrapped gift"])):has(.content .emoji[aria-label="Emoji: orange heart"]):has(.content .emoji[aria-label="Emoji: dizzy"])
 .from .user::after {
     content: var(--tlcc-giveaway-prefix) "SPONSORS";
@@ -1132,7 +1196,7 @@ body:has(
 
 /* ENTRIES LIST - 📋 */
 
-& #chat-container[data-current-channel="#darkpeers" i]
+#chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="clipboard" i]) {
     background:
         color-mix(in srgb, var(--tlcc-cyan) 5%, transparent);
@@ -1141,7 +1205,7 @@ body:has(
     border-radius: 5px;
 }
 
-& #chat-container[data-current-channel="#darkpeers" i]
+#chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="clipboard" i])
 .from .user::after {
     content: var(--tlcc-giveaway-prefix) "ENTRIES";
@@ -1154,9 +1218,33 @@ body:has(
 }
 
 
+/* GIVEAWAY STATS - 📊 */
+
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="bar chart" i]) {
+    background:
+        color-mix(in srgb, var(--tlcc-cyan) 5%, transparent);
+    box-shadow:
+        inset 2px 0 0 color-mix(in srgb, var(--tlcc-cyan) 72%, transparent);
+    border-radius: 5px;
+}
+
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="bar chart" i])
+.from .user::after {
+    content: var(--tlcc-giveaway-prefix) "STATS";
+    color: var(--tlcc-cyan);
+    border-color:
+        color-mix(in srgb, var(--tlcc-cyan) 50%, transparent);
+    border-style: dashed;
+    background:
+        color-mix(in srgb, var(--tlcc-cyan) 9%, transparent);
+}
+
+
 /* GIVEAWAY TIME - ⏳ */
 
-& #chat-container[data-current-channel="#darkpeers" i]
+#chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="hourglass" i]) {
     background:
         color-mix(in srgb, var(--tlcc-green) 5%, transparent);
@@ -1165,7 +1253,7 @@ body:has(
     border-radius: 5px;
 }
 
-& #chat-container[data-current-channel="#darkpeers" i]
+#chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="hourglass" i])
 .from .user::after {
     content: var(--tlcc-giveaway-prefix) "TIME";
@@ -1184,12 +1272,12 @@ body:has(
    in reversed order, so accept the party line immediately before OR
    after a warning/trophy message. */
 
-& #chat-container[data-current-channel="#darkpeers" i]
+#chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="partying" i]):is(
     :has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="warning" i]),
     :has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="trophy" i])
 ),
-& #chat-container[data-current-channel="#darkpeers" i]
+#chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:is(
     :has(.content .emoji[aria-label*="warning" i]),
     :has(.content .emoji[aria-label*="trophy" i])
@@ -1201,13 +1289,13 @@ body:has(
     border-radius: 5px;
 }
 
-& #chat-container[data-current-channel="#darkpeers" i]
+#chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="partying" i]):is(
     :has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="warning" i]),
     :has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="trophy" i])
 )
 .from .user::after,
-& #chat-container[data-current-channel="#darkpeers" i]
+#chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:is(
     :has(.content .emoji[aria-label*="warning" i]),
     :has(.content .emoji[aria-label*="trophy" i])
@@ -1229,7 +1317,7 @@ body:has(
    trophy alone cannot prove RESULT. Use WINNERS as the honest
    fallback and promote only when stronger context survives. */
 
-& #chat-container[data-current-channel="#darkpeers" i]
+#chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="trophy" i]) {
     background:
         color-mix(in srgb, var(--tlcc-gold) 12%, transparent);
@@ -1239,7 +1327,7 @@ body:has(
     border-radius: 5px;
 }
 
-& #chat-container[data-current-channel="#darkpeers" i]
+#chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="trophy" i])
 .from .user::after {
     content: var(--tlcc-giveaway-prefix) "WINNERS";
@@ -1260,7 +1348,7 @@ body:has(
    For adjacent end-sequence markers, accept either bridge arrival order
    because sendMessage() is asynchronous. */
 
-& #chat-container[data-current-channel="#darkpeers" i]
+#chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="trophy" i]):is(
     :has(.content .emoji[aria-label*="medal" i]),
     :has(.content .emoji[aria-label*="eyes" i]),
@@ -1268,7 +1356,7 @@ body:has(
     :has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="partying" i])
 )
 .from .user::after,
-& #chat-container[data-current-channel="#darkpeers" i]
+#chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:is(
     :has(.content .emoji[aria-label*="warning" i]),
     :has(.content .emoji[aria-label*="partying" i])
@@ -1285,9 +1373,9 @@ body:has(
    order. Classify the warning when a trophy message is immediately
    before OR after it. */
 
-& #chat-container[data-current-channel="#darkpeers" i]
+#chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="warning" i]):has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="trophy" i]),
-& #chat-container[data-current-channel="#darkpeers" i]
+#chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="trophy" i])
 + .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="warning" i]) {
     background:
@@ -1297,10 +1385,10 @@ body:has(
     border-radius: 5px;
 }
 
-& #chat-container[data-current-channel="#darkpeers" i]
+#chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="warning" i]):has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="trophy" i])
 .from .user::after,
-& #chat-container[data-current-channel="#darkpeers" i]
+#chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="trophy" i])
 + .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="warning" i])
 .from .user::after {
@@ -1318,9 +1406,9 @@ body:has(
    Standalone 😈 is intentionally still heuristic because v6.2.2
    also appends it to rigged entry confirmations. */
 
-& #chat-container[data-current-channel="#darkpeers" i]
+#chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="horns" i]),
-& #chat-container[data-current-channel="#darkpeers" i]
+#chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label="Emoji: wrapped gift"] ~ .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]):has(.content .emoji[aria-label*="winking face" i]:last-child) {
     background:
         color-mix(in srgb, var(--tlcc-rigged) 9%, transparent);
@@ -1331,10 +1419,10 @@ body:has(
     border-radius: 5px;
 }
 
-& #chat-container[data-current-channel="#darkpeers" i]
+#chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="horns" i])
 .from .user::after,
-& #chat-container[data-current-channel="#darkpeers" i]
+#chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label="Emoji: wrapped gift"] ~ .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]):has(.content .emoji[aria-label*="winking face" i]:last-child)
 .from .user::after {
     content: var(--tlcc-giveaway-prefix) "RIGGED";
@@ -1349,7 +1437,7 @@ body:has(
 
 /* RIGGED MODE DISABLED - 😒 */
 
-& #chat-container[data-current-channel="#darkpeers" i]
+#chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="unamused" i]) {
     background:
         color-mix(in srgb, var(--tlcc-green) 6%, transparent);
@@ -1358,7 +1446,7 @@ body:has(
     border-radius: 5px;
 }
 
-& #chat-container[data-current-channel="#darkpeers" i]
+#chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="unamused" i])
 .from .user::after {
     content: var(--tlcc-giveaway-prefix) "UNRIGGED";
@@ -1373,7 +1461,7 @@ body:has(
 
 /* NAUGHTY-LIST ADD - 👮 */
 
-& #chat-container[data-current-channel="#darkpeers" i]
+#chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="police officer" i]) {
     background:
         color-mix(in srgb, var(--tlcc-naughty) 6%, transparent);
@@ -1382,7 +1470,7 @@ body:has(
     border-radius: 5px;
 }
 
-& #chat-container[data-current-channel="#darkpeers" i]
+#chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="police officer" i])
 .from .user::after {
     content: var(--tlcc-giveaway-prefix) "NAUGHTY";
@@ -1397,7 +1485,7 @@ body:has(
 
 /* REJECTED / UNAUTHORISED - 🚫 / 🛑 / 🚨 */
 
-& #chat-container[data-current-channel="#darkpeers" i]
+#chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):is(:has(.content .emoji[aria-label*="prohibited" i]),:has(.content .emoji[aria-label*="stop sign" i]),:has(.content .emoji[aria-label*="police car light" i])
 ) {
     background:
@@ -1407,7 +1495,7 @@ body:has(
     border-radius: 5px;
 }
 
-& #chat-container[data-current-channel="#darkpeers" i]
+#chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):is(:has(.content .emoji[aria-label*="prohibited" i]),:has(.content .emoji[aria-label*="stop sign" i]),:has(.content .emoji[aria-label*="police car light" i])
 )
 .from .user::after {
@@ -1419,6 +1507,5 @@ body:has(
     background:
         color-mix(in srgb, var(--tlcc-alert) 10%, transparent);
 }
-
 
 }
