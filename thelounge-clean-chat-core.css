@@ -76,6 +76,7 @@ body:has(
         ~ .channel-list-item[data-name="#darkpeers" i]
 ) {
     --tlcc-giveaway-prefix: "GIVEAWAY · ";
+    --tlcc-bonanza-prefix: "BONANZA · ";
     --tlcc-gold: #f3d34a;
     --tlcc-cyan: #6eb8d4;
     --tlcc-green: #79d99b;
@@ -691,6 +692,7 @@ body:has(
 @media (max-width: 479px) {
     & {
         --tlcc-giveaway-prefix: "GW · ";
+        --tlcc-bonanza-prefix: "BON · ";
     }
 
     & #chat .messages {
@@ -740,6 +742,113 @@ body:has(
 
 & #chat-container:is([data-current-channel="#announce" i], [data-current-channel="#pre" i]) :is(.preview, .toggle-preview, .preview-size) {
     display: none !important;
+}
+
+
+/* ============================================================
+   18A. BONANZA FORUM ANNOUNCEMENTS
+
+   These are not giveaway-script state messages. They are recurring
+   DarkPeers website announcements that retain stable forum-topic
+   anchors after the website -> DP -> IRC bridge.
+
+   NUMBERS:
+     - topic 12 (Count to Infinity)
+     - topic 414 (BONanza)
+     Both fragments retain both anchors, so each can be classified
+     independently without reading [1/2] / [2/2] text.
+
+   DONATIONS:
+     - topic 414
+     - 👉 ... 👈 structure
+     - no topic 12
+     The first fragment is structurally identifiable. Its plain-text
+     total continuation contains no usable marker, so only the
+     immediately following marker-free DP message is inherited as the
+     second DONATIONS fragment.
+   ============================================================ */
+
+/* BONANZA · NUMBERS - both topic 12 and topic 414 survive. */
+& #chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/12" i]):has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/414" i]) {
+    --tlcc-bridge-badge: var(--tlcc-bonanza-prefix) "NUMBERS";
+}
+
+& #chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/12" i]):has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/414" i]) {
+    background:
+        color-mix(in srgb, var(--tlcc-gold) 7%, transparent);
+    box-shadow:
+        inset 3px 0 0 color-mix(in srgb, var(--tlcc-gold) 86%, transparent);
+    border-radius: 5px;
+}
+
+& #chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/12" i]):has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/414" i])
+.from .user::after {
+    content: var(--tlcc-bonanza-prefix) "NUMBERS";
+    color: var(--tlcc-gold);
+    border-color:
+        color-mix(in srgb, var(--tlcc-gold) 58%, transparent);
+    border-style: solid;
+    background:
+        color-mix(in srgb, var(--tlcc-gold) 10%, transparent);
+}
+
+
+/* BONANZA · DONATIONS - topic 414 + 👉 ... 👈, excluding topic 12. */
+& #chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/414" i]):not(:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/12" i])):has(.content .emoji[aria-label="Emoji: backhand index pointing right"] ~ .emoji[aria-label="Emoji: backhand index pointing left"]) {
+    --tlcc-bridge-badge: var(--tlcc-bonanza-prefix) "DONATIONS";
+}
+
+& #chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/414" i]):not(:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/12" i])):has(.content .emoji[aria-label="Emoji: backhand index pointing right"] ~ .emoji[aria-label="Emoji: backhand index pointing left"]) {
+    background:
+        color-mix(in srgb, var(--tlcc-gold) 7%, transparent);
+    box-shadow:
+        inset 3px 0 0 color-mix(in srgb, var(--tlcc-gold) 86%, transparent);
+    border-radius: 5px;
+}
+
+& #chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/414" i]):not(:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/12" i])):has(.content .emoji[aria-label="Emoji: backhand index pointing right"] ~ .emoji[aria-label="Emoji: backhand index pointing left"])
+.from .user::after {
+    content: var(--tlcc-bonanza-prefix) "DONATIONS";
+    color: var(--tlcc-gold);
+    border-color:
+        color-mix(in srgb, var(--tlcc-gold) 58%, transparent);
+    border-style: solid;
+    background:
+        color-mix(in srgb, var(--tlcc-gold) 10%, transparent);
+}
+
+
+/* Plain second DONATIONS fragment: inherit only from the immediately
+   preceding strong donations signature and only when the continuation
+   itself carries no link or emoji structure. */
+& #chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/414" i]):not(:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/12" i])):has(.content .emoji[aria-label="Emoji: backhand index pointing right"] ~ .emoji[aria-label="Emoji: backhand index pointing left"])
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href])):not(:has(.content .emoji)) {
+    --tlcc-bridge-badge: var(--tlcc-bonanza-prefix) "DONATIONS";
+    background:
+        color-mix(in srgb, var(--tlcc-gold) 7%, transparent);
+    box-shadow:
+        inset 3px 0 0 color-mix(in srgb, var(--tlcc-gold) 86%, transparent);
+    border-radius: 5px;
+}
+
+& #chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/414" i]):not(:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/12" i])):has(.content .emoji[aria-label="Emoji: backhand index pointing right"] ~ .emoji[aria-label="Emoji: backhand index pointing left"])
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href])):not(:has(.content .emoji))
+.from .user::after {
+    content: var(--tlcc-bonanza-prefix) "DONATIONS";
+    color: var(--tlcc-gold);
+    border-color:
+        color-mix(in srgb, var(--tlcc-gold) 58%, transparent);
+    border-style: solid;
+    background:
+        color-mix(in srgb, var(--tlcc-gold) 10%, transparent);
 }
 
 
