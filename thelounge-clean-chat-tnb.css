@@ -24,15 +24,7 @@
    release-version module during the flat production build.
    ============================================================ */
 
-body:has(
-    .network > .channel-list-item[data-type="lobby"].active
-        ~ .channels .channel-list-item[data-name="#darkpeers" i],
-    .network > .channels .channel-list-item[data-name="#darkpeers" i].active,
-    .network > .channels .channel-list-item[data-name="#darkpeers" i]
-        ~ .channel-list-item.active,
-    .network > .channels .channel-list-item.active
-        ~ .channel-list-item[data-name="#darkpeers" i]
-) {
+@container style(--tlcc-active: on) {
 
 /* ============================================================
    TNB BRIDGED USERNAME
@@ -49,7 +41,7 @@ body:has(
    and any fork-provided icon instead of reversing those elements.
    ============================================================ */
 
-& #chat-container[data-current-channel="#darkpeers" i]
+#chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i][data-bridged="true"]
 .from .user {
     font-size: inherit !important;
@@ -68,16 +60,17 @@ body:has(
    Treat it like the presence noise hidden by the core stylesheet.
    ============================================================ */
 
-& #chat-container[data-current-channel="#darkpeers" i]
+#chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="mass_event"] {
     display: none;
 }
 
 /* Prevent an orphaned New messages marker when only hidden
    mass_event/presence entries remain below it. */
-& #chat-container[data-current-channel="#darkpeers" i]
+#chat-container[data-current-channel="#darkpeers" i]
 .unread-marker:not(:has(~ .msg:not([data-type="join"]):not([data-type="part"]):not([data-type="quit"]):not([data-type="condensed"]):not([data-type="mass_event"]))) {
     display: none;
 }
+
 
 }
