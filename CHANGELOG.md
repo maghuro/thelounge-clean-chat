@@ -23,7 +23,7 @@ All notable changes to **The Lounge Clean Chat** will be documented here.
 
 ### Compatibility
 
-- v0.5.5 relies on custom-property container style queries (`@container style(...)`) for scoped TLCC rules. Unsupported browsers leave those scoped rules inactive rather than partially applying the layout.
+- v0.5.5 relies on custom-property container style queries (`@container style(...)`) for scoped TLCC rules. Minimum support for this exact custom-property form is Chromium/Edge 111+, Safari 18+, Firefox 151+ desktop and Firefox 155+ Android. Unsupported browsers leave those scoped rules inactive rather than partially applying the layout.
 - The active-network fingerprint itself remains unchanged: TLCC still identifies DarkPeers from the real `#darkpeers` channel, not from the user-defined connection name.
 
 ### Credits
