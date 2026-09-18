@@ -854,11 +854,25 @@ body:has(
    The first fragment still retains a strong giveaway signature:
    wrapped gift + one sparkle. Classify that fragment as GIVEAWAY.
 
+   IMPORTANT: semantic classification must not depend on .highlight.
+   Highlighted bridge messages keep The Lounge's highlight visuals but
+   still receive the correct TLCC badge.
+
    A continuation containing only the closing sparkle is deliberately
    NOT reconstructed here. It is structurally indistinguishable from
-   the existing one-sparkle sponsor digest, so attempting to pair the
-   fragments would trade one ambiguity for fragile DOM heuristics. */
+   the existing one-sparkle sponsor digest. */
 
+/* Semantic classification: applies whether highlighted or not. */
+& #chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]
+:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i])))
+:has(.content .emoji[aria-label="Emoji: wrapped gift"])
+:has(.content .emoji[aria-label="Emoji: sparkles"])
+:not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"])) {
+    --tlcc-bridge-badge: "GIVEAWAY";
+}
+
+/* Decoration only: do not override The Lounge's highlight treatment. */
 & #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]
 :not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i])))
@@ -866,7 +880,6 @@ body:has(
 :has(.content .emoji[aria-label="Emoji: wrapped gift"])
 :has(.content .emoji[aria-label="Emoji: sparkles"])
 :not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"])) {
-    --tlcc-bridge-badge: "GIVEAWAY";
     background:
         color-mix(in srgb, var(--tlcc-gold) 10%, transparent);
     box-shadow:
@@ -874,49 +887,6 @@ body:has(
         inset 0 1px 0 color-mix(in srgb, var(--tlcc-gold) 30%, transparent),
         inset 0 -1px 0 color-mix(in srgb, var(--tlcc-gold) 30%, transparent);
     border-radius: 5px;
-}
-
-
-
-/* SPLIT START BADGE FALLBACK
-   Live testing showed the generic WEB pseudo-element can remain visible
-   on bridge-split first fragments even when the message-level giveaway
-   selector definitely matches. For this one narrow case, bypass that
-   pseudo-element entirely: suppress it and draw the semantic badge on
-   .from itself. This does not attempt to reconstruct [2/2]. */
-
-& #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]
-:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i])))
-:has(.content .emoji[aria-label="Emoji: wrapped gift"])
-:has(.content .emoji[aria-label="Emoji: sparkles"])
-:not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]))
-.from .user::after {
-    content: none !important;
-    display: none !important;
-}
-
-& #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]
-:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i])))
-:has(.content .emoji[aria-label="Emoji: wrapped gift"])
-:has(.content .emoji[aria-label="Emoji: sparkles"])
-:not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]))
-.from::before {
-    content: "GIVEAWAY";
-    display: inline-block;
-    font-size: 10px;
-    line-height: 1.55;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    padding: 1px 5px;
-    border: 1px dashed
-        color-mix(in srgb, var(--tlcc-gold) 60%, transparent);
-    border-radius: 5px;
-    color: var(--tlcc-gold);
-    background:
-        color-mix(in srgb, var(--tlcc-gold) 12%, transparent);
-    vertical-align: middle;
 }
 
 
@@ -1421,5 +1391,5 @@ body:has(
     .network > .channels .channel-list-item.active
         ~ .channel-list-item[data-name="#darkpeers" i]
 ) {
-    --tlcc-version: "v0.5.4-dev7";
+    --tlcc-version: "v0.5.4-dev8";
 }
