@@ -1271,6 +1271,97 @@ body:has(
 }
 
 
+/* GIVEAWAY GLOBAL STATS BLOCK
+   The global stats command is emitted as a four-message sequence:
+     💰 Most BON won
+     📈 Largest giveaways
+     😵 Unlucky
+     💸 Top all-time sponsors
+
+   💰 and 💸 are intentionally NOT classified on their own because
+   they are too generic after bridge flattening. Instead, each line is
+   promoted to STATS only when it participates in the exact adjacent
+   four-message emoji sequence observed from the giveaway script. */
+
+/* 1/4 - 💰, followed by 📈, 😵, 💸 */
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]
+:has(.content .emoji[aria-label*="money bag" i])
+:has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="chart increasing" i])
+:has(+ .msg[data-type="message"][data-from="DP" i] + .msg[data-type="message"][data-from="DP" i] .content .emoji:is([aria-label*="crossed-out eyes" i], [aria-label*="dizzy face" i]))
+:has(+ .msg[data-type="message"][data-from="DP" i] + .msg[data-type="message"][data-from="DP" i] + .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="money with wings" i]),
+
+/* 2/4 - 📈, preceded by the proven 💰 start and followed by 😵, 💸 */
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="money bag" i])
++ .msg[data-type="message"][data-from="DP" i]
+:has(.content .emoji[aria-label*="chart increasing" i])
+:has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji:is([aria-label*="crossed-out eyes" i], [aria-label*="dizzy face" i]))
+:has(+ .msg[data-type="message"][data-from="DP" i] + .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="money with wings" i]),
+
+/* 3/4 - 😵 inside the same proven sequence */
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="money bag" i])
++ .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="chart increasing" i])
++ .msg[data-type="message"][data-from="DP" i]
+:has(.content .emoji:is([aria-label*="crossed-out eyes" i], [aria-label*="dizzy face" i]))
+:has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="money with wings" i]),
+
+/* 4/4 - 💸 closing the proven sequence */
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="money bag" i])
++ .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="chart increasing" i])
++ .msg[data-type="message"][data-from="DP" i]:has(.content .emoji:is([aria-label*="crossed-out eyes" i], [aria-label*="dizzy face" i]))
++ .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="money with wings" i]) {
+    background:
+        color-mix(in srgb, var(--tlcc-cyan) 5%, transparent);
+    box-shadow:
+        inset 2px 0 0 color-mix(in srgb, var(--tlcc-cyan) 72%, transparent);
+    border-radius: 5px;
+}
+
+
+/* Apply the same STATS badge to each proven line in the sequence. */
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]
+:has(.content .emoji[aria-label*="money bag" i])
+:has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="chart increasing" i])
+:has(+ .msg[data-type="message"][data-from="DP" i] + .msg[data-type="message"][data-from="DP" i] .content .emoji:is([aria-label*="crossed-out eyes" i], [aria-label*="dizzy face" i]))
+:has(+ .msg[data-type="message"][data-from="DP" i] + .msg[data-type="message"][data-from="DP" i] + .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="money with wings" i])
+.from .user::after,
+
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="money bag" i])
++ .msg[data-type="message"][data-from="DP" i]
+:has(.content .emoji[aria-label*="chart increasing" i])
+:has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji:is([aria-label*="crossed-out eyes" i], [aria-label*="dizzy face" i]))
+:has(+ .msg[data-type="message"][data-from="DP" i] + .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="money with wings" i])
+.from .user::after,
+
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="money bag" i])
++ .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="chart increasing" i])
++ .msg[data-type="message"][data-from="DP" i]
+:has(.content .emoji:is([aria-label*="crossed-out eyes" i], [aria-label*="dizzy face" i]))
+:has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="money with wings" i])
+.from .user::after,
+
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="money bag" i])
++ .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="chart increasing" i])
++ .msg[data-type="message"][data-from="DP" i]:has(.content .emoji:is([aria-label*="crossed-out eyes" i], [aria-label*="dizzy face" i]))
++ .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="money with wings" i])
+.from .user::after {
+    content: var(--tlcc-giveaway-prefix) "STATS";
+    color: var(--tlcc-cyan);
+    border-color:
+        color-mix(in srgb, var(--tlcc-cyan) 50%, transparent);
+    border-style: dashed;
+    background:
+        color-mix(in srgb, var(--tlcc-cyan) 9%, transparent);
+}
+
+
 /* GIVEAWAY TIME - ⏳ */
 
 #chat-container[data-current-channel="#darkpeers" i]
