@@ -6,7 +6,7 @@ TLCC remains deliberately **CSS-only**. It does not patch The Lounge, the DarkPe
 
 **Current version:** v0.5.5  
 **Tested with:** The Lounge 4.5.2 and the TNB tracker-first fork based on The Lounge 4.4.3  
-**Browsers tested:** Chrome on Android and desktop\n\n**Performance-scope requirement:** TLCC v0.5.5 uses custom-property container style queries (`@container style(...)`). Use a current browser with support for custom-property style queries; unsupported browsers fail gracefully by leaving the scoped TLCC rules inactive.
+**Browsers tested:** Chrome on Android and desktop\n\n**Performance-scope requirement:** TLCC v0.5.5 uses custom-property container style queries (`@container style(...)`). Minimum support for this exact custom-property form is Chromium/Edge 111+, Safari 18+, Firefox 151+ desktop and Firefox 155+ Android. Unsupported browsers fail gracefully by leaving the scoped TLCC rules inactive.
 
 ## v0.5.5: performance scope + new giveaway/PM classifications
 
