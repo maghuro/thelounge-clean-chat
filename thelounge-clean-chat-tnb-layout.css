@@ -5,41 +5,21 @@
    alongside TLCC's WEB/category badge. The normal sender column can
    therefore clip longer website usernames.
 
-   This rule widens the sender column only on desktop and only when
-   the active #darkpeers view contains a structured TNB bridged
-   message (data-bridged="true"). Stock The Lounge does not match.
-
-   The same TNB-only desktop scope also left-aligns the sender column
-   so IRC and bridged senders use the same visual direction. Bridged
-   messages keep the fork's natural order: avatar, username, optional
-   icon, then the TLCC WEB/category badge.
-
-   Extremely long website usernames are allowed to shrink inside the
-   fixed 12rem sender column. This keeps the column compact while
-   reserving the trailing TLCC badge instead of clipping the badge.
-
-   DarkPeers is identified by the real #darkpeers channel in the
-   active network. The user's local connection/network name is never
-   used as a selector.
+   Performance note:
+   Active-network detection is handled once by the core
+   --tlcc-active flag. The remaining :has() is anchored on the active
+   #chat-container rather than body, so its invalidation scope is the
+   chat pane and it is inert on official The Lounge.
    ============================================================ */
 
 @media (min-width: 480px) {
-    body:has(
-        .network > .channel-list-item[data-type="lobby"].active
-            ~ .channels .channel-list-item[data-name="#darkpeers" i],
-        .network > .channels .channel-list-item[data-name="#darkpeers" i].active,
-        .network > .channels .channel-list-item[data-name="#darkpeers" i]
-            ~ .channel-list-item.active,
-        .network > .channels .channel-list-item.active
-            ~ .channel-list-item[data-name="#darkpeers" i]
-    ) {
-        &:has(
-            #chat-container[data-current-channel="#darkpeers" i]
+    @container style(--tlcc-active: on) {
+        #chat-container[data-current-channel="#darkpeers" i]:has(
             .msg[data-type="message"][data-from="DP" i][data-bridged="true"]
         ) {
             --window-left-padding: 12.5rem !important;
 
-            & #chat-container[data-current-channel="#darkpeers" i] .msg .from {
+            & .msg .from {
                 width: 12rem !important;
                 min-width: 12rem !important;
                 max-width: 12rem !important;
@@ -48,7 +28,7 @@
             }
         }
 
-        & #chat-container[data-current-channel="#darkpeers" i]
+        #chat-container[data-current-channel="#darkpeers" i]
         .msg[data-type="message"][data-from="DP" i][data-bridged="true"]
         .from .user {
             width: 100% !important;
@@ -56,7 +36,7 @@
             min-width: 0;
         }
 
-        & #chat-container[data-current-channel="#darkpeers" i]
+        #chat-container[data-current-channel="#darkpeers" i]
         .msg[data-type="message"][data-from="DP" i][data-bridged="true"]
         .from .user .username {
             flex: 0 1 auto;
@@ -68,7 +48,7 @@
             white-space: nowrap;
         }
 
-        & #chat-container[data-current-channel="#darkpeers" i]
+        #chat-container[data-current-channel="#darkpeers" i]
         .msg[data-type="message"][data-from="DP" i][data-bridged="true"]
         .from .user::after {
             flex: 0 0 auto;
