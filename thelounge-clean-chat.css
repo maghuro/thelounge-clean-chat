@@ -1318,6 +1318,51 @@ body:has(
 }
 
 
+/* SPLIT GLOBAL STATS CONTINUATION
+   Long global-stat outputs (for example !sponsors 10) can be split by
+   the website/IRC bridge. The first fragment retains its unique stats
+   emoji while the immediately following [2/2] fragment can be plain
+   text only.
+
+   CSS cannot read the literal [1/2]/[2/2] marker, so inherit STATS only
+   to the immediately adjacent marker-free DP message. This mirrors the
+   existing split ENTRIES handling and deliberately requires no links
+   or emojis on the continuation. */
+
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:is(
+    :has(.content .emoji[aria-label*="money bag" i]),
+    :has(.content .emoji[aria-label*="chart increasing" i]),
+    :has(.content .emoji:is([aria-label*="crossed-out eyes" i], [aria-label*="dizzy face" i])),
+    :has(.content .emoji[aria-label*="money with wings" i])
+)
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href])):not(:has(.content .emoji)) {
+    background:
+        color-mix(in srgb, var(--tlcc-cyan) 5%, transparent);
+    box-shadow:
+        inset 2px 0 0 color-mix(in srgb, var(--tlcc-cyan) 72%, transparent);
+    border-radius: 5px;
+}
+
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:is(
+    :has(.content .emoji[aria-label*="money bag" i]),
+    :has(.content .emoji[aria-label*="chart increasing" i]),
+    :has(.content .emoji:is([aria-label*="crossed-out eyes" i], [aria-label*="dizzy face" i])),
+    :has(.content .emoji[aria-label*="money with wings" i])
+)
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href])):not(:has(.content .emoji))
+.from .user::after {
+    content: var(--tlcc-giveaway-prefix) "STATS";
+    color: var(--tlcc-cyan);
+    border-color:
+        color-mix(in srgb, var(--tlcc-cyan) 50%, transparent);
+    border-style: dashed;
+    background:
+        color-mix(in srgb, var(--tlcc-cyan) 9%, transparent);
+}
+
+
 /* GIVEAWAY TIME - ⏳ */
 
 #chat-container[data-current-channel="#darkpeers" i]
