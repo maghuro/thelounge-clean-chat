@@ -3,6 +3,16 @@
 All notable changes to **The Lounge Clean Chat** will be documented here.
 
 
+## v0.5.64 - 2026-09-19
+
+### BON Pool identity and badge baseline
+
+- Added a dedicated blue `--tlcc-pool` accent and applied it to authoritative `GIVEAWAY · BON POOL` starts, keeping them visually distinct from regular giveaways and BONanza donation messages.
+- Corrected the shared DarkPeers badge baseline after zoomed live inspection: removed the cumulative upward offset from v0.5.62/v0.5.63 and nudged the badge 1px downward instead.
+- Badge geometry, row height, right-edge alignment, original/public giveaway POT/SPONSORS fallbacks and all existing Maghuro bridge classifications remain unchanged.
+
+
+
 ## v0.5.63 - 2026-09-19
 
 ### Badge baseline follow-up and original POT fallback

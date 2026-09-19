@@ -81,6 +81,7 @@ body:has(
     --tlcc-trivia-prefix: "TRIVIA · ";
     --tlcc-gold: #f3d34a;
     --tlcc-cyan: #6eb8d4;
+    --tlcc-pool: #58a9ff;
     --tlcc-green: #79d99b;
     --tlcc-warning: #f0a83a;
     --tlcc-rigged: #ff4f9a;
@@ -246,8 +247,8 @@ body:has(
     color: var(--link-color);
     background:
         color-mix(in srgb, var(--link-color) 7%, transparent);
-    vertical-align: 0.14em;
-    transform: translateY(-2px);
+    vertical-align: baseline;
+    transform: translateY(1px);
 }
 
 /* On official The Lounge, keep every DP/TLCC badge on the same right edge
@@ -1153,7 +1154,7 @@ body:has(
 #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:has(.content a[href$="#dpgw-v1-start-pool" i]) {
     --tlcc-dpgw-badge: var(--tlcc-giveaway-prefix) "BON POOL";
-    --tlcc-dpgw-color: var(--tlcc-green);
+    --tlcc-dpgw-color: var(--tlcc-pool);
     --tlcc-dpgw-strength: 10%;
     --tlcc-dpgw-edge: 3px;
 }
@@ -2643,5 +2644,5 @@ body:has(
 
 /* TLCC release version override. Keep this tiny file easy to update per release. */
 :root {
-    --tlcc-version: "v0.5.63";
+    --tlcc-version: "v0.5.64";
 }
