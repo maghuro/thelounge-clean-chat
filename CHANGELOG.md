@@ -2,6 +2,22 @@
 
 All notable changes to **The Lounge Clean Chat** will be documented here.
 
+## v0.5.53 - 2026-09-19
+
+### Compatibility
+
+- Added authoritative support for Maghuro's DarkPeers giveaway bridge contract using structural `https://darkpeers.org/#dpgw-v1-*` links.
+- Maghuro markers now have explicit precedence: every legacy Nums/TRAVIS/other-fork giveaway heuristic is gated to messages that do **not** contain a `#dpgw-v1-` marker.
+- Added deterministic badges for start, sponsors, entries, stats, time, result, tie, rigged/unrigged, naughty-list actions, confirmed BON Pool payments and confirmed Rigged Mode taxes.
+- Neutralized TLCC's generic `site ↗` treatment for marker links so the wrapped semantic emoji remains visually unchanged.
+- Kept all legacy emoji/adjacency classifiers as backwards-compatible fallbacks for older and third-party giveaway forks.
+
+### BON Pool
+
+- Added `GIVEAWAY · BON POOL` / `GW · BON POOL` for a confirmed direct pool contribution.
+- Added `GIVEAWAY · TAXES` / `GW · TAXES` for the same confirmed direct contribution while Rigged Mode is active.
+- These success badges are emitted only after DarkPeers BON Pool counters confirm the contribution.
+
 ## v0.5.52 - 2026-09-19
 
 ### Compatibility

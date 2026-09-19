@@ -977,7 +977,162 @@ body:has(
 
 
 /* ============================================================
-   19. BLUTOPIA BON GIVEAWAY MESSAGES
+   19A. MAGHURO GIVEAWAY - AUTHORITATIVE BRIDGE MARKERS
+
+   DarkPeers BONanza Giveaway v1.2.3+ emits real links using:
+     https://darkpeers.org/#dpgw-v1-<type>
+
+   These markers are authoritative. Every legacy giveaway classifier
+   below explicitly excludes messages carrying #dpgw-v1-, so the
+   Maghuro fork always wins. Emoji/adjacency rules remain only as a
+   backwards-compatible fallback for Nums/TRAVIS/other forks.
+
+   The marker link itself wraps the existing semantic emoji. Undo the
+   generic DarkPeers "site ↗" link treatment so it still looks like an
+   ordinary emoji in chat.
+   ============================================================ */
+
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]
+.content a[href*="darkpeers.org/#dpgw-v1-" i] {
+    font-size: inherit !important;
+    display: inline !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    background: none !important;
+    color: inherit !important;
+    text-decoration: none !important;
+}
+
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]
+.content a[href*="darkpeers.org/#dpgw-v1-" i]::after {
+    content: none !important;
+}
+
+/* Per-message semantic contract. */
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content a[href$="#dpgw-v1-start" i]) {
+    --tlcc-dpgw-badge: "GIVEAWAY";
+    --tlcc-dpgw-color: var(--tlcc-gold);
+    --tlcc-dpgw-strength: 10%;
+    --tlcc-dpgw-edge: 4px;
+}
+
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content a[href$="#dpgw-v1-sponsors" i]) {
+    --tlcc-dpgw-badge: var(--tlcc-giveaway-prefix) "SPONSORS";
+    --tlcc-dpgw-color: var(--tlcc-gold);
+    --tlcc-dpgw-strength: 6%;
+    --tlcc-dpgw-edge: 3px;
+}
+
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content a[href$="#dpgw-v1-entries" i]) {
+    --tlcc-dpgw-badge: var(--tlcc-giveaway-prefix) "ENTRIES";
+    --tlcc-dpgw-color: var(--tlcc-cyan);
+    --tlcc-dpgw-strength: 6%;
+    --tlcc-dpgw-edge: 3px;
+}
+
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content a[href$="#dpgw-v1-stats" i]) {
+    --tlcc-dpgw-badge: var(--tlcc-giveaway-prefix) "STATS";
+    --tlcc-dpgw-color: var(--tlcc-cyan);
+    --tlcc-dpgw-strength: 6%;
+    --tlcc-dpgw-edge: 3px;
+}
+
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content a[href$="#dpgw-v1-time" i]) {
+    --tlcc-dpgw-badge: var(--tlcc-giveaway-prefix) "TIME";
+    --tlcc-dpgw-color: var(--tlcc-green);
+    --tlcc-dpgw-strength: 6%;
+    --tlcc-dpgw-edge: 3px;
+}
+
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content a[href$="#dpgw-v1-result" i]) {
+    --tlcc-dpgw-badge: var(--tlcc-giveaway-prefix) "RESULT";
+    --tlcc-dpgw-color: var(--tlcc-gold);
+    --tlcc-dpgw-strength: 13%;
+    --tlcc-dpgw-edge: 4px;
+}
+
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content a[href$="#dpgw-v1-tie" i]) {
+    --tlcc-dpgw-badge: var(--tlcc-giveaway-prefix) "TIE";
+    --tlcc-dpgw-color: var(--tlcc-warning);
+    --tlcc-dpgw-strength: 9%;
+    --tlcc-dpgw-edge: 4px;
+}
+
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content a[href$="#dpgw-v1-rigged" i]) {
+    --tlcc-dpgw-badge: var(--tlcc-giveaway-prefix) "RIGGED";
+    --tlcc-dpgw-color: var(--tlcc-rigged);
+    --tlcc-dpgw-strength: 9%;
+    --tlcc-dpgw-edge: 4px;
+}
+
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content a[href$="#dpgw-v1-unrigged" i]) {
+    --tlcc-dpgw-badge: var(--tlcc-giveaway-prefix) "UNRIGGED";
+    --tlcc-dpgw-color: var(--tlcc-green);
+    --tlcc-dpgw-strength: 7%;
+    --tlcc-dpgw-edge: 3px;
+}
+
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content a[href$="#dpgw-v1-naughty" i]) {
+    --tlcc-dpgw-badge: var(--tlcc-giveaway-prefix) "NAUGHTY";
+    --tlcc-dpgw-color: var(--tlcc-naughty);
+    --tlcc-dpgw-strength: 8%;
+    --tlcc-dpgw-edge: 3px;
+}
+
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content a[href$="#dpgw-v1-pool-paid" i]) {
+    --tlcc-dpgw-badge: var(--tlcc-giveaway-prefix) "BON POOL";
+    --tlcc-dpgw-color: var(--tlcc-green);
+    --tlcc-dpgw-strength: 9%;
+    --tlcc-dpgw-edge: 4px;
+}
+
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content a[href$="#dpgw-v1-taxes-paid" i]) {
+    --tlcc-dpgw-badge: var(--tlcc-giveaway-prefix) "TAXES";
+    --tlcc-dpgw-color: var(--tlcc-rigged);
+    --tlcc-dpgw-strength: 11%;
+    --tlcc-dpgw-edge: 4px;
+}
+
+/* Shared authoritative card treatment. Highlight keeps The Lounge's native fill. */
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content a[href*="darkpeers.org/#dpgw-v1-" i]) {
+    background: color-mix(in srgb, var(--tlcc-dpgw-color) var(--tlcc-dpgw-strength, 7%), transparent);
+    box-shadow: inset var(--tlcc-dpgw-edge, 3px) 0 0 var(--tlcc-dpgw-color);
+    border-radius: 5px;
+}
+
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])
+.from .user::after {
+    content: var(--tlcc-dpgw-badge);
+    color: var(--tlcc-dpgw-color);
+    border-color: color-mix(in srgb, var(--tlcc-dpgw-color) 58%, transparent);
+    border-style: solid;
+    background: color-mix(in srgb, var(--tlcc-dpgw-color) 11%, transparent);
+}
+
+
+/* ============================================================
+   19B. LEGACY GIVEAWAY FALLBACKS
+   Only reached when the message has NO Maghuro #dpgw-v1-* marker.
+   ============================================================ */
+
+/* ============================================================
+   19. GIVEAWAY MESSAGE CLASSIFICATION
    ============================================================
 
    The giveaway userscript runs on the DarkPeers website. The DP
@@ -985,7 +1140,7 @@ body:has(
    Original BBCode colours do not survive, but The Lounge renders
    emoji as structured .emoji spans that CSS can still inspect.
 
-   Confidence model:
+   Compatibility model:\n     - Maghuro #dpgw-v1-* markers are handled authoritatively above.\n     - This legacy block is evaluated only for unmarked messages.\n\n   Confidence model:
      - REQUEST / BON POOL are structural link-based classifications
        handled earlier in this file. They take precedence.
      - Giveaway-specific emoji signatures use a dashed GIVEAWAY ·
@@ -1026,7 +1181,7 @@ body:has(
 /* MAIN GIVEAWAY ANNOUNCEMENT / REMINDER - 🎁 ... ✨ ... ✨ */
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label="Emoji: wrapped gift"] ~ .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]) {
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label="Emoji: wrapped gift"] ~ .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]) {
     background:
         color-mix(in srgb, var(--tlcc-gold) 10%, transparent);
     box-shadow:
@@ -1037,7 +1192,7 @@ body:has(
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label="Emoji: wrapped gift"] ~ .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"])
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label="Emoji: wrapped gift"] ~ .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"])
 .from .user::after {
     content: "GIVEAWAY";
     color: var(--tlcc-gold);
@@ -1049,7 +1204,7 @@ body:has(
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label="Emoji: wrapped gift"] ~ .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"])
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label="Emoji: wrapped gift"] ~ .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"])
 .content .emoji[aria-label="Emoji: wrapped gift"] {
     font-size: 1.12em;
 }
@@ -1060,7 +1215,7 @@ body:has(
    this signature. It remains dashed because one ✨ is heuristic. */
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):not(:has(.content .emoji[aria-label="Emoji: wrapped gift"])):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"])) {
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):not(:has(.content .emoji[aria-label="Emoji: wrapped gift"])):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"])) {
     background:
         color-mix(in srgb, var(--tlcc-gold) 5%, transparent);
     box-shadow:
@@ -1069,7 +1224,7 @@ body:has(
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(:has(.content .emoji[aria-label="Emoji: wrapped gift"])):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]))
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(:has(.content .emoji[aria-label="Emoji: wrapped gift"])):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]))
 .from .user::after {
     content: var(--tlcc-giveaway-prefix) "SPONSORS";
     color: var(--tlcc-gold);
@@ -1103,13 +1258,13 @@ body:has(
 
 /* Semantic classification: highlighted or not. */
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label="Emoji: wrapped gift"]):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"])) {
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label="Emoji: wrapped gift"]):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"])) {
     --tlcc-bridge-badge: "GIVEAWAY";
 }
 
 /* Match the normal GIVEAWAY badge exactly, even when the message is highlighted. */
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label="Emoji: wrapped gift"]):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]))
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label="Emoji: wrapped gift"]):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]))
 .from .user::after {
     content: "GIVEAWAY";
     color: var(--tlcc-gold);
@@ -1122,7 +1277,7 @@ body:has(
 
 /* Decoration only: preserve native highlight treatment. */
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label="Emoji: wrapped gift"]):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"])) {
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label="Emoji: wrapped gift"]):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"])) {
     background:
         color-mix(in srgb, var(--tlcc-gold) 10%, transparent);
     box-shadow:
@@ -1142,8 +1297,8 @@ body:has(
    the split-start signature. */
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label="Emoji: wrapped gift"]):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]))
-+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(:has(.content .emoji[aria-label="Emoji: wrapped gift"])):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"])) {
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label="Emoji: wrapped gift"]):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]))
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(:has(.content .emoji[aria-label="Emoji: wrapped gift"])):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"])) {
     --tlcc-bridge-badge: "GIVEAWAY";
     background:
         color-mix(in srgb, var(--tlcc-gold) 10%, transparent);
@@ -1155,8 +1310,8 @@ body:has(
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label="Emoji: wrapped gift"]):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]))
-+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(:has(.content .emoji[aria-label="Emoji: wrapped gift"])):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]))
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label="Emoji: wrapped gift"]):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]))
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(:has(.content .emoji[aria-label="Emoji: wrapped gift"])):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]))
 .from .user::after {
     content: "GIVEAWAY";
     color: var(--tlcc-gold);
@@ -1176,7 +1331,7 @@ body:has(
    signature is specific enough to classify without reading text. */
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):not(:has(.content .emoji[aria-label="Emoji: wrapped gift"])):has(.content .emoji[aria-label="Emoji: orange heart"]):has(.content .emoji[aria-label="Emoji: dizzy"]) {
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):not(:has(.content .emoji[aria-label="Emoji: wrapped gift"])):has(.content .emoji[aria-label="Emoji: orange heart"]):has(.content .emoji[aria-label="Emoji: dizzy"]) {
     background:
         color-mix(in srgb, var(--tlcc-gold) 5%, transparent);
     box-shadow:
@@ -1185,7 +1340,7 @@ body:has(
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(:has(.content .emoji[aria-label="Emoji: wrapped gift"])):has(.content .emoji[aria-label="Emoji: orange heart"]):has(.content .emoji[aria-label="Emoji: dizzy"])
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(:has(.content .emoji[aria-label="Emoji: wrapped gift"])):has(.content .emoji[aria-label="Emoji: orange heart"]):has(.content .emoji[aria-label="Emoji: dizzy"])
 .from .user::after {
     content: var(--tlcc-giveaway-prefix) "SPONSORS";
     color: var(--tlcc-gold);
@@ -1200,7 +1355,7 @@ body:has(
 /* ENTRIES LIST - 📋 */
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="clipboard" i]) {
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="clipboard" i]) {
     background:
         color-mix(in srgb, var(--tlcc-cyan) 5%, transparent);
     box-shadow:
@@ -1209,7 +1364,7 @@ body:has(
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="clipboard" i])
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="clipboard" i])
 .from .user::after {
     content: var(--tlcc-giveaway-prefix) "ENTRIES";
     color: var(--tlcc-cyan);
@@ -1228,8 +1383,8 @@ body:has(
    Inherit ENTRIES only for that adjacent marker-free DP fragment. */
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="clipboard" i])
-+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href])):not(:has(.content .emoji)) {
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):has(.content .emoji[aria-label*="clipboard" i])
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a[href])):not(:has(.content .emoji)) {
     background:
         color-mix(in srgb, var(--tlcc-cyan) 5%, transparent);
     box-shadow:
@@ -1238,8 +1393,8 @@ body:has(
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="clipboard" i])
-+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href])):not(:has(.content .emoji))
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):has(.content .emoji[aria-label*="clipboard" i])
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a[href])):not(:has(.content .emoji))
 .from .user::after {
     content: var(--tlcc-giveaway-prefix) "ENTRIES";
     color: var(--tlcc-cyan);
@@ -1254,7 +1409,7 @@ body:has(
 /* GIVEAWAY STATS - 📊 */
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="bar chart" i]) {
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="bar chart" i]) {
     background:
         color-mix(in srgb, var(--tlcc-cyan) 5%, transparent);
     box-shadow:
@@ -1263,7 +1418,7 @@ body:has(
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="bar chart" i])
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="bar chart" i])
 .from .user::after {
     content: var(--tlcc-giveaway-prefix) "STATS";
     color: var(--tlcc-cyan);
@@ -1288,7 +1443,7 @@ body:has(
    ============================================================ */
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):is(
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):is(
     :has(.content .emoji[aria-label*="money bag" i]),
     :has(.content .emoji[aria-label*="chart increasing" i]),
     :has(.content .emoji:is([aria-label*="crossed-out eyes" i], [aria-label*="dizzy face" i])),
@@ -1302,7 +1457,7 @@ body:has(
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):is(
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):is(
     :has(.content .emoji[aria-label*="money bag" i]),
     :has(.content .emoji[aria-label*="chart increasing" i]),
     :has(.content .emoji:is([aria-label*="crossed-out eyes" i], [aria-label*="dizzy face" i])),
@@ -1331,13 +1486,13 @@ body:has(
    or emojis on the continuation. */
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:is(
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):is(
     :has(.content .emoji[aria-label*="money bag" i]),
     :has(.content .emoji[aria-label*="chart increasing" i]),
     :has(.content .emoji:is([aria-label*="crossed-out eyes" i], [aria-label*="dizzy face" i])),
     :has(.content .emoji[aria-label*="money with wings" i])
 )
-+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href])):not(:has(.content .emoji)) {
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a[href])):not(:has(.content .emoji)) {
     background:
         color-mix(in srgb, var(--tlcc-cyan) 5%, transparent);
     box-shadow:
@@ -1346,13 +1501,13 @@ body:has(
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:is(
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):is(
     :has(.content .emoji[aria-label*="money bag" i]),
     :has(.content .emoji[aria-label*="chart increasing" i]),
     :has(.content .emoji:is([aria-label*="crossed-out eyes" i], [aria-label*="dizzy face" i])),
     :has(.content .emoji[aria-label*="money with wings" i])
 )
-+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href])):not(:has(.content .emoji))
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a[href])):not(:has(.content .emoji))
 .from .user::after {
     content: var(--tlcc-giveaway-prefix) "STATS";
     color: var(--tlcc-cyan);
@@ -1367,7 +1522,7 @@ body:has(
 /* GIVEAWAY TIME - ⏳ */
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="hourglass" i]) {
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="hourglass" i]) {
     background:
         color-mix(in srgb, var(--tlcc-green) 5%, transparent);
     box-shadow:
@@ -1376,7 +1531,7 @@ body:has(
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="hourglass" i])
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="hourglass" i])
 .from .user::after {
     content: var(--tlcc-giveaway-prefix) "TIME";
     color: var(--tlcc-green);
@@ -1395,15 +1550,15 @@ body:has(
    after a warning/trophy message. */
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="partying" i]):is(
-    :has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="warning" i]),
-    :has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="trophy" i])
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="partying" i]):is(
+    :has(+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])) .content .emoji[aria-label*="warning" i]),
+    :has(+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])) .content .emoji[aria-label*="trophy" i])
 ),
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:is(
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):is(
     :has(.content .emoji[aria-label*="warning" i]),
     :has(.content .emoji[aria-label*="trophy" i])
-) + .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="partying" i]) {
+) + .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="partying" i]) {
     background:
         color-mix(in srgb, var(--tlcc-green) 7%, transparent);
     box-shadow:
@@ -1412,16 +1567,16 @@ body:has(
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="partying" i]):is(
-    :has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="warning" i]),
-    :has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="trophy" i])
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="partying" i]):is(
+    :has(+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])) .content .emoji[aria-label*="warning" i]),
+    :has(+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])) .content .emoji[aria-label*="trophy" i])
 )
 .from .user::after,
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:is(
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):is(
     :has(.content .emoji[aria-label*="warning" i]),
     :has(.content .emoji[aria-label*="trophy" i])
-) + .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="partying" i])
+) + .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="partying" i])
 .from .user::after {
     content: var(--tlcc-giveaway-prefix) "SPONSORS";
     color: var(--tlcc-green);
@@ -1440,7 +1595,7 @@ body:has(
    fallback and promote only when stronger context survives. */
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="trophy" i]) {
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="trophy" i]) {
     background:
         color-mix(in srgb, var(--tlcc-gold) 12%, transparent);
     box-shadow:
@@ -1450,7 +1605,7 @@ body:has(
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="trophy" i])
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="trophy" i])
 .from .user::after {
     content: var(--tlcc-giveaway-prefix) "WINNERS";
     color: var(--tlcc-gold);
@@ -1472,20 +1627,20 @@ body:has(
    because sendMessage() is asynchronous. */
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="trophy" i]):is(
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="trophy" i]):is(
     :has(.content .emoji[aria-label*="direct hit" i]),
     :has(.content .emoji[aria-label*="medal" i]),
     :has(.content .emoji[aria-label*="eyes" i]),
-    :has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="warning" i]),
-    :has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="partying" i])
+    :has(+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])) .content .emoji[aria-label*="warning" i]),
+    :has(+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])) .content .emoji[aria-label*="partying" i])
 )
 .from .user::after,
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:is(
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):is(
     :has(.content .emoji[aria-label*="warning" i]),
     :has(.content .emoji[aria-label*="partying" i])
 )
-+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="trophy" i])
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="trophy" i])
 .from .user::after {
     content: var(--tlcc-giveaway-prefix) "RESULT";
 }
@@ -1507,21 +1662,21 @@ body:has(
 
 /* Rich result signature -> marker-free continuation. */
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="trophy" i]):is(
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):has(.content .emoji[aria-label*="trophy" i]):is(
     :has(.content .emoji[aria-label*="direct hit" i]),
     :has(.content .emoji[aria-label*="medal" i]),
     :has(.content .emoji[aria-label*="eyes" i])
 )
-+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href])):not(:has(.content .emoji)),
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a[href])):not(:has(.content .emoji)),
 
 /* Sponsor/tie marker -> trophy result -> marker-free continuation. */
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:is(
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):is(
     :has(.content .emoji[aria-label*="warning" i]),
     :has(.content .emoji[aria-label*="partying" i])
 )
-+ .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="trophy" i])
-+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href])):not(:has(.content .emoji)) {
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):has(.content .emoji[aria-label*="trophy" i])
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a[href])):not(:has(.content .emoji)) {
     background:
         color-mix(in srgb, var(--tlcc-gold) 12%, transparent);
     box-shadow:
@@ -1533,21 +1688,21 @@ body:has(
 
 /* Apply RESULT badge to the inherited continuation. */
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="trophy" i]):is(
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):has(.content .emoji[aria-label*="trophy" i]):is(
     :has(.content .emoji[aria-label*="direct hit" i]),
     :has(.content .emoji[aria-label*="medal" i]),
     :has(.content .emoji[aria-label*="eyes" i])
 )
-+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href])):not(:has(.content .emoji))
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a[href])):not(:has(.content .emoji))
 .from .user::after,
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:is(
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):is(
     :has(.content .emoji[aria-label*="warning" i]),
     :has(.content .emoji[aria-label*="partying" i])
 )
-+ .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="trophy" i])
-+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href])):not(:has(.content .emoji))
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):has(.content .emoji[aria-label*="trophy" i])
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a[href])):not(:has(.content .emoji))
 .from .user::after {
     content: var(--tlcc-giveaway-prefix) "RESULT";
     color: var(--tlcc-gold);
@@ -1566,10 +1721,10 @@ body:has(
    before OR after it. */
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="warning" i]):has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="trophy" i]),
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="warning" i]):has(+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])) .content .emoji[aria-label*="trophy" i]),
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="trophy" i])
-+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="warning" i]) {
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):has(.content .emoji[aria-label*="trophy" i])
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="warning" i]) {
     background:
         color-mix(in srgb, var(--tlcc-warning) 8%, transparent);
     box-shadow:
@@ -1578,11 +1733,11 @@ body:has(
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="warning" i]):has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="trophy" i])
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="warning" i]):has(+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])) .content .emoji[aria-label*="trophy" i])
 .from .user::after,
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="trophy" i])
-+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="warning" i])
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):has(.content .emoji[aria-label*="trophy" i])
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="warning" i])
 .from .user::after {
     content: var(--tlcc-giveaway-prefix) "TIE";
     color: var(--tlcc-warning);
@@ -1599,9 +1754,9 @@ body:has(
    also appends it to rigged entry confirmations. */
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="horns" i]),
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="horns" i]),
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label="Emoji: wrapped gift"] ~ .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]):has(.content .emoji[aria-label*="winking face" i]:last-child) {
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label="Emoji: wrapped gift"] ~ .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]):has(.content .emoji[aria-label*="winking face" i]:last-child) {
     background:
         color-mix(in srgb, var(--tlcc-rigged) 9%, transparent);
     box-shadow:
@@ -1612,10 +1767,10 @@ body:has(
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="horns" i])
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="horns" i])
 .from .user::after,
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label="Emoji: wrapped gift"] ~ .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]):has(.content .emoji[aria-label*="winking face" i]:last-child)
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label="Emoji: wrapped gift"] ~ .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]):has(.content .emoji[aria-label*="winking face" i]:last-child)
 .from .user::after {
     content: var(--tlcc-giveaway-prefix) "RIGGED";
     color: var(--tlcc-rigged);
@@ -1630,7 +1785,7 @@ body:has(
 /* RIGGED MODE DISABLED - 😒 */
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="unamused" i]) {
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="unamused" i]) {
     background:
         color-mix(in srgb, var(--tlcc-green) 6%, transparent);
     box-shadow:
@@ -1639,7 +1794,7 @@ body:has(
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="unamused" i])
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="unamused" i])
 .from .user::after {
     content: var(--tlcc-giveaway-prefix) "UNRIGGED";
     color: var(--tlcc-green);
@@ -1654,7 +1809,7 @@ body:has(
 /* NAUGHTY-LIST ADD - 👮 */
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="police officer" i]) {
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="police officer" i]) {
     background:
         color-mix(in srgb, var(--tlcc-naughty) 6%, transparent);
     box-shadow:
@@ -1663,7 +1818,7 @@ body:has(
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="police officer" i])
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="police officer" i])
 .from .user::after {
     content: var(--tlcc-giveaway-prefix) "NAUGHTY";
     color: var(--tlcc-naughty);
@@ -1678,7 +1833,7 @@ body:has(
 /* REJECTED / UNAUTHORISED - 🚫 / 🛑 / 🚨 */
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):is(:has(.content .emoji[aria-label*="prohibited" i]),:has(.content .emoji[aria-label*="stop sign" i]),:has(.content .emoji[aria-label*="police car light" i])
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):is(:has(.content .emoji[aria-label*="prohibited" i]),:has(.content .emoji[aria-label*="stop sign" i]),:has(.content .emoji[aria-label*="police car light" i])
 ) {
     background:
         color-mix(in srgb, var(--tlcc-alert) 7%, transparent);
@@ -1688,7 +1843,7 @@ body:has(
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):is(:has(.content .emoji[aria-label*="prohibited" i]),:has(.content .emoji[aria-label*="stop sign" i]),:has(.content .emoji[aria-label*="police car light" i])
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):is(:has(.content .emoji[aria-label*="prohibited" i]),:has(.content .emoji[aria-label*="stop sign" i]),:has(.content .emoji[aria-label*="police car light" i])
 )
 .from .user::after {
     content: var(--tlcc-giveaway-prefix) "REJECTED";
@@ -2007,5 +2162,5 @@ body:has(
 
 /* TLCC release version override. Keep this tiny file easy to update per release. */
 :root {
-    --tlcc-version: "v0.5.52";
+    --tlcc-version: "v0.5.53";
 }
