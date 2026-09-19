@@ -1011,7 +1011,7 @@ body:has(
     --tlcc-dpgw-badge: "GIVEAWAY";
     --tlcc-dpgw-color: var(--tlcc-gold);
     --tlcc-dpgw-strength: 10%;
-    --tlcc-dpgw-edge: 4px;
+    --tlcc-dpgw-edge: 3px;
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
@@ -1019,7 +1019,7 @@ body:has(
     --tlcc-dpgw-badge: var(--tlcc-giveaway-prefix) "BON POOL";
     --tlcc-dpgw-color: var(--tlcc-green);
     --tlcc-dpgw-strength: 10%;
-    --tlcc-dpgw-edge: 4px;
+    --tlcc-dpgw-edge: 3px;
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
@@ -1027,7 +1027,7 @@ body:has(
     --tlcc-dpgw-badge: var(--tlcc-giveaway-prefix) "TAXES";
     --tlcc-dpgw-color: var(--tlcc-rigged);
     --tlcc-dpgw-strength: 11%;
-    --tlcc-dpgw-edge: 4px;
+    --tlcc-dpgw-edge: 3px;
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
@@ -1075,7 +1075,7 @@ body:has(
     --tlcc-dpgw-badge: var(--tlcc-giveaway-prefix) "RESULT";
     --tlcc-dpgw-color: var(--tlcc-gold);
     --tlcc-dpgw-strength: 13%;
-    --tlcc-dpgw-edge: 4px;
+    --tlcc-dpgw-edge: 3px;
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
@@ -1083,7 +1083,7 @@ body:has(
     --tlcc-dpgw-badge: var(--tlcc-giveaway-prefix) "TIE";
     --tlcc-dpgw-color: var(--tlcc-warning);
     --tlcc-dpgw-strength: 9%;
-    --tlcc-dpgw-edge: 4px;
+    --tlcc-dpgw-edge: 3px;
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
@@ -1091,7 +1091,7 @@ body:has(
     --tlcc-dpgw-badge: var(--tlcc-giveaway-prefix) "RIGGED";
     --tlcc-dpgw-color: var(--tlcc-rigged);
     --tlcc-dpgw-strength: 9%;
-    --tlcc-dpgw-edge: 4px;
+    --tlcc-dpgw-edge: 3px;
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
@@ -1115,7 +1115,7 @@ body:has(
     --tlcc-dpgw-badge: var(--tlcc-giveaway-prefix) "BON POOL";
     --tlcc-dpgw-color: var(--tlcc-green);
     --tlcc-dpgw-strength: 9%;
-    --tlcc-dpgw-edge: 4px;
+    --tlcc-dpgw-edge: 3px;
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
@@ -1123,7 +1123,7 @@ body:has(
     --tlcc-dpgw-badge: var(--tlcc-giveaway-prefix) "TAXES";
     --tlcc-dpgw-color: var(--tlcc-rigged);
     --tlcc-dpgw-strength: 11%;
-    --tlcc-dpgw-edge: 4px;
+    --tlcc-dpgw-edge: 3px;
 }
 
 /* Shared authoritative card treatment. Highlight keeps The Lounge's native fill. */
@@ -1140,7 +1140,7 @@ body:has(
     content: var(--tlcc-dpgw-badge);
     color: var(--tlcc-dpgw-color);
     border-color: color-mix(in srgb, var(--tlcc-dpgw-color) 58%, transparent);
-    border-style: solid;
+    border-style: solid !important;
     background: color-mix(in srgb, var(--tlcc-dpgw-color) 11%, transparent);
 }
 
@@ -1204,9 +1204,7 @@ body:has(
     background:
         color-mix(in srgb, var(--tlcc-gold) 10%, transparent);
     box-shadow:
-        inset 4px 0 0 var(--tlcc-gold),
-        inset 0 1px 0 color-mix(in srgb, var(--tlcc-gold) 30%, transparent),
-        inset 0 -1px 0 color-mix(in srgb, var(--tlcc-gold) 30%, transparent);
+        inset 3px 0 0 var(--tlcc-gold);
     border-radius: 5px;
 }
 
@@ -1217,7 +1215,7 @@ body:has(
     color: var(--tlcc-gold);
     border-color:
         color-mix(in srgb, var(--tlcc-gold) 60%, transparent);
-    border-style: dashed;
+    border-style: solid;
     background:
         color-mix(in srgb, var(--tlcc-gold) 12%, transparent);
 }
@@ -1231,14 +1229,15 @@ body:has(
 
 /* SPONSOR UPDATE - one ✨, without 🎁
    Live bridge testing confirms the userscript's sponsor digest keeps
-   this signature. It remains dashed because one ✨ is heuristic. */
+   this signature. Classification remains heuristic, but its visual
+   treatment is intentionally the same as authoritative giveaway events. */
 
 #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):not(:has(.content .emoji[aria-label="Emoji: wrapped gift"])):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"])) {
     background:
         color-mix(in srgb, var(--tlcc-gold) 5%, transparent);
     box-shadow:
-        inset 2px 0 0 color-mix(in srgb, var(--tlcc-gold) 70%, transparent);
+        inset 3px 0 0 color-mix(in srgb, var(--tlcc-gold) 70%, transparent);
     border-radius: 5px;
 }
 
@@ -1249,7 +1248,7 @@ body:has(
     color: var(--tlcc-gold);
     border-color:
         color-mix(in srgb, var(--tlcc-gold) 45%, transparent);
-    border-style: dashed;
+    border-style: solid;
     background:
         color-mix(in srgb, var(--tlcc-gold) 8%, transparent);
 }
@@ -1289,7 +1288,7 @@ body:has(
     color: var(--tlcc-gold);
     border-color:
         color-mix(in srgb, var(--tlcc-gold) 60%, transparent);
-    border-style: dashed;
+    border-style: solid;
     background:
         color-mix(in srgb, var(--tlcc-gold) 12%, transparent);
 }
@@ -1300,9 +1299,7 @@ body:has(
     background:
         color-mix(in srgb, var(--tlcc-gold) 10%, transparent);
     box-shadow:
-        inset 4px 0 0 var(--tlcc-gold),
-        inset 0 1px 0 color-mix(in srgb, var(--tlcc-gold) 30%, transparent),
-        inset 0 -1px 0 color-mix(in srgb, var(--tlcc-gold) 30%, transparent);
+        inset 3px 0 0 var(--tlcc-gold);
     border-radius: 5px;
 }
 
@@ -1322,9 +1319,7 @@ body:has(
     background:
         color-mix(in srgb, var(--tlcc-gold) 10%, transparent);
     box-shadow:
-        inset 4px 0 0 var(--tlcc-gold),
-        inset 0 1px 0 color-mix(in srgb, var(--tlcc-gold) 30%, transparent),
-        inset 0 -1px 0 color-mix(in srgb, var(--tlcc-gold) 30%, transparent);
+        inset 3px 0 0 var(--tlcc-gold);
     border-radius: 5px;
 }
 
@@ -1336,7 +1331,7 @@ body:has(
     color: var(--tlcc-gold);
     border-color:
         color-mix(in srgb, var(--tlcc-gold) 60%, transparent);
-    border-style: dashed;
+    border-style: solid;
     background:
         color-mix(in srgb, var(--tlcc-gold) 12%, transparent);
 }
@@ -1354,7 +1349,7 @@ body:has(
     background:
         color-mix(in srgb, var(--tlcc-gold) 5%, transparent);
     box-shadow:
-        inset 2px 0 0 color-mix(in srgb, var(--tlcc-gold) 70%, transparent);
+        inset 3px 0 0 color-mix(in srgb, var(--tlcc-gold) 70%, transparent);
     border-radius: 5px;
 }
 
@@ -1365,7 +1360,7 @@ body:has(
     color: var(--tlcc-gold);
     border-color:
         color-mix(in srgb, var(--tlcc-gold) 45%, transparent);
-    border-style: dashed;
+    border-style: solid;
     background:
         color-mix(in srgb, var(--tlcc-gold) 8%, transparent);
 }
@@ -1378,7 +1373,7 @@ body:has(
     background:
         color-mix(in srgb, var(--tlcc-cyan) 5%, transparent);
     box-shadow:
-        inset 2px 0 0 color-mix(in srgb, var(--tlcc-cyan) 72%, transparent);
+        inset 3px 0 0 color-mix(in srgb, var(--tlcc-cyan) 72%, transparent);
     border-radius: 5px;
 }
 
@@ -1389,7 +1384,7 @@ body:has(
     color: var(--tlcc-cyan);
     border-color:
         color-mix(in srgb, var(--tlcc-cyan) 50%, transparent);
-    border-style: dashed;
+    border-style: solid;
     background:
         color-mix(in srgb, var(--tlcc-cyan) 9%, transparent);
 }
@@ -1407,7 +1402,7 @@ body:has(
     background:
         color-mix(in srgb, var(--tlcc-cyan) 5%, transparent);
     box-shadow:
-        inset 2px 0 0 color-mix(in srgb, var(--tlcc-cyan) 72%, transparent);
+        inset 3px 0 0 color-mix(in srgb, var(--tlcc-cyan) 72%, transparent);
     border-radius: 5px;
 }
 
@@ -1419,7 +1414,7 @@ body:has(
     color: var(--tlcc-cyan);
     border-color:
         color-mix(in srgb, var(--tlcc-cyan) 50%, transparent);
-    border-style: dashed;
+    border-style: solid;
     background:
         color-mix(in srgb, var(--tlcc-cyan) 9%, transparent);
 }
@@ -1432,7 +1427,7 @@ body:has(
     background:
         color-mix(in srgb, var(--tlcc-cyan) 5%, transparent);
     box-shadow:
-        inset 2px 0 0 color-mix(in srgb, var(--tlcc-cyan) 72%, transparent);
+        inset 3px 0 0 color-mix(in srgb, var(--tlcc-cyan) 72%, transparent);
     border-radius: 5px;
 }
 
@@ -1443,7 +1438,7 @@ body:has(
     color: var(--tlcc-cyan);
     border-color:
         color-mix(in srgb, var(--tlcc-cyan) 50%, transparent);
-    border-style: dashed;
+    border-style: solid;
     background:
         color-mix(in srgb, var(--tlcc-cyan) 9%, transparent);
 }
@@ -1471,7 +1466,7 @@ body:has(
     background:
         color-mix(in srgb, var(--tlcc-cyan) 5%, transparent);
     box-shadow:
-        inset 2px 0 0 color-mix(in srgb, var(--tlcc-cyan) 72%, transparent);
+        inset 3px 0 0 color-mix(in srgb, var(--tlcc-cyan) 72%, transparent);
     border-radius: 5px;
 }
 
@@ -1487,7 +1482,7 @@ body:has(
     color: var(--tlcc-cyan);
     border-color:
         color-mix(in srgb, var(--tlcc-cyan) 50%, transparent);
-    border-style: dashed;
+    border-style: solid;
     background:
         color-mix(in srgb, var(--tlcc-cyan) 9%, transparent);
 }
@@ -1515,7 +1510,7 @@ body:has(
     background:
         color-mix(in srgb, var(--tlcc-cyan) 5%, transparent);
     box-shadow:
-        inset 2px 0 0 color-mix(in srgb, var(--tlcc-cyan) 72%, transparent);
+        inset 3px 0 0 color-mix(in srgb, var(--tlcc-cyan) 72%, transparent);
     border-radius: 5px;
 }
 
@@ -1532,7 +1527,7 @@ body:has(
     color: var(--tlcc-cyan);
     border-color:
         color-mix(in srgb, var(--tlcc-cyan) 50%, transparent);
-    border-style: dashed;
+    border-style: solid;
     background:
         color-mix(in srgb, var(--tlcc-cyan) 9%, transparent);
 }
@@ -1545,7 +1540,7 @@ body:has(
     background:
         color-mix(in srgb, var(--tlcc-green) 5%, transparent);
     box-shadow:
-        inset 2px 0 0 color-mix(in srgb, var(--tlcc-green) 72%, transparent);
+        inset 3px 0 0 color-mix(in srgb, var(--tlcc-green) 72%, transparent);
     border-radius: 5px;
 }
 
@@ -1556,7 +1551,7 @@ body:has(
     color: var(--tlcc-green);
     border-color:
         color-mix(in srgb, var(--tlcc-green) 50%, transparent);
-    border-style: dashed;
+    border-style: solid;
     background:
         color-mix(in srgb, var(--tlcc-green) 9%, transparent);
 }
@@ -1601,7 +1596,7 @@ body:has(
     color: var(--tlcc-green);
     border-color:
         color-mix(in srgb, var(--tlcc-green) 55%, transparent);
-    border-style: dashed;
+    border-style: solid;
     background:
         color-mix(in srgb, var(--tlcc-green) 10%, transparent);
 }
@@ -1618,8 +1613,7 @@ body:has(
     background:
         color-mix(in srgb, var(--tlcc-gold) 12%, transparent);
     box-shadow:
-        inset 4px 0 0 var(--tlcc-gold),
-        inset 0 0 0 1px color-mix(in srgb, var(--tlcc-gold) 28%, transparent);
+        inset 3px 0 0 var(--tlcc-gold);
     border-radius: 5px;
 }
 
@@ -1630,7 +1624,7 @@ body:has(
     color: var(--tlcc-gold);
     border-color:
         color-mix(in srgb, var(--tlcc-gold) 65%, transparent);
-    border-style: dashed;
+    border-style: solid;
     background:
         color-mix(in srgb, var(--tlcc-gold) 14%, transparent);
 }
@@ -1699,8 +1693,7 @@ body:has(
     background:
         color-mix(in srgb, var(--tlcc-gold) 12%, transparent);
     box-shadow:
-        inset 4px 0 0 var(--tlcc-gold),
-        inset 0 0 0 1px color-mix(in srgb, var(--tlcc-gold) 28%, transparent);
+        inset 3px 0 0 var(--tlcc-gold);
     border-radius: 5px;
 }
 
@@ -1727,7 +1720,7 @@ body:has(
     color: var(--tlcc-gold);
     border-color:
         color-mix(in srgb, var(--tlcc-gold) 65%, transparent);
-    border-style: dashed;
+    border-style: solid;
     background:
         color-mix(in srgb, var(--tlcc-gold) 14%, transparent);
 }
@@ -1762,7 +1755,7 @@ body:has(
     color: var(--tlcc-warning);
     border-color:
         color-mix(in srgb, var(--tlcc-warning) 58%, transparent);
-    border-style: dashed;
+    border-style: solid;
     background:
         color-mix(in srgb, var(--tlcc-warning) 11%, transparent);
 }
@@ -1779,9 +1772,7 @@ body:has(
     background:
         color-mix(in srgb, var(--tlcc-rigged) 9%, transparent);
     box-shadow:
-        inset 4px 0 0 var(--tlcc-rigged),
-        inset 0 1px 0 color-mix(in srgb, var(--tlcc-rigged) 28%, transparent),
-        inset 0 -1px 0 color-mix(in srgb, var(--tlcc-rigged) 28%, transparent);
+        inset 3px 0 0 var(--tlcc-rigged);
     border-radius: 5px;
 }
 
@@ -1795,7 +1786,7 @@ body:has(
     color: var(--tlcc-rigged);
     border-color:
         color-mix(in srgb, var(--tlcc-rigged) 65%, transparent);
-    border-style: dashed;
+    border-style: solid;
     background:
         color-mix(in srgb, var(--tlcc-rigged) 12%, transparent);
 }
@@ -1819,7 +1810,7 @@ body:has(
     color: var(--tlcc-green);
     border-color:
         color-mix(in srgb, var(--tlcc-green) 55%, transparent);
-    border-style: dashed;
+    border-style: solid;
     background:
         color-mix(in srgb, var(--tlcc-green) 10%, transparent);
 }
@@ -1843,7 +1834,7 @@ body:has(
     color: var(--tlcc-naughty);
     border-color:
         color-mix(in srgb, var(--tlcc-naughty) 55%, transparent);
-    border-style: dashed;
+    border-style: solid;
     background:
         color-mix(in srgb, var(--tlcc-naughty) 10%, transparent);
 }
@@ -1869,7 +1860,7 @@ body:has(
     color: var(--tlcc-alert);
     border-color:
         color-mix(in srgb, var(--tlcc-alert) 58%, transparent);
-    border-style: dashed;
+    border-style: solid;
     background:
         color-mix(in srgb, var(--tlcc-alert) 10%, transparent);
 }

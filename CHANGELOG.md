@@ -3,6 +3,18 @@
 All notable changes to **The Lounge Clean Chat** will be documented here.
 
 
+## v0.5.55 - 2026-09-19
+
+### Giveaway visual consistency
+
+- Unified all giveaway badges to a solid border. The old dashed-vs-solid distinction reflected heuristic vs structural detection, but was visually confusing now that Maghuro emits authoritative bridge markers.
+- Standardized giveaway cards on one visual grammar: a soft category-coloured background plus a 3px left accent bar.
+- Removed the extra top/bottom and full-outline shadows previously used by some giveaway states such as main announcements, RESULT and RIGGED; category colour and badge text now carry the semantic distinction.
+- Kept all existing legacy Nums/TRAVIS/third-party detection rules and Maghuro authoritative markers; this release changes presentation, not compatibility or classification.
+- Old scrollback produced by userscript v1.2.12 may still contain orphan `()` around a hidden marker URL because those parentheses were emitted as bridge text. New v1.2.14 messages avoid generating that bridge shape.
+
+
+
 ## v0.5.54 - 2026-09-19
 
 ### Giveaway bridge
