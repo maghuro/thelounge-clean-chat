@@ -3,6 +3,17 @@
 All notable changes to **The Lounge Clean Chat** will be documented here.
 
 
+## v0.5.59 - 2026-09-19
+
+### Desktop density and sender-column geometry
+
+- Fixed clipping of long natural-width badges such as `GIVEAWAY · SPONSORS` by widening the official DarkPeers sender column to 10rem and reserving 10.5rem of left layout space.
+- Badges remain intrinsic-width and right-aligned; no fixed badge width is used.
+- Reduced desktop message-cell vertical padding from 4px to 2px, restoring a denser scrollback without touching mobile spacing.
+- Added authoritative RESULT continuation inheritance: if a marked `#dpgw-v1-result` fragment is immediately followed by an unmarked, link-free DP fragment, that `[2/2]` continuation inherits `GIVEAWAY · RESULT`. This covers the live rigged-mode result split observed in the first real giveaway.
+
+
+
 ## v0.5.58 - 2026-09-19
 
 ### Badge alignment and BONanza split messages

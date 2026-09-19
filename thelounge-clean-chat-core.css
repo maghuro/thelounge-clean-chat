@@ -159,8 +159,8 @@ body:has(
 
 @media (min-width: 480px) {
     #chat :is(.time, .from, .content) {
-        padding-top: 4px;
-        padding-bottom: 4px;
+        padding-top: 2px;
+        padding-bottom: 2px;
     }
 }
 
@@ -252,6 +252,18 @@ body:has(
    of the sender column. TNB bridged usernames deliberately retain their
    own left-to-right username + badge layout in the compatibility module. */
 @media (min-width: 480px) {
+    #chat-container[data-current-channel="#darkpeers" i] {
+        --window-left-padding: 10.5rem !important;
+    }
+
+    #chat-container[data-current-channel="#darkpeers" i]
+    .msg .from {
+        width: 10rem !important;
+        min-width: 10rem !important;
+        max-width: 10rem !important;
+        flex-basis: 10rem !important;
+    }
+
     #chat-container[data-current-channel="#darkpeers" i]
     .msg[data-type="message"][data-from="DP" i]:not([data-bridged="true"])
     .from {
@@ -263,6 +275,7 @@ body:has(
     .from .user {
         display: block;
         width: 100%;
+        overflow: visible;
         text-align: right;
     }
 }
@@ -1705,6 +1718,36 @@ body:has(
 + .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="trophy" i])
 .from .user::after {
     content: var(--tlcc-giveaway-prefix) "RESULT";
+}
+
+
+/* AUTHORITATIVE RESULT -> UNMARKED SPLIT CONTINUATION
+   Maghuro's marker is on the first fragment. A bridge split can leave [2/2]
+   without any dpgw marker while still containing ordinary emoji (for example
+   the final rigged-mode eyes). Inherit RESULT only for the immediate DP
+   message after an authoritative result and only when that continuation has
+   no surviving link of its own. */
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content a[href$="#dpgw-v1-result" i])
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a[href])) {
+    background:
+        color-mix(in srgb, var(--tlcc-gold) 12%, transparent);
+    box-shadow:
+        inset 3px 0 0 var(--tlcc-gold);
+    border-radius: 5px;
+}
+
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content a[href$="#dpgw-v1-result" i])
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a[href]))
+.from .user::after {
+    content: var(--tlcc-giveaway-prefix) "RESULT";
+    color: var(--tlcc-gold);
+    border-color:
+        color-mix(in srgb, var(--tlcc-gold) 65%, transparent);
+    border-style: solid;
+    background:
+        color-mix(in srgb, var(--tlcc-gold) 14%, transparent);
 }
 
 
