@@ -2022,10 +2022,10 @@ body:has(
    We deliberately use short structural sequences instead of plain
    message text:
 
-     🧠 immediately followed by ❓       -> START
-     🧠 + ❓                            -> QUESTION
-     ❓ + [optional answer] + ⏱         -> ANSWER / reveal
-     ⏱ immediately followed by 🏆 + 🥇 -> RESULT
+     🧠 immediately followed by ❓      -> START
+     ❓ ... nearby ⏱                    -> QUESTION
+     ❓ ... nearby ⏱                    -> ANSWER / reveal
+     ⏱ ... nearby 🏆 + 🥇              -> RESULT
 
    The RESULT rule is intentionally later than the giveaway trophy
    rules. Trivia also uses trophy + medal, which previously caused a
@@ -2058,10 +2058,22 @@ body:has(
 }
 
 
-/* TRIVIA · QUESTION - ❓ immediately after the proven 🧠 start. */
+/* TRIVIA · QUESTION - ❓
+   A question is confirmed by its nearby ⏱ reveal rather than only by
+   being the first message after 🧠. Multi-question games therefore keep
+   QUESTION on Q2/Q3/etc., even when ordinary chat/answers are interleaved.
+
+   Keep the window deliberately bounded: allow up to four ordinary message
+   rows between ❓ and ⏱. This is enough for live chat noise without turning
+   every later question-mark emoji in scrollback into trivia. */
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="brain" i])
-+ .msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content .emoji[aria-label*="question mark" i]) {
+.msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content .emoji[aria-label*="question mark" i]):is(
+    :has(+ .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])),
+    :has(+ .msg[data-type="message"] + .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])),
+    :has(+ .msg[data-type="message"] + .msg[data-type="message"] + .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])),
+    :has(+ .msg[data-type="message"] + .msg[data-type="message"] + .msg[data-type="message"] + .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])),
+    :has(+ .msg[data-type="message"] + .msg[data-type="message"] + .msg[data-type="message"] + .msg[data-type="message"] + .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i]))
+) {
     background:
         color-mix(in srgb, var(--tlcc-trivia) 6%, transparent);
     box-shadow:
@@ -2070,8 +2082,13 @@ body:has(
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="brain" i])
-+ .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="question mark" i])
+.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="question mark" i]):is(
+    :has(+ .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])),
+    :has(+ .msg[data-type="message"] + .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])),
+    :has(+ .msg[data-type="message"] + .msg[data-type="message"] + .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])),
+    :has(+ .msg[data-type="message"] + .msg[data-type="message"] + .msg[data-type="message"] + .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])),
+    :has(+ .msg[data-type="message"] + .msg[data-type="message"] + .msg[data-type="message"] + .msg[data-type="message"] + .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i]))
+)
 .from .user::after {
     content: var(--tlcc-trivia-prefix) "QUESTION";
     color: var(--tlcc-trivia);
@@ -2083,14 +2100,35 @@ body:has(
 }
 
 
-/* TRIVIA · ANSWER - ⏱ after the question, with either zero or one
-   intervening DP message (normally the player's A/B/C/D reply). */
+/* TRIVIA · ANSWER - ⏱
+   Mirror the same bounded round window in the opposite direction:
+   the reveal is ANSWER when it arrives up to four ordinary message rows
+   after a proven ❓ question. Intervening rows may be native IRC or bridge
+   messages; only the ❓ and ⏱ endpoints must come from DP. */
 #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="question mark" i])
 + .msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content .emoji[aria-label*="stopwatch" i]),
 #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="question mark" i])
-+ .msg[data-type="message"][data-from="DP" i]
++ .msg[data-type="message"]
++ .msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content .emoji[aria-label*="stopwatch" i]),
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="question mark" i])
++ .msg[data-type="message"]
++ .msg[data-type="message"]
++ .msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content .emoji[aria-label*="stopwatch" i]),
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="question mark" i])
++ .msg[data-type="message"]
++ .msg[data-type="message"]
++ .msg[data-type="message"]
++ .msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content .emoji[aria-label*="stopwatch" i]),
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="question mark" i])
++ .msg[data-type="message"]
++ .msg[data-type="message"]
++ .msg[data-type="message"]
++ .msg[data-type="message"]
 + .msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content .emoji[aria-label*="stopwatch" i]) {
     background:
         color-mix(in srgb, var(--tlcc-trivia) 6%, transparent);
@@ -2105,7 +2143,28 @@ body:has(
 .from .user::after,
 #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="question mark" i])
-+ .msg[data-type="message"][data-from="DP" i]
++ .msg[data-type="message"]
++ .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])
+.from .user::after,
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="question mark" i])
++ .msg[data-type="message"]
++ .msg[data-type="message"]
++ .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])
+.from .user::after,
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="question mark" i])
++ .msg[data-type="message"]
++ .msg[data-type="message"]
++ .msg[data-type="message"]
++ .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])
+.from .user::after,
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="question mark" i])
++ .msg[data-type="message"]
++ .msg[data-type="message"]
++ .msg[data-type="message"]
++ .msg[data-type="message"]
 + .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])
 .from .user::after {
     content: var(--tlcc-trivia-prefix) "ANSWER";
@@ -2118,10 +2177,27 @@ body:has(
 }
 
 
-/* TRIVIA · RESULT - 🏆 + medal immediately after a proven ⏱ reveal.
-   This overrides the giveaway trophy+medal RESULT heuristic. */
+/* TRIVIA · RESULT - 🏆 + medal after a proven ⏱ reveal.
+   Allow up to three ordinary message rows between the final reveal and
+   result so a late player/chat line cannot make the trophy fall back to
+   the giveaway RESULT heuristic. */
 #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])
++ .msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content .emoji[aria-label*="trophy" i]):has(.content .emoji[aria-label*="medal" i]),
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])
++ .msg[data-type="message"]
++ .msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content .emoji[aria-label*="trophy" i]):has(.content .emoji[aria-label*="medal" i]),
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])
++ .msg[data-type="message"]
++ .msg[data-type="message"]
++ .msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content .emoji[aria-label*="trophy" i]):has(.content .emoji[aria-label*="medal" i]),
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])
++ .msg[data-type="message"]
++ .msg[data-type="message"]
++ .msg[data-type="message"]
 + .msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content .emoji[aria-label*="trophy" i]):has(.content .emoji[aria-label*="medal" i]) {
     background:
         color-mix(in srgb, var(--tlcc-trivia) 9%, transparent);
@@ -2134,6 +2210,24 @@ body:has(
 #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])
 + .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="trophy" i]):has(.content .emoji[aria-label*="medal" i])
+.from .user::after,
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])
++ .msg[data-type="message"]
++ .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="trophy" i]):has(.content .emoji[aria-label*="medal" i])
+.from .user::after,
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])
++ .msg[data-type="message"]
++ .msg[data-type="message"]
++ .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="trophy" i]):has(.content .emoji[aria-label*="medal" i])
+.from .user::after,
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])
++ .msg[data-type="message"]
++ .msg[data-type="message"]
++ .msg[data-type="message"]
++ .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="trophy" i]):has(.content .emoji[aria-label*="medal" i])
 .from .user::after {
     content: var(--tlcc-trivia-prefix) "RESULT";
     color: var(--tlcc-trivia);
@@ -2143,7 +2237,6 @@ body:has(
     background:
         color-mix(in srgb, var(--tlcc-trivia) 12%, transparent);
 }
-
 
 
 /* TRIVIA · NO WINNER - 🦗
