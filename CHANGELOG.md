@@ -2,6 +2,20 @@
 
 All notable changes to **The Lounge Clean Chat** will be documented here.
 
+## v0.5.52 - 2026-09-19
+
+### Compatibility
+
+- Added first-class support for the stable final-result signature introduced by **DarkPeers BONanza Giveaway v1.2.2**: `🏆 + 🎯`.
+- A single-winner final result can now be classified honestly as `GIVEAWAY · RESULT` / `GW · RESULT` without depending on a tie, final sponsor message, medal, or Rigged Mode marker being adjacent.
+- Extended split-result continuation handling so marker-free bridge fragments inherit `RESULT` after the new trophy + direct-hit signature.
+- Documented the giveaway userscript's surviving emoji signatures as an explicit website → DP → IRC → The Lounge compatibility contract.
+
+### Notes
+
+- The v1.2.2 userscript may display BONanza-fund deductions as 🧾 **Rigging taxes** while Rigged Mode is active. This is cosmetic wording only: the destination and verified fund transfer remain unchanged.
+- TLCC continues to classify structurally from surviving emoji/links rather than from flattened message text.
+
 ## v0.5.5 - 2026-09-18
 
 ### Performance
