@@ -2,6 +2,18 @@
 
 All notable changes to **The Lounge Clean Chat** will be documented here.
 
+
+## v0.5.54 - 2026-09-19
+
+### Giveaway bridge
+
+- Made Maghuro `#dpgw-v1-*` anchors machine-only in The Lounge: the structural link remains available to CSS selectors but is hidden from the rendered message.
+- Added authoritative `start-pool` and `start-taxes` markers so starts are classified immediately as `GIVEAWAY · BON POOL` / `GW · BON POOL` or `GIVEAWAY · TAXES` / `GW · TAXES`.
+- Added an authoritative `gift` marker for the userscript's built-in `/gift HOST AMOUNT MESSAGE` contribution hint. It now renders as `GIVEAWAY · GIFT` / `GW · GIFT` instead of falling through to the legacy SPONSORS heuristic.
+- Updated the userscript v1.2.13+ bridge contract: semantic emoji are outside the marker anchor and the anchor self-labels with its own URL, preventing HTML→IRC converters from appending the implementation URL after the emoji.
+- Legacy `#dpgw-v1-start` and all Nums/TRAVIS/third-party fallback classifiers remain supported.
+
+
 ## v0.5.53 - 2026-09-19
 
 ### Compatibility

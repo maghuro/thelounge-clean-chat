@@ -987,21 +987,16 @@ body:has(
    Maghuro fork always wins. Emoji/adjacency rules remain only as a
    backwards-compatible fallback for Nums/TRAVIS/other forks.
 
-   The marker link itself wraps the existing semantic emoji. Undo the
-   generic DarkPeers "site ↗" link treatment so it still looks like an
-   ordinary emoji in chat.
+   Marker anchors are machine-only. Maghuro v1.2.13+ keeps the semantic
+   emoji outside the anchor and self-labels the anchor with its URL, so
+   the bridge preserves the structural hook without appending a noisy
+   "(URL)" after an unrelated emoji. Hide marker anchors completely.
    ============================================================ */
 
 #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]
 .content a[href*="darkpeers.org/#dpgw-v1-" i] {
-    font-size: inherit !important;
-    display: inline !important;
-    padding: 0 !important;
-    border-radius: 0 !important;
-    background: none !important;
-    color: inherit !important;
-    text-decoration: none !important;
+    display: none !important;
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
@@ -1017,6 +1012,30 @@ body:has(
     --tlcc-dpgw-color: var(--tlcc-gold);
     --tlcc-dpgw-strength: 10%;
     --tlcc-dpgw-edge: 4px;
+}
+
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content a[href$="#dpgw-v1-start-pool" i]) {
+    --tlcc-dpgw-badge: var(--tlcc-giveaway-prefix) "BON POOL";
+    --tlcc-dpgw-color: var(--tlcc-green);
+    --tlcc-dpgw-strength: 10%;
+    --tlcc-dpgw-edge: 4px;
+}
+
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content a[href$="#dpgw-v1-start-taxes" i]) {
+    --tlcc-dpgw-badge: var(--tlcc-giveaway-prefix) "TAXES";
+    --tlcc-dpgw-color: var(--tlcc-rigged);
+    --tlcc-dpgw-strength: 11%;
+    --tlcc-dpgw-edge: 4px;
+}
+
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content a[href$="#dpgw-v1-gift" i]) {
+    --tlcc-dpgw-badge: var(--tlcc-giveaway-prefix) "GIFT";
+    --tlcc-dpgw-color: var(--tlcc-cyan);
+    --tlcc-dpgw-strength: 6%;
+    --tlcc-dpgw-edge: 3px;
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
@@ -2162,5 +2181,5 @@ body:has(
 
 /* TLCC release version override. Keep this tiny file easy to update per release. */
 :root {
-    --tlcc-version: "v0.5.53";
+    --tlcc-version: "v0.5.54";
 }
