@@ -967,6 +967,86 @@ body:has(
 }
 
 
+/* THREE-PART DONATIONS CONTINUATION
+   Live BONanza output can now split the recurring donations post into
+   [1/3] + [2/3] + [3/3].
+
+   [1/3] keeps the strong DONATIONS signature above (topic 414 plus the
+   pointing-hands/image hook).
+   [2/3] moves the Count to Infinity link to topic 12 and retains 🙏.
+   [3/3] can be plain text only.
+
+   Classify the second fragment only when it directly follows a proven
+   DONATIONS start and itself carries topic 12 + folded-hands. Then allow
+   exactly one marker-free DP fragment after that as the final continuation.
+   This keeps the inheritance narrow and avoids labelling unrelated chatter. */
+
+/* [2/3]: proven DONATIONS start -> topic 12 + 🙏 */
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/414" i]):not(:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/12" i])):is(
+    :has(.content .emoji[aria-label="Emoji: backhand index pointing right"] ~ .emoji[aria-label="Emoji: backhand index pointing left"]),
+    :has(.content a[href*="Game-Sign-Donations.png" i])
+)
++ .msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/12" i]):has(.content .emoji[aria-label*="folded hands" i]) {
+    --tlcc-bridge-badge: var(--tlcc-bonanza-prefix) "DONATIONS";
+    background:
+        color-mix(in srgb, var(--tlcc-gold) 7%, transparent);
+    box-shadow:
+        inset 3px 0 0 color-mix(in srgb, var(--tlcc-gold) 86%, transparent);
+    border-radius: 5px;
+}
+
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/414" i]):not(:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/12" i])):is(
+    :has(.content .emoji[aria-label="Emoji: backhand index pointing right"] ~ .emoji[aria-label="Emoji: backhand index pointing left"]),
+    :has(.content a[href*="Game-Sign-Donations.png" i])
+)
++ .msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/12" i]):has(.content .emoji[aria-label*="folded hands" i])
+.from .user::after {
+    content: var(--tlcc-bonanza-prefix) "DONATIONS";
+    color: var(--tlcc-gold);
+    border-color:
+        color-mix(in srgb, var(--tlcc-gold) 58%, transparent);
+    border-style: solid;
+    background:
+        color-mix(in srgb, var(--tlcc-gold) 10%, transparent);
+}
+
+
+/* [3/3]: same proven chain -> one final marker-free DP fragment */
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/414" i]):not(:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/12" i])):is(
+    :has(.content .emoji[aria-label="Emoji: backhand index pointing right"] ~ .emoji[aria-label="Emoji: backhand index pointing left"]),
+    :has(.content a[href*="Game-Sign-Donations.png" i])
+)
++ .msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/12" i]):has(.content .emoji[aria-label*="folded hands" i])
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href])):not(:has(.content .emoji)) {
+    --tlcc-bridge-badge: var(--tlcc-bonanza-prefix) "DONATIONS";
+    background:
+        color-mix(in srgb, var(--tlcc-gold) 7%, transparent);
+    box-shadow:
+        inset 3px 0 0 color-mix(in srgb, var(--tlcc-gold) 86%, transparent);
+    border-radius: 5px;
+}
+
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/414" i]):not(:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/12" i])):is(
+    :has(.content .emoji[aria-label="Emoji: backhand index pointing right"] ~ .emoji[aria-label="Emoji: backhand index pointing left"]),
+    :has(.content a[href*="Game-Sign-Donations.png" i])
+)
++ .msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/12" i]):has(.content .emoji[aria-label*="folded hands" i])
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href])):not(:has(.content .emoji))
+.from .user::after {
+    content: var(--tlcc-bonanza-prefix) "DONATIONS";
+    color: var(--tlcc-gold);
+    border-color:
+        color-mix(in srgb, var(--tlcc-gold) 58%, transparent);
+    border-style: solid;
+    background:
+        color-mix(in srgb, var(--tlcc-gold) 10%, transparent);
+}
+
+
 /* ============================================================
    18B. DARKPEERS PRIVATE-MESSAGE ALERTS
 
