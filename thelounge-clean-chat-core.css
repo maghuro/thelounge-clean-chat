@@ -145,7 +145,7 @@ body:has(
    ============================================================ */
 
 #chat .messages {
-    line-height: 1.47;
+    line-height: 1.35;
 }
 
 #chat .time {
@@ -159,8 +159,8 @@ body:has(
 
 @media (min-width: 480px) {
     #chat :is(.time, .from, .content) {
-        padding-top: 2px;
-        padding-bottom: 2px;
+        padding-top: 1px;
+        padding-bottom: 1px;
     }
 }
 
@@ -236,16 +236,17 @@ body:has(
     content: var(--tlcc-bridge-badge, "WEB");
     display: inline-block;
     font-size: 10px;
-    line-height: 1.55;
+    line-height: 1.2;
     font-weight: 700;
     letter-spacing: 0.04em;
-    padding: 1px 5px;
+    padding: 0 5px;
     border: 1px solid
         color-mix(in srgb, var(--link-color) 42%, transparent);
     border-radius: 5px;
     color: var(--link-color);
     background:
         color-mix(in srgb, var(--link-color) 7%, transparent);
+    vertical-align: middle;
 }
 
 /* On official The Lounge, keep every DP/TLCC badge on the same right edge

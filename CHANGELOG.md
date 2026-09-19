@@ -3,6 +3,18 @@
 All notable changes to **The Lounge Clean Chat** will be documented here.
 
 
+## v0.5.60 - 2026-09-19
+
+### Compact DarkPeers rows
+
+- Reduced active-chat line-height from 1.47 to 1.35.
+- Reduced desktop `.time`, `.from` and `.content` vertical padding from 2px to 1px.
+- Compacted the shared `#darkpeers` DP badge box used by `WEB` and all semantic categories: 10px label text is preserved, but badge line-height drops from 1.55 to 1.2 and vertical padding from 1px to 0.
+- This stops the badge box from setting the row height while keeping natural badge widths and the v0.5.59 right-edge alignment.
+- The separate `NEW PM` badge in the DP query is intentionally unchanged.
+
+
+
 ## v0.5.59 - 2026-09-19
 
 ### Desktop density and sender-column geometry
