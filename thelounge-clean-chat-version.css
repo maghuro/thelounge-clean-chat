@@ -1,4 +1,4 @@
 /* TLCC release version override. Keep this tiny file easy to update per release. */
 :root {
-    --tlcc-version: "v0.5.5";
+    --tlcc-version: "v0.5.5-trivia-dev1";
 }
