@@ -271,14 +271,6 @@ body:has(
         text-align: right;
     }
 
-    #chat-container[data-current-channel="#darkpeers" i]
-    .msg[data-type="message"][data-from="DP" i]:not([data-bridged="true"])
-    .from .user {
-        display: block;
-        width: 100%;
-        overflow: visible;
-        text-align: right;
-    }
 }
 
 
@@ -2314,5 +2306,5 @@ body:has(
 
 /* TLCC release version override. Keep this tiny file easy to update per release. */
 :root {
-    --tlcc-version: "v0.5.60";
+    --tlcc-version: "v0.5.61";
 }

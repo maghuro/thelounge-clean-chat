@@ -271,14 +271,6 @@ body:has(
         text-align: right;
     }
 
-    #chat-container[data-current-channel="#darkpeers" i]
-    .msg[data-type="message"][data-from="DP" i]:not([data-bridged="true"])
-    .from .user {
-        display: block;
-        width: 100%;
-        overflow: visible;
-        text-align: right;
-    }
 }
 
 

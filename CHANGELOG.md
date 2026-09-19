@@ -3,6 +3,17 @@
 All notable changes to **The Lounge Clean Chat** will be documented here.
 
 
+## v0.5.61 - 2026-09-19
+
+### Fix DP row-height regression
+
+- Removed the desktop `.from .user { display:block; width:100%; }` override introduced while aligning DarkPeers badges.
+- Live DevTools measurements showed bridged DP rows at about 55px high while normal IRC rows were about 22px, even though the badge itself was only 14px tall.
+- The sender column itself already right-aligns content, so the generated `WEB`/semantic badge can remain inline with natural width and still share the same right edge.
+- Keeps the wider 10rem sender column, compact v0.5.60 row metrics, natural-width badges, BONanza split inheritance and giveaway continuation fixes intact.
+
+
+
 ## v0.5.60 - 2026-09-19
 
 ### Compact DarkPeers rows
