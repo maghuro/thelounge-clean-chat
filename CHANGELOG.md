@@ -3,6 +3,16 @@
 All notable changes to **The Lounge Clean Chat** will be documented here.
 
 
+## v0.5.63 - 2026-09-19
+
+### Badge baseline follow-up and original POT fallback
+
+- Raised the shared DarkPeers badge an additional 2px with `transform: translateY(-2px)`. The transform changes only paint position, not row height or sender-column geometry.
+- Added a narrow structural fallback for the original/public giveaway script's text-only `Host added ... Total pot ...` reply: a coloured, emoji-free, link-free DP line immediately before the legacy lone-🥳 sponsor summary now renders as `GIVEAWAY · POT`.
+- Keeps v0.5.62's removal of the unsafe ENTRIES-adjacency continuation and its legacy lone-🥳 `GIVEAWAY · SPONSORS` classifier.
+
+
+
 ## v0.5.62 - 2026-09-19
 
 ### Giveaway badge polish and safer fallbacks

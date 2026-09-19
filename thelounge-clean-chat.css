@@ -247,6 +247,7 @@ body:has(
     background:
         color-mix(in srgb, var(--link-color) 7%, transparent);
     vertical-align: 0.14em;
+    transform: translateY(-2px);
 }
 
 /* On official The Lounge, keep every DP/TLCC badge on the same right edge
@@ -1750,6 +1751,55 @@ body:has(
 }
 
 
+
+/* ORIGINAL GIVEAWAY HOST POT TOP-UP
+   The old/public giveaway script has no structural bridge marker on
+   "Host added ... Total pot ...". Its automatic reply does, however,
+   retain IRC colour spans from the script's BBCode. When such a coloured,
+   emoji-free, link-free DP reply is immediately followed by the legacy
+   lone-🥳 sponsor summary, treat it as GIVEAWAY · POT.
+
+   This deliberately avoids classifying arbitrary coloured chat lines. */
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]
+:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i]))
+:not(:has(.content a[href]))
+:not(:has(.content .emoji))
+:has(.content [class*="irc-fg"])
+:has(+ .msg[data-type="message"][data-from="DP" i]
+    :not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i]))
+    :not(:has(.content a[href]))
+    :has(.content .emoji[aria-label*="partying" i])
+    :not(:has(.content .emoji:not([aria-label*="partying" i])))) {
+    background:
+        color-mix(in srgb, var(--tlcc-gold) 7%, transparent);
+    box-shadow:
+        inset 3px 0 0 color-mix(in srgb, var(--tlcc-gold) 86%, transparent);
+    border-radius: 5px;
+}
+
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]
+:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i]))
+:not(:has(.content a[href]))
+:not(:has(.content .emoji))
+:has(.content [class*="irc-fg"])
+:has(+ .msg[data-type="message"][data-from="DP" i]
+    :not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i]))
+    :not(:has(.content a[href]))
+    :has(.content .emoji[aria-label*="partying" i])
+    :not(:has(.content .emoji:not([aria-label*="partying" i]))))
+.from .user::after {
+    content: var(--tlcc-giveaway-prefix) "POT";
+    color: var(--tlcc-gold);
+    border-color:
+        color-mix(in srgb, var(--tlcc-gold) 58%, transparent);
+    border-style: solid;
+    background:
+        color-mix(in srgb, var(--tlcc-gold) 10%, transparent);
+}
+
+
 /* TROPHY OUTPUT - 🏆
    v6.2.2 uses the same trophy for both !top and the final winner
    summary. A trophy therefore belongs to the giveaway family, but
@@ -2593,5 +2643,5 @@ body:has(
 
 /* TLCC release version override. Keep this tiny file easy to update per release. */
 :root {
-    --tlcc-version: "v0.5.62";
+    --tlcc-version: "v0.5.63";
 }
