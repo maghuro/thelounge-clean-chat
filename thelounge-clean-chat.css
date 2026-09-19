@@ -2059,21 +2059,39 @@ body:has(
 
 
 /* TRIVIA · QUESTION - ❓
-   A question is confirmed by its nearby ⏱ reveal rather than only by
-   being the first message after 🧠. Multi-question games therefore keep
-   QUESTION on Q2/Q3/etc., even when ordinary chat/answers are interleaved.
+   Q1 follows the 🧠 start directly. Later questions follow the previous
+   ⏱ reveal. Allow a small amount of ordinary chat between reveal and the
+   next question, but do not depend on looking forward from ❓ to the next
+   reveal: live testing showed that forward relation was not matching
+   reliably in The Lounge even though the ANSWER relation did.
 
-   Keep the window deliberately bounded: allow up to four ordinary message
-   rows between ❓ and ⏱. This is enough for live chat noise without turning
-   every later question-mark emoji in scrollback into trivia. */
+   Endpoints must be DP messages; up to three ordinary message rows may
+   appear between a previous ⏱ reveal and the next ❓ question. */
+
+/* Q1: 🧠 -> ❓ */
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content .emoji[aria-label*="question mark" i]):is(
-    :has(+ .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])),
-    :has(+ .msg[data-type="message"] + .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])),
-    :has(+ .msg[data-type="message"] + .msg[data-type="message"] + .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])),
-    :has(+ .msg[data-type="message"] + .msg[data-type="message"] + .msg[data-type="message"] + .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])),
-    :has(+ .msg[data-type="message"] + .msg[data-type="message"] + .msg[data-type="message"] + .msg[data-type="message"] + .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i]))
-) {
+.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="brain" i])
++ .msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content .emoji[aria-label*="question mark" i]),
+
+/* Q2+: ⏱ -> ❓, with 0..3 intervening message rows. */
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])
++ .msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content .emoji[aria-label*="question mark" i]),
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])
++ .msg[data-type="message"]
++ .msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content .emoji[aria-label*="question mark" i]),
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])
++ .msg[data-type="message"]
++ .msg[data-type="message"]
++ .msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content .emoji[aria-label*="question mark" i]),
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])
++ .msg[data-type="message"]
++ .msg[data-type="message"]
++ .msg[data-type="message"]
++ .msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content .emoji[aria-label*="question mark" i]) {
     background:
         color-mix(in srgb, var(--tlcc-trivia) 6%, transparent);
     box-shadow:
@@ -2081,14 +2099,32 @@ body:has(
     border-radius: 5px;
 }
 
+/* Badge: same structural paths, independent of native highlight state. */
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="question mark" i]):is(
-    :has(+ .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])),
-    :has(+ .msg[data-type="message"] + .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])),
-    :has(+ .msg[data-type="message"] + .msg[data-type="message"] + .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])),
-    :has(+ .msg[data-type="message"] + .msg[data-type="message"] + .msg[data-type="message"] + .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])),
-    :has(+ .msg[data-type="message"] + .msg[data-type="message"] + .msg[data-type="message"] + .msg[data-type="message"] + .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i]))
-)
+.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="brain" i])
++ .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="question mark" i])
+.from .user::after,
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])
++ .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="question mark" i])
+.from .user::after,
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])
++ .msg[data-type="message"]
++ .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="question mark" i])
+.from .user::after,
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])
++ .msg[data-type="message"]
++ .msg[data-type="message"]
++ .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="question mark" i])
+.from .user::after,
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])
++ .msg[data-type="message"]
++ .msg[data-type="message"]
++ .msg[data-type="message"]
++ .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="question mark" i])
 .from .user::after {
     content: var(--tlcc-trivia-prefix) "QUESTION";
     color: var(--tlcc-trivia);
