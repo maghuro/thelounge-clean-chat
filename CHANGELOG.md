@@ -3,6 +3,18 @@
 All notable changes to **The Lounge Clean Chat** will be documented here.
 
 
+## v0.5.58 - 2026-09-19
+
+### Badge alignment and BONanza split messages
+
+- Reverted the fixed-width giveaway badge experiment from v0.5.57. Badges keep their natural width and are anchored to the right edge of the official The Lounge sender column.
+- Strengthened that alignment by making the official DP `.from .user` fill the sender column on desktop and right-align its generated badge. TNB structured bridged usernames remain excluded.
+- Fixed the malformed section separator left by the v0.5.57 mobile-width reset.
+- Corrected the BONanza NUMBERS bridge model: live output shows the `[2/2]` donation-list fragment can be plain text even when `[1/2]` contains both topic 12 and topic 414 links.
+- A plain DP message immediately following the strong `BON · NUMBERS` signature now inherits the same `BON · NUMBERS` badge/card, mirroring the existing DONATIONS continuation logic.
+
+
+
 ## v0.5.57 - 2026-09-19
 
 ### Giveaway badge alignment
