@@ -1153,6 +1153,10 @@ body:has(
     border-color: color-mix(in srgb, var(--tlcc-dpgw-color) 58%, transparent);
     border-style: solid !important;
     background: color-mix(in srgb, var(--tlcc-dpgw-color) 11%, transparent);
+    width: 126px;
+    box-sizing: border-box;
+    text-align: center;
+    white-space: nowrap;
 }
 
 
@@ -1229,6 +1233,10 @@ body:has(
     border-style: solid;
     background:
         color-mix(in srgb, var(--tlcc-gold) 12%, transparent);
+    width: 126px;
+    box-sizing: border-box;
+    text-align: center;
+    white-space: nowrap;
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
@@ -1262,6 +1270,10 @@ body:has(
     border-style: solid;
     background:
         color-mix(in srgb, var(--tlcc-gold) 8%, transparent);
+    width: 126px;
+    box-sizing: border-box;
+    text-align: center;
+    white-space: nowrap;
 }
 
 
@@ -1302,6 +1314,10 @@ body:has(
     border-style: solid;
     background:
         color-mix(in srgb, var(--tlcc-gold) 12%, transparent);
+    width: 126px;
+    box-sizing: border-box;
+    text-align: center;
+    white-space: nowrap;
 }
 
 /* Decoration only: preserve native highlight treatment. */
@@ -1345,6 +1361,10 @@ body:has(
     border-style: solid;
     background:
         color-mix(in srgb, var(--tlcc-gold) 12%, transparent);
+    width: 126px;
+    box-sizing: border-box;
+    text-align: center;
+    white-space: nowrap;
 }
 
 
@@ -1374,6 +1394,10 @@ body:has(
     border-style: solid;
     background:
         color-mix(in srgb, var(--tlcc-gold) 8%, transparent);
+    width: 126px;
+    box-sizing: border-box;
+    text-align: center;
+    white-space: nowrap;
 }
 
 
@@ -1398,6 +1422,10 @@ body:has(
     border-style: solid;
     background:
         color-mix(in srgb, var(--tlcc-cyan) 9%, transparent);
+    width: 126px;
+    box-sizing: border-box;
+    text-align: center;
+    white-space: nowrap;
 }
 
 
@@ -1428,6 +1456,10 @@ body:has(
     border-style: solid;
     background:
         color-mix(in srgb, var(--tlcc-cyan) 9%, transparent);
+    width: 126px;
+    box-sizing: border-box;
+    text-align: center;
+    white-space: nowrap;
 }
 
 
@@ -1452,6 +1484,10 @@ body:has(
     border-style: solid;
     background:
         color-mix(in srgb, var(--tlcc-cyan) 9%, transparent);
+    width: 126px;
+    box-sizing: border-box;
+    text-align: center;
+    white-space: nowrap;
 }
 
 
@@ -1496,6 +1532,10 @@ body:has(
     border-style: solid;
     background:
         color-mix(in srgb, var(--tlcc-cyan) 9%, transparent);
+    width: 126px;
+    box-sizing: border-box;
+    text-align: center;
+    white-space: nowrap;
 }
 
 
@@ -1541,6 +1581,10 @@ body:has(
     border-style: solid;
     background:
         color-mix(in srgb, var(--tlcc-cyan) 9%, transparent);
+    width: 126px;
+    box-sizing: border-box;
+    text-align: center;
+    white-space: nowrap;
 }
 
 
@@ -1565,6 +1609,10 @@ body:has(
     border-style: solid;
     background:
         color-mix(in srgb, var(--tlcc-green) 9%, transparent);
+    width: 126px;
+    box-sizing: border-box;
+    text-align: center;
+    white-space: nowrap;
 }
 
 
@@ -1610,6 +1658,10 @@ body:has(
     border-style: solid;
     background:
         color-mix(in srgb, var(--tlcc-green) 10%, transparent);
+    width: 126px;
+    box-sizing: border-box;
+    text-align: center;
+    white-space: nowrap;
 }
 
 
@@ -1638,6 +1690,10 @@ body:has(
     border-style: solid;
     background:
         color-mix(in srgb, var(--tlcc-gold) 14%, transparent);
+    width: 126px;
+    box-sizing: border-box;
+    text-align: center;
+    white-space: nowrap;
 }
 
 
@@ -1667,6 +1723,10 @@ body:has(
 + .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="trophy" i])
 .from .user::after {
     content: var(--tlcc-giveaway-prefix) "RESULT";
+    width: 126px;
+    box-sizing: border-box;
+    text-align: center;
+    white-space: nowrap;
 }
 
 
@@ -1734,6 +1794,10 @@ body:has(
     border-style: solid;
     background:
         color-mix(in srgb, var(--tlcc-gold) 14%, transparent);
+    width: 126px;
+    box-sizing: border-box;
+    text-align: center;
+    white-space: nowrap;
 }
 
 
@@ -1769,6 +1833,10 @@ body:has(
     border-style: solid;
     background:
         color-mix(in srgb, var(--tlcc-warning) 11%, transparent);
+    width: 126px;
+    box-sizing: border-box;
+    text-align: center;
+    white-space: nowrap;
 }
 
 
@@ -1800,6 +1868,10 @@ body:has(
     border-style: solid;
     background:
         color-mix(in srgb, var(--tlcc-rigged) 12%, transparent);
+    width: 126px;
+    box-sizing: border-box;
+    text-align: center;
+    white-space: nowrap;
 }
 
 
@@ -1824,6 +1896,10 @@ body:has(
     border-style: solid;
     background:
         color-mix(in srgb, var(--tlcc-green) 10%, transparent);
+    width: 126px;
+    box-sizing: border-box;
+    text-align: center;
+    white-space: nowrap;
 }
 
 
@@ -1848,6 +1924,10 @@ body:has(
     border-style: solid;
     background:
         color-mix(in srgb, var(--tlcc-naughty) 10%, transparent);
+    width: 126px;
+    box-sizing: border-box;
+    text-align: center;
+    white-space: nowrap;
 }
 
 
@@ -1874,13 +1954,17 @@ body:has(
     border-style: solid;
     background:
         color-mix(in srgb, var(--tlcc-alert) 10%, transparent);
+    width: 126px;
+    box-sizing: border-box;
+    text-align: center;
+    white-space: nowrap;
 }
 
 
 
 
 /* ============================================================
-   19C. MAGHURO PRE-v1.2.14 SPLIT-START CONTINUATION
+   19C. MAGHURO PRE-v1.2.15 SPLIT-START CONTINUATION
 
    v1.2.12 could split a marked giveaway start into [1/2] + [2/2].
    The first fragment retained #dpgw-v1-start*, while the second
@@ -1888,9 +1972,10 @@ body:has(
    authoritative messages are excluded from the legacy start heuristic,
    that second fragment could otherwise fall through to SPONSORS.
 
-   v1.2.14 emits #dpgw-v1-gift directly, so this adjacency rule is only
-   a backwards-compatible repair for old/current scrollback and older
-   clients. It is deliberately narrow: marked start immediately followed
+   v1.2.15 keeps announcement/reminder continuations as GIVEAWAY and reserves
+   #dpgw-v1-gift for the standalone /gift help response. This adjacency rule is
+   a backwards-compatible repair for old/current scrollback and older clients.
+   It is deliberately narrow: marked start immediately followed
    by an unmarked one-sparkle DP fragment.
    ============================================================ */
 
@@ -1916,18 +2001,34 @@ body:has(
 ))
 + .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .emoji[aria-label="Emoji: wrapped gift"])):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]))
 .from .user::after {
-    content: var(--tlcc-giveaway-prefix) "GIFT";
+    content: "GIVEAWAY";
     color: var(--tlcc-cyan);
     border-color:
         color-mix(in srgb, var(--tlcc-cyan) 58%, transparent);
     border-style: solid;
     background:
         color-mix(in srgb, var(--tlcc-cyan) 11%, transparent);
+    width: 126px;
+    box-sizing: border-box;
+    text-align: center;
+    white-space: nowrap;
 }
 
 
 /* ============================================================
-   20. TRIVIA GAME
+   
+/* Giveaway badge boxes are fixed-width on desktop so all labels share both
+   left and right edges. Mobile returns to intrinsic width to preserve space. */
+@media (max-width: 479px) {
+    #chat-container[data-current-channel="#darkpeers" i]
+    .msg[data-type="message"][data-from="DP" i]
+    .from .user::after {
+        width: auto;
+    }
+}
+
+
+20. TRIVIA GAME
 
    New DarkPeers trivia game currently under development.
 

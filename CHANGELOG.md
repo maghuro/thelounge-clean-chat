@@ -3,6 +3,17 @@
 All notable changes to **The Lounge Clean Chat** will be documented here.
 
 
+## v0.5.57 - 2026-09-19
+
+### Giveaway badge alignment
+
+- Gave giveaway badges a fixed 126px desktop width so labels such as `TIME`, `SPONSORS`, `TIE` and `RESULT` share both left and right edges instead of forming a staircase.
+- Kept mobile badges intrinsic-width to avoid wasting horizontal space.
+- Corrected the pre-v1.2.15 split-start compatibility rule: the second `[2/2]` fragment of a giveaway announcement is again `GIVEAWAY`, not `GIVEAWAY · GIFT`.
+- The dedicated `GIVEAWAY · GIFT` badge is now reserved for the userscript's standalone `To send a gift type: /gift HOST amount message` response introduced correctly in userscript v1.2.15.
+
+
+
 ## v0.5.56 - 2026-09-19
 
 ### Giveaway layout and split-message compatibility
