@@ -3,6 +3,18 @@
 All notable changes to **The Lounge Clean Chat** will be documented here.
 
 
+## v0.5.56 - 2026-09-19
+
+### Giveaway layout and split-message compatibility
+
+- Right-aligned official-The-Lounge DP/TLCC badges inside the desktop sender column so short and long labels share one stable right edge instead of forming a visual staircase.
+- Kept TNB's structured bridged-username layout unchanged; its username + badge order remains left-to-right.
+- Added a narrow backwards-compatible override for Maghuro pre-v1.2.14 split giveaway starts: an unmarked one-sparkle fragment immediately following an authoritative `#dpgw-v1-start*` message is now `GIVEAWAY · GIFT`, not the legacy `SPONSORS` fallback.
+- v1.2.14 still remains the preferred path because it marks the gift instruction directly with `#dpgw-v1-gift`.
+- Orphan `()` visible in old v1.2.12 scrollback are literal IRC text emitted around the marker URL. CSS can hide the anchor but cannot safely delete those surrounding text-node characters; new v1.2.14 marker transport is intended to prevent them at source.
+
+
+
 ## v0.5.55 - 2026-09-19
 
 ### Giveaway visual consistency

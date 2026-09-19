@@ -248,6 +248,17 @@ body:has(
         color-mix(in srgb, var(--link-color) 7%, transparent);
 }
 
+/* On official The Lounge, keep every DP/TLCC badge on the same right edge
+   of the sender column. TNB bridged usernames deliberately retain their
+   own left-to-right username + badge layout in the compatibility module. */
+@media (min-width: 480px) {
+    #chat-container[data-current-channel="#darkpeers" i]
+    .msg[data-type="message"][data-from="DP" i]:not([data-bridged="true"])
+    .from {
+        text-align: right;
+    }
+}
+
 
 /* ============================================================
    7. HEURISTIC DETECTION OF WEB REPLIES
@@ -1867,6 +1878,54 @@ body:has(
 
 
 
+
+/* ============================================================
+   19C. MAGHURO PRE-v1.2.14 SPLIT-START CONTINUATION
+
+   v1.2.12 could split a marked giveaway start into [1/2] + [2/2].
+   The first fragment retained #dpgw-v1-start*, while the second
+   "/gift HOST AMOUNT MESSAGE" fragment carried only one ✨. Because
+   authoritative messages are excluded from the legacy start heuristic,
+   that second fragment could otherwise fall through to SPONSORS.
+
+   v1.2.14 emits #dpgw-v1-gift directly, so this adjacency rule is only
+   a backwards-compatible repair for old/current scrollback and older
+   clients. It is deliberately narrow: marked start immediately followed
+   by an unmarked one-sparkle DP fragment.
+   ============================================================ */
+
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content a:is(
+    [href$="#dpgw-v1-start" i],
+    [href$="#dpgw-v1-start-pool" i],
+    [href$="#dpgw-v1-start-taxes" i]
+))
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .emoji[aria-label="Emoji: wrapped gift"])):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"])) {
+    background:
+        color-mix(in srgb, var(--tlcc-cyan) 6%, transparent);
+    box-shadow:
+        inset 3px 0 0 color-mix(in srgb, var(--tlcc-cyan) 82%, transparent);
+    border-radius: 5px;
+}
+
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content a:is(
+    [href$="#dpgw-v1-start" i],
+    [href$="#dpgw-v1-start-pool" i],
+    [href$="#dpgw-v1-start-taxes" i]
+))
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .emoji[aria-label="Emoji: wrapped gift"])):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]))
+.from .user::after {
+    content: var(--tlcc-giveaway-prefix) "GIFT";
+    color: var(--tlcc-cyan);
+    border-color:
+        color-mix(in srgb, var(--tlcc-cyan) 58%, transparent);
+    border-style: solid;
+    background:
+        color-mix(in srgb, var(--tlcc-cyan) 11%, transparent);
+}
+
+
 /* ============================================================
    20. TRIVIA GAME
 
@@ -2172,5 +2231,5 @@ body:has(
 
 /* TLCC release version override. Keep this tiny file easy to update per release. */
 :root {
-    --tlcc-version: "v0.5.55";
+    --tlcc-version: "v0.5.56";
 }
