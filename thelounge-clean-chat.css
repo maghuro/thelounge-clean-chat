@@ -2015,6 +2015,71 @@ body:has(
 
 
 /* ============================================================
+   19D. AUTHORITATIVE POOL / TAXES SPLIT CONTINUATIONS
+
+   Long marked giveaway starts can be split by the website -> IRC bridge.
+   The #dpgw-v1-start-pool / start-taxes marker survives only on [1/2],
+   while [2/2] may contain no link at all.
+
+   Keep this deliberately subtype-specific:
+     - BON POOL continuation retains the closing ✨...✨ + 👀 structure.
+     - TAXES continuation retains the final 😉 marker.
+
+   This avoids turning an arbitrary DP message after an unsplit start into
+   a giveaway continuation.
+   ============================================================ */
+
+/* GW · BON POOL [2/2] */
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content a[href$="#dpgw-v1-start-pool" i])
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a[href])):has(.content .emoji[aria-label="Emoji: sparkles"]):has(.content .emoji[aria-label*="eyes" i]) {
+    background:
+        color-mix(in srgb, var(--tlcc-green) 10%, transparent);
+    box-shadow:
+        inset 3px 0 0 var(--tlcc-green);
+    border-radius: 5px;
+}
+
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content a[href$="#dpgw-v1-start-pool" i])
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a[href])):has(.content .emoji[aria-label="Emoji: sparkles"]):has(.content .emoji[aria-label*="eyes" i])
+.from .user::after {
+    content: var(--tlcc-giveaway-prefix) "BON POOL";
+    color: var(--tlcc-green);
+    border-color:
+        color-mix(in srgb, var(--tlcc-green) 58%, transparent);
+    border-style: solid;
+    background:
+        color-mix(in srgb, var(--tlcc-green) 11%, transparent);
+}
+
+
+/* GW · TAXES [2/2] */
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content a[href$="#dpgw-v1-start-taxes" i])
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a[href])):has(.content .emoji[aria-label*="winking face" i]) {
+    background:
+        color-mix(in srgb, var(--tlcc-rigged) 11%, transparent);
+    box-shadow:
+        inset 3px 0 0 var(--tlcc-rigged);
+    border-radius: 5px;
+}
+
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content a[href$="#dpgw-v1-start-taxes" i])
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content a[href])):has(.content .emoji[aria-label*="winking face" i])
+.from .user::after {
+    content: var(--tlcc-giveaway-prefix) "TAXES";
+    color: var(--tlcc-rigged);
+    border-color:
+        color-mix(in srgb, var(--tlcc-rigged) 58%, transparent);
+    border-style: solid;
+    background:
+        color-mix(in srgb, var(--tlcc-rigged) 11%, transparent);
+}
+
+
+/* ============================================================
    20. TRIVIA GAME
 
    New DarkPeers trivia game currently under development.
