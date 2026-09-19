@@ -3,6 +3,18 @@
 All notable changes to **The Lounge Clean Chat** will be documented here.
 
 
+## v0.5.62 - 2026-09-19
+
+### Giveaway badge polish and safer fallbacks
+
+- Raised the shared DarkPeers `WEB`/semantic badge by `0.14em` so its visual center aligns with the first line of message text at normal and zoomed scales.
+- Added authoritative `#dpgw-v1-pot` support as `GIVEAWAY · POT` for Maghuro v1.2.16+ host top-ups.
+- Removed the legacy adjacency-only ENTRIES continuation rule after live output showed it could label a real following command such as `!addbon` as `GIVEAWAY · ENTRIES`.
+- Added a narrow old-fork sponsor-summary fallback for a marker-free message containing a lone 🥳 and no other emoji/links. Richer celebratory user messages remain `WEB`.
+- Text-only old-fork responses such as `Host added ... Total pot ...` still remain `WEB`: after the bridge flattens them there is no safe CSS structural hook to distinguish them from ordinary chat.
+
+
+
 ## v0.5.61 - 2026-09-19
 
 ### Fix DP row-height regression
