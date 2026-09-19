@@ -1781,6 +1781,35 @@ body:has(
         color-mix(in srgb, var(--tlcc-trivia) 12%, transparent);
 }
 
+
+
+/* TRIVIA · NO WINNER - 🦗
+   Proposed trivia no-correct-answers marker.
+   The cricket is intentionally unique and maps naturally to the
+   "crickets / awkward silence" joke. If the trivia implementation
+   adopts a different marker later, this rule can be adjusted without
+   changing the rest of the trivia classifier. */
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content .emoji[aria-label*="cricket" i]) {
+    background:
+        color-mix(in srgb, var(--tlcc-trivia) 6%, transparent);
+    box-shadow:
+        inset 3px 0 0 color-mix(in srgb, var(--tlcc-trivia) 82%, transparent);
+    border-radius: 5px;
+}
+
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="cricket" i])
+.from .user::after {
+    content: var(--tlcc-trivia-prefix) "NO WINNER";
+    color: var(--tlcc-trivia);
+    border-color:
+        color-mix(in srgb, var(--tlcc-trivia) 58%, transparent);
+    border-style: dashed;
+    background:
+        color-mix(in srgb, var(--tlcc-trivia) 10%, transparent);
+}
+
 }
 
 
