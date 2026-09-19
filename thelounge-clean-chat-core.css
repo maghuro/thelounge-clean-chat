@@ -78,6 +78,7 @@ body:has(
     --tlcc-active: on;
     --tlcc-giveaway-prefix: "GIVEAWAY · ";
     --tlcc-bonanza-prefix: "BON · ";
+    --tlcc-trivia-prefix: "TRIVIA · ";
     --tlcc-gold: #f3d34a;
     --tlcc-cyan: #6eb8d4;
     --tlcc-green: #79d99b;
@@ -85,9 +86,11 @@ body:has(
     --tlcc-rigged: #ff4f9a;
     --tlcc-alert: #e85d55;
     --tlcc-naughty: #ffde59;
+    --tlcc-trivia: #b892ff;
 
     @media (max-width: 479px) {
         --tlcc-giveaway-prefix: "GW · ";
+        --tlcc-trivia-prefix: "TR · ";
     }
 }
 
@@ -1644,6 +1647,138 @@ body:has(
     border-style: dashed;
     background:
         color-mix(in srgb, var(--tlcc-alert) 10%, transparent);
+}
+
+
+
+/* ============================================================
+   20. TRIVIA GAME
+
+   New DarkPeers trivia game currently under development.
+
+   We deliberately use short structural sequences instead of plain
+   message text:
+
+     🧠 immediately followed by ❓       -> START
+     🧠 + ❓                            -> QUESTION
+     ❓ + [optional answer] + ⏱         -> ANSWER / reveal
+     ⏱ immediately followed by 🏆 + 🥇 -> RESULT
+
+   The RESULT rule is intentionally later than the giveaway trophy
+   rules. Trivia also uses trophy + medal, which previously caused a
+   false-positive GW · RESULT classification.
+
+   Plain A/B/C/D player replies remain WEB because CSS cannot safely
+   distinguish them from normal bridged chat without parsing text.
+   ============================================================ */
+
+/* TRIVIA · START - 🧠 followed immediately by a question. */
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content .emoji[aria-label*="brain" i]):has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="question mark" i]) {
+    background:
+        color-mix(in srgb, var(--tlcc-trivia) 6%, transparent);
+    box-shadow:
+        inset 3px 0 0 color-mix(in srgb, var(--tlcc-trivia) 82%, transparent);
+    border-radius: 5px;
+}
+
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="brain" i]):has(+ .msg[data-type="message"][data-from="DP" i] .content .emoji[aria-label*="question mark" i])
+.from .user::after {
+    content: var(--tlcc-trivia-prefix) "START";
+    color: var(--tlcc-trivia);
+    border-color:
+        color-mix(in srgb, var(--tlcc-trivia) 58%, transparent);
+    border-style: dashed;
+    background:
+        color-mix(in srgb, var(--tlcc-trivia) 10%, transparent);
+}
+
+
+/* TRIVIA · QUESTION - ❓ immediately after the proven 🧠 start. */
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="brain" i])
++ .msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content .emoji[aria-label*="question mark" i]) {
+    background:
+        color-mix(in srgb, var(--tlcc-trivia) 6%, transparent);
+    box-shadow:
+        inset 3px 0 0 color-mix(in srgb, var(--tlcc-trivia) 82%, transparent);
+    border-radius: 5px;
+}
+
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="brain" i])
++ .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="question mark" i])
+.from .user::after {
+    content: var(--tlcc-trivia-prefix) "QUESTION";
+    color: var(--tlcc-trivia);
+    border-color:
+        color-mix(in srgb, var(--tlcc-trivia) 58%, transparent);
+    border-style: dashed;
+    background:
+        color-mix(in srgb, var(--tlcc-trivia) 10%, transparent);
+}
+
+
+/* TRIVIA · ANSWER - ⏱ after the question, with either zero or one
+   intervening DP message (normally the player's A/B/C/D reply). */
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="question mark" i])
++ .msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content .emoji[aria-label*="stopwatch" i]),
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="question mark" i])
++ .msg[data-type="message"][data-from="DP" i]
++ .msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content .emoji[aria-label*="stopwatch" i]) {
+    background:
+        color-mix(in srgb, var(--tlcc-trivia) 6%, transparent);
+    box-shadow:
+        inset 3px 0 0 color-mix(in srgb, var(--tlcc-trivia) 82%, transparent);
+    border-radius: 5px;
+}
+
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="question mark" i])
++ .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])
+.from .user::after,
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="question mark" i])
++ .msg[data-type="message"][data-from="DP" i]
++ .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])
+.from .user::after {
+    content: var(--tlcc-trivia-prefix) "ANSWER";
+    color: var(--tlcc-trivia);
+    border-color:
+        color-mix(in srgb, var(--tlcc-trivia) 58%, transparent);
+    border-style: dashed;
+    background:
+        color-mix(in srgb, var(--tlcc-trivia) 10%, transparent);
+}
+
+
+/* TRIVIA · RESULT - 🏆 + medal immediately after a proven ⏱ reveal.
+   This overrides the giveaway trophy+medal RESULT heuristic. */
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])
++ .msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content .emoji[aria-label*="trophy" i]):has(.content .emoji[aria-label*="medal" i]) {
+    background:
+        color-mix(in srgb, var(--tlcc-trivia) 9%, transparent);
+    box-shadow:
+        inset 4px 0 0 var(--tlcc-trivia),
+        inset 0 0 0 1px color-mix(in srgb, var(--tlcc-trivia) 28%, transparent);
+    border-radius: 5px;
+}
+
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])
++ .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="trophy" i]):has(.content .emoji[aria-label*="medal" i])
+.from .user::after {
+    content: var(--tlcc-trivia-prefix) "RESULT";
+    color: var(--tlcc-trivia);
+    border-color:
+        color-mix(in srgb, var(--tlcc-trivia) 65%, transparent);
+    border-style: dashed;
+    background:
+        color-mix(in srgb, var(--tlcc-trivia) 12%, transparent);
 }
 
 }
