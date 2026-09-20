@@ -1116,11 +1116,13 @@ body:has(
 /* ============================================================
    19A. MAGHURO GIVEAWAY - AUTHORITATIVE BRIDGE MARKERS
 
-   Current transport (Maghuro v1.3.14+):
-     - two adjacent U+2063 INVISIBLE SEPARATOR sentinels
+   Current transport:
+     - v1.3.14+: prefix + typed U+2063 INVISIBLE SEPARATOR sentinels
+     - v1.3.15+: optional third context sentinel for BON Pool / Rigged Taxes
      - prefix sentinel: bold + italic + underline
      - typed sentinel: italic + underline + one canonical IRC colour
-     - IRC colours 00..15 map one-to-one to the 16 marker kinds below
+     - context sentinel: bold + underline + IRC 12 (pool) or IRC 13 (taxes)
+     - IRC colours 00..16 map one-to-one to the 17 marker kinds below
 
    This keeps the contract structural and CSS-only without publishing a
    technical URL on DarkPeers. The sentinels have zero visual width on
@@ -1154,9 +1156,10 @@ body:has(
 
 /* Per-message semantic contract.
    Sentinel grammar:
-     prefix = .irc-bold.irc-italic.irc-underline
-     type   = .irc-italic.irc-underline.irc-fgN
-   with the type span immediately following the prefix span. */
+     prefix  = .irc-bold.irc-italic.irc-underline
+     type    = .irc-italic.irc-underline.irc-fgN
+     context = .irc-bold.irc-underline.irc-fg12/13 (optional)
+   with type immediately after prefix, then optional event context. */
 #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:is(
     :has(.content a[href$="#dpgw-v1-start" i]),
@@ -1219,6 +1222,16 @@ body:has(
     :has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline.irc-fg5)
 ) {
     --tlcc-dpgw-badge: var(--tlcc-giveaway-prefix) "SPONSORS";
+    --tlcc-dpgw-color: var(--tlcc-gold);
+    --tlcc-dpgw-strength: 6%;
+    --tlcc-dpgw-edge: 3px;
+}
+
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(
+    .content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline.irc-fg16
+) {
+    --tlcc-dpgw-badge: var(--tlcc-giveaway-prefix) "SPONSOR MSGS";
     --tlcc-dpgw-color: var(--tlcc-gold);
     --tlcc-dpgw-strength: 6%;
     --tlcc-dpgw-edge: 3px;
@@ -1318,7 +1331,7 @@ body:has(
     :has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline.irc-fg14)
 ) {
     --tlcc-dpgw-badge: var(--tlcc-giveaway-prefix) "BON POOL";
-    --tlcc-dpgw-color: var(--tlcc-green);
+    --tlcc-dpgw-color: var(--tlcc-pool);
     --tlcc-dpgw-strength: 9%;
     --tlcc-dpgw-edge: 3px;
 }
@@ -1334,11 +1347,28 @@ body:has(
     --tlcc-dpgw-edge: 3px;
 }
 
+/* v1.3.15 event-family context. The type still chooses the badge text, while
+   this third zero-width sentinel makes the entire active event keep one colour.
+   Pool wins blue; Rigged Taxes wins pink. */
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(
+    .content .irc-bold.irc-underline.irc-fg12:not(.irc-italic)
+) {
+    --tlcc-dpgw-color: var(--tlcc-pool);
+}
+
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(
+    .content .irc-bold.irc-underline.irc-fg13:not(.irc-italic)
+) {
+    --tlcc-dpgw-color: var(--tlcc-rigged);
+}
+
 /* Shared authoritative card treatment. Highlight keeps The Lounge's native fill. */
 #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:not(.highlight):is(
     :has(.content a[href*="darkpeers.org/#dpgw-v1-" i]),
-    :has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline:is(.irc-fg0, .irc-fg1, .irc-fg2, .irc-fg3, .irc-fg4, .irc-fg5, .irc-fg6, .irc-fg7, .irc-fg8, .irc-fg9, .irc-fg10, .irc-fg11, .irc-fg12, .irc-fg13, .irc-fg14, .irc-fg15))
+    :has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline:is(.irc-fg0, .irc-fg1, .irc-fg2, .irc-fg3, .irc-fg4, .irc-fg5, .irc-fg6, .irc-fg7, .irc-fg8, .irc-fg9, .irc-fg10, .irc-fg11, .irc-fg12, .irc-fg13, .irc-fg14, .irc-fg15, .irc-fg16))
 ) {
     background: color-mix(in srgb, var(--tlcc-dpgw-color) var(--tlcc-dpgw-strength, 7%), transparent);
     box-shadow: inset var(--tlcc-dpgw-edge, 3px) 0 0 var(--tlcc-dpgw-color);
@@ -1348,7 +1378,7 @@ body:has(
 #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:is(
     :has(.content a[href*="darkpeers.org/#dpgw-v1-" i]),
-    :has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline:is(.irc-fg0, .irc-fg1, .irc-fg2, .irc-fg3, .irc-fg4, .irc-fg5, .irc-fg6, .irc-fg7, .irc-fg8, .irc-fg9, .irc-fg10, .irc-fg11, .irc-fg12, .irc-fg13, .irc-fg14, .irc-fg15))
+    :has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline:is(.irc-fg0, .irc-fg1, .irc-fg2, .irc-fg3, .irc-fg4, .irc-fg5, .irc-fg6, .irc-fg7, .irc-fg8, .irc-fg9, .irc-fg10, .irc-fg11, .irc-fg12, .irc-fg13, .irc-fg14, .irc-fg15, .irc-fg16))
 )
 .from .user::after {
     content: var(--tlcc-dpgw-badge);
@@ -1361,7 +1391,7 @@ body:has(
 
 /* ============================================================
    19B. LEGACY GIVEAWAY FALLBACKS
-   Only reached when the message has NO Maghuro URL marker or v1.3.14+ sentinel.
+   Only reached when the message has NO Maghuro URL marker or v1.3.14+ typed sentinel.
    ============================================================ */
 
 /* ============================================================
@@ -2737,5 +2767,5 @@ body:has(
 
 /* TLCC release version override. Keep this tiny file easy to update per release. */
 :root {
-    --tlcc-version: "v0.5.66";
+    --tlcc-version: "v0.5.67";
 }

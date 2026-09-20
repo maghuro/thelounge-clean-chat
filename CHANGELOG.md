@@ -3,6 +3,16 @@
 All notable changes to **The Lounge Clean Chat** will be documented here.
 
 
+## v0.5.67 - 2026-09-20
+
+### BON Pool event-wide blue identity + sponsor-note badge
+
+- Added the v1.3.15 third-sentinel event context: BON Pool messages carry a distinct zero-width pool signature and Rigged Taxes messages carry a distinct taxes signature.
+- Any authoritative giveaway type inside a BON Pool event now paints with `--tlcc-pool`: starts, gifts, pot changes, sponsors, sponsor-note recaps, entries, stats, time, result, ties and the final pool confirmation all keep the same blue card/badge identity.
+- Added the new `sponsor-messages` marker (IRC colour 16) with a dedicated `GIVEAWAY · SPONSOR MSGS` / mobile `GW · SPONSOR MSGS` badge.
+- Changed the standalone `pool-paid` marker from green to pool blue for compatibility with older messages that predate the v1.3.15 context sentinel.
+
+
 ## v0.5.66 - 2026-09-20
 
 ### Sentinel parity for split continuations

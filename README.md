@@ -4,9 +4,15 @@ Custom CSS for [The Lounge](https://thelounge.chat/) focused on making the DarkP
 
 TLCC remains deliberately **CSS-only**. It does not patch The Lounge, the DarkPeers bridge, Docker images, JavaScript or the giveaway userscript.
 
-**Current version:** v0.5.66  
+**Current version:** v0.5.67  
 **Tested with:** The Lounge 4.5.2 and the TNB tracker-first fork based on The Lounge 4.4.3  
 **Browsers tested:** Chrome on Android and desktop\n\n**Performance-scope requirement:** TLCC v0.5.5 uses custom-property container style queries (`@container style(...)`). Minimum support for this exact custom-property form is Chromium/Edge 111+, Safari 18+, Firefox 151+ desktop and Firefox 155+ Android. Unsupported browsers fail gracefully by leaving the scoped TLCC rules inactive.
+
+## v0.5.67: BON Pool event-wide blue identity
+
+Giveaway v1.3.15 adds an invisible event-context sentinel after the existing type marker. TLCC uses it to keep every authoritative message from a BON Pool contribution giveaway in the same blue visual family instead of falling back to generic gold/green/orange category colours.
+
+The final sponsor-note recap also has its own `SPONSOR MSGS` badge. Rigged Taxes uses the same mechanism with its existing pink identity.
 
 ## v0.5.66: split-continuation parity
 
