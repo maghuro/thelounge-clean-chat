@@ -3,6 +3,15 @@
 All notable changes to **The Lounge Clean Chat** will be documented here.
 
 
+## v0.5.68 - 2026-09-20
+
+### Cleaner giveaway closing labels
+
+- Renamed the authoritative final sponsor-note badge from `GIVEAWAY · SPONSOR MSGS` to `GIVEAWAY · MESSAGES` (mobile: `GW · MESSAGES`).
+- Keeps the same v1.3.15+ `sponsor-messages` marker and BON Pool / Rigged Taxes event-context colouring; only the human-facing badge label changes.
+- Matches giveaway v1.3.16, where final sponsor notes are grouped by sponsor under the public heading “Messages from our sponsors”.
+
+
 ## v0.5.67 - 2026-09-20
 
 ### BON Pool event-wide blue identity + sponsor-note badge
