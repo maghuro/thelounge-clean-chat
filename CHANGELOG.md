@@ -3,6 +3,16 @@
 All notable changes to **The Lounge Clean Chat** will be documented here.
 
 
+## v0.5.65 - 2026-09-20
+
+### Invisible authoritative giveaway bridge
+
+- Added authoritative support for the Maghuro giveaway v1.3.14 sentinel transport across every marker kind: start, BON Pool start, Rigged Taxes start, gift, pot, sponsors, entries, stats, time, result, tie, rigged, unrigged, naughty, pool-paid and taxes-paid.
+- The new transport uses two zero-width styled IRC spans instead of a public `#dpgw-v1-*` URL. This prevents technical marker links from appearing on DarkPeers and prevents the bridge from generating orphaned `()` when TLCC hides a link.
+- Every legacy giveaway heuristic now excludes both the old URL transport and the new sentinel transport, preserving authoritative-marker precedence everywhere rather than only for the live examples seen during debugging.
+- Kept the old `#dpgw-v1-*` selectors as read-only compatibility for existing scrollback and older userscript versions. Historical literal parentheses already emitted as IRC text cannot be removed safely by CSS alone.
+
+
 ## v0.5.64 - 2026-09-19
 
 ### BON Pool identity and badge baseline
