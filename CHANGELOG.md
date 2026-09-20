@@ -3,6 +3,16 @@
 All notable changes to **The Lounge Clean Chat** will be documented here.
 
 
+## v0.5.69 - 2026-09-20
+
+### Full-source audit hardening
+
+- Hardened invisible-marker decoding against The Lounge's exact extended-palette aliases: white markers accept IRC 0/98 and black markers accept IRC 1/88.
+- Narrowed BON Pool / Rigged Taxes context detection to the exact three-sentinel marker sequence, preventing unrelated bold+underlined coloured text from overriding a marked card's event family.
+- Fixed the BON Pool split-start continuation path so an unmarked `[2/2]` fragment keeps the pool-blue card and badge instead of the older generic green.
+- Propagated the white/black alias support through the shared authoritative-card selectors and every split-start source selector.
+
+
 ## v0.5.68 - 2026-09-20
 
 ### Cleaner giveaway closing labels
