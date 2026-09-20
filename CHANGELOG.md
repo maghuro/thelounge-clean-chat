@@ -3,6 +3,15 @@
 All notable changes to **The Lounge Clean Chat** will be documented here.
 
 
+## v0.5.66 - 2026-09-20
+
+### Sentinel parity for split continuations
+
+- Extended the v1.3.14 sentinel transport to every authoritative adjacency path, not only the primary message classifiers.
+- RESULT [2/2] inheritance, generic split-start repair, BON Pool [2/2] and Rigged Taxes [2/2] now accept both legacy `#dpgw-v1-*` URLs and the corresponding sentinel signatures.
+- This closes the remaining URL-only continuation selectors found during a full post-change audit of every `#dpgw-v1-*` reference.
+
+
 ## v0.5.65 - 2026-09-20
 
 ### Invisible authoritative giveaway bridge

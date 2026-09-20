@@ -4,9 +4,13 @@ Custom CSS for [The Lounge](https://thelounge.chat/) focused on making the DarkP
 
 TLCC remains deliberately **CSS-only**. It does not patch The Lounge, the DarkPeers bridge, Docker images, JavaScript or the giveaway userscript.
 
-**Current version:** v0.5.65  
+**Current version:** v0.5.66  
 **Tested with:** The Lounge 4.5.2 and the TNB tracker-first fork based on The Lounge 4.4.3  
 **Browsers tested:** Chrome on Android and desktop\n\n**Performance-scope requirement:** TLCC v0.5.5 uses custom-property container style queries (`@container style(...)`). Minimum support for this exact custom-property form is Chromium/Edge 111+, Safari 18+, Firefox 151+ desktop and Firefox 155+ Android. Unsupported browsers fail gracefully by leaving the scoped TLCC rules inactive.
+
+## v0.5.66: split-continuation parity
+
+The sentinel contract now also covers every adjacency-based continuation classifier: final RESULT fragments, generic split starts, BON Pool continuations and Rigged Taxes continuations. No continuation rule remains dependent on the old URL transport.
 
 ## v0.5.65: invisible giveaway bridge markers
 
