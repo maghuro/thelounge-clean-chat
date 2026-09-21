@@ -828,12 +828,12 @@ body:has(
 
 /* BONANZA · NUMBERS - both topic 12 and topic 414 survive. */
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/12" i]):has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/414" i]) {
+.msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail):is([href="https://darkpeers.org/forums/topics/12" i], [href^="https://darkpeers.org/forums/topics/12?" i], [href^="https://darkpeers.org/forums/topics/12#" i], [href^="https://darkpeers.org/forums/topics/12/" i])):has(.content a:not(.toggle-thumbnail):is([href="https://darkpeers.org/forums/topics/414" i], [href^="https://darkpeers.org/forums/topics/414?" i], [href^="https://darkpeers.org/forums/topics/414#" i], [href^="https://darkpeers.org/forums/topics/414/" i])) {
     --tlcc-bridge-badge: var(--tlcc-bonanza-prefix) "NUMBERS";
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/12" i]):has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/414" i]) {
+.msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content a:not(.toggle-thumbnail):is([href="https://darkpeers.org/forums/topics/12" i], [href^="https://darkpeers.org/forums/topics/12?" i], [href^="https://darkpeers.org/forums/topics/12#" i], [href^="https://darkpeers.org/forums/topics/12/" i])):has(.content a:not(.toggle-thumbnail):is([href="https://darkpeers.org/forums/topics/414" i], [href^="https://darkpeers.org/forums/topics/414?" i], [href^="https://darkpeers.org/forums/topics/414#" i], [href^="https://darkpeers.org/forums/topics/414/" i])) {
     background:
         color-mix(in srgb, var(--tlcc-gold) 7%, transparent);
     box-shadow:
@@ -842,7 +842,7 @@ body:has(
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/12" i]):has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/414" i])
+.msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail):is([href="https://darkpeers.org/forums/topics/12" i], [href^="https://darkpeers.org/forums/topics/12?" i], [href^="https://darkpeers.org/forums/topics/12#" i], [href^="https://darkpeers.org/forums/topics/12/" i])):has(.content a:not(.toggle-thumbnail):is([href="https://darkpeers.org/forums/topics/414" i], [href^="https://darkpeers.org/forums/topics/414?" i], [href^="https://darkpeers.org/forums/topics/414#" i], [href^="https://darkpeers.org/forums/topics/414/" i]))
 .from .user::after {
     content: var(--tlcc-bonanza-prefix) "NUMBERS";
     color: var(--tlcc-gold);
@@ -858,7 +858,7 @@ body:has(
    preceding strong NUMBERS signature and only when the continuation
    itself carries no surviving link or emoji structure. */
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/12" i]):has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/414" i])
+.msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail):is([href="https://darkpeers.org/forums/topics/12" i], [href^="https://darkpeers.org/forums/topics/12?" i], [href^="https://darkpeers.org/forums/topics/12#" i], [href^="https://darkpeers.org/forums/topics/12/" i])):has(.content a:not(.toggle-thumbnail):is([href="https://darkpeers.org/forums/topics/414" i], [href^="https://darkpeers.org/forums/topics/414?" i], [href^="https://darkpeers.org/forums/topics/414#" i], [href^="https://darkpeers.org/forums/topics/414/" i]))
 + .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href])):not(:has(.content .emoji)) {
     --tlcc-bridge-badge: var(--tlcc-bonanza-prefix) "NUMBERS";
     background:
@@ -869,7 +869,7 @@ body:has(
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/12" i]):has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/414" i])
+.msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail):is([href="https://darkpeers.org/forums/topics/12" i], [href^="https://darkpeers.org/forums/topics/12?" i], [href^="https://darkpeers.org/forums/topics/12#" i], [href^="https://darkpeers.org/forums/topics/12/" i])):has(.content a:not(.toggle-thumbnail):is([href="https://darkpeers.org/forums/topics/414" i], [href^="https://darkpeers.org/forums/topics/414?" i], [href^="https://darkpeers.org/forums/topics/414#" i], [href^="https://darkpeers.org/forums/topics/414/" i]))
 + .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href])):not(:has(.content .emoji))
 .from .user::after {
     content: var(--tlcc-bonanza-prefix) "NUMBERS";
@@ -886,12 +886,12 @@ body:has(
    stable structural hook in all three forum links. No text parsing
    or image filename dependency is needed. */
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/1119" i]) {
+.msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail):is([href="https://darkpeers.org/forums/topics/1119" i], [href^="https://darkpeers.org/forums/topics/1119?" i], [href^="https://darkpeers.org/forums/topics/1119#" i], [href^="https://darkpeers.org/forums/topics/1119/" i])) {
     --tlcc-bridge-badge: var(--tlcc-bonanza-prefix) "NEW MEMBERS";
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/1119" i]) {
+.msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content a:not(.toggle-thumbnail):is([href="https://darkpeers.org/forums/topics/1119" i], [href^="https://darkpeers.org/forums/topics/1119?" i], [href^="https://darkpeers.org/forums/topics/1119#" i], [href^="https://darkpeers.org/forums/topics/1119/" i])) {
     background:
         color-mix(in srgb, var(--tlcc-gold) 7%, transparent);
     box-shadow:
@@ -900,7 +900,7 @@ body:has(
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/1119" i])
+.msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail):is([href="https://darkpeers.org/forums/topics/1119" i], [href^="https://darkpeers.org/forums/topics/1119?" i], [href^="https://darkpeers.org/forums/topics/1119#" i], [href^="https://darkpeers.org/forums/topics/1119/" i]))
 .from .user::after {
     content: var(--tlcc-bonanza-prefix) "NEW MEMBERS";
     color: var(--tlcc-gold);
@@ -915,12 +915,12 @@ body:has(
 /* BONANZA · DONATIONS - topic 414 + either 👉 ... 👈 or the
    stable Game-Sign-Donations image, excluding topic 12. */
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/414" i]):not(:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/12" i])):is(:has(.content .emoji[aria-label="Emoji: backhand index pointing right"] ~ .emoji[aria-label="Emoji: backhand index pointing left"]), :has(.content a[href*="Game-Sign-Donations.png" i])) {
+.msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail):is([href="https://darkpeers.org/forums/topics/414" i], [href^="https://darkpeers.org/forums/topics/414?" i], [href^="https://darkpeers.org/forums/topics/414#" i], [href^="https://darkpeers.org/forums/topics/414/" i])):not(:has(.content a:not(.toggle-thumbnail):is([href="https://darkpeers.org/forums/topics/12" i], [href^="https://darkpeers.org/forums/topics/12?" i], [href^="https://darkpeers.org/forums/topics/12#" i], [href^="https://darkpeers.org/forums/topics/12/" i]))):is(:has(.content .emoji[aria-label="Emoji: backhand index pointing right"] ~ .emoji[aria-label="Emoji: backhand index pointing left"]), :has(.content a[href*="Game-Sign-Donations.png" i])) {
     --tlcc-bridge-badge: var(--tlcc-bonanza-prefix) "DONATIONS";
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/414" i]):not(:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/12" i])):is(:has(.content .emoji[aria-label="Emoji: backhand index pointing right"] ~ .emoji[aria-label="Emoji: backhand index pointing left"]), :has(.content a[href*="Game-Sign-Donations.png" i])) {
+.msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content a:not(.toggle-thumbnail):is([href="https://darkpeers.org/forums/topics/414" i], [href^="https://darkpeers.org/forums/topics/414?" i], [href^="https://darkpeers.org/forums/topics/414#" i], [href^="https://darkpeers.org/forums/topics/414/" i])):not(:has(.content a:not(.toggle-thumbnail):is([href="https://darkpeers.org/forums/topics/12" i], [href^="https://darkpeers.org/forums/topics/12?" i], [href^="https://darkpeers.org/forums/topics/12#" i], [href^="https://darkpeers.org/forums/topics/12/" i]))):is(:has(.content .emoji[aria-label="Emoji: backhand index pointing right"] ~ .emoji[aria-label="Emoji: backhand index pointing left"]), :has(.content a[href*="Game-Sign-Donations.png" i])) {
     background:
         color-mix(in srgb, var(--tlcc-gold) 7%, transparent);
     box-shadow:
@@ -929,7 +929,7 @@ body:has(
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/414" i]):not(:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/12" i])):is(:has(.content .emoji[aria-label="Emoji: backhand index pointing right"] ~ .emoji[aria-label="Emoji: backhand index pointing left"]), :has(.content a[href*="Game-Sign-Donations.png" i]))
+.msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail):is([href="https://darkpeers.org/forums/topics/414" i], [href^="https://darkpeers.org/forums/topics/414?" i], [href^="https://darkpeers.org/forums/topics/414#" i], [href^="https://darkpeers.org/forums/topics/414/" i])):not(:has(.content a:not(.toggle-thumbnail):is([href="https://darkpeers.org/forums/topics/12" i], [href^="https://darkpeers.org/forums/topics/12?" i], [href^="https://darkpeers.org/forums/topics/12#" i], [href^="https://darkpeers.org/forums/topics/12/" i]))):is(:has(.content .emoji[aria-label="Emoji: backhand index pointing right"] ~ .emoji[aria-label="Emoji: backhand index pointing left"]), :has(.content a[href*="Game-Sign-Donations.png" i]))
 .from .user::after {
     content: var(--tlcc-bonanza-prefix) "DONATIONS";
     color: var(--tlcc-gold);
@@ -945,7 +945,7 @@ body:has(
    preceding strong donations signature and only when the continuation
    itself carries no link or emoji structure. */
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/414" i]):not(:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/12" i])):is(:has(.content .emoji[aria-label="Emoji: backhand index pointing right"] ~ .emoji[aria-label="Emoji: backhand index pointing left"]), :has(.content a[href*="Game-Sign-Donations.png" i]))
+.msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail):is([href="https://darkpeers.org/forums/topics/414" i], [href^="https://darkpeers.org/forums/topics/414?" i], [href^="https://darkpeers.org/forums/topics/414#" i], [href^="https://darkpeers.org/forums/topics/414/" i])):not(:has(.content a:not(.toggle-thumbnail):is([href="https://darkpeers.org/forums/topics/12" i], [href^="https://darkpeers.org/forums/topics/12?" i], [href^="https://darkpeers.org/forums/topics/12#" i], [href^="https://darkpeers.org/forums/topics/12/" i]))):is(:has(.content .emoji[aria-label="Emoji: backhand index pointing right"] ~ .emoji[aria-label="Emoji: backhand index pointing left"]), :has(.content a[href*="Game-Sign-Donations.png" i]))
 + .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href])):not(:has(.content .emoji)) {
     --tlcc-bridge-badge: var(--tlcc-bonanza-prefix) "DONATIONS";
     background:
@@ -956,7 +956,7 @@ body:has(
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/414" i]):not(:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/12" i])):is(:has(.content .emoji[aria-label="Emoji: backhand index pointing right"] ~ .emoji[aria-label="Emoji: backhand index pointing left"]), :has(.content a[href*="Game-Sign-Donations.png" i]))
+.msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail):is([href="https://darkpeers.org/forums/topics/414" i], [href^="https://darkpeers.org/forums/topics/414?" i], [href^="https://darkpeers.org/forums/topics/414#" i], [href^="https://darkpeers.org/forums/topics/414/" i])):not(:has(.content a:not(.toggle-thumbnail):is([href="https://darkpeers.org/forums/topics/12" i], [href^="https://darkpeers.org/forums/topics/12?" i], [href^="https://darkpeers.org/forums/topics/12#" i], [href^="https://darkpeers.org/forums/topics/12/" i]))):is(:has(.content .emoji[aria-label="Emoji: backhand index pointing right"] ~ .emoji[aria-label="Emoji: backhand index pointing left"]), :has(.content a[href*="Game-Sign-Donations.png" i]))
 + .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href])):not(:has(.content .emoji))
 .from .user::after {
     content: var(--tlcc-bonanza-prefix) "DONATIONS";
@@ -985,11 +985,11 @@ body:has(
 
 /* [2/3]: proven DONATIONS start -> topic 12 + 🙏 */
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/414" i]):not(:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/12" i])):is(
+.msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail):is([href="https://darkpeers.org/forums/topics/414" i], [href^="https://darkpeers.org/forums/topics/414?" i], [href^="https://darkpeers.org/forums/topics/414#" i], [href^="https://darkpeers.org/forums/topics/414/" i])):not(:has(.content a:not(.toggle-thumbnail):is([href="https://darkpeers.org/forums/topics/12" i], [href^="https://darkpeers.org/forums/topics/12?" i], [href^="https://darkpeers.org/forums/topics/12#" i], [href^="https://darkpeers.org/forums/topics/12/" i]))):is(
     :has(.content .emoji[aria-label="Emoji: backhand index pointing right"] ~ .emoji[aria-label="Emoji: backhand index pointing left"]),
     :has(.content a[href*="Game-Sign-Donations.png" i])
 )
-+ .msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/12" i]):has(.content .emoji[aria-label*="folded hands" i]) {
++ .msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail):is([href="https://darkpeers.org/forums/topics/12" i], [href^="https://darkpeers.org/forums/topics/12?" i], [href^="https://darkpeers.org/forums/topics/12#" i], [href^="https://darkpeers.org/forums/topics/12/" i])):has(.content .emoji[aria-label*="folded hands" i]) {
     --tlcc-bridge-badge: var(--tlcc-bonanza-prefix) "DONATIONS";
     background:
         color-mix(in srgb, var(--tlcc-gold) 7%, transparent);
@@ -999,11 +999,11 @@ body:has(
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/414" i]):not(:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/12" i])):is(
+.msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail):is([href="https://darkpeers.org/forums/topics/414" i], [href^="https://darkpeers.org/forums/topics/414?" i], [href^="https://darkpeers.org/forums/topics/414#" i], [href^="https://darkpeers.org/forums/topics/414/" i])):not(:has(.content a:not(.toggle-thumbnail):is([href="https://darkpeers.org/forums/topics/12" i], [href^="https://darkpeers.org/forums/topics/12?" i], [href^="https://darkpeers.org/forums/topics/12#" i], [href^="https://darkpeers.org/forums/topics/12/" i]))):is(
     :has(.content .emoji[aria-label="Emoji: backhand index pointing right"] ~ .emoji[aria-label="Emoji: backhand index pointing left"]),
     :has(.content a[href*="Game-Sign-Donations.png" i])
 )
-+ .msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/12" i]):has(.content .emoji[aria-label*="folded hands" i])
++ .msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail):is([href="https://darkpeers.org/forums/topics/12" i], [href^="https://darkpeers.org/forums/topics/12?" i], [href^="https://darkpeers.org/forums/topics/12#" i], [href^="https://darkpeers.org/forums/topics/12/" i])):has(.content .emoji[aria-label*="folded hands" i])
 .from .user::after {
     content: var(--tlcc-bonanza-prefix) "DONATIONS";
     color: var(--tlcc-gold);
@@ -1017,11 +1017,11 @@ body:has(
 
 /* [3/3]: same proven chain -> one final marker-free DP fragment */
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/414" i]):not(:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/12" i])):is(
+.msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail):is([href="https://darkpeers.org/forums/topics/414" i], [href^="https://darkpeers.org/forums/topics/414?" i], [href^="https://darkpeers.org/forums/topics/414#" i], [href^="https://darkpeers.org/forums/topics/414/" i])):not(:has(.content a:not(.toggle-thumbnail):is([href="https://darkpeers.org/forums/topics/12" i], [href^="https://darkpeers.org/forums/topics/12?" i], [href^="https://darkpeers.org/forums/topics/12#" i], [href^="https://darkpeers.org/forums/topics/12/" i]))):is(
     :has(.content .emoji[aria-label="Emoji: backhand index pointing right"] ~ .emoji[aria-label="Emoji: backhand index pointing left"]),
     :has(.content a[href*="Game-Sign-Donations.png" i])
 )
-+ .msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/12" i]):has(.content .emoji[aria-label*="folded hands" i])
++ .msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail):is([href="https://darkpeers.org/forums/topics/12" i], [href^="https://darkpeers.org/forums/topics/12?" i], [href^="https://darkpeers.org/forums/topics/12#" i], [href^="https://darkpeers.org/forums/topics/12/" i])):has(.content .emoji[aria-label*="folded hands" i])
 + .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href])):not(:has(.content .emoji)) {
     --tlcc-bridge-badge: var(--tlcc-bonanza-prefix) "DONATIONS";
     background:
@@ -1032,11 +1032,11 @@ body:has(
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/414" i]):not(:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/12" i])):is(
+.msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail):is([href="https://darkpeers.org/forums/topics/414" i], [href^="https://darkpeers.org/forums/topics/414?" i], [href^="https://darkpeers.org/forums/topics/414#" i], [href^="https://darkpeers.org/forums/topics/414/" i])):not(:has(.content a:not(.toggle-thumbnail):is([href="https://darkpeers.org/forums/topics/12" i], [href^="https://darkpeers.org/forums/topics/12?" i], [href^="https://darkpeers.org/forums/topics/12#" i], [href^="https://darkpeers.org/forums/topics/12/" i]))):is(
     :has(.content .emoji[aria-label="Emoji: backhand index pointing right"] ~ .emoji[aria-label="Emoji: backhand index pointing left"]),
     :has(.content a[href*="Game-Sign-Donations.png" i])
 )
-+ .msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail)[href*="darkpeers.org/forums/topics/12" i]):has(.content .emoji[aria-label*="folded hands" i])
++ .msg[data-type="message"][data-from="DP" i]:has(.content a:not(.toggle-thumbnail):is([href="https://darkpeers.org/forums/topics/12" i], [href^="https://darkpeers.org/forums/topics/12?" i], [href^="https://darkpeers.org/forums/topics/12#" i], [href^="https://darkpeers.org/forums/topics/12/" i])):has(.content .emoji[aria-label*="folded hands" i])
 + .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href])):not(:has(.content .emoji))
 .from .user::after {
     content: var(--tlcc-bonanza-prefix) "DONATIONS";
@@ -1145,13 +1145,13 @@ body:has(
 /* Legacy URL anchors only. Current sentinels are inherently invisible. */
 #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]
-.content a[href*="darkpeers.org/#dpgw-v1-" i] {
+.content a[href^="https://darkpeers.org/#dpgw-v1-" i] {
     display: none !important;
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]
-.content a[href*="darkpeers.org/#dpgw-v1-" i]::after {
+.content a[href^="https://darkpeers.org/#dpgw-v1-" i]::after {
     content: none !important;
 }
 
@@ -1163,7 +1163,7 @@ body:has(
    with type immediately after prefix, then optional event context. */
 #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:is(
-    :has(.content a[href$="#dpgw-v1-start" i]),
+    :has(.content a[href="https://darkpeers.org/#dpgw-v1-start" i]),
     :has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline:is(.irc-fg0, .irc-fg98))
 ) {
     --tlcc-dpgw-badge: "GIVEAWAY";
@@ -1174,7 +1174,7 @@ body:has(
 
 #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:is(
-    :has(.content a[href$="#dpgw-v1-start-pool" i]),
+    :has(.content a[href="https://darkpeers.org/#dpgw-v1-start-pool" i]),
     :has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline:is(.irc-fg1, .irc-fg88))
 ) {
     --tlcc-dpgw-badge: var(--tlcc-giveaway-prefix) "BON POOL";
@@ -1185,7 +1185,7 @@ body:has(
 
 #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:is(
-    :has(.content a[href$="#dpgw-v1-start-taxes" i]),
+    :has(.content a[href="https://darkpeers.org/#dpgw-v1-start-taxes" i]),
     :has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline.irc-fg2)
 ) {
     --tlcc-dpgw-badge: var(--tlcc-giveaway-prefix) "TAXES";
@@ -1196,7 +1196,7 @@ body:has(
 
 #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:is(
-    :has(.content a[href$="#dpgw-v1-gift" i]),
+    :has(.content a[href="https://darkpeers.org/#dpgw-v1-gift" i]),
     :has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline.irc-fg3)
 ) {
     --tlcc-dpgw-badge: var(--tlcc-giveaway-prefix) "GIFT";
@@ -1208,7 +1208,7 @@ body:has(
 
 #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:is(
-    :has(.content a[href$="#dpgw-v1-pot" i]),
+    :has(.content a[href="https://darkpeers.org/#dpgw-v1-pot" i]),
     :has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline.irc-fg4)
 ) {
     --tlcc-dpgw-badge: var(--tlcc-giveaway-prefix) "POT";
@@ -1219,7 +1219,7 @@ body:has(
 
 #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:is(
-    :has(.content a[href$="#dpgw-v1-sponsors" i]),
+    :has(.content a[href="https://darkpeers.org/#dpgw-v1-sponsors" i]),
     :has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline.irc-fg5)
 ) {
     --tlcc-dpgw-badge: var(--tlcc-giveaway-prefix) "SPONSORS";
@@ -1240,7 +1240,7 @@ body:has(
 
 #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:is(
-    :has(.content a[href$="#dpgw-v1-entries" i]),
+    :has(.content a[href="https://darkpeers.org/#dpgw-v1-entries" i]),
     :has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline.irc-fg6)
 ) {
     --tlcc-dpgw-badge: var(--tlcc-giveaway-prefix) "ENTRIES";
@@ -1251,7 +1251,7 @@ body:has(
 
 #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:is(
-    :has(.content a[href$="#dpgw-v1-stats" i]),
+    :has(.content a[href="https://darkpeers.org/#dpgw-v1-stats" i]),
     :has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline.irc-fg7)
 ) {
     --tlcc-dpgw-badge: var(--tlcc-giveaway-prefix) "STATS";
@@ -1262,7 +1262,7 @@ body:has(
 
 #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:is(
-    :has(.content a[href$="#dpgw-v1-time" i]),
+    :has(.content a[href="https://darkpeers.org/#dpgw-v1-time" i]),
     :has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline.irc-fg8)
 ) {
     --tlcc-dpgw-badge: var(--tlcc-giveaway-prefix) "TIME";
@@ -1273,7 +1273,7 @@ body:has(
 
 #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:is(
-    :has(.content a[href$="#dpgw-v1-result" i]),
+    :has(.content a[href="https://darkpeers.org/#dpgw-v1-result" i]),
     :has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline.irc-fg9)
 ) {
     --tlcc-dpgw-badge: var(--tlcc-giveaway-prefix) "RESULT";
@@ -1284,7 +1284,7 @@ body:has(
 
 #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:is(
-    :has(.content a[href$="#dpgw-v1-tie" i]),
+    :has(.content a[href="https://darkpeers.org/#dpgw-v1-tie" i]),
     :has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline.irc-fg10)
 ) {
     --tlcc-dpgw-badge: var(--tlcc-giveaway-prefix) "TIE";
@@ -1295,7 +1295,7 @@ body:has(
 
 #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:is(
-    :has(.content a[href$="#dpgw-v1-rigged" i]),
+    :has(.content a[href="https://darkpeers.org/#dpgw-v1-rigged" i]),
     :has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline.irc-fg11)
 ) {
     --tlcc-dpgw-badge: var(--tlcc-giveaway-prefix) "RIGGED";
@@ -1306,7 +1306,7 @@ body:has(
 
 #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:is(
-    :has(.content a[href$="#dpgw-v1-unrigged" i]),
+    :has(.content a[href="https://darkpeers.org/#dpgw-v1-unrigged" i]),
     :has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline.irc-fg12)
 ) {
     --tlcc-dpgw-badge: var(--tlcc-giveaway-prefix) "UNRIGGED";
@@ -1317,7 +1317,7 @@ body:has(
 
 #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:is(
-    :has(.content a[href$="#dpgw-v1-naughty" i]),
+    :has(.content a[href="https://darkpeers.org/#dpgw-v1-naughty" i]),
     :has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline.irc-fg13)
 ) {
     --tlcc-dpgw-badge: var(--tlcc-giveaway-prefix) "NAUGHTY";
@@ -1328,7 +1328,7 @@ body:has(
 
 #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:is(
-    :has(.content a[href$="#dpgw-v1-pool-paid" i]),
+    :has(.content a[href="https://darkpeers.org/#dpgw-v1-pool-paid" i]),
     :has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline.irc-fg14)
 ) {
     --tlcc-dpgw-badge: var(--tlcc-giveaway-prefix) "BON POOL";
@@ -1339,7 +1339,7 @@ body:has(
 
 #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:is(
-    :has(.content a[href$="#dpgw-v1-taxes-paid" i]),
+    :has(.content a[href="https://darkpeers.org/#dpgw-v1-taxes-paid" i]),
     :has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline.irc-fg15)
 ) {
     --tlcc-dpgw-badge: var(--tlcc-giveaway-prefix) "TAXES";
@@ -1374,7 +1374,7 @@ body:has(
 /* Shared authoritative card treatment. Highlight keeps The Lounge's native fill. */
 #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:not(.highlight):is(
-    :has(.content a[href*="darkpeers.org/#dpgw-v1-" i]),
+    :has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i]),
     :has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline:is(.irc-fg0, .irc-fg1, .irc-fg2, .irc-fg3, .irc-fg4, .irc-fg5, .irc-fg6, .irc-fg7, .irc-fg8, .irc-fg9, .irc-fg10, .irc-fg11, .irc-fg12, .irc-fg13, .irc-fg14, .irc-fg15, .irc-fg16, .irc-fg88, .irc-fg98))
 ) {
     background: color-mix(in srgb, var(--tlcc-dpgw-color) var(--tlcc-dpgw-strength, 7%), transparent);
@@ -1384,7 +1384,7 @@ body:has(
 
 #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:is(
-    :has(.content a[href*="darkpeers.org/#dpgw-v1-" i]),
+    :has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i]),
     :has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline:is(.irc-fg0, .irc-fg1, .irc-fg2, .irc-fg3, .irc-fg4, .irc-fg5, .irc-fg6, .irc-fg7, .irc-fg8, .irc-fg9, .irc-fg10, .irc-fg11, .irc-fg12, .irc-fg13, .irc-fg14, .irc-fg15, .irc-fg16, .irc-fg88, .irc-fg98))
 )
 .from .user::after {
@@ -1451,7 +1451,7 @@ body:has(
 /* MAIN GIVEAWAY ANNOUNCEMENT / REMINDER - 🎁 ... ✨ ... ✨ */
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label="Emoji: wrapped gift"] ~ .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]) {
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label="Emoji: wrapped gift"] ~ .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]) {
     background:
         color-mix(in srgb, var(--tlcc-gold) 10%, transparent);
     box-shadow:
@@ -1460,7 +1460,7 @@ body:has(
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label="Emoji: wrapped gift"] ~ .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"])
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label="Emoji: wrapped gift"] ~ .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"])
 .from .user::after {
     content: "GIVEAWAY";
     color: var(--tlcc-gold);
@@ -1472,7 +1472,7 @@ body:has(
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label="Emoji: wrapped gift"] ~ .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"])
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label="Emoji: wrapped gift"] ~ .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"])
 .content .emoji[aria-label="Emoji: wrapped gift"] {
     font-size: 1.12em;
 }
@@ -1484,7 +1484,7 @@ body:has(
    treatment is intentionally the same as authoritative giveaway events. */
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):not(:has(.content .emoji[aria-label="Emoji: wrapped gift"])):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"])) {
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):not(:has(.content .emoji[aria-label="Emoji: wrapped gift"])):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"])) {
     background:
         color-mix(in srgb, var(--tlcc-gold) 5%, transparent);
     box-shadow:
@@ -1493,7 +1493,7 @@ body:has(
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(:has(.content .emoji[aria-label="Emoji: wrapped gift"])):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]))
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(:has(.content .emoji[aria-label="Emoji: wrapped gift"])):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]))
 .from .user::after {
     content: var(--tlcc-giveaway-prefix) "SPONSORS";
     color: var(--tlcc-gold);
@@ -1527,13 +1527,13 @@ body:has(
 
 /* Semantic classification: highlighted or not. */
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label="Emoji: wrapped gift"]):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"])) {
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label="Emoji: wrapped gift"]):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"])) {
     --tlcc-bridge-badge: "GIVEAWAY";
 }
 
 /* Match the normal GIVEAWAY badge exactly, even when the message is highlighted. */
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label="Emoji: wrapped gift"]):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]))
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label="Emoji: wrapped gift"]):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]))
 .from .user::after {
     content: "GIVEAWAY";
     color: var(--tlcc-gold);
@@ -1546,7 +1546,7 @@ body:has(
 
 /* Decoration only: preserve native highlight treatment. */
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label="Emoji: wrapped gift"]):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"])) {
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label="Emoji: wrapped gift"]):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"])) {
     background:
         color-mix(in srgb, var(--tlcc-gold) 10%, transparent);
     box-shadow:
@@ -1564,8 +1564,8 @@ body:has(
    the split-start signature. */
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label="Emoji: wrapped gift"]):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]))
-+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(:has(.content .emoji[aria-label="Emoji: wrapped gift"])):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"])) {
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label="Emoji: wrapped gift"]):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]))
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(:has(.content .emoji[aria-label="Emoji: wrapped gift"])):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"])) {
     --tlcc-bridge-badge: "GIVEAWAY";
     background:
         color-mix(in srgb, var(--tlcc-gold) 10%, transparent);
@@ -1575,8 +1575,8 @@ body:has(
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label="Emoji: wrapped gift"]):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]))
-+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(:has(.content .emoji[aria-label="Emoji: wrapped gift"])):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]))
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label="Emoji: wrapped gift"]):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]))
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(:has(.content .emoji[aria-label="Emoji: wrapped gift"])):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]))
 .from .user::after {
     content: "GIVEAWAY";
     color: var(--tlcc-gold);
@@ -1596,7 +1596,7 @@ body:has(
    signature is specific enough to classify without reading text. */
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):not(:has(.content .emoji[aria-label="Emoji: wrapped gift"])):has(.content .emoji[aria-label="Emoji: orange heart"]):has(.content .emoji[aria-label="Emoji: dizzy"]) {
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):not(:has(.content .emoji[aria-label="Emoji: wrapped gift"])):has(.content .emoji[aria-label="Emoji: orange heart"]):has(.content .emoji[aria-label="Emoji: dizzy"]) {
     background:
         color-mix(in srgb, var(--tlcc-gold) 5%, transparent);
     box-shadow:
@@ -1605,7 +1605,7 @@ body:has(
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(:has(.content .emoji[aria-label="Emoji: wrapped gift"])):has(.content .emoji[aria-label="Emoji: orange heart"]):has(.content .emoji[aria-label="Emoji: dizzy"])
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(:has(.content .emoji[aria-label="Emoji: wrapped gift"])):has(.content .emoji[aria-label="Emoji: orange heart"]):has(.content .emoji[aria-label="Emoji: dizzy"])
 .from .user::after {
     content: var(--tlcc-giveaway-prefix) "SPONSORS";
     color: var(--tlcc-gold);
@@ -1620,7 +1620,7 @@ body:has(
 /* ENTRIES LIST - 📋 */
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="clipboard" i]) {
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="clipboard" i]) {
     background:
         color-mix(in srgb, var(--tlcc-cyan) 5%, transparent);
     box-shadow:
@@ -1629,7 +1629,7 @@ body:has(
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="clipboard" i])
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="clipboard" i])
 .from .user::after {
     content: var(--tlcc-giveaway-prefix) "ENTRIES";
     color: var(--tlcc-cyan);
@@ -1651,7 +1651,7 @@ body:has(
 /* GIVEAWAY STATS - 📊 */
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="bar chart" i]) {
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="bar chart" i]) {
     background:
         color-mix(in srgb, var(--tlcc-cyan) 5%, transparent);
     box-shadow:
@@ -1660,7 +1660,7 @@ body:has(
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="bar chart" i])
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="bar chart" i])
 .from .user::after {
     content: var(--tlcc-giveaway-prefix) "STATS";
     color: var(--tlcc-cyan);
@@ -1685,7 +1685,7 @@ body:has(
    ============================================================ */
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):is(
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):is(
     :has(.content .emoji[aria-label*="money bag" i]),
     :has(.content .emoji[aria-label*="chart increasing" i]),
     :has(.content .emoji:is([aria-label*="crossed-out eyes" i], [aria-label*="dizzy face" i])),
@@ -1699,7 +1699,7 @@ body:has(
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):is(
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):is(
     :has(.content .emoji[aria-label*="money bag" i]),
     :has(.content .emoji[aria-label*="chart increasing" i]),
     :has(.content .emoji:is([aria-label*="crossed-out eyes" i], [aria-label*="dizzy face" i])),
@@ -1728,13 +1728,13 @@ body:has(
    or emojis on the continuation. */
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):is(
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):is(
     :has(.content .emoji[aria-label*="money bag" i]),
     :has(.content .emoji[aria-label*="chart increasing" i]),
     :has(.content .emoji:is([aria-label*="crossed-out eyes" i], [aria-label*="dizzy face" i])),
     :has(.content .emoji[aria-label*="money with wings" i])
 )
-+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a[href])):not(:has(.content .emoji)) {
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a[href])):not(:has(.content .emoji)) {
     background:
         color-mix(in srgb, var(--tlcc-cyan) 5%, transparent);
     box-shadow:
@@ -1743,13 +1743,13 @@ body:has(
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):is(
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):is(
     :has(.content .emoji[aria-label*="money bag" i]),
     :has(.content .emoji[aria-label*="chart increasing" i]),
     :has(.content .emoji:is([aria-label*="crossed-out eyes" i], [aria-label*="dizzy face" i])),
     :has(.content .emoji[aria-label*="money with wings" i])
 )
-+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a[href])):not(:has(.content .emoji))
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a[href])):not(:has(.content .emoji))
 .from .user::after {
     content: var(--tlcc-giveaway-prefix) "STATS";
     color: var(--tlcc-cyan);
@@ -1764,7 +1764,7 @@ body:has(
 /* GIVEAWAY TIME - ⏳ */
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="hourglass" i]) {
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="hourglass" i]) {
     background:
         color-mix(in srgb, var(--tlcc-green) 5%, transparent);
     box-shadow:
@@ -1773,7 +1773,7 @@ body:has(
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="hourglass" i])
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="hourglass" i])
 .from .user::after {
     content: var(--tlcc-giveaway-prefix) "TIME";
     color: var(--tlcc-green);
@@ -1792,15 +1792,15 @@ body:has(
    after a warning/trophy message. */
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="partying" i]):is(
-    :has(+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])) .content .emoji[aria-label*="warning" i]),
-    :has(+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])) .content .emoji[aria-label*="trophy" i])
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="partying" i]):is(
+    :has(+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])) .content .emoji[aria-label*="warning" i]),
+    :has(+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])) .content .emoji[aria-label*="trophy" i])
 ),
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):is(
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):is(
     :has(.content .emoji[aria-label*="warning" i]),
     :has(.content .emoji[aria-label*="trophy" i])
-) + .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="partying" i]) {
+) + .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="partying" i]) {
     background:
         color-mix(in srgb, var(--tlcc-green) 7%, transparent);
     box-shadow:
@@ -1809,16 +1809,16 @@ body:has(
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="partying" i]):is(
-    :has(+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])) .content .emoji[aria-label*="warning" i]),
-    :has(+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])) .content .emoji[aria-label*="trophy" i])
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="partying" i]):is(
+    :has(+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])) .content .emoji[aria-label*="warning" i]),
+    :has(+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])) .content .emoji[aria-label*="trophy" i])
 )
 .from .user::after,
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):is(
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):is(
     :has(.content .emoji[aria-label*="warning" i]),
     :has(.content .emoji[aria-label*="trophy" i])
-) + .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="partying" i])
+) + .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="partying" i])
 .from .user::after {
     content: var(--tlcc-giveaway-prefix) "SPONSORS";
     color: var(--tlcc-green);
@@ -1836,7 +1836,7 @@ body:has(
    emoji and no structural marker. Accept this narrow signature only when there
    are no other emoji or links; richer celebratory user messages remain WEB. */
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a[href])):has(.content .emoji[aria-label*="partying" i]):not(:has(.content .emoji:not([aria-label*="partying" i]))) {
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a[href])):has(.content .emoji[aria-label*="partying" i]):not(:has(.content .emoji:not([aria-label*="partying" i]))) {
     background:
         color-mix(in srgb, var(--tlcc-green) 7%, transparent);
     box-shadow:
@@ -1845,7 +1845,7 @@ body:has(
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a[href])):has(.content .emoji[aria-label*="partying" i]):not(:has(.content .emoji:not([aria-label*="partying" i])))
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a[href])):has(.content .emoji[aria-label*="partying" i]):not(:has(.content .emoji:not([aria-label*="partying" i])))
 .from .user::after {
     content: var(--tlcc-giveaway-prefix) "SPONSORS";
     color: var(--tlcc-green);
@@ -1867,16 +1867,7 @@ body:has(
 
    This deliberately avoids classifying arbitrary coloured chat lines. */
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]
-:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"]))
-:not(:has(.content a[href]))
-:not(:has(.content .emoji))
-:has(.content [class*="irc-fg"])
-:has(+ .msg[data-type="message"][data-from="DP" i]
-    :not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"]))
-    :not(:has(.content a[href]))
-    :has(.content .emoji[aria-label*="partying" i])
-    :not(:has(.content .emoji:not([aria-label*="partying" i])))) {
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a[href])):not(:has(.content .emoji)):has(.content [class*="irc-fg"]):has(+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a[href])):has(.content .emoji[aria-label*="partying" i]):not(:has(.content .emoji:not([aria-label*="partying" i])))) {
     background:
         color-mix(in srgb, var(--tlcc-gold) 7%, transparent);
     box-shadow:
@@ -1885,16 +1876,7 @@ body:has(
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]
-:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"]))
-:not(:has(.content a[href]))
-:not(:has(.content .emoji))
-:has(.content [class*="irc-fg"])
-:has(+ .msg[data-type="message"][data-from="DP" i]
-    :not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"]))
-    :not(:has(.content a[href]))
-    :has(.content .emoji[aria-label*="partying" i])
-    :not(:has(.content .emoji:not([aria-label*="partying" i]))))
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a[href])):not(:has(.content .emoji)):has(.content [class*="irc-fg"]):has(+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a[href])):has(.content .emoji[aria-label*="partying" i]):not(:has(.content .emoji:not([aria-label*="partying" i]))))
 .from .user::after {
     content: var(--tlcc-giveaway-prefix) "POT";
     color: var(--tlcc-gold);
@@ -1913,7 +1895,7 @@ body:has(
    fallback and promote only when stronger context survives. */
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="trophy" i]) {
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="trophy" i]) {
     background:
         color-mix(in srgb, var(--tlcc-gold) 12%, transparent);
     box-shadow:
@@ -1922,7 +1904,7 @@ body:has(
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="trophy" i])
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="trophy" i])
 .from .user::after {
     content: var(--tlcc-giveaway-prefix) "WINNERS";
     color: var(--tlcc-gold);
@@ -1944,20 +1926,20 @@ body:has(
    because sendMessage() is asynchronous. */
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="trophy" i]):is(
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="trophy" i]):is(
     :has(.content .emoji[aria-label*="direct hit" i]),
     :has(.content .emoji[aria-label*="medal" i]),
     :has(.content .emoji[aria-label*="eyes" i]),
-    :has(+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])) .content .emoji[aria-label*="warning" i]),
-    :has(+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])) .content .emoji[aria-label*="partying" i])
+    :has(+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])) .content .emoji[aria-label*="warning" i]),
+    :has(+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])) .content .emoji[aria-label*="partying" i])
 )
 .from .user::after,
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):is(
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):is(
     :has(.content .emoji[aria-label*="warning" i]),
     :has(.content .emoji[aria-label*="partying" i])
 )
-+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="trophy" i])
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="trophy" i])
 .from .user::after {
     content: var(--tlcc-giveaway-prefix) "RESULT";
 }
@@ -1972,10 +1954,10 @@ body:has(
    no surviving link of its own. */
 #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:is(
-    :has(.content a[href$="#dpgw-v1-result" i]),
+    :has(.content a[href="https://darkpeers.org/#dpgw-v1-result" i]),
     :has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline.irc-fg9)
 )
-+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a[href])) {
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a[href])) {
     background:
         color-mix(in srgb, var(--tlcc-gold) 12%, transparent);
     box-shadow:
@@ -1985,10 +1967,10 @@ body:has(
 
 #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:is(
-    :has(.content a[href$="#dpgw-v1-result" i]),
+    :has(.content a[href="https://darkpeers.org/#dpgw-v1-result" i]),
     :has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline.irc-fg9)
 )
-+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a[href]))
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a[href]))
 .from .user::after {
     content: var(--tlcc-giveaway-prefix) "RESULT";
     color: var(--tlcc-gold);
@@ -1997,6 +1979,40 @@ body:has(
     border-style: solid;
     background:
         color-mix(in srgb, var(--tlcc-gold) 14%, transparent);
+}
+
+
+/* AUTHORITATIVE RESULT CONTEXT -> UNMARKED [2/2]
+   The first result fragment can carry the v1.3.15+ event-context sentinel while
+   the bridge leaves its continuation marker-free. Preserve the event family colour. */
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline.irc-fg9 + .irc-bold.irc-underline.irc-fg12:not(.irc-italic))
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a[href])) {
+    background: color-mix(in srgb, var(--tlcc-pool) 10%, transparent) !important;
+    box-shadow: inset 3px 0 0 var(--tlcc-pool) !important;
+}
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline.irc-fg9 + .irc-bold.irc-underline.irc-fg12:not(.irc-italic))
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a[href]))
+.from .user::after {
+    color: var(--tlcc-pool) !important;
+    border-color: color-mix(in srgb, var(--tlcc-pool) 65%, transparent) !important;
+    background: color-mix(in srgb, var(--tlcc-pool) 14%, transparent) !important;
+}
+
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline.irc-fg9 + .irc-bold.irc-underline.irc-fg13:not(.irc-italic))
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a[href])) {
+    background: color-mix(in srgb, var(--tlcc-rigged) 11%, transparent) !important;
+    box-shadow: inset 3px 0 0 var(--tlcc-rigged) !important;
+}
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline.irc-fg9 + .irc-bold.irc-underline.irc-fg13:not(.irc-italic))
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a[href]))
+.from .user::after {
+    color: var(--tlcc-rigged) !important;
+    border-color: color-mix(in srgb, var(--tlcc-rigged) 65%, transparent) !important;
+    background: color-mix(in srgb, var(--tlcc-rigged) 14%, transparent) !important;
 }
 
 
@@ -2016,21 +2032,21 @@ body:has(
 
 /* Rich result signature -> marker-free continuation. */
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):has(.content .emoji[aria-label*="trophy" i]):is(
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):has(.content .emoji[aria-label*="trophy" i]):is(
     :has(.content .emoji[aria-label*="direct hit" i]),
     :has(.content .emoji[aria-label*="medal" i]),
     :has(.content .emoji[aria-label*="eyes" i])
 )
-+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a[href])):not(:has(.content .emoji)),
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a[href])):not(:has(.content .emoji)),
 
 /* Sponsor/tie marker -> trophy result -> marker-free continuation. */
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):is(
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):is(
     :has(.content .emoji[aria-label*="warning" i]),
     :has(.content .emoji[aria-label*="partying" i])
 )
-+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):has(.content .emoji[aria-label*="trophy" i])
-+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a[href])):not(:has(.content .emoji)) {
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):has(.content .emoji[aria-label*="trophy" i])
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a[href])):not(:has(.content .emoji)) {
     background:
         color-mix(in srgb, var(--tlcc-gold) 12%, transparent);
     box-shadow:
@@ -2041,21 +2057,21 @@ body:has(
 
 /* Apply RESULT badge to the inherited continuation. */
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):has(.content .emoji[aria-label*="trophy" i]):is(
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):has(.content .emoji[aria-label*="trophy" i]):is(
     :has(.content .emoji[aria-label*="direct hit" i]),
     :has(.content .emoji[aria-label*="medal" i]),
     :has(.content .emoji[aria-label*="eyes" i])
 )
-+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a[href])):not(:has(.content .emoji))
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a[href])):not(:has(.content .emoji))
 .from .user::after,
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):is(
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):is(
     :has(.content .emoji[aria-label*="warning" i]),
     :has(.content .emoji[aria-label*="partying" i])
 )
-+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):has(.content .emoji[aria-label*="trophy" i])
-+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a[href])):not(:has(.content .emoji))
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):has(.content .emoji[aria-label*="trophy" i])
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a[href])):not(:has(.content .emoji))
 .from .user::after {
     content: var(--tlcc-giveaway-prefix) "RESULT";
     color: var(--tlcc-gold);
@@ -2074,10 +2090,10 @@ body:has(
    before OR after it. */
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="warning" i]):has(+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])) .content .emoji[aria-label*="trophy" i]),
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="warning" i]):has(+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])) .content .emoji[aria-label*="trophy" i]),
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):has(.content .emoji[aria-label*="trophy" i])
-+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="warning" i]) {
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):has(.content .emoji[aria-label*="trophy" i])
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="warning" i]) {
     background:
         color-mix(in srgb, var(--tlcc-warning) 8%, transparent);
     box-shadow:
@@ -2086,11 +2102,11 @@ body:has(
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="warning" i]):has(+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])) .content .emoji[aria-label*="trophy" i])
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="warning" i]):has(+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])) .content .emoji[aria-label*="trophy" i])
 .from .user::after,
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):has(.content .emoji[aria-label*="trophy" i])
-+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="warning" i])
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):has(.content .emoji[aria-label*="trophy" i])
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="warning" i])
 .from .user::after {
     content: var(--tlcc-giveaway-prefix) "TIE";
     color: var(--tlcc-warning);
@@ -2107,9 +2123,9 @@ body:has(
    also appends it to rigged entry confirmations. */
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="horns" i]),
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="horns" i]),
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label="Emoji: wrapped gift"] ~ .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]):has(.content .emoji[aria-label*="winking face" i]:last-child) {
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label="Emoji: wrapped gift"] ~ .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]):has(.content .emoji[aria-label*="winking face" i]:last-child) {
     background:
         color-mix(in srgb, var(--tlcc-rigged) 9%, transparent);
     box-shadow:
@@ -2118,10 +2134,10 @@ body:has(
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="horns" i])
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="horns" i])
 .from .user::after,
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label="Emoji: wrapped gift"] ~ .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]):has(.content .emoji[aria-label*="winking face" i]:last-child)
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label="Emoji: wrapped gift"] ~ .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]):has(.content .emoji[aria-label*="winking face" i]:last-child)
 .from .user::after {
     content: var(--tlcc-giveaway-prefix) "RIGGED";
     color: var(--tlcc-rigged);
@@ -2136,7 +2152,7 @@ body:has(
 /* RIGGED MODE DISABLED - 😒 */
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="unamused" i]) {
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="unamused" i]) {
     background:
         color-mix(in srgb, var(--tlcc-green) 6%, transparent);
     box-shadow:
@@ -2145,7 +2161,7 @@ body:has(
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="unamused" i])
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="unamused" i])
 .from .user::after {
     content: var(--tlcc-giveaway-prefix) "UNRIGGED";
     color: var(--tlcc-green);
@@ -2160,7 +2176,7 @@ body:has(
 /* NAUGHTY-LIST ADD - 👮 */
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="police officer" i]) {
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):has(.content .emoji[aria-label*="police officer" i]) {
     background:
         color-mix(in srgb, var(--tlcc-naughty) 6%, transparent);
     box-shadow:
@@ -2169,7 +2185,7 @@ body:has(
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="police officer" i])
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):has(.content .emoji[aria-label*="police officer" i])
 .from .user::after {
     content: var(--tlcc-giveaway-prefix) "NAUGHTY";
     color: var(--tlcc-naughty);
@@ -2184,7 +2200,7 @@ body:has(
 /* REJECTED / UNAUTHORISED - 🚫 / 🛑 / 🚨 */
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):is(:has(.content .emoji[aria-label*="prohibited" i]),:has(.content .emoji[aria-label*="stop sign" i]),:has(.content .emoji[aria-label*="police car light" i])
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):not(.highlight):is(:has(.content .emoji[aria-label*="prohibited" i]),:has(.content .emoji[aria-label*="stop sign" i]),:has(.content .emoji[aria-label*="police car light" i])
 ) {
     background:
         color-mix(in srgb, var(--tlcc-alert) 7%, transparent);
@@ -2194,7 +2210,7 @@ body:has(
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):is(:has(.content .emoji[aria-label*="prohibited" i]),:has(.content .emoji[aria-label*="stop sign" i]),:has(.content .emoji[aria-label*="police car light" i])
+.msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a:is([href*="darkpeers.org/requests/" i], [href*="darkpeers.org/bon-pool" i]))):is(:has(.content .emoji[aria-label*="prohibited" i]),:has(.content .emoji[aria-label*="stop sign" i]),:has(.content .emoji[aria-label*="police car light" i])
 )
 .from .user::after {
     content: var(--tlcc-giveaway-prefix) "REJECTED";
@@ -2228,13 +2244,13 @@ body:has(
 #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:is(
     :has(.content a:is(
-        [href$="#dpgw-v1-start" i],
-        [href$="#dpgw-v1-start-pool" i],
-        [href$="#dpgw-v1-start-taxes" i]
+        [href="https://darkpeers.org/#dpgw-v1-start" i],
+        [href="https://darkpeers.org/#dpgw-v1-start-pool" i],
+        [href="https://darkpeers.org/#dpgw-v1-start-taxes" i]
     )),
     :has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline:is(.irc-fg0, .irc-fg98, .irc-fg1, .irc-fg88, .irc-fg2))
 )
-+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content .emoji[aria-label="Emoji: wrapped gift"])):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"])) {
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content .emoji[aria-label="Emoji: wrapped gift"])):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"])):not(:has(.content .emoji[aria-label*="winking face" i])) {
     background:
         color-mix(in srgb, var(--tlcc-cyan) 6%, transparent);
     box-shadow:
@@ -2245,13 +2261,13 @@ body:has(
 #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:is(
     :has(.content a:is(
-        [href$="#dpgw-v1-start" i],
-        [href$="#dpgw-v1-start-pool" i],
-        [href$="#dpgw-v1-start-taxes" i]
+        [href="https://darkpeers.org/#dpgw-v1-start" i],
+        [href="https://darkpeers.org/#dpgw-v1-start-pool" i],
+        [href="https://darkpeers.org/#dpgw-v1-start-taxes" i]
     )),
     :has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline:is(.irc-fg0, .irc-fg98, .irc-fg1, .irc-fg88, .irc-fg2))
 )
-+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content .emoji[aria-label="Emoji: wrapped gift"])):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"]))
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content .emoji[aria-label="Emoji: wrapped gift"])):has(.content .emoji[aria-label="Emoji: sparkles"]):not(:has(.content .emoji[aria-label="Emoji: sparkles"] ~ .emoji[aria-label="Emoji: sparkles"])):not(:has(.content .emoji[aria-label*="winking face" i]))
 .from .user::after {
     content: "GIVEAWAY";
     color: var(--tlcc-cyan);
@@ -2281,10 +2297,10 @@ body:has(
 /* GW · BON POOL [2/2] */
 #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:is(
-    :has(.content a[href$="#dpgw-v1-start-pool" i]),
+    :has(.content a[href="https://darkpeers.org/#dpgw-v1-start-pool" i]),
     :has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline:is(.irc-fg1, .irc-fg88))
 )
-+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a[href])):has(.content .emoji[aria-label="Emoji: sparkles"]):has(.content .emoji[aria-label*="eyes" i]) {
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a[href])):has(.content .emoji[aria-label="Emoji: sparkles"]):has(.content .emoji[aria-label*="eyes" i]) {
     background:
         color-mix(in srgb, var(--tlcc-pool) 10%, transparent);
     box-shadow:
@@ -2294,10 +2310,10 @@ body:has(
 
 #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:is(
-    :has(.content a[href$="#dpgw-v1-start-pool" i]),
+    :has(.content a[href="https://darkpeers.org/#dpgw-v1-start-pool" i]),
     :has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline:is(.irc-fg1, .irc-fg88))
 )
-+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a[href])):has(.content .emoji[aria-label="Emoji: sparkles"]):has(.content .emoji[aria-label*="eyes" i])
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a[href])):has(.content .emoji[aria-label="Emoji: sparkles"]):has(.content .emoji[aria-label*="eyes" i])
 .from .user::after {
     content: var(--tlcc-giveaway-prefix) "BON POOL";
     color: var(--tlcc-pool);
@@ -2312,10 +2328,10 @@ body:has(
 /* GW · TAXES [2/2] */
 #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:is(
-    :has(.content a[href$="#dpgw-v1-start-taxes" i]),
+    :has(.content a[href="https://darkpeers.org/#dpgw-v1-start-taxes" i]),
     :has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline.irc-fg2)
 )
-+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a[href])):has(.content .emoji[aria-label*="winking face" i]) {
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a[href])):has(.content .emoji[aria-label*="winking face" i]) {
     background:
         color-mix(in srgb, var(--tlcc-rigged) 11%, transparent);
     box-shadow:
@@ -2325,10 +2341,10 @@ body:has(
 
 #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:is(
-    :has(.content a[href$="#dpgw-v1-start-taxes" i]),
+    :has(.content a[href="https://darkpeers.org/#dpgw-v1-start-taxes" i]),
     :has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline.irc-fg2)
 )
-+ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href*="darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a[href])):has(.content .emoji[aria-label*="winking face" i])
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href^="https://darkpeers.org/#dpgw-v1-" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline[class*="irc-fg"])):not(:has(.content a[href])):has(.content .emoji[aria-label*="winking face" i])
 .from .user::after {
     content: var(--tlcc-giveaway-prefix) "TAXES";
     color: var(--tlcc-rigged);
@@ -2545,59 +2561,59 @@ body:has(
    the giveaway RESULT heuristic. */
 #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])
-+ .msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content .emoji[aria-label*="trophy" i]):has(.content .emoji[aria-label*="medal" i]),
++ .msg[data-type="message"][data-from="DP" i]:not(.highlight):not(:has(.content a[href="https://darkpeers.org/#dpgw-v1-result" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline.irc-fg9)):has(.content .emoji[aria-label*="trophy" i]):has(.content .emoji[aria-label*="medal" i]),
 #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])
 + .msg[data-type="message"]
-+ .msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content .emoji[aria-label*="trophy" i]):has(.content .emoji[aria-label*="medal" i]),
-#chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])
-+ .msg[data-type="message"]
-+ .msg[data-type="message"]
-+ .msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content .emoji[aria-label*="trophy" i]):has(.content .emoji[aria-label*="medal" i]),
++ .msg[data-type="message"][data-from="DP" i]:not(.highlight):not(:has(.content a[href="https://darkpeers.org/#dpgw-v1-result" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline.irc-fg9)):has(.content .emoji[aria-label*="trophy" i]):has(.content .emoji[aria-label*="medal" i]),
 #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])
 + .msg[data-type="message"]
 + .msg[data-type="message"]
++ .msg[data-type="message"][data-from="DP" i]:not(.highlight):not(:has(.content a[href="https://darkpeers.org/#dpgw-v1-result" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline.irc-fg9)):has(.content .emoji[aria-label*="trophy" i]):has(.content .emoji[aria-label*="medal" i]),
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])
 + .msg[data-type="message"]
-+ .msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content .emoji[aria-label*="trophy" i]):has(.content .emoji[aria-label*="medal" i]) {
++ .msg[data-type="message"]
++ .msg[data-type="message"]
++ .msg[data-type="message"][data-from="DP" i]:not(.highlight):not(:has(.content a[href="https://darkpeers.org/#dpgw-v1-result" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline.irc-fg9)):has(.content .emoji[aria-label*="trophy" i]):has(.content .emoji[aria-label*="medal" i]) {
     background:
-        color-mix(in srgb, var(--tlcc-trivia) 9%, transparent);
+        color-mix(in srgb, var(--tlcc-trivia) 9%, transparent) !important;
     box-shadow:
         inset 4px 0 0 var(--tlcc-trivia),
-        inset 0 0 0 1px color-mix(in srgb, var(--tlcc-trivia) 28%, transparent);
-    border-radius: 5px;
+        inset 0 0 0 1px color-mix(in srgb, var(--tlcc-trivia) 28%, transparent) !important;
+    border-radius: 5px !important;
 }
 
 #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])
-+ .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="trophy" i]):has(.content .emoji[aria-label*="medal" i])
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href="https://darkpeers.org/#dpgw-v1-result" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline.irc-fg9)):has(.content .emoji[aria-label*="trophy" i]):has(.content .emoji[aria-label*="medal" i])
 .from .user::after,
 #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])
 + .msg[data-type="message"]
-+ .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="trophy" i]):has(.content .emoji[aria-label*="medal" i])
-.from .user::after,
-#chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])
-+ .msg[data-type="message"]
-+ .msg[data-type="message"]
-+ .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="trophy" i]):has(.content .emoji[aria-label*="medal" i])
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href="https://darkpeers.org/#dpgw-v1-result" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline.irc-fg9)):has(.content .emoji[aria-label*="trophy" i]):has(.content .emoji[aria-label*="medal" i])
 .from .user::after,
 #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])
 + .msg[data-type="message"]
 + .msg[data-type="message"]
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href="https://darkpeers.org/#dpgw-v1-result" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline.irc-fg9)):has(.content .emoji[aria-label*="trophy" i]):has(.content .emoji[aria-label*="medal" i])
+.from .user::after,
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])
 + .msg[data-type="message"]
-+ .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="trophy" i]):has(.content .emoji[aria-label*="medal" i])
++ .msg[data-type="message"]
++ .msg[data-type="message"]
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href="https://darkpeers.org/#dpgw-v1-result" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline.irc-fg9)):has(.content .emoji[aria-label*="trophy" i]):has(.content .emoji[aria-label*="medal" i])
 .from .user::after {
-    content: var(--tlcc-trivia-prefix) "RESULT";
-    color: var(--tlcc-trivia);
+    content: var(--tlcc-trivia-prefix) "RESULT" !important;
+    color: var(--tlcc-trivia) !important;
     border-color:
-        color-mix(in srgb, var(--tlcc-trivia) 65%, transparent);
-    border-style: dashed;
+        color-mix(in srgb, var(--tlcc-trivia) 65%, transparent) !important;
+    border-style: dashed !important;
     background:
-        color-mix(in srgb, var(--tlcc-trivia) 12%, transparent);
+        color-mix(in srgb, var(--tlcc-trivia) 12%, transparent) !important;
 }
 
 
