@@ -10,7 +10,7 @@ TLCC remains deliberately **CSS-only**. It does not patch The Lounge, the DarkPe
 
 ## v0.5.70: Codex full-repository audit fixes
 
-The first Codex full-repository pass found six CSS correctness/compatibility edge cases. v0.5.70 fixes giveaway/trivia specificity, preserves BON Pool/Rigged Taxes colours across split RESULT continuations, repairs the original/legacy POT fallback, makes forum-topic matching ID-safe, gives TAXES split continuations explicit precedence, and restricts legacy authoritative markers to the real DarkPeers origin.
+The first Codex full-repository pass found six CSS correctness/compatibility edge cases. v0.5.70 fixes giveaway/trivia specificity, preserves BON Pool/Rigged Taxes colours across split RESULT continuations, repairs the original/legacy POT fallback, makes forum-topic matching ID-safe, gives TAXES split continuations explicit precedence, and restricts legacy authoritative markers to the real DarkPeers origin. A follow-up Codex pass also ensures the trivia precedence override can never outrank an authoritative Maghuro RESULT marker/sentinel.
 
 Backwards compatibility remains intentional across the original Blutopia BON Giveaway v6.2.2 by Nums, the DarkPeers BONanza v1.2.0 T.R.A.V.I.S. fork, and Maghuro's current sentinel/context protocol.
 
