@@ -4,9 +4,15 @@ Custom CSS for [The Lounge](https://thelounge.chat/) focused on making the DarkP
 
 TLCC remains deliberately **CSS-only**. It does not patch The Lounge, the DarkPeers bridge, Docker images, JavaScript or the giveaway userscript.
 
-**Current version:** v0.5.70  
+**Current version:** v0.6.0  
 **Tested with:** The Lounge 4.5.2 and the TNB tracker-first fork based on The Lounge 4.4.3  
 **Browsers tested:** Chrome on Android and desktop\n\n**Performance-scope requirement:** TLCC v0.5.5 uses custom-property container style queries (`@container style(...)`). Minimum support for this exact custom-property form is Chromium/Edge 111+, Safari 18+, Firefox 151+ desktop and Firefox 155+ Android. Unsupported browsers fail gracefully by leaving the scoped TLCC rules inactive.
+
+## v0.6.0: stable post-audit milestone
+
+v0.6.0 promotes the fully audited v0.5.70 code to the next stable TLCC line. It consolidates the invisible giveaway sentinel/context protocol, BON Pool and Rigged Taxes event identities, sponsor-message and split-continuation handling, backwards compatibility with the legacy giveaway implementations, and all classifier/specificity corrections from the full repository audit.
+
+This is deliberately a **release promotion rather than another behaviour change**: the CSS logic is the same audited logic already shipped as v0.5.70.
 
 ## v0.5.70: Codex full-repository audit fixes
 
