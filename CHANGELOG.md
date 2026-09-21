@@ -2,6 +2,16 @@
 
 All notable changes to **The Lounge Clean Chat** will be documented here.
 
+## v0.6.0 - 2026-09-21
+
+### Stable post-audit milestone
+
+- Promoted the completed v0.5.x development cycle to the v0.6 stable line after the full repository audit.
+- Consolidates the invisible sentinel/context protocol for Maghuro Giveaway, including event-wide BON Pool and Rigged Taxes identities, sponsor-message markers and split-continuation inheritance.
+- Includes the hardened compatibility layer for the original Blutopia BON Giveaway v6.2.2, the DarkPeers BONanza v1.2.0 T.R.A.V.I.S. fork and Maghuro's current userscript.
+- Includes the full set of classifier/specificity fixes from v0.5.70: trivia RESULT precedence, legacy POT fallback repair, topic-ID boundary matching, TAXES continuation precedence and exact-origin legacy markers.
+- No new CSS behaviour is introduced by this version bump; v0.6.0 is the stable promotion of the already audited v0.5.70 code.
+
 ## v0.5.70 - 2026-09-21
 
 ### Codex full-repository audit fixes
