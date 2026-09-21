@@ -2561,22 +2561,22 @@ body:has(
    the giveaway RESULT heuristic. */
 #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])
-+ .msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content .emoji[aria-label*="trophy" i]):has(.content .emoji[aria-label*="medal" i]),
++ .msg[data-type="message"][data-from="DP" i]:not(.highlight):not(:has(.content a[href="https://darkpeers.org/#dpgw-v1-result" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline.irc-fg9)):has(.content .emoji[aria-label*="trophy" i]):has(.content .emoji[aria-label*="medal" i]),
 #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])
 + .msg[data-type="message"]
-+ .msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content .emoji[aria-label*="trophy" i]):has(.content .emoji[aria-label*="medal" i]),
-#chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])
-+ .msg[data-type="message"]
-+ .msg[data-type="message"]
-+ .msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content .emoji[aria-label*="trophy" i]):has(.content .emoji[aria-label*="medal" i]),
++ .msg[data-type="message"][data-from="DP" i]:not(.highlight):not(:has(.content a[href="https://darkpeers.org/#dpgw-v1-result" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline.irc-fg9)):has(.content .emoji[aria-label*="trophy" i]):has(.content .emoji[aria-label*="medal" i]),
 #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])
 + .msg[data-type="message"]
 + .msg[data-type="message"]
++ .msg[data-type="message"][data-from="DP" i]:not(.highlight):not(:has(.content a[href="https://darkpeers.org/#dpgw-v1-result" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline.irc-fg9)):has(.content .emoji[aria-label*="trophy" i]):has(.content .emoji[aria-label*="medal" i]),
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])
 + .msg[data-type="message"]
-+ .msg[data-type="message"][data-from="DP" i]:not(.highlight):has(.content .emoji[aria-label*="trophy" i]):has(.content .emoji[aria-label*="medal" i]) {
++ .msg[data-type="message"]
++ .msg[data-type="message"]
++ .msg[data-type="message"][data-from="DP" i]:not(.highlight):not(:has(.content a[href="https://darkpeers.org/#dpgw-v1-result" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline.irc-fg9)):has(.content .emoji[aria-label*="trophy" i]):has(.content .emoji[aria-label*="medal" i]) {
     background:
         color-mix(in srgb, var(--tlcc-trivia) 9%, transparent) !important;
     box-shadow:
@@ -2587,25 +2587,25 @@ body:has(
 
 #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])
-+ .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="trophy" i]):has(.content .emoji[aria-label*="medal" i])
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href="https://darkpeers.org/#dpgw-v1-result" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline.irc-fg9)):has(.content .emoji[aria-label*="trophy" i]):has(.content .emoji[aria-label*="medal" i])
 .from .user::after,
 #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])
 + .msg[data-type="message"]
-+ .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="trophy" i]):has(.content .emoji[aria-label*="medal" i])
-.from .user::after,
-#chat-container[data-current-channel="#darkpeers" i]
-.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])
-+ .msg[data-type="message"]
-+ .msg[data-type="message"]
-+ .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="trophy" i]):has(.content .emoji[aria-label*="medal" i])
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href="https://darkpeers.org/#dpgw-v1-result" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline.irc-fg9)):has(.content .emoji[aria-label*="trophy" i]):has(.content .emoji[aria-label*="medal" i])
 .from .user::after,
 #chat-container[data-current-channel="#darkpeers" i]
 .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])
 + .msg[data-type="message"]
 + .msg[data-type="message"]
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href="https://darkpeers.org/#dpgw-v1-result" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline.irc-fg9)):has(.content .emoji[aria-label*="trophy" i]):has(.content .emoji[aria-label*="medal" i])
+.from .user::after,
+#chat-container[data-current-channel="#darkpeers" i]
+.msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="stopwatch" i])
 + .msg[data-type="message"]
-+ .msg[data-type="message"][data-from="DP" i]:has(.content .emoji[aria-label*="trophy" i]):has(.content .emoji[aria-label*="medal" i])
++ .msg[data-type="message"]
++ .msg[data-type="message"]
++ .msg[data-type="message"][data-from="DP" i]:not(:has(.content a[href="https://darkpeers.org/#dpgw-v1-result" i])):not(:has(.content .irc-bold.irc-italic.irc-underline + .irc-italic.irc-underline.irc-fg9)):has(.content .emoji[aria-label*="trophy" i]):has(.content .emoji[aria-label*="medal" i])
 .from .user::after {
     content: var(--tlcc-trivia-prefix) "RESULT" !important;
     color: var(--tlcc-trivia) !important;
