@@ -7,6 +7,7 @@ All notable changes to **The Lounge Clean Chat** will be documented here.
 ### Codex full-repository audit fixes
 
 - Gave proven trivia RESULT paths explicit precedence over giveaway trophy heuristics.
+- Kept authoritative Maghuro RESULT URL/sentinel markers above that trivia override, so a nearby stopwatch can never relabel a proven giveaway result.
 - Preserved BON Pool blue and Rigged Taxes pink on unmarked split RESULT continuations.
 - Repaired the original/legacy host POT fallback by keeping all pseudo-class predicates on the DP message selector.
 - Delimited BONanza forum topic IDs so IDs such as 12/414/1119 cannot prefix-match unrelated topics.
