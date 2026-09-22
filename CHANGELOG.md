@@ -2,6 +2,15 @@
 
 All notable changes to **The Lounge Clean Chat** will be documented here.
 
+## v0.6.1 - 2026-09-22
+
+### Live giveaway bridge fixes
+
+- Recognise the v1.3.26 sponsor-message sentinel as `GIVEAWAY · MESSAGES` while keeping the older IRC-16 marker compatible.
+- Treat 🎯 labels such as `bullseye` / `target` as the same high-confidence final-result signature as `direct hit`.
+- Preserve `GIVEAWAY · RESULT` across a split `[1/2]` → `[2/2]` result when the continuation contains only the trailing 👀 marker.
+- Recognise the live 🧾 + 😈 confirmed Rigged Taxes settlement as `GIVEAWAY · TAXES` instead of the generic `GIVEAWAY · RIGGED` fallback.
+
 ## v0.6.0 - 2026-09-21
 
 ### Stable post-audit milestone
