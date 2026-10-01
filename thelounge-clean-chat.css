@@ -105,6 +105,129 @@ body:has(
    selector prefix across the entire scrollback.
    ============================================================ */
 
+/* ============================================================
+   GLOBAL CHANNEL TOPIC EXPANSION
+
+   This UI-only enhancement intentionally lives outside the
+   DarkPeers network scope. Any channel topic rendered by The Lounge
+   gets the same full-topic popup without enabling DarkPeers message
+   classifiers, badges or tracker-specific styling.
+   ============================================================ */
+
+#chat .header {
+    position: relative;
+    overflow: visible;
+}
+
+#chat .header .topic {
+    position: relative;
+}
+
+@media (hover: none) and (pointer: coarse) {
+    #chat .header .topic {
+        cursor: pointer;
+    }
+
+    #chat .header .topic:hover,
+    #chat .header .topic:active {
+        position: fixed;
+        top: 48px;
+        left: 6px;
+        right: 6px;
+        z-index: 9999;
+        display: block;
+        margin: 0;
+        min-width: 0;
+        padding: 10px 11px;
+        max-height: 45vh;
+        overflow-x: hidden;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        white-space: normal;
+        word-break: normal;
+        overflow-wrap: anywhere;
+        line-height: 1.4;
+        font-size: 13px;
+        font-weight: 400;
+        color: var(--body-color);
+        background: var(--window-bg-color);
+        border: 1px solid
+            color-mix(in srgb, var(--body-color) 18%, transparent);
+        border-radius: 8px;
+        box-shadow: 0 6px 22px rgb(0 0 0 / 28%);
+        mask-image: none;
+        -webkit-mask-image: none;
+        user-select: text;
+        cursor: text;
+    }
+
+    #chat .header .topic:hover::before,
+    #chat .header .topic:active::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 48px;
+        background: transparent;
+        pointer-events: auto;
+    }
+}
+
+@media (hover: hover) and (pointer: fine) {
+    #chat .header .topic {
+        cursor: help;
+    }
+
+    /* Desktop: reveal the complete formatted topic on hover. The
+       transparent ::before bridge keeps the header under the pointer
+       after the topic itself becomes a fixed popup. */
+    #chat .header .topic:hover {
+        position: fixed;
+        top: 48px;
+        left: 12px;
+        right: 12px;
+        z-index: 9999;
+        display: block;
+        width: auto;
+        max-width: 900px;
+        margin: 0 auto;
+        min-width: 0;
+        padding: 10px 12px;
+        max-height: 45vh;
+        overflow-x: hidden;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        white-space: normal;
+        word-break: normal;
+        overflow-wrap: anywhere;
+        line-height: 1.4;
+        font-size: 13px;
+        font-weight: 400;
+        color: var(--body-color);
+        background: var(--window-bg-color);
+        border: 1px solid
+            color-mix(in srgb, var(--body-color) 18%, transparent);
+        border-radius: 8px;
+        box-shadow: 0 6px 22px rgb(0 0 0 / 28%);
+        mask-image: none;
+        -webkit-mask-image: none;
+        user-select: text;
+        cursor: text;
+    }
+
+    #chat .header .topic:hover::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 48px;
+        background: transparent;
+        pointer-events: auto;
+    }
+}
+
 @container style(--tlcc-active: on) {
 
 /* ============================================================
@@ -602,17 +725,11 @@ body:has(
 
 
 /* ============================================================
-   15. FULL FORMATTED CHANNEL TOPIC
+   15. DARKPEERS TOPIC VERSION MARKER
+
+   Topic expansion is global; only the TLCC identity marker remains
+   scoped to the real #darkpeers channel.
    ============================================================ */
-
-#chat .header {
-    position: relative;
-    overflow: visible;
-}
-
-#chat .header .topic {
-    position: relative;
-}
 
 #chat-container[data-current-channel="#darkpeers" i] .header .topic::after {
     content: " · Enhanced by TLCC " var(--tlcc-version);
@@ -624,111 +741,6 @@ body:has(
     color: var(--tlcc-cyan);
     opacity: 0.58;
     white-space: nowrap;
-}
-
-@media (hover: none) and (pointer: coarse) {
-    #chat .header .topic {
-        cursor: pointer;
-    }
-
-    #chat .header .topic:hover,
-    #chat .header .topic:active {
-        position: fixed;
-        top: 48px;
-        left: 6px;
-        right: 6px;
-        z-index: 9999;
-        display: block;
-        margin: 0;
-        min-width: 0;
-        padding: 10px 11px;
-        max-height: 45vh;
-        overflow-x: hidden;
-        overflow-y: auto;
-        overscroll-behavior: contain;
-        white-space: normal;
-        word-break: normal;
-        overflow-wrap: anywhere;
-        line-height: 1.4;
-        font-size: 13px;
-        font-weight: 400;
-        color: var(--body-color);
-        background: var(--window-bg-color);
-        border: 1px solid
-            color-mix(in srgb, var(--body-color) 18%, transparent);
-        border-radius: 8px;
-        box-shadow: 0 6px 22px rgb(0 0 0 / 28%);
-        mask-image: none;
-        -webkit-mask-image: none;
-        user-select: text;
-        cursor: text;
-    }
-
-    #chat .header .topic:hover::before,
-    #chat .header .topic:active::before {
-        content: "";
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 48px;
-        background: transparent;
-        pointer-events: auto;
-    }
-}
-
-@media (hover: hover) and (pointer: fine) {
-    #chat .header .topic {
-        cursor: help;
-    }
-
-    /* Desktop: reveal the complete formatted topic on hover. The
-       transparent ::before bridge keeps the header under the pointer
-       after the topic itself becomes a fixed popup. */
-    #chat .header .topic:hover {
-        position: fixed;
-        top: 48px;
-        left: 12px;
-        right: 12px;
-        z-index: 9999;
-        display: block;
-        width: auto;
-        max-width: 900px;
-        margin: 0 auto;
-        min-width: 0;
-        padding: 10px 12px;
-        max-height: 45vh;
-        overflow-x: hidden;
-        overflow-y: auto;
-        overscroll-behavior: contain;
-        white-space: normal;
-        word-break: normal;
-        overflow-wrap: anywhere;
-        line-height: 1.4;
-        font-size: 13px;
-        font-weight: 400;
-        color: var(--body-color);
-        background: var(--window-bg-color);
-        border: 1px solid
-            color-mix(in srgb, var(--body-color) 18%, transparent);
-        border-radius: 8px;
-        box-shadow: 0 6px 22px rgb(0 0 0 / 28%);
-        mask-image: none;
-        -webkit-mask-image: none;
-        user-select: text;
-        cursor: text;
-    }
-
-    #chat .header .topic:hover::before {
-        content: "";
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 48px;
-        background: transparent;
-        pointer-events: auto;
-    }
 }
 
 
@@ -2812,5 +2824,5 @@ body:has(
 
 /* TLCC release version override. Keep this tiny file easy to update per release. */
 :root {
-    --tlcc-version: "v0.6.1";
+    --tlcc-version: "v0.6.2";
 }
