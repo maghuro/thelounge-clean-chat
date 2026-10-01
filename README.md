@@ -1,12 +1,18 @@
 # The Lounge Clean Chat
 
-Custom CSS for [The Lounge](https://thelounge.chat/) focused on making the DarkPeers IRC experience cleaner and easier to read, especially where the website chat is bridged into IRC.
+Custom CSS for [The Lounge](https://thelounge.chat/) with global channel-topic readability improvements plus DarkPeers-specific styling for a cleaner bridged IRC experience.
 
 TLCC remains deliberately **CSS-only**. It does not patch The Lounge, the DarkPeers bridge, Docker images, JavaScript or the giveaway userscript.
 
-**Current version:** v0.6.1  
+**Current version:** v0.6.2  
 **Tested with:** The Lounge 4.5.2 and the TNB tracker-first fork based on The Lounge 4.4.3  
 **Browsers tested:** Chrome on Android and desktop\n\n**Performance-scope requirement:** TLCC v0.5.5 uses custom-property container style queries (`@container style(...)`). Minimum support for this exact custom-property form is Chromium/Edge 111+, Safari 18+, Firefox 151+ desktop and Firefox 155+ Android. Unsupported browsers fail gracefully by leaving the scoped TLCC rules inactive.
+
+## v0.6.2: global channel-topic expansion
+
+The full formatted topic popup is now a **global The Lounge enhancement** instead of being gated by the DarkPeers network fingerprint. Any channel that exposes a topic can use the same touch/click or desktop-hover expansion, across all configured IRC networks.
+
+DarkPeers-specific behaviour remains scoped exactly as before: the `Enhanced by TLCC` topic marker stays on `#darkpeers`, and bridge badges, giveaway classifiers, tracker links and colours do not leak into other networks.
 
 ## v0.6.1: live giveaway bridge fixes
 

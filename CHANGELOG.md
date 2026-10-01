@@ -2,6 +2,15 @@
 
 All notable changes to **The Lounge Clean Chat** will be documented here.
 
+## v0.6.2 - 2026-10-01
+
+### Global channel-topic expansion
+
+- Moved the full formatted channel-topic popup outside the DarkPeers-only runtime scope.
+- The touch/coarse-pointer expansion and desktop hover expansion now work for channel topics on every The Lounge network.
+- Kept the `Enhanced by TLCC` version marker scoped to `#darkpeers`; no DarkPeers bridge badges, classifiers, colours or tracker-specific rules are enabled on other networks.
+- Kept the implementation CSS-only and reused the existing popup behaviour rather than duplicating per-network selectors.
+
 ## v0.6.1 - 2026-09-22
 
 ### Live giveaway bridge fixes
