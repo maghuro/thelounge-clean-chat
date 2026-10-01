@@ -15,10 +15,12 @@
    #darkpeers channel in the same network as the active lobby/
    channel, rather than trusting the user-defined connection name.
 
-   Everything except the Custom Stylesheet editor rule is scoped to
-   the currently active DarkPeers network. This prevents the
-   stylesheet from affecting similarly named channels on other
-   IRC networks loaded in the same The Lounge instance.
+   Two UI-only enhancements are global by design: the Custom
+   Stylesheet editor sizing and the full channel-topic expansion.
+   All DarkPeers-specific message/UI styling remains scoped to the
+   currently active DarkPeers network. This prevents tracker-specific
+   rules from affecting other IRC networks loaded in the same
+   The Lounge instance.
 
    OFFICIAL THE LOUNGE BRIDGED USERNAMES
    --------------------------------------
@@ -95,15 +97,6 @@ body:has(
     }
 }
 
-
-/* ============================================================
-   ACTIVE DARKPEERS RULES
-
-   The expensive active-network :has() above is evaluated once to
-   expose --tlcc-active. All message/UI rules are then gated by a
-   custom-property style query instead of repeating body:has() as a
-   selector prefix across the entire scrollback.
-   ============================================================ */
 
 /* ============================================================
    GLOBAL CHANNEL TOPIC EXPANSION
@@ -227,6 +220,15 @@ body:has(
         pointer-events: auto;
     }
 }
+
+/* ============================================================
+   ACTIVE DARKPEERS RULES
+
+   The expensive active-network :has() above is evaluated once to
+   expose --tlcc-active. All message/UI rules are then gated by a
+   custom-property style query instead of repeating body:has() as a
+   selector prefix across the entire scrollback.
+   ============================================================ */
 
 @container style(--tlcc-active: on) {
 
