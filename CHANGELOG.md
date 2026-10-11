@@ -2,6 +2,16 @@
 
 All notable changes to **The Lounge Clean Chat** will be documented here.
 
+## v0.6.3 - 2026-10-11
+
+### CSS-only IdleRPG support
+
+- Added an independent `#idlerpg` / `IdleRPG` (case-insensitive) CSS module without enabling any DarkPeers-specific behaviour on that network.
+- Replaced the bot's visible nickname (including its `~` mode prefix) with an indigo **RPG** badge.
+- Added a subtle accent to ordinary IdleRPG bot messages while preserving native highlights, nickname interactivity, and message content.
+- Deliberately avoided combat/level/equipment classifiers: the bot's plain text has no reliable CSS-selectable event type.
+- Included the module in the flat production CSS build, with no runtime JavaScript.
+
 ## v0.6.2 - 2026-10-01
 
 ### Global channel-topic expansion
