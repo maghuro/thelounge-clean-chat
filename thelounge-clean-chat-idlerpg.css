@@ -1,0 +1,60 @@
+/* ============================================================
+   TLCC - IdleRPG bot styling
+
+   Independent of the DarkPeers active-network scope. Both the
+   channel name and IRC sender nickname are matched case-insensitively.
+
+   Keep this CSS-only. Normal IdleRPG prose has no dependable DOM
+   markers for combat, levelling, equipment, or other event types;
+   do not guess categories from neighbouring messages or user spans.
+   ============================================================ */
+
+#chat-container[data-current-channel="#idlerpg" i]
+.msg[data-type="message"][data-from="idlerpg" i] {
+    --tlcc-idlerpg-accent: #a5b4fc;
+}
+
+/* Preserve the native The Lounge highlight (e.g. a player's own events). */
+#chat-container[data-current-channel="#idlerpg" i]
+.msg[data-type="message"][data-from="idlerpg" i]:not(.highlight) {
+    background:
+        color-mix(in srgb, var(--tlcc-idlerpg-accent) 4%, transparent);
+    box-shadow:
+        inset 2px 0 0
+        color-mix(in srgb, var(--tlcc-idlerpg-accent) 68%, transparent);
+    border-radius: 4px;
+}
+
+#chat-container[data-current-channel="#idlerpg" i]
+.msg[data-type="message"][data-from="idlerpg" i] .content {
+    padding-right: 9px;
+}
+
+/* The Lounge renders an optional ~ mode prefix inside .from .user,
+   so hiding that element's text also removes the visible prefix. The
+   original interactive nick and copyable message data remain intact. */
+#chat-container[data-current-channel="#idlerpg" i]
+.msg[data-type="message"][data-from="idlerpg" i] .from .user {
+    font-size: 0;
+    opacity: 1;
+}
+
+#chat-container[data-current-channel="#idlerpg" i]
+.msg[data-type="message"][data-from="idlerpg" i] .from .user::after {
+    content: "RPG";
+    display: inline-block;
+    font-size: 10px;
+    line-height: 1.2;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 0 5px;
+    border: 1px solid
+        color-mix(in srgb, var(--tlcc-idlerpg-accent) 52%, transparent);
+    border-radius: 5px;
+    color: var(--tlcc-idlerpg-accent);
+    background:
+        color-mix(in srgb, var(--tlcc-idlerpg-accent) 11%, transparent);
+    vertical-align: baseline;
+    transform: translateY(1px);
+    white-space: nowrap;
+}

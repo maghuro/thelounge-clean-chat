@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - "thelounge-clean-chat-core.css"
+      - "thelounge-clean-chat-idlerpg.css"
       - "thelounge-clean-chat-tnb.css"
       - "thelounge-clean-chat-tnb-layout.css"
       - "thelounge-clean-chat-stats.css"
@@ -26,6 +27,8 @@ jobs:
         run: |
           {
             cat thelounge-clean-chat-core.css
+            printf '\n\n'
+            cat thelounge-clean-chat-idlerpg.css
             printf '\n\n'
             cat thelounge-clean-chat-tnb.css
             printf '\n\n'
