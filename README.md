@@ -4,6 +4,8 @@ Custom CSS for [The Lounge](https://thelounge.chat/) with global channel-topic r
 
 TLCC remains deliberately **CSS-only**. It does not patch The Lounge, the DarkPeers bridge, Docker images, JavaScript or the giveaway userscript.
 
+**Maintainers and AI assistants:** read [`AGENTS.md`](AGENTS.md) before editing. It explains the source modules, automatic stylesheet build, release versioning and verification rules.
+
 **Current version:** v0.6.3  
 **Tested with:** The Lounge 4.5.2 and the TNB tracker-first fork based on The Lounge 4.4.3  
 **Browsers tested:** Chrome on Android and desktop\n\n**Performance-scope requirement:** TLCC v0.5.5 uses custom-property container style queries (`@container style(...)`). Minimum support for this exact custom-property form is Chromium/Edge 111+, Safari 18+, Firefox 151+ desktop and Firefox 155+ Android. Unsupported browsers fail gracefully by leaving the scoped TLCC rules inactive.
@@ -352,7 +354,7 @@ See [`docs/ANALYTICS.md`](docs/ANALYTICS.md) for deployment, privacy and rollbac
 
 ## Development
 
-The repository keeps the normal TLCC core and narrow TNB compatibility modules separate for maintainability. A GitHub Actions build step concatenates those source modules into the single public `thelounge-clean-chat.css` served through Cloudflare Pages. This preserves one-import installation and avoids runtime nested-import assumptions.
+The repository keeps shared core, IdleRPG, TNB compatibility, layout, stats and release-version CSS in separate source modules. GitHub Actions concatenates them into the single public `thelounge-clean-chat.css` served through Cloudflare Pages. **Edit only the source modules, not the generated stylesheet**. The complete procedure and module order are in [`AGENTS.md`](AGENTS.md).
 
 This was developed through repeated DOM inspection, selector testing, browser comparisons, live bridge testing and source auditing of the TNB fork.
 
